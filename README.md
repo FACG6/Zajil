@@ -4,9 +4,7 @@ Problem statement:
 Zajil is a delivery service application that allows users to order one or more items in one single order, 
 inorder to handle the orders and manage them the admin needs to manage the application orders and watch every action.
 
-
 Solution:
-
 this web application is going to be the control panel for "Zajil application" and will provide the backend structure for the application.
 
 User journey:
