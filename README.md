@@ -25,14 +25,6 @@ I can also add, edit, delete, activate and deactivate captins' and customers' ac
 - As an admin I want to search through the orders.
 - As an admin I want to be able to signout.
 
-## Running Instructions
-- Clone the repo.
-- Navigate to the repo $ cd UNOPS
-- Install dependencies $ npm install
-- Navigate to client $ cd client
-- Install dependencies $ npm install
-- Run the server $ npm start
-
 ## Tech Stack
 - React.Js
 - PostgresSQL
