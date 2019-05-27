@@ -2,6 +2,7 @@
   "name": "zajil",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4400",
   "dependencies": {
     "firebase": "^6.0.2",
     "re-base": "^4.0.0",
