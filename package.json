@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd client && npm run start",
+    "server": "nodemon server/index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "react:test": "cd client && npm run test",
+    "test": "NODE_ENV=test mocha ./server/test/route.js --recursive| tap-spec",
+    "client:init": "cd client && npm i",
+    "start": "NODE_ENV=production node server/index.js",
+    "heroku-postbuild": "npm run client:init && npm run build"
   },
   "author": "",
   "license": "ISC",
