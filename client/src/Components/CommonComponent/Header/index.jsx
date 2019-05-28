@@ -4,7 +4,7 @@ import './style.css';
 
 const Header = ({ title, icon }) => (
   <div className="header">
-    {icon}
+    <icon className="icon" />
     <h2>{title}</h2>
     <hr className="line" />
   </div>
