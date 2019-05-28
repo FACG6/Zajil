@@ -1,24 +1,27 @@
 .navbar{
     background-color: #201F2B;
-    height: 65px;
-    width: 1116px;
+    height: 3.5rem;
+    width: 65.6rem;
 }
+
 .controlBoard{
-    width: fit-content;
-    margin-left: 1000px;
-    padding-top: 13px;
+    line-height: 3.2rem;    
+    height: 5rem;
+    width: 20rem;
+    margin-left: 50rem;
     color: #fdeeee;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 800;
 }
+
 .circle{
-    margin-top: -33px;
-    border-radius: 50px;
+    margin-top: -4.7rem;
+    border-radius: 5rem;
     text-align: center;
-    height: 45px;
-    line-height: 42px;
-    margin-left: 40px;
+    height: 2.7rem;
+    line-height: 3.1rem;
+    margin-left: 4rem;
     font-weight: 600;
-    width: 45px;
+    width: 2.7rem;
     background-color: #88B0D6;
 }
