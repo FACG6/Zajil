@@ -1,14 +1,16 @@
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved
+import PropTypes from 'prop-types';
 import './style.css';
 
-// eslint-disable-next-line react/prop-types
-export default function Header({ title, icon }) {
-  return (
-    <div className="header">
-      {icon}
-      <h2>{title}</h2>
-      <hr className="line" />
-    </div>
-  );
-}
+const Header = ({ title, icon }) => (
+  <div className="header">
+    {icon}
+    <h2>{title}</h2>
+    <hr className="line" />
+  </div>
+);
+Header.propTypes = {
+  icon: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+};
+export default Header;
