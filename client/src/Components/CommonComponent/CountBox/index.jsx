@@ -18,9 +18,10 @@ const CountBox = (props) => {
     </div>
   );
 };
-CountBox.prototype = {
+CountBox.propTypes = {
   icon: PropTypes.node.isRequired,
   number: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 export default CountBox;
