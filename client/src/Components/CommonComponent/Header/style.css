@@ -1,8 +1,8 @@
-.icon{
+.header i{
   display: inline;
-  float:right;
+  float: right;
   margin-right: 2rem;
-  margin-top: 1.3rem;
+  font-size: 2.5rem;
 }
 .header h2{
   display: inline;
