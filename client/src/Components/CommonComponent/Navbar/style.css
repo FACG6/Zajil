@@ -2,6 +2,7 @@
     background-color: #201F2B;
     height: 3.5rem;
     width: 65.6rem;
+    margin-top: -2rem;
 }
 
 .controlBoard{
@@ -15,7 +16,7 @@
 }
 
 .circle{
-    margin-top: -4.7rem;
+    margin-top: -3.5rem;
     border-radius: 5rem;
     text-align: center;
     height: 2.7rem;
@@ -24,4 +25,10 @@
     font-weight: 600;
     width: 2.7rem;
     background-color: #88B0D6;
+}
+
+.logout{
+    margin-top: -5.7rem;
+    color: #ecdfdf;
+    margin-left: -45rem;
 }
