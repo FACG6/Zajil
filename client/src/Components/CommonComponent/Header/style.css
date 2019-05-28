@@ -1,0 +1,16 @@
+.header i{
+  display: inline;
+  float:right;
+  margin-right: 2rem;
+  margin-top: 1.3rem;
+}
+.header h2{
+  display: inline;
+  float:right;
+  margin-right: 2rem;
+  margin-top: 0.8rem;
+
+}
+.line{
+  width: 79.3rem;
+}
