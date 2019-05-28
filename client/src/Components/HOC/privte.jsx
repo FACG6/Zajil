@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
-import axios from "axios";
-import Login from '../Layouts/Login';
+import { Redirect } from "react-router-dom";
+import checkLogin from "../helper/checkLogin";
+import Login from "../Layouts/Login";
 
 export default WrappedComponent =>
   class extends Component {
@@ -12,8 +12,7 @@ export default WrappedComponent =>
     };
 
     componentDidMount() {
-      axios
-        .get("/api/v1/checkLogin")
+      checkLogin()
         .then(response => {
           const { result } = response;
           this.setState({ login: result, fetch: true });
@@ -28,8 +27,8 @@ export default WrappedComponent =>
       if (!fetch) {
         return <h1> Loading </h1>;
       }
-      if(fetch && error) return <p>{error}</p>
+      if (fetch && error) return <p>{error}</p>;
       if (login) return <WrappedComponent {...this.props} />;
-      return <Redirect to={<Login/>} />
+      return <Redirect to={<Login />} />;
     }
   };
