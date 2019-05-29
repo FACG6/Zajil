@@ -21,4 +21,12 @@ BEGIN;
 
     );
 
+    CREATE TABLE places
+    (
+        pk_i_id SERIAL PRIMARY KEY,
+        s_name TEXT NOT NULL,
+        d_latitude FLOAT,
+        d_longitude FLOAT
+    );
+
     COMMIT;
