@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
 import TableComponent from './Components/CommonComponent/table/Table';
 import './App.css';

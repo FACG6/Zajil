@@ -6,14 +6,11 @@
   "dependencies": {
     "antd": "^3.19.1",
     "axios": "^0.18.0",
-<<<<<<< HEAD
     "babel-plugin-import": "^1.11.2",
     "customize-cra": "^0.2.12",
     "firebase": "^6.0.2",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
-=======
->>>>>>> 7496a25b97f34be5cf54cb6bd5bde8fc66d9d11c
     "prop-types": "^15.7.2",
     "re-base": "^4.0.0",
     "react": "^16.8.6",

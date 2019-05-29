@@ -14,7 +14,7 @@
 }
 
 .ant-table-thead tr th {
-  text-align: center;
+  text-align: center !important;
 }
 .ant-pagination-item {
   display: none;
