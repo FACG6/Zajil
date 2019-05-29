@@ -1,10 +1,13 @@
 .button {
     background: #28A745;
     border-radius: .5rem;
-    width: 12.7rem;
-    height: 3rem;
+    width: 9rem;
+    height: 3.7rem;
     border: none;
     cursor: pointer;
     font-size: 1.5rem;
     color: #ffffff;
+    margin-right: 60.4rem;
+    font-family: 'cairo';
+    font-size: 1.4rem;
 }
