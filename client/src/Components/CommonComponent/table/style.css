@@ -1,6 +1,6 @@
 .table-container {
-  width: 70rem;
-  margin-left: 5rem;
+  width: 75vw;
+  margin-left: 5vw;
 }
 .ant-table-pagination.ant-pagination {
   display: none;
