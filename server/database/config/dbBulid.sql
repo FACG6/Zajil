@@ -29,4 +29,17 @@ BEGIN;
         d_longitude FLOAT
     );
 
+    CREATE TABLE orders
+    (
+        pk_i_id SERIAL PRIMARY KEY,
+        fk_i_customer_id INTEGER REFERENCES TUser(pk_i_id),
+        fk_i_captain_id INTEGER REFERENCES TUser(pk_i_id),
+        fk_i_place_id INTEGER REFERENCES places(pk_i_id),
+    	s_customer_address TEXT NOT NULL,
+        s_customer_phone TEXT NOT NULL,
+        dt_create_at DATE DEFAULT current_date,
+        dt_delete_at DATE,
+        dt_modified_date DATE
+    );
+
     COMMIT;
