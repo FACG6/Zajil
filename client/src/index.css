@@ -23,6 +23,7 @@ code {
   --cancel-button-color: #c4c4c4;
   --delete-button-color: #ff4343;
   --table-names-color: #8000ff;
+  --inprogress-color: rgb(239, 208, 0);;
 }
 .header {
   font-family: "Cairo";

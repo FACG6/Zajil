@@ -60,7 +60,7 @@ class TableComponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <a href="#">
+                  <a>
                     <Icon
                       onClick={event => viewPopup(record.key)}
                       style={{
@@ -71,7 +71,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -81,7 +81,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -136,7 +136,7 @@ class TableComponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -146,7 +146,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -156,7 +156,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -211,7 +211,7 @@ class TableComponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -221,7 +221,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -231,7 +231,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -287,7 +287,7 @@ class TableComponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -297,7 +297,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -307,7 +307,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -362,7 +362,7 @@ class TableComponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -372,7 +372,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
@@ -382,7 +382,7 @@ class TableComponent extends Component {
                     />
                   </a>
                   <Divider type="vertical" />
-                  <a href="#">
+                  <a>
                     <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",

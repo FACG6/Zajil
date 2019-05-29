@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert2';
 
-function viewPopup(id, viewPopupHtmlString) {
+const viewPopup = (id, viewPopupHtmlString) => {
   const span = document.createElement('span');
   const details = viewPopupHtmlString;
   span.innerHTML = `${details}`;
@@ -10,14 +10,16 @@ function viewPopup(id, viewPopupHtmlString) {
     showCancelButton: true,
     showConfirmButton: true,
     confirmButtonColor: '#28a745',
-    confirmButtonText: 'نعم',
-    cancelButtonText: 'لا',
+    confirmButtonText: 'تعديل',
+    cancelButtonText: 'إغلاق',
+    cancelButtonColor: '#2b2a37',
     closeOnConfirm: true,
+    reverseButtons: true,
     html: span,
   });
-}
+};
 
-function editPopup(id, editPopupHtmlString) {
+const editPopup = (id, editPopupHtmlString) => {
   const span = document.createElement('span');
   const details = editPopupHtmlString;
   span.innerHTML = `${details}`;
@@ -25,15 +27,17 @@ function editPopup(id, editPopupHtmlString) {
     title: 'Are you sure?',
     showCancelButton: true,
     showConfirmButton: true,
-    confirmButtonColor: '#28a745',
-    confirmButtonText: 'نعم',
-    cancelButtonText: 'لا',
+    confirmButtonColor: '#ffc700bd',
+    confirmButtonText: 'تعديل',
+    cancelButtonText: 'إغلاق',
+    cancelButtonColor: '#2b2a37',
     closeOnConfirm: true,
+    reverseButtons: true,
     html: span,
   });
-}
+};
 
-function deletePopup(id, deletePopupHtmlString) {
+const deletePopup = (id, deletePopupHtmlString) => {
   const span = document.createElement('span');
   const details = deletePopupHtmlString;
   span.innerHTML = `${details}`;
@@ -41,12 +45,14 @@ function deletePopup(id, deletePopupHtmlString) {
     title: 'Are you sure?',
     showCancelButton: true,
     showConfirmButton: true,
-    confirmButtonColor: '#28a745',
-    confirmButtonText: 'نعم',
-    cancelButtonText: 'لا',
+    confirmButtonColor: '#ff4343',
+    confirmButtonText: 'حذف',
+    cancelButtonText: 'إغلاق',
+    cancelButtonColor: '#2b2a37',
     closeOnConfirm: true,
+    reverseButtons: true,
     html: span,
   });
-}
+};
 
 export { viewPopup, editPopup, deletePopup };
