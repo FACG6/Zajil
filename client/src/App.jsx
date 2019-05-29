@@ -1,12 +1,19 @@
 import React from 'react';
 import './App.css';
-import Navbar from './Components/CommonComponent/Navbar';
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom';
+
+import Home from './Components/Layouts/Home';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-    </div>
+    <Router>
+      <div className="App">
+       
+        <Home />
+      </div>
+    </Router>
   );
 }
 
