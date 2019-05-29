@@ -1,8 +1,10 @@
 import React from 'react';
 import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
 import TableComponent from './Components/CommonComponent/table/Table';
-import Navbar from './Components/CommonComponent/Navbar';
 import './App.css';
+// import Navbar from './Components/CommonComponent/Navbar';
+import Button from './Components/CommonComponent/Button';
+
 
 function App() {
   return (
