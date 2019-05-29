@@ -5,14 +5,19 @@
   "proxy": "http://localhost:4400",
   "dependencies": {
     "antd": "^3.19.1",
-    "firebase": "^6.0.2",
+    "axios": "^0.18.0",
     "prop-types": "^15.7.2",
     "re-base": "^4.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "sweetalert2": "^8.11.1"
+    "sweetalert2": "^8.11.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,12 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.13.0"
   }
 }
