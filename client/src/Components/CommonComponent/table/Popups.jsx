@@ -1,5 +1,6 @@
 import React from 'react';
 import swal from 'sweetalert2';
+import './style.css';
 
 const viewPopup = (id, viewPopupHtmlString) => {
   const span = document.createElement('span');

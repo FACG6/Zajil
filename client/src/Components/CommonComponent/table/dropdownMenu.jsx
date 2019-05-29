@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Dropdown, Icon } from 'antd';
 import PropTypes from 'prop-types';
 
-function DropdownMenu({ pageSize, paginationSize }) {
+const DropdownMenu = ({ pageSize, paginationSize }) => {
   const handleMenuClick = (e) => {
     paginationSize(e.key);
   };
@@ -19,7 +19,7 @@ function DropdownMenu({ pageSize, paginationSize }) {
     <div className="table-dropdown">
       {` عرض `}
       <Dropdown overlay={menu} trigger={['click']}>
-        <a className=" ant-dropdown-link" href="">
+        <a className=" ant-dropdown-link">
           {pageSize}
           <Icon type="down" />
         </a>
@@ -27,11 +27,11 @@ function DropdownMenu({ pageSize, paginationSize }) {
       {` عناصر `}
     </div>
   );
-}
+};
 
 DropdownMenu.propTypes = {
   pageSize: PropTypes.string.isRequired,
-  paginationSize: PropTypes.func,
+  paginationSize: PropTypes.func.isRequired,
 };
 
 export default DropdownMenu;
