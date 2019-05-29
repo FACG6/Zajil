@@ -1,13 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo&display=swap');
+
+.html {
+  font-size: 62.5%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  padding: 0;
+  font-family: "Cairo", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --main-component-color: #2b2a37;
+  --main-font-color: #000000;
+  --add-button-color: #28a745;
+  --cancel-button-color: #c4c4c4;
+  --delete-button-color: #ff4343;
+  --table-names-color: #8000ff;
+}
+.header {
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: bold;
+  font-size: '1.8 rem';
+}
+p {
+  font-family: "Cairo";
+  font-style: "normal";
+  font-weight: "600";
+  font-size: "1.6 rem";
+  color: #000000;
+}
+h2,
+h3 {
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: bold;
+  font-size: "1.6 rem";
 }
