@@ -16,7 +16,7 @@ class App extends Component {
       <BrowserRouter>
       <Route path="/" component={SideBar} />
     </BrowserRouter>
-      <TableComponent
+      {/* <TableComponent
         pageName="customers"
         columns={[{
           key: 54, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
@@ -26,7 +26,7 @@ class App extends Component {
         viewPopup={viewPopup}
         editPopup={editPopup}
         deletePopup={deletePopup}
-      />
+      /> */}
     </div>
     );
   }

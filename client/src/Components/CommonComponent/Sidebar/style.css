@@ -1,7 +1,7 @@
 .container {
     position: relative;
     min-height: 100vh;
-    background: black;
+    background: #2B2A37;
     width: 225px;
     float: right;
     
@@ -14,7 +14,7 @@
     padding-top: 1rem;
     color: white;
     display: flex;
-    background-color: black;
+    background-color: #2B2A37;
     flex-direction: column;
     justify-content: center;
     font-size: 0.9rem;
@@ -24,6 +24,7 @@
     top: 0rem;
     right: 4.5rem;
     color: white;
+    margin-top:1.5rem;
 }
 .sidebar__bar{
     margin-top: 5rem;
@@ -32,11 +33,7 @@
     display: flex;
     flex-direction: column;
 }
-.sidebar button{
-    font-size: 1.5rem;
-    color: white;
-    background-color: black;
-}
+
  .sidebar__links{
     padding: .6rem .8rem .6rem 1.6rem;
     text-decoration: none;
@@ -56,13 +53,13 @@
 }
 .home{
     margin-right: -11px;
-    margin-bottom: 11px
+    margin-bottom: 1.5rem;
 
 }
 
 .lists{
     margin-right: -1px;
-    margin-bottom: 11px;
+    margin-bottom: 1.5rem;
     cursor: pointer;
 
 }
