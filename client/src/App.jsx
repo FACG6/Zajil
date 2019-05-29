@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import {
-  BrowserRouter as Router,
-} from 'react-router-dom';
 
 import Home from './Components/Layouts/Home';
 
-function App() {
-  return (
-    <Router>
+class App extends Component {
+  state = {
+    
+  }
+  render() {
+    return (
       <div className="App">
         <Home />
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
 export default App;
