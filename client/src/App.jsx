@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import Navbar from './Components/CommonComponent/Navbar';
+// import Navbar from './Components/CommonComponent/Navbar';
+import Button from './Components/CommonComponent/Button';
+
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Button name="d" />
     </div>
   );
 }
