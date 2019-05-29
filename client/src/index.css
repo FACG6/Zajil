@@ -28,13 +28,13 @@ code {
   font-family: "Cairo";
   font-style: normal;
   font-weight: bold;
-  font-size: '1.8 rem';
+  font-size: 1.8 rem;
 }
 p {
-  font-family: "Cairo";
-  font-style: "normal";
-  font-weight: "600";
-  font-size: "1.6 rem";
+  font-family: Cairo;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.6 rem;
   color: #000000;
 }
 h2,
@@ -42,5 +42,5 @@ h3 {
   font-family: "Cairo";
   font-style: normal;
   font-weight: bold;
-  font-size: "1.6 rem";
+  font-size: 1.6 rem
 }
