@@ -3,6 +3,6 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.send('First setup');
+  res.send('First setup');
 });
 module.exports = router;
