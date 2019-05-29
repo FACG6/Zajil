@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Table, Divider, Tag, Icon } from "antd";
+import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
-import "./App.css";
+import "./style.css";
 
 // the passed input to this component has to be in the following form:
-// pageName,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup.
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, viewPopup, deletePopup).
 
 class TableComponent extends Component {
   state = {
@@ -16,7 +17,7 @@ class TableComponent extends Component {
   };
 
   render() {
-    const { viewPopup, editPopup, deletePopup  } = this.props;
+    const { viewPopup, editPopup, deletePopup, columns } = this.props;
     const { Column } = Table;
     if (this.props.pageName === "orders") {
       return (
@@ -26,8 +27,8 @@ class TableComponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={data}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? data.length : parseInt(this.state.pageSize) }}
+            dataSource={columns}
+            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
@@ -61,7 +62,7 @@ class TableComponent extends Component {
                 <span>
                   <a href="#">
                     <Icon
-                      onClick={event => viewPopup(record.id)}
+                      onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -71,7 +72,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => editPopup(record.id)}
+                    <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -81,7 +82,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => deletePopup(record.id)}
+                    <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -103,8 +104,8 @@ class TableComponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={data}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? data.length : parseInt(this.state.pageSize) }}
+            dataSource={columns}
+            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
           >
             <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
             <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
@@ -136,7 +137,7 @@ class TableComponent extends Component {
               render={(text, record) => (
                 <span>
                   <a href="#">
-                    <Icon onClick={event => viewPopup(record.id)}
+                    <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -146,7 +147,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => editPopup(record.id)}
+                    <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -156,7 +157,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => deletePopup(record.id)}
+                    <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -178,8 +179,8 @@ class TableComponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={data}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? data.length : parseInt(this.state.pageSize) }}
+            dataSource={columns}
+            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
             <Column title="التاريخ" dataIndex="date" key="date" />
@@ -211,7 +212,7 @@ class TableComponent extends Component {
               render={(text, record) => (
                 <span>
                   <a href="#">
-                    <Icon onClick={event => viewPopup(record.id)}
+                    <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -221,7 +222,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => editPopup(record.id)}
+                    <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -231,7 +232,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => deletePopup(record.id)}
+                    <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -253,8 +254,8 @@ class TableComponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={data}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? data.length : parseInt(this.state.pageSize) }}
+            dataSource={columns}
+            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
             <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
@@ -287,7 +288,7 @@ class TableComponent extends Component {
               render={(text, record) => (
                 <span>
                   <a href="#">
-                    <Icon onClick={event => viewPopup(record.id)}
+                    <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -297,7 +298,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => editPopup(record.id)}
+                    <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -307,7 +308,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => deletePopup(record.id)}
+                    <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -329,8 +330,8 @@ class TableComponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={data}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? data.length : parseInt(this.state.pageSize) }}
+            dataSource={columns}
+            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
@@ -362,7 +363,7 @@ class TableComponent extends Component {
               render={(text, record) => (
                 <span>
                   <a href="#">
-                    <Icon onClick={event => viewPopup(record.id)}
+                    <Icon onClick={event => viewPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -372,7 +373,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => editPopup(record.id)}
+                    <Icon onClick={event => editPopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -382,7 +383,7 @@ class TableComponent extends Component {
                   </a>
                   <Divider type="vertical" />
                   <a href="#">
-                    <Icon onClick={event => deletePopup(record.id)}
+                    <Icon onClick={event => deletePopup(record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -399,4 +400,12 @@ class TableComponent extends Component {
     }
   }
 }
+
+TableComponent.propTypes = {
+  columns: PropTypes.array.isRequired,
+  viewPopup: PropTypes.func.isRequired,
+  viewPopup: PropTypes.func.isRequired,
+  deletePopup: PropTypes.func.isRequired,
+};
+
 export default TableComponent;
