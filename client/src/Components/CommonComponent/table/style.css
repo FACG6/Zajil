@@ -41,5 +41,9 @@
   font-weight: 600;
 }
 .ant-dropdown-link :hover {
- cursor: pointer;
+  cursor: pointer;
+}
+.swal2-modal .swal2-styled:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
