@@ -1,0 +1,16 @@
+.header__icon{
+  display: inline;
+  float: right;
+  margin-right: 2rem;
+  font-size: 2.5rem;
+}
+.header__h2{
+  display: inline;
+  float:right;
+  margin-right: 2rem;
+  margin-top: 0.8rem;
+
+}
+.header__line{
+  width: 79.3rem;
+}
