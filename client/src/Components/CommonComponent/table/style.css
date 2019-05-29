@@ -28,8 +28,18 @@
   text-align: right;
   padding: 0.5rem;
   direction: rtl;
+  color: #2b2a37;
+  font-weight: 400;
 }
 .ant-dropdown-menu {
   text-align: right;
   right: 0.6rem;
+  text-align: center !important;
+}
+.ant-dropdown-link {
+  color: #2b2a37;
+  font-weight: 600;
+}
+.ant-dropdown-link :hover {
+ cursor: pointer;
 }
