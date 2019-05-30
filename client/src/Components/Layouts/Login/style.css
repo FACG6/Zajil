@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #201F2B;
+  min-height: 100vh;
 
 }
 .login__title {
@@ -12,33 +13,38 @@
 }
 .login__box{
   background-color: #fff;
-  width: 50%;
-  height: 24rem;
+  width: 35%;
+  height: 20rem;
   margin-top: -7rem;
+  text-align: center;
   margin-bottom: 10rem;
   border-radius: 0.3rem;
 }
 
+.login__box-title{
+  color: #201F2B;
+}
+
 .login__box-input {
   border: 0;
-  width: 75%;
-  height: 3rem;
-  font-size: 1rem;
-  margin-top: 0.8rem;
-  color: #000;
-  background-color: #DADADA;
-  border-radius: 0.4rem;
-  outline: none;
-  text-align: center;
-  font-family: cairo;
+    width: 75%;
+    height: 2.5rem;
+    font-size: 0.88rem;
+    margin-top: 1.5rem;
+    color: #000;
+    background-color: #DADADA;
+    border-radius: 0.4rem;
+    outline: none;
+    text-align: right;
+    padding-right: 1rem;
 }
 
 .login__box-button {
   border: 0;
-  width: 75%;
-  height: 3rem;
+  width: 76%;
+  height: 2.5rem;
   font-size: 1rem;
-  margin-top: 0.8rem;
+  margin-top: 2rem;
   color: white;
   background-color: #201F2B;
   border-radius: 0.4rem;
