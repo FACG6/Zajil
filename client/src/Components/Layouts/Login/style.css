@@ -50,7 +50,14 @@
   border-radius: 0.4rem;
   outline: none;
   font-family: cairo;
-} 
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+}
+
+.login__box-button:hover{
+  background: #101017;
+  box-shadow: 0 0 5px #201f2c;
+}
 .login__box-error{
   color: rgb(255, 83, 83);
 }
