@@ -34,9 +34,9 @@ export default class Login extends Component {
   render() {
     return (
       <div className='login'>
-        <h2 className='login__title'>زاجل</h2>
+        <h1 className='login__title'>زاجل</h1>
         <div className='login__box'>
-          <h2>تسجيل الدخول</h2>
+          <h3 className="login__box-title">تسجيل الدخول</h3>
           <input type="text" name="userName" id="userName" placeholder="إسم المستخدم" onChange={this.handleChange} className='login__box-input' />
           <input type="password" name="password" id="password" placeholder="كلمة المرور" onChange={this.handleChange} className='login__box-input' />
           <input type="submit" value="تسجيل الدخول" onClick={this.handleClick} className='login__box-button' />
