@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
+.container {
+    position: relative;
+    min-height: 100vh;
+    background: #2B2A37;
+    width: 225px;
+    float: right;
+    
+}
+.sidebar{
+    width: 14.11rem;
+    position: absolute;
+    top:0rem;
+    right:0rem;
+    padding-top: 1rem;
+    color: white;
+    display: flex;
+    background-color: #2B2A37;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Lateef', cursive;
+    font-size: 1.3rem;
+}
+.sidebar__header{
+    position: absolute;
+    top: 0rem;
+    right: 4.5rem;
+    color: white;
+    margin-top:1.4rem;
+    font-family: 'Changa', sans-serif;
+}
+.sidebar__bar{
+    margin-top: 5rem;
+    margin-right: 2rem;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+ .sidebar__links{
+    margin: .6rem .8rem .6rem 1.6rem;
+    text-decoration: none;
+    color: white;
+}
+.sidebar__dropdowncontainer{
+    display: flex;
+    flex-direction: column;
+        margin-right: 23px;
+        font-size: 1.1rem;
+}
+.hidden{
+    
+    display: none;
+    transition: all 2s ease-in-out;
+}
+.block{
+    display: flex;
+    transition: all 2s ease-in-out;
+}
+.home{
+    margin-right: -11px;
+    margin-bottom: 1.5rem;
+
+}
+
+.lists{
+    margin-right: -1px;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+
+}
