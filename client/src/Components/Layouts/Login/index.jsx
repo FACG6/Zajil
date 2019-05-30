@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./style.css";
 
 export default class Login extends Component {
@@ -21,17 +20,23 @@ export default class Login extends Component {
     if(!userName || !password){
       return this.setState({error: 'الرجاء ملىء جميع الحقول'});
     }
-    axios.post("/api/v1/login", {
-      password,
-      userName
+    fetch('/api/v1/login', {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify({password, userName})
     })
-      .then(res => {
-        //login now masseg
-        //res from back then redirect to home page
-      })
-      .catch(e => {
-        //show massege there is an internal server error
-      })
+    .then(res => res.json())
+    .then(res => {
+      const { error } = res;
+      if (error) {
+        this.setState({error});
+      } else {
+        this.props.history.push('/');
+      }
+    })
+    .catch(() => {
+      this.setState({error: 'هناك خطأ جرب مرة أخرى'});
+    })
 
   };
 
