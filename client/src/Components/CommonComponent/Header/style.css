@@ -1,18 +1,19 @@
-.header__icon{
-  display: inline;
-  float: right;
-  margin-right: 2rem;
-  font-size: 2.5rem;
-}
-.header__h2{
-  display: inline;
-  float:right;
-  margin-right: 2rem;
-  margin-top: 0.8rem;
-
+.header {
+  font-family: "Cairo";
+    font-style: normal;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 1.8 rem;
+    margin-right: 21.9rem;
+    margin-top: 1.5rem;
 }
 .header__line{
-  width: 65.4rem;   
-  margin-top: 4rem;
-  margin-left: 0.4rem;
+    width: 65.4rem;   
+    margin-left: 0.4rem;
+}
+.icon{
+    font-size: 1.4rem;
+    margin-left: 1rem;
+
 }

@@ -3,6 +3,7 @@ import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/
 import TableComponent from './Components/CommonComponent/table/Table';
 import './App.css';
 
+import Home from './Components/Layouts/Home';
 
 class App extends Component {
   state = {
@@ -11,6 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Home />
       <TableComponent
         pageName="customers"
         columns={[{
