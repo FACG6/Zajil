@@ -56,7 +56,7 @@ export default class Sidebar extends Component {
               <Link to="/" className="sidebar__links ">
                 <span>
                   الرئيسية
-            <Icon type="home" />
+            <Icon type="home" style={{marginLeft:'7px'}}/>
                 </span>
 
               </Link>
@@ -66,7 +66,7 @@ export default class Sidebar extends Component {
                 <span>
                   إدارة الطلبات
             {' '}
-                  <Icon type="menu-unfold" />
+                  <Icon type="menu-unfold" style={{marginLeft:'5px'}}/>
                 </span>
 
               </Link>
@@ -74,65 +74,66 @@ export default class Sidebar extends Component {
 
 
             <div className="sidebar__dropdown lists" onClick={this.handleClick('accounts')}>
-            <span className={`${arrow_down_accounts}`}>
-            <Icon type="down" />
-            </span>
-            <span className={`${arrow_up_accounts}`}>
-            <Icon type="up"  />
-            </span>
-            
-              
               إدارة الحسابات
           {' '}
 
               <Icon type="tool" />
               {' '}
+              <span className={`${arrow_down_accounts}`}>
+            <Icon type="down" style={{marginLeft:'5px',fontSize:'15px'}}/>
+            </span>
+            <span className={`${arrow_up_accounts}`}>
+            <Icon type="up" style={{marginLeft:'5px',fontSize:'15px'}} />
+            </span>
             </div>
             <div className={`sidebar__dropdowncontainer ${accounts}`}>
                 <Link to="/customers" className="sidebar__links ">
                   <span>
                     المستخدمين
-              <Icon type="team" />
+              <Icon type="team"style={{marginLeft:'7px'}} />
                   </span>
                 </Link>
                 <Link to="/captains" className="sidebar__links">
                   <span>
                     الكابتن
-              <Icon type="car" />
+              <Icon type="car" style={{marginLeft:'7px'}}/>
                   </span>
 
                 </Link>
                 <Link className="sidebar__links">
                   <span>
                     المشرفين
-              <Icon type="star" />
+              <Icon type="star"style={{marginLeft:'7px'}} />
                   </span>
 
                 </Link>
               </div>
 
             <div onClick={this.handleClick('reports')} className="sidebar__dropdown lists" >
-            <span className={`${arrow_down_reports}`}>
-            <Icon type="down" />
-            </span>
-            <span className={`${arrow_up_reports}`}>
-            <Icon type="up"  />
-            </span>
+           
               إدارة التقارير
           {' '}
               <Icon type="profile" />
-              <div className={`sidebar__dropdowncontainer ${reports}`}>
+              <span className={`${arrow_down_reports}`}>
+            <Icon type="down" style={{marginLeft:'7px',fontSize:'15px'}}/>
+            </span>
+            <span className={`${arrow_up_reports}`}>
+            <Icon type="up" style={{marginLeft:'7px',fontSize:'15px'}} />
+            </span>
+             
+            </div>
+            <div className={`sidebar__dropdowncontainer ${reports}`}>
                 <Link to="" className="sidebar__links ">
                   <span>
                     تقارير الكابتن
-              <Icon type="profile" />
+              <Icon type="profile" style={{marginLeft:'7px'}}/>
                   </span>
 
                 </Link>
                 <Link to="" className="sidebar__links">
                   <span>
                     تقارير المستخدم
-              <Icon type="profile" />
+              <Icon type="profile" style={{marginLeft:'7px'}} />
                   </span>
 
                 </Link>
@@ -140,29 +141,29 @@ export default class Sidebar extends Component {
                   <span>
                     تقارير عامة
               {' '}
-                    <Icon type="profile" />
+                    <Icon type="profile" style={{marginLeft:'7px'}}/>
                   </span>
 
                 </Link>
               </div>
-            </div>
-
 
             <div onClick={this.handleClick('msg')} className="sidebar__dropdown lists" >
-            <span className={`${arrow_down_msg}`}>
-            <Icon type="down" />
+           
+              إدارة الرسائل
+          <Icon type="mail" style={{marginLeft:'7px'}}/>
+          <span className={`${arrow_down_msg}`}>
+            <Icon type="down" style={{marginLeft:'7px',fontSize:'15px'}}/>
             </span>
             <span className={`${arrow_up_msg}`}>
-            <Icon type="up"  />
+            <Icon type="up" style={{marginLeft:'7px',fontSize:'15px'}} />
             </span>
-              إدارة الرسائل
-          <Icon type="mail" />
-              <div className={`sidebar__dropdowncontainer ${msg}`}>
+            </div>
+            <div className={`sidebar__dropdowncontainer ${msg}`}>
                 <Link to="" className="sidebar__links ">
                   <span>
                     رسائل قصيرة
               {' '}
-                    <Icon type="mail" />
+                    <Icon type="mail" style={{marginLeft:'7px'}}/>
                   </span>
 
                 </Link>
@@ -170,19 +171,18 @@ export default class Sidebar extends Component {
                   <span>
                     اشعارات
               {' '}
-                    <Icon type="bell" />
+                    <Icon type="bell"style={{marginLeft:'7px'}} />
                   </span>
 
                 </Link>
               </div>
-            </div>
             <div className='home'>
 
               <Link to="" className="sidebar__links">
                 <span>
                   إدارة الاستفسارات
             {' '}
-                  <Icon type="wechat" />
+                  <Icon type="wechat"style={{marginLeft:'7px'}} />
                 </span>
 
               </Link>
@@ -192,7 +192,7 @@ export default class Sidebar extends Component {
                 <span>
                   إدارة البروموكود
             {' '}
-                  <Icon type="setting" />
+                  <Icon type="setting" style={{marginLeft:'5px'}}/>
                 </span>
 
               </Link>
@@ -200,22 +200,24 @@ export default class Sidebar extends Component {
 
 
             <div onClick={this.handleClick('settings')} className="sidebar__dropdown lists" >
-            <span className={`${arrow_down_settings}`}>
-            <Icon type="down" />
-            </span>
-            <span className={`${arrow_up_settings}`}>
-            <Icon type="up"  />
-            </span>
+            
               الإعدادات
           {' '}
-              <Icon type="setting" />
-              <div className={`sidebar__dropdowncontainer ${settings}`}>
+              <Icon type="setting" style={{marginLeft:'5px'}}/>
+              <span className={`${arrow_down_settings}`}>
+            <Icon type="down" style={{marginLeft:'7px',fontSize:'15px'}}/>
+            </span>
+            <span className={`${arrow_up_settings}`}>
+            <Icon type="up" style={{marginLeft:'7px',fontSize:'15px'}} />
+            </span>
+            </div>
+            <div className={`sidebar__dropdowncontainer ${settings}`}>
                 <Link to="" className="sidebar__links">
                   <span>
                     ثوابت النظام
               {' '}
                     {' '}
-                    <Icon type="setting" />
+                    <Icon type="setting"style={{marginLeft:'7px'}} />
                   </span>
 
                 </Link>
@@ -224,7 +226,7 @@ export default class Sidebar extends Component {
                     ثوابت لوحة التحكم
               {' '}
                     {' '}
-                    <Icon type="control" />
+                    <Icon type="control"style={{marginLeft:'7px'}} />
                   </span>
 
                 </Link>
@@ -233,18 +235,17 @@ export default class Sidebar extends Component {
                     إدارة الاماكن العامة
               {' '}
                     {' '}
-                    <Icon type="environment" />
+                    <Icon type="environment"style={{marginLeft:'7px'}} />
                   </span>
 
                 </Link>
               </div>
-            </div>
             <div className='home'>
               <Link to="" className="sidebar__links">
                 <span>
                   إتصل بنا
             {' '}
-                  <Icon type="phone" />
+                  <Icon type="phone"style={{marginLeft:'5px'}} />
                 </span>
 
               </Link>

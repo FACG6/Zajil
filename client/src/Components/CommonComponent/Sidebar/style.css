@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
 .container {
     position: relative;
     min-height: 100vh;
@@ -25,7 +26,8 @@
     top: 0rem;
     right: 4.5rem;
     color: white;
-    margin-top:1.5rem;
+    margin-top:1.4rem;
+    font-family: 'Changa', sans-serif;
 }
 .sidebar__bar{
     margin-top: 5rem;
@@ -36,7 +38,7 @@
 }
 
  .sidebar__links{
-    padding: .6rem .8rem .6rem 1.6rem;
+    margin: .6rem .8rem .6rem 1.6rem;
     text-decoration: none;
     color: white;
 }
@@ -44,13 +46,16 @@
     display: flex;
     flex-direction: column;
         margin-right: 23px;
-        font-size: .7rem;
+        font-size: 1.1rem;
 }
 .hidden{
+    
     display: none;
+    transition: all 2s ease-in-out;
 }
 .block{
     display: flex;
+    transition: all 2s ease-in-out;
 }
 .home{
     margin-right: -11px;
