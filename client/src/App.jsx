@@ -4,8 +4,8 @@ import {
   viewPopup,
   editPopup,
   deletePopup
-} from "./Components/CommonComponent/table/Popups";
-import TableComponent from "./Components/CommonComponent/table/Table";
+} from "./Components/CommonComponent/Table/Popups";
+import TableComponent from "./Components/CommonComponent/Table/Table";
 import "./App.css";
 
 class App extends Component {
@@ -18,7 +18,7 @@ class App extends Component {
           path="/"
           render={() => (
             <TableComponent
-              pageName="captains"
+              pageName="customers"
               columns={[
                 {
                   key: 54,
