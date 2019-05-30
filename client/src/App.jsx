@@ -5,8 +5,8 @@ import {
   editPopup,
   deletePopup
 } from "./Components/CommonComponent/Table/Popups";
-import TableComponent from "./Components/CommonComponent/Table/Table";
 import "./App.css";
+import OrdersManagement from "./Components/Layouts/Ordersmanagement/index";
 
 class App extends Component {
   state = {};
@@ -16,28 +16,7 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={() => (
-            <TableComponent
-              pageName="customers"
-              columns={[
-                {
-                  key: 54,
-                  customer: "fgd",
-                  captain: "fgdf",
-                  date: "dfsdf"
-                },
-                {
-                  key: 56,
-                  customer: "fgd",
-                  captain: "fgdf",
-                  date: "dfsdf"
-                }
-              ]}
-              viewPopup={viewPopup}
-              editPopup={editPopup}
-              deletePopup={deletePopup}
-            />
-          )}
+          render={() => (<OrdersManagement />)}
         />
       </Router>
     );
