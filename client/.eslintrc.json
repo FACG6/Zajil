@@ -28,7 +28,6 @@
         "allowTemplateLiterals": true
       }
     ],
-<<<<<<< HEAD
     "rules": {
         "no-unused-expressions":"off",
         "quotes": [
@@ -45,8 +44,7 @@
               "extensions": [".js", ".jsx"]
             }
           ]
-    }
-=======
+    },
     "react/jsx-filename-extension": [
       1,
       {
@@ -54,5 +52,4 @@
       }
     ]
   }
->>>>>>> 7496a25b97f34be5cf54cb6bd5bde8fc66d9d11c
 }
