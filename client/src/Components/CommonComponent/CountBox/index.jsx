@@ -11,7 +11,7 @@ const CountBox = (props) => {
     <div className="card" style={{ background: `${color}` }}>
       {icon}
       <div className="card__content">
-        <h1>{number}</h1>
+        <h1 className="card__content-number">{number}</h1>
         <p className="card__content-title">{title}</p>
       </div>
       <div className="card__footer" />

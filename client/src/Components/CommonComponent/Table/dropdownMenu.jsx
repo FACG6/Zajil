@@ -1,9 +1,9 @@
-import React from 'react';
-import { Menu, Dropdown, Icon } from 'antd';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Menu, Dropdown, Icon } from "antd";
+import PropTypes from "prop-types";
 
 const DropdownMenu = ({ pageSize, paginationSize }) => {
-  const handleMenuClick = (e) => {
+  const handleMenuClick = e => {
     paginationSize(e.key);
   };
   const menu = (
@@ -18,11 +18,11 @@ const DropdownMenu = ({ pageSize, paginationSize }) => {
   return (
     <div className="table-dropdown">
       {` عرض `}
-      <Dropdown overlay={menu} trigger={['click']}>
-        <a className=" ant-dropdown-link">
-          {pageSize}
+      <Dropdown overlay={menu} trigger={["click"]}>
+        <span className="ant-dropdown-link">
+          <span>{pageSize} </span>
           <Icon type="down" />
-        </a>
+        </span>
       </Dropdown>
       {` عناصر `}
     </div>
@@ -31,7 +31,7 @@ const DropdownMenu = ({ pageSize, paginationSize }) => {
 
 DropdownMenu.propTypes = {
   pageSize: PropTypes.string.isRequired,
-  paginationSize: PropTypes.func.isRequired,
+  paginationSize: PropTypes.func.isRequired
 };
 
 export default DropdownMenu;

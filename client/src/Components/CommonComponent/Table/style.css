@@ -1,0 +1,71 @@
+
+.add-captain {
+  margin: 50px;
+  width: 100%;
+  display: flex;
+}
+
+.add-captain__input {
+  outline: none;
+  margin-top: 8px;
+  padding-left: 15px;
+}
+
+p {
+  margin: 0 0 15px 0;
+}
+
+.add-captain__right-box,
+.add-captain__left-box {
+  width: 42%;
+}
+
+.table-container {
+  width: 75vw;
+  margin-left: 5vw;
+}
+.ant-table-pagination.ant-pagination {
+  display: none;
+}
+.ant-table {
+  direction: rtl;
+}
+
+.ant-table-tbody tr td {
+  text-align: center !important;
+}
+
+.ant-table-thead tr th {
+  text-align: center !important;
+}
+.ant-pagination-item {
+  display: none;
+}
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis {
+  display: none;
+}
+.table-dropdown {
+  text-align: right;
+  padding: 0.5rem;
+  direction: rtl;
+  color: #2b2a37;
+  font-weight: 400;
+}
+.ant-dropdown-menu {
+  text-align: right;
+  right: 0.6rem;
+  text-align: center !important;
+}
+.ant-dropdown-link {
+  color: #2b2a37;
+  font-weight: 600;
+}
+.ant-dropdown-link :hover {
+  cursor: pointer;
+}
+.swal2-modal .swal2-styled:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

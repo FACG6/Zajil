@@ -9,8 +9,7 @@
     position: absolute;
     font-size: 6.5rem;
     color: #f0f8ff36;
-    left: -1rem;
-    top: -2.3rem;
+    top: -0.3rem;
 }
 
 .card__content {
@@ -19,7 +18,9 @@
     bottom: 1.5rem;
     color: white;
 }
-
+.card__content-number{
+    color: white;
+}
 .card__content-title{
     color: white;
     font-weight: bold;
