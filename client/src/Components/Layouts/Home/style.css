@@ -1,6 +1,6 @@
 .box1{
     margin-left: 42.5rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .box-two{
@@ -11,4 +11,7 @@
 .box-three{
     margin-left: 10.5rem;
     margin-top: -9rem;
+}
+.text-header{
+margin-left: 20px;
 }
