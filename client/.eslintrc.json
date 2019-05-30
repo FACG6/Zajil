@@ -12,22 +12,24 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react"],
-  "rules": {
-    "no-unused-expressions": "off",
-    "quotes": [
-      2,
-      "single",
-      {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
-      }
-    ],
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ]
-  }
+  "plugins": [
+    "react"
+  ],
+    "rules": {
+        "no-unused-expressions":"off",
+        "quotes": [
+            2,
+            "single",
+            {
+              "avoidEscape": true,
+              "allowTemplateLiterals": true
+            }
+          ],
+          "react/jsx-filename-extension": [
+            1,
+            {
+              "extensions": [".js", ".jsx"]
+            }
+          ]
+    }
 }
