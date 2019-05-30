@@ -8,9 +8,7 @@ import './App.css';
 import Home from './Components/Layouts/Home';
 
 class App extends Component {
-  state = {
-    
-  }
+  state = {};
   render() {
     return (
       <div className="App">
@@ -25,7 +23,7 @@ class App extends Component {
         viewPopup={viewPopup}
         editPopup={editPopup}
         deletePopup={deletePopup}
-      /> */}
+      />
     </div>
     );
   }
