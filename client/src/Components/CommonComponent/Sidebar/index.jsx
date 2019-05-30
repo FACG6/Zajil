@@ -10,14 +10,14 @@ export default class Sidebar extends Component {
     reports: 'hidden',
     msg: 'hidden',
     settings: 'hidden',
-    arrow_down_accounts:'hidden',
-    arrow_up_accounts:'inline',
-    arrow_down_reports:'hidden',
-    arrow_up_reports:'inline',
-    arrow_down_msg:'hidden',
-    arrow_up_msg:'inline',
-    arrow_down_settings:'hidden',
-    arrow_up_settings:'inline',
+    arrow_down_accounts:'inline',
+    arrow_up_accounts:'hidden',
+    arrow_down_reports:'inline',
+    arrow_up_reports:'hidden',
+    arrow_down_msg:'inline',
+    arrow_up_msg:'hidden',
+    arrow_down_settings:'inline',
+    arrow_up_settings:'hidden',
   }
   handleClick = (value) => (e) => {
     this.setState((prev) => {
@@ -26,12 +26,12 @@ export default class Sidebar extends Component {
       let down='';
       if (prev[value] === 'hidden') {
         display = 'block';
-        up='hidden';
-        down='inline';
-      } else {
-        display = 'hidden';
         up='inline';
         down='hidden';
+      } else {
+        display = 'hidden';
+        up='hidden';
+        down='inline';
       }
       if(value==='accounts')
       return { [value]: display , arrow_down_accounts:down,arrow_up_accounts:up};
