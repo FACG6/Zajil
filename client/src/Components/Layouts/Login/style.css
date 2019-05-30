@@ -51,3 +51,6 @@
   outline: none;
   font-family: cairo;
 } 
+.login__box-error{
+  color: rgb(255, 83, 83);
+}
