@@ -87,7 +87,8 @@ export default class Sidebar extends Component {
 
               <Icon type="tool" />
               {' '}
-              <div className={`sidebar__dropdowncontainer ${accounts}`}>
+            </div>
+            <div className={`sidebar__dropdowncontainer ${accounts}`}>
                 <Link to="/customers" className="sidebar__links ">
                   <span>
                     المستخدمين
@@ -109,9 +110,6 @@ export default class Sidebar extends Component {
 
                 </Link>
               </div>
-
-            </div>
-
 
             <div onClick={this.handleClick('reports')} className="sidebar__dropdown lists" >
             <span className={`${arrow_down_reports}`}>
