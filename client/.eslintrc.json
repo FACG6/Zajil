@@ -20,15 +20,6 @@
     "react"
   ],
   "rules": {
-    "quotes": [
-      2,
-      "single",
-      {
-        "avoidEscape": true,
-        "allowTemplateLiterals": true
-      }
-    ],
-    "rules": {
         "no-unused-expressions":"off",
         "quotes": [
             2,
@@ -44,12 +35,5 @@
               "extensions": [".js", ".jsx"]
             }
           ]
-    },
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".js", ".jsx"]
-      }
-    ]
   }
 }
