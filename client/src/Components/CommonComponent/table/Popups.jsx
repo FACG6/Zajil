@@ -1,38 +1,45 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Icon } from 'antd';
-import Header from '../../CommonComponent/Header'
 import swal from 'sweetalert2';
 import './style.css';
 
 
-
-
 export default class Addcaptain extends Component {
   state = {
-    name: "",
-    phone: "",
-    IDNumber: "",
-    status: "",
-    email: "",
-    address: "",
-    licenceNumber: "",
-    avatar: "",
+    data: {
+      name: "",
+      phone: "",
+      IDNumber: "",
+      status: "",
+      email: "",
+      address: "",
+      licenceNumber: "",
+      avatar: "",
+    }
   };
+  popup = async () => {
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value.trim()
-    });
-  };
-
-  popup = () => {
-    const div = document.createElement('div');
-    const html = `<div className="add-captain">${<Header title="اضافة كابتن" Icon={<Icon type="user" className="header__icon" />} />}<div className="add - captain - box"><div className="right - box">            <p>الاسم:</p><input type="text" name="name" id="name" onChange={this.handleChange} className="" /><p>الهاتف المحمول:</p>            <input type="text" name="phone" id="phone" onChange={this.handleChange} className="" />  <p>رقم الهوية:</p>  <input type="text" name="IDNumber" id="IDNumber" onChange={this.handleChange} className="" />            <p>الحالة:</p>            <select name="status" id="status" onChange={this.handleChange} className="">              <option value="0">فعال</option>              <option value="1">غير فعال </option>            </select>          </div>          <div className="left-box">      <p>البريد الالكتروني:</p>            <input type="email" name="email" id="email" onChange={this.handleChange} className="" />            <p>العنوان:</p>            <input type="text" name="address" id="address" onChange={this.handleChange} className="" />            <p>رقم الرخصة:</p>            <input type="text" name="licenceNumber" id="licenceNumber" onChange={this.handleChange} className="" />          <p>صورة الهوية:</p>            <input type="file" name="avatar" id="avatar" onChange={this.handleChange} className="" accept="image/*" />          </div>        </div>      </div>`
-    div.innerHTML = `${html}`;
-
-    swal.fire({
-      title: '',
+    const { value: formValues } = await swal.fire({
+      title: 'اضافة كابتن',
+      html: `
+      <div class="add-captain">
+      <div class="add-captain__right-box">
+      <p>:الاسم</p><input type="text" name="name" id="name" class="add-captain__input"/>
+      <p>:الهاتف المحمول</p><input type="text" name="phone" id="phone" class="add-captain__input" />
+      <p>:رقم الهوية</p><input type="text" name="IDNumber" id="IDNumber" class="add-captain__input" /> 
+      <p>"الحالة</p><select name="status" id="status" class="add-captain__select"> <option value="0">فعال</option> <option value="1">غير فعال </option> </select>
+      </div>  
+      <div class="add-captain__left-box">
+      <p>:البريد الالكتروني</p> <input type="email" name="email" id="email" class="add-captain__input" /> 
+      <p>:العنوان</p> <input type="text" name="address" id="address"  class="add-captain__input" />  
+      <p>:رقم الرخصة</p><input type="text" name="licenceNumber" id="licenceNumber" class="add-captain__input" /> 
+      <p>:صورة الهوية</p> 
+      <div>
+      <label for="avatar" class="add-captain__avatar-label">أرفق صورة</label>
+      <input id="avatar" style="visibility:hidden;" type="file" class="add-captain__avatar-input">
+      </div>
+      </div>   
+      </div>`,
       showCancelButton: true,
       showConfirmButton: true,
       confirmButtonColor: '#28a745',
@@ -41,105 +48,97 @@ export default class Addcaptain extends Component {
       cancelButtonColor: '#2b2a37',
       closeOnConfirm: true,
       reverseButtons: true,
-      html: div,
+      preConfirm: () => {
+        return {
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          IDNumber: document.getElementById('IDNumber').value,
+          status: document.getElementById('status').value,
+          email: document.getElementById('email').value,
+          address: document.getElementById('address').value,
+          licenceNumber: document.getElementById('licenceNumber').value,
+          avatar: document.getElementById('avatar').value,
+        }
 
-    }).then(res => {
-      if (res.value === true) {
-
-        const { name, phone, IDNumber, status, email, address, licenceNumber, avatar } = this.state;
-        axios.post("/api/v1/postCaptain", {
-          name, phone, IDNumber, status, email, address, licenceNumber, avatar
-        })
-          .then(res => {
-            //change state as responce from back
-          })
-          .catch(e => {
-
-          })
-      }
-      else {
-        //redirect to captain mangment page
       }
     })
+
+    if (formValues) {
+
+      this.setState({ data: formValues });
+      const inputValues = Object.values(formValues)
+      const inputObject = { ...inputValues };
+      axios.post("/api/v1/postCaptain", inputObject)
+        .then(res => {
+          //change state as responce from back
+        })
+        .catch(e => {
+          //enternal server error
+        })
+    }
   }
 
   render() {
     return (
-      <button onClick={this.popup}>add</button>
+      <button onClick={this.popup} >add captain</button>
     );
   };
 }
 
 
 
+const viewPopup = (id, viewPopupHtmlString) => {
+  const span = document.createElement('span');
+  const details = viewPopupHtmlString;
+  span.innerHTML = `${details}`;
+  swal.fire({
+    title: 'Are you sure?',
+    showCancelButton: true,
+    showConfirmButton: true,
+    confirmButtonColor: '#28a745',
+    confirmButtonText: 'تعديل',
+    cancelButtonText: 'إغلاق',
+    cancelButtonColor: '#2b2a37',
+    closeOnConfirm: true,
+    reverseButtons: true,
+    html: span,
+  });
+};
 
+const editPopup = (id, editPopupHtmlString) => {
+  const span = document.createElement('span');
+  const details = editPopupHtmlString;
+  span.innerHTML = `${details}`;
+  swal.fire({
+    title: 'Are you sure?',
+    showCancelButton: true,
+    showConfirmButton: true,
+    confirmButtonColor: '#ffc700bd',
+    confirmButtonText: 'تعديل',
+    cancelButtonText: 'إغلاق',
+    cancelButtonColor: '#2b2a37',
+    closeOnConfirm: true,
+    reverseButtons: true,
+    html: span,
+  });
+};
 
+const deletePopup = (id, deletePopupHtmlString) => {
+  const span = document.createElement('span');
+  const details = deletePopupHtmlString;
+  span.innerHTML = `${details}`;
+  swal.fire({
+    title: 'Are you sure?',
+    showCancelButton: true,
+    showConfirmButton: true,
+    confirmButtonColor: '#ff4343',
+    confirmButtonText: 'حذف',
+    cancelButtonText: 'إغلاق',
+    cancelButtonColor: '#2b2a37',
+    closeOnConfirm: true,
+    reverseButtons: true,
+    html: span,
+  });
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const viewPopup = (id, viewPopupHtmlString) => {
-//   const span = document.createElement('span');
-//   const details = viewPopupHtmlString;
-//   span.innerHTML = `${details}`;
-//   swal.fire({
-//     title: 'Are you sure?',
-//     showCancelButton: true,
-//     showConfirmButton: true,
-//     confirmButtonColor: '#28a745',
-//     confirmButtonText: 'تعديل',
-//     cancelButtonText: 'إغلاق',
-//     cancelButtonColor: '#2b2a37',
-//     closeOnConfirm: true,
-//     reverseButtons: true,
-//     html: span,
-//   });
-// };
-
-// const editPopup = (id, editPopupHtmlString) => {
-//   const span = document.createElement('span');
-//   const details = editPopupHtmlString;
-//   span.innerHTML = `${details}`;
-//   swal.fire({
-//     title: 'Are you sure?',
-//     showCancelButton: true,
-//     showConfirmButton: true,
-//     confirmButtonColor: '#ffc700bd',
-//     confirmButtonText: 'تعديل',
-//     cancelButtonText: 'إغلاق',
-//     cancelButtonColor: '#2b2a37',
-//     closeOnConfirm: true,
-//     reverseButtons: true,
-//     html: span,
-//   });
-// };
-
-// const deletePopup = (id, deletePopupHtmlString) => {
-//   const span = document.createElement('span');
-//   const details = deletePopupHtmlString;
-//   span.innerHTML = `${details}`;
-//   swal.fire({
-//     title: 'Are you sure?',
-//     showCancelButton: true,
-//     showConfirmButton: true,
-//     confirmButtonColor: '#ff4343',
-//     confirmButtonText: 'حذف',
-//     cancelButtonText: 'إغلاق',
-//     cancelButtonColor: '#2b2a37',
-//     closeOnConfirm: true,
-//     reverseButtons: true,
-//     html: span,
-//   });
-// };
-
-// export { viewPopup, editPopup, deletePopup, Addcaptain };
+export { viewPopup, editPopup, deletePopup, Addcaptain };
