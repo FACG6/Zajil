@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 //import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
 //import TableComponent from './Components/CommonComponent/table/Table';
-//import Addcaptain from './Components/CommonComponent/table/Popups'
-import { BrowserRouter, Route } from 'react-router-dom';
-import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
-import TableComponent from './Components/CommonComponent/table/Table';
-import SideBar from './Components/CommonComponent/Sidebar';
+//import Addcaptain from './Components/CommonComponent/Table/Popups'
+// import { BrowserRouter, Route } from 'react-router-dom';
+// import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
+// import TableComponent from './Components/CommonComponent/table/Table';
+// import SideBar from './Components/CommonComponent/Sidebar';
 import './App.css';
 
-import Home from './Components/Layouts/Home';
+// import Home from './Components/Layouts/Home';
 
 class App extends Component {
   state = {

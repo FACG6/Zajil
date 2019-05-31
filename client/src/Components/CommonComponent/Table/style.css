@@ -1,25 +1,74 @@
 
 .add-captain {
-  margin: 50px;
+  display: inline;
+}
+.add-captain-title{
+  margin-right: -283px;
+  font-size: 30px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+hr{
+  width: 108%;
+  margin-left: -20px;
+}
+
+.add-captain-container{
   width: 100%;
   display: flex;
+  margin-left: 10px;
+
+ }
+ p{
+  font-weight: inherit;
+  text-align: center;
+ }
+
+.add-captain-container-left{
+  width: 42%;
+
+}
+.add-captain-container-center{
+  margin: auto 35px;
+  width: 1.5px;
+  background-color: #e0e0e0;
+  height: 449px;
+}
+.add-captain-container-right{
+  width: 42%;
+
 }
 
 .add-captain__input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.add-captain__select{
   outline: none;
-  margin-top: 8px;
-  padding-left: 15px;
+  width: 79%;
+  padding: 12px 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
+.add-captain-container-left-avatar{
+  background-color: #73f3f382;
+  width: 104px;
+  margin-left: 40px;
+  height: 30px;
 
-p {
-  margin: 0 0 15px 0;
 }
-
-.add-captain__right-box,
-.add-captain__left-box {
-  width: 42%;
+.add-captain-container-left-avatar-label{
+  float: left;
+  width: 6em;
+  margin-right: 1em;
+  margin-top: 0.4rem;
+  font-size: 16px;
+  border-radius: 15px;
 }
-
 .table-container {
   width: 75vw;
   margin-left: 5vw;
@@ -68,4 +117,4 @@ p {
 .swal2-modal .swal2-styled:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
-}
+}  

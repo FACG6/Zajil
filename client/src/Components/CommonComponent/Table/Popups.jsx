@@ -3,7 +3,6 @@ import axios from "axios";
 import swal from 'sweetalert2';
 import './style.css';
 
-
 export default class Addcaptain extends Component {
   state = {
     data: {
@@ -20,25 +19,30 @@ export default class Addcaptain extends Component {
   popup = async () => {
 
     const { value: formValues } = await swal.fire({
-      title: 'اضافة كابتن',
+      title: '',
       html: `
       <div class="add-captain">
-      <div class="add-captain__right-box">
-      <p>:الاسم</p><input type="text" name="name" id="name" class="add-captain__input"/>
-      <p>:الهاتف المحمول</p><input type="text" name="phone" id="phone" class="add-captain__input" />
-      <p>:رقم الهوية</p><input type="text" name="IDNumber" id="IDNumber" class="add-captain__input" /> 
-      <p>"الحالة</p><select name="status" id="status" class="add-captain__select"> <option value="0">فعال</option> <option value="1">غير فعال </option> </select>
-      </div>  
-      <div class="add-captain__left-box">
-      <p>:البريد الالكتروني</p> <input type="email" name="email" id="email" class="add-captain__input" /> 
+      <p class="add-captain-title">إضافة كابتن</p>
+      <hr>
+      <div class='add-captain-container'>
+      <div class="add-captain-container-left">
+      <p>:البريد</p> <input type="email" name="email" id="email" class="add-captain__input" /> 
       <p>:العنوان</p> <input type="text" name="address" id="address"  class="add-captain__input" />  
       <p>:رقم الرخصة</p><input type="text" name="licenceNumber" id="licenceNumber" class="add-captain__input" /> 
       <p>:صورة الهوية</p> 
-      <div>
-      <label for="avatar" class="add-captain__avatar-label">أرفق صورة</label>
-      <input id="avatar" style="visibility:hidden;" type="file" class="add-captain__avatar-input">
+      <div class="add-captain-container-left-avatar">
+      <label for="avatar" class="add-captain-container-left-avatar-label">أرفق صورة</label>
+      <input id="avatar" style="visibility:hidden;" type="file">
       </div>
-      </div>   
+      </div>
+      <div class="add-captain-container-center"></div>
+      <div class="add-captain-container-right">
+      <p>:الاسم</p><input type="text" name="name" id="name" class="add-captain__input"/>
+      <p>:الهاتف</p><input type="text" name="phone" id="phone" class="add-captain__input" />
+      <p>:رقم الهوية</p><input type="text" name="IDNumber" id="IDNumber" class="add-captain__input" /> 
+      <p>:الحالة</p><select name="status" id="status" class="add-captain__select"> <option value="0">فعال</option> <option value="1">غير فعال </option> </select>
+      </div> 
+      </div>  
       </div>`,
       showCancelButton: true,
       showConfirmButton: true,
