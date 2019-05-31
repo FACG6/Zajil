@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
 import TableComponent from './Components/CommonComponent/table/Table';
 import './App.css';
 
 import Home from './Components/Layouts/Home';
+import Sidebar from './Components/CommonComponent/Sidebar';
 
 class App extends Component {
   state = {
@@ -12,7 +14,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Home />
+    <Router>
+
+      <Route exact path='/' component={Sidebar} /> 
+    </Router>
+      
+    
+        {/* <Home />
       <TableComponent
         pageName="customers"
         columns={[{
@@ -23,7 +31,7 @@ class App extends Component {
         viewPopup={viewPopup}
         editPopup={editPopup}
         deletePopup={deletePopup}
-      />
+      /> */}
     </div>
     );
   }
