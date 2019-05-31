@@ -45,8 +45,10 @@
 .sidebar__dropdowncontainer{
     display: flex;
     flex-direction: column;
-        margin-right: 10px;
-        font-size: 1.1rem;
+    margin-right: 23px;
+    margin-top: -1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
 }
 .hidden{
     
@@ -70,5 +72,11 @@
 
 }
 .icon-style{
-    margin-left: 20px;
+    margin-left: 1.3rem;
+}
+.icons-style{
+    margin-left: 1rem;
+}
+.iconstyle{
+    margin-left: .5rem;
 }

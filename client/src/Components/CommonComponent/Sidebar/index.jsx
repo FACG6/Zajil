@@ -33,21 +33,21 @@ export default class Sidebar extends Component {
   }
   handleClick = (value) => (e) => {
     this.setState(prev => {
-      let display = ''; 
+      let display = '';
       let arrow = ''
-      if(prev[value].display == 'hidden'){
+      if (prev[value].display == 'hidden') {
         display = 'block';
         arrow = 'up'
       } else {
         display = 'hidden';
         arrow = 'down'
       }
-      return {[value]: { display, arrow, }}
-    })
+      return { [value]: { display, arrow, } }
+    });
   }
   render() {
-      
-    const { accounts, reports, msg, settings,arrow_down_accounts,arrow_up_accounts ,arrow_down_reports,arrow_up_reports,arrow_down_msg,arrow_up_msg,arrow_down_settings,arrow_up_settings} = this.state;
+
+    const { accounts, reports, msg, settings } = this.state;
     return (
       <div className="container">
 
@@ -58,17 +58,17 @@ export default class Sidebar extends Component {
               <Link to="/" className="sidebar__links ">
                 <span>
                   الرئيسية
-            <Icon type="home" style={{marginLeft:'7px'}}/>
+            <Icon type="home" className='icon-style' />
                 </span>
 
               </Link>
             </div>
             <div className='home'>
-              <Link to="/" className="sidebar__links" >
+              <Link to="/orders" className="sidebar__links" >
                 <span>
                   إدارة الطلبات
             {' '}
-                  <Icon type="menu-unfold" style={{marginLeft:'5px'}}/>
+                  <Icon type="menu-unfold" className='icons-style' />
                 </span>
 
               </Link>
@@ -79,96 +79,97 @@ export default class Sidebar extends Component {
               إدارة الحسابات
           {' '}
 
-              <Icon type="tool" />
+              <Icon type="tool"className='iconstyle' />
               {' '}
-              <Icon  type={accounts.arrow} style={{marginLeft:'5px',fontSize:'15px'}}/>
+              <Icon type={accounts.arrow} style={{ marginLeft: '1.2rem', fontSize: '15px' }} />
             </div>
             <div className={`sidebar__dropdowncontainer ${accounts.display}`}>
-                <Link to="/customers" className="sidebar__links ">
-                  <span>
-                    المستخدمين
-              <Icon type="team"style={{marginLeft:'7px'}} />
-                  </span>
-                </Link>
-                <Link to="/captains" className="sidebar__links">
-                  <span>
-                    الكابتن
-              <Icon type="car" style={{marginLeft:'7px'}}/>
-                  </span>
+              <Link to="/customers" className="sidebar__links ">
+                <span>
+                  المستخدمين
+              <Icon type="team" className='icon-style' />
+                </span>
+              </Link>
+              <Link to="/captains" className="sidebar__links">
+                <span>
+                  الكابتن
+              <Icon type="car" className='icon-style' />
+                </span>
 
-                </Link>
-                <Link className="sidebar__links">
-                  <span>
-                    المشرفين
-              <Icon type="star"style={{marginLeft:'7px'}} />
-                  </span>
+              </Link>
+              <Link className="sidebar__links">
+                <span>
+                  المشرفين
+              <Icon type="star" className='icon-style' />
+                </span>
 
-                </Link>
-              </div>
+              </Link>
+            </div>
 
-            <div onClick={this.handleClick('reports')} className="sidebar__dropdown lists" >
-           
+            <div onClick={this.handleClick('reports')}className="sidebar__dropdown lists" >
+
               إدارة التقارير
           {' '}
-              <Icon type="profile" />
-              <Icon  type={accounts.arrow} style={{marginLeft:'7px',fontSize:'15px'}}/>
+              <Icon type="profile"className='iconstyle'  />
+              <Icon type={reports.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
+
             </div>
             <div className={`sidebar__dropdowncontainer ${reports.display}`}>
-                <Link to="" className="sidebar__links ">
-                  <span>
-                    تقارير الكابتن
-              <Icon type="profile" style={{marginLeft:'7px'}}/>
-                  </span>
+              <Link to="" className="sidebar__links ">
+                <span>
+                  تقارير الكابتن
+              <Icon type="profile" className='icon-style' />
+                </span>
 
-                </Link>
-                <Link to="" className="sidebar__links">
-                  <span>
-                    تقارير المستخدم
-              <Icon type="profile" style={{marginLeft:'7px'}} />
-                  </span>
+              </Link>
+              <Link to="" className="sidebar__links">
+                <span>
+                  تقارير المستخدم
+              <Icon type="profile" className='icon-style' />
+                </span>
 
-                </Link>
-                <Link to="" className="sidebar__links ">
-                  <span>
-                    تقارير عامة
+              </Link>
+              <Link to="" className="sidebar__links ">
+                <span>
+                  تقارير عامة
               {' '}
-                    <Icon type="profile" style={{marginLeft:'7px'}}/>
-                  </span>
+                  <Icon type="profile" className='icon-style' />
+                </span>
 
-                </Link>
-              </div>
+              </Link>
+            </div>
 
             <div onClick={this.handleClick('msg')} className="sidebar__dropdown lists" >
-           
+
               إدارة الرسائل
-          <Icon type="mail" style={{marginLeft:'7px'}}/>
-          <Icon  type={accounts.arrow} style={{marginLeft:'5px',fontSize:'15px'}}/>
+          <Icon type="mail" className='icons-style' />
+          <Icon type={msg.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
             </div>
             <div className={`sidebar__dropdowncontainer ${msg.display}`}>
-                <Link to="" className="sidebar__links ">
-                  <span>
-                    رسائل قصيرة
+              <Link to="" className="sidebar__links ">
+                <span>
+                  رسائل قصيرة
               {' '}
-                    <Icon type="mail" style={{marginLeft:'7px'}}/>
-                  </span>
+                  <Icon type="mail" className='icon-style' />
+                </span>
 
-                </Link>
-                <Link to="" className="sidebar__links">
-                  <span>
-                    اشعارات
+              </Link>
+              <Link to="" className="sidebar__links">
+                <span>
+                  اشعارات
               {' '}
-                    <Icon type="bell"style={{marginLeft:'7px'}} />
-                  </span>
+                  <Icon type="bell" className='icon-style' />
+                </span>
 
-                </Link>
-              </div>
+              </Link>
+            </div>
             <div className='home'>
 
               <Link to="" className="sidebar__links">
                 <span>
                   إدارة الاستفسارات
             {' '}
-                  <Icon type="wechat"style={{marginLeft:'7px'}} />
+                  <Icon type="wechat" className='icon-style' />
                 </span>
 
               </Link>
@@ -178,7 +179,7 @@ export default class Sidebar extends Component {
                 <span>
                   إدارة البروموكود
             {' '}
-                  <Icon type="setting" style={{marginLeft:'5px'}}/>
+                  <Icon type="setting" className='icon-style'/>
                 </span>
 
               </Link>
@@ -186,47 +187,47 @@ export default class Sidebar extends Component {
 
 
             <div onClick={this.handleClick('settings')} className="sidebar__dropdown lists" >
-            
+
               الإعدادات
           {' '}
-              <Icon type="setting" style={{marginLeft:'7px'}}/>
-              <Icon  type={accounts.arrow} style={{marginLeft:'5px',fontSize:'15px'}}/>
+              <Icon type="setting" className='iconstyle' />
+              <Icon type={settings.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
             </div>
             <div className={`sidebar__dropdowncontainer ${settings.display}`}>
-                <Link to="" className="sidebar__links">
-                  <span>
-                    ثوابت النظام
+              <Link to="" className="sidebar__links">
+                <span>
+                  ثوابت النظام
               {' '}
-                    {' '}
-                    <Icon type="setting"style={{marginLeft:'7px'}} />
-                  </span>
+                  {' '}
+                  <Icon type="setting" className='icon-style' />
+                </span>
 
-                </Link>
-                <Link to="" className="sidebar__links">
-                  <span>
-                    ثوابت لوحة التحكم
+              </Link>
+              <Link to="" className="sidebar__links">
+                <span>
+                  ثوابت لوحة التحكم
               {' '}
-                    {' '}
-                    <Icon type="control"style={{marginLeft:'7px'}} />
-                  </span>
+                  {' '}
+                  <Icon type="control" className='icon-style' />
+                </span>
 
-                </Link>
-                <Link to="" className="sidebar__links">
-                  <span>
-                    إدارة الاماكن العامة
+              </Link>
+              <Link to="" className="sidebar__links">
+                <span>
+                  إدارة الاماكن العامة
               {' '}
-                    {' '}
-                    <Icon type="environment"style={{marginLeft:'7px'}} />
-                  </span>
+                  {' '}
+                  <Icon type="environment" className='icon-style' />
+                </span>
 
-                </Link>
-              </div>
+              </Link>
+            </div>
             <div className='home'>
               <Link to="" className="sidebar__links">
                 <span>
                   إتصل بنا
             {' '}
-                  <Icon type="phone"style={{marginLeft:'5px'}} />
+                  <Icon type="phone" className='icon-style' />
                 </span>
 
               </Link>
