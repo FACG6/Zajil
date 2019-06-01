@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import swal from 'sweetalert2';
 import './style.css';
+import { captainSchema } from '../../helper/validationSchema'
 
 export default class Addcaptain extends Component {
   state = {
@@ -32,7 +33,7 @@ export default class Addcaptain extends Component {
       <p>:صورة الهوية</p> 
       <div class="add-captain-container-left-avatar">
       <label for="avatar" class="add-captain-container-left-avatar-label">أرفق صورة</label>
-      <input id="avatar" style="visibility:hidden;" type="file">
+      <input id="avatar" style="visibility:hidden;" type="file" accept=".jpg , .png">
       </div>
       </div>
       <div class="add-captain-container-center"></div>
@@ -68,17 +69,21 @@ export default class Addcaptain extends Component {
     })
 
     if (formValues) {
-
       this.setState({ data: formValues });
-      const inputValues = Object.values(formValues)
-      const inputObject = { ...inputValues };
-      axios.post("/api/v1/postCaptain", inputObject)
-        .then(res => {
-          //change state as responce from back
-        })
-        .catch(e => {
-          //enternal server error
-        })
+      captainSchema
+        .validate(formValues)
+        .then((validateFormValue) => {
+          axios.post("/api/v1/postCaptain", validateFormValue)
+            .then(res => {
+              //change state as responce from back
+            })
+            .catch(e => {
+              //enternal server error
+            })
+
+        }
+        )
+
     }
   }
 
@@ -87,8 +92,8 @@ export default class Addcaptain extends Component {
       <button onClick={this.popup} >add captain</button>
     );
   };
-}
 
+}
 
 
 const viewPopup = (id, viewPopupHtmlString) => {
