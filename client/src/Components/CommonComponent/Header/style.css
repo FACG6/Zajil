@@ -7,7 +7,9 @@
     align-self: flex-end;
     margin-right: 19.5vw;
     border-bottom: groove;
-    border-color: #2b2a374f
+    border-color: #2b2a374f;
+    border-width: 2px;
+
     
 }
 
