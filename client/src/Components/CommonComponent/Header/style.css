@@ -1,18 +1,16 @@
 .header {
-    font-style: normal;
-    font-weight: bold;
     display: flex;
-    flex-direction: row-reverse;
-    font-size: 1.8 rem;
-    margin-top: 1.5rem;
-}
-
-.header__line {
-    width: 65.4rem;
-    margin-left: 0.4rem;
+    width: 78vw;
+    direction: rtl;
+    margin-top: 67px;
+    padding-right: 3vw;
+    align-self: flex-end;
+    margin-right: 19.5vw;
+    border-bottom: groove;
+    border-color: #201f2b
 }
 
 .icon {
-    font-size: 1.4rem;
-    margin-left: 1rem;
+    margin-left: 1vw;
+    "fontSize": 2.2vw;
 }
