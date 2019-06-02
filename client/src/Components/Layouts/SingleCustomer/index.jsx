@@ -28,7 +28,7 @@ class Profile extends Component {
         <Header Icon={<Icon type="user" />} title="الصفحة الشخصية" />
         <div className="profile">
           <div className="profile__info">
-          <h2 className="profile__info__title">المعلومات الشخصية</h2>
+          <h3 className="profile__info__title">المعلومات الشخصية</h3>
             <div className="profile__box">
               <p className="profile__box__title">الاسم</p>
               <p className="profile__value">{name}</p>
