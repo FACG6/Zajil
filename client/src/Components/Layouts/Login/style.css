@@ -12,11 +12,12 @@
 }
 .login__box{
   background-color: #fff;
-  width: 50%;
-  height: 24rem;
+  width: 27.87rem;
+  height: 20rem;
   margin-top: -7rem;
   margin-bottom: 10rem;
   border-radius: 0.3rem;
+  text-align: center;
 }
 
 .login__box__input {
