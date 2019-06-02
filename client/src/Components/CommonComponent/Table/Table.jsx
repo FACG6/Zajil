@@ -63,7 +63,7 @@ class TableCmponent extends Component {
                 <span>
                   
                     <Icon
-                      onClick={event => viewPopup(record.key)}
+                      onClick={event => viewPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -73,7 +73,7 @@ class TableCmponent extends Component {
                   
                   <Divider type="vertical" />
                   
-                    <Icon onClick={event => editPopup(record.key)}
+                    <Icon onClick={event => editPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -83,7 +83,7 @@ class TableCmponent extends Component {
                   
                   <Divider type="vertical" />
                   
-                    <Icon onClick={event => deletePopup(record.key)}
+                    <Icon onClick={event => deletePopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -145,7 +145,7 @@ class TableCmponent extends Component {
                       type="profile"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key)}
+                    <Icon onClick={event => editPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -153,7 +153,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key)}
+                    <Icon onClick={event => deletePopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -206,7 +206,7 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={event => viewPopup(record.key)}
+                    <Icon onClick={event => viewPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -214,7 +214,7 @@ class TableCmponent extends Component {
                       type="profile"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key)}
+                    <Icon onClick={event => editPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -222,7 +222,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key)}
+                    <Icon onClick={event => deletePopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -284,7 +284,7 @@ class TableCmponent extends Component {
                       type="profile"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key)}
+                    <Icon onClick={event => editPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -292,7 +292,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key)}
+                    <Icon onClick={event => deletePopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -345,7 +345,7 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={event => viewPopup(record.key)}
+                    <Icon onClick={event => viewPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -353,7 +353,7 @@ class TableCmponent extends Component {
                       type="profile"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key)}
+                    <Icon onClick={event => editPopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -361,7 +361,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key)}
+                    <Icon onClick={event => deletePopup(record.key,record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
