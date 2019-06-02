@@ -2,13 +2,13 @@ require('dotenv').config();
 
 const express = require('express');
 
-const { check } = require('./middleware/authentication');
+const { checkAuth } = require('./middleware/authentication');
 const { protect } = require('./middleware/protectRoute');
 const adminHandler = require('./accountsMangment/admin');
 
 const router = express.Router();
 
-router.use(check);
+router.use(checkAuth);
 // the all routes start from here
 
 router.use(adminHandler);
