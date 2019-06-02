@@ -30,7 +30,7 @@
   direction: rtl;
   color: #2b2a37;
   font-weight: 400;
-  margin-top: 45px;
+  margin-top: 45px !important;
 }
 .ant-dropdown-menu {
   text-align: right;
