@@ -1,18 +1,31 @@
 import React, {Component} from 'react';
-import {BrowserRouter,Route} from 'react-router-dom';
-import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
-import TableComponent from './Components/CommonComponent/table/Table';
-import SideBar from './Components/CommonComponent/Sidebar';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 import './App.css';
-
-import Home from './Components/Layouts/Home';
+import Sidebar from './Components/CommonComponent/Sidebar';
+import Header from './Components/CommonComponent/Header';
+import Navbar from './Components/CommonComponent/Navbar/index'
 
 class App extends Component {
   state = {};
   render() {
     return (
       <div className="App">
-        <Home />
+    <Router>
+
+      <Route exact path='/' render={()=>(
+        <div>
+ <Sidebar />
+ <Navbar />
+ 
+          <Header />
+        </div>
+         
+       
+         )} /> 
+    </Router>
+      
+    
+        {/* <Home />
       <TableComponent
         pageName="customers"
         columns={[{
@@ -23,7 +36,7 @@ class App extends Component {
         viewPopup={viewPopup}
         editPopup={editPopup}
         deletePopup={deletePopup}
-      />
+      /> */}
     </div>
     );
   }
