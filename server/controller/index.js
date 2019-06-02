@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 
 const { checkAuth } = require('./middleware/authentication');
-const { protect } = require('./middleware/protectRoute');
+const { protectRoutes } = require('./middleware/protectRoute');
 const adminHandler = require('./accountsMangment/admin');
 
 const router = express.Router();
@@ -13,7 +13,7 @@ router.use(checkAuth);
 
 router.use(adminHandler);
 
-router.use(protect);
+router.use(protectRoutes);
 // the protected route start from here
 
 module.exports = router;
