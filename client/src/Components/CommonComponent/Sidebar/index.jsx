@@ -6,14 +6,6 @@ import './style.css';
 
 export default class Sidebar extends Component {
   state = {
-    accounts: 'hidden',
-    reports: 'hidden',
-    msg: 'hidden',
-    settings: 'hidden',
-    accounts: {
-      display: 'hidden',
-      arrow: 'down'
-    },
     accounts: {
       display: 'hidden',
       arrow: 'down'
@@ -34,15 +26,79 @@ export default class Sidebar extends Component {
   handleClick = (value) => (e) => {
     this.setState(prev => {
       let display = '';
-      let arrow = ''
-      if (prev[value].display == 'hidden') {
+      let arrow = '';
+      if (prev[value].display === 'hidden') {
         display = 'block';
-        arrow = 'up'
+        arrow = 'up';
       } else {
         display = 'hidden';
-        arrow = 'down'
+        arrow = 'down';
       }
-      return { [value]: { display, arrow, } }
+      if (value === 'accounts')
+        return {
+          [value]: { display, arrow, }, 
+          reports: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          msg: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          settings: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+        }
+        if (value === 'reports')
+        return {
+          [value]: { display, arrow, }, 
+          accounts: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          msg: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          settings: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+        }
+        if (value === 'msg')
+        return {
+          [value]: { display, arrow, }, 
+          accounts: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          reports: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          settings: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+        }
+        if (value === 'settings')
+        return {
+          [value]: { display, arrow, }, 
+          accounts: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          reports: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+          msg: {
+            display: 'hidden',
+            arrow: 'down'
+          },
+        }
+        
     });
   }
   render() {
@@ -79,7 +135,7 @@ export default class Sidebar extends Component {
               إدارة الحسابات
           {' '}
 
-              <Icon type="tool"className='iconstyle' />
+              <Icon type="tool" className='iconstyle' />
               {' '}
               <Icon type={accounts.arrow} style={{ marginLeft: '1.2rem', fontSize: '15px' }} />
             </div>
@@ -106,11 +162,11 @@ export default class Sidebar extends Component {
               </Link>
             </div>
 
-            <div onClick={this.handleClick('reports')}className="sidebar__dropdown lists" >
+            <div onClick={this.handleClick('reports')} className="sidebar__dropdown lists" >
 
               إدارة التقارير
           {' '}
-              <Icon type="profile"className='iconstyle'  />
+              <Icon type="profile" className='iconstyle' />
               <Icon type={reports.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
 
             </div>
@@ -143,7 +199,7 @@ export default class Sidebar extends Component {
 
               إدارة الرسائل
           <Icon type="mail" className='icons-style' />
-          <Icon type={msg.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
+              <Icon type={msg.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
             </div>
             <div className={`sidebar__dropdowncontainer ${msg.display}`}>
               <Link to="" className="sidebar__links ">
@@ -179,7 +235,7 @@ export default class Sidebar extends Component {
                 <span>
                   إدارة البروموكود
             {' '}
-                  <Icon type="setting" className='icon-style'/>
+                  <Icon type="setting" className='icon-style' />
                 </span>
 
               </Link>

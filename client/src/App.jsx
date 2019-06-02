@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
-// import { viewPopup, editPopup, deletePopup } from './pgComponents/CommonComponent/table/Popups';
-// import TableComponent from './Components/CommonComponent/table/Table';
-import SideBar from './Components/CommonComponent/Sidebar';
 import './App.css';
-
-import Home from './Components/Layouts/Home';
 import Sidebar from './Components/CommonComponent/Sidebar';
 
 class App extends Component {

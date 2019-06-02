@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Changa&display=swap');
 .container {
     position: relative;
     min-height: 100vh;
     background: #2B2A37;
     width: 225px;
     float: right;
+    font-family: 'cairo';
     
 }
 .sidebar{
@@ -18,16 +18,15 @@
     background-color: #2B2A37;
     flex-direction: column;
     justify-content: center;
-    font-family: 'Lateef', cursive;
-    font-size: 1.3rem;
+    font-size: 0.85rem;
 }
 .sidebar__header{
     position: absolute;
     top: 0rem;
     right: 4.5rem;
-    color: white;
+    color: orange;
     margin-top:1.4rem;
-    font-family: 'Changa', sans-serif;
+    font-family: 'cairo';
 }
 .sidebar__bar{
     margin-top: 5rem;
@@ -47,7 +46,6 @@
     flex-direction: column;
     margin-right: 23px;
     margin-top: -1rem;
-    font-size: 1.1rem;
     margin-bottom: 1rem;
 }
 .hidden{
