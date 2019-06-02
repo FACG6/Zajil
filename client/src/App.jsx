@@ -1,43 +1,35 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router,Route} from 'react-router-dom';
-import './App.css';
-import Sidebar from './Components/CommonComponent/Sidebar';
-import Header from './Components/CommonComponent/Header';
-import Navbar from './Components/CommonComponent/Navbar/index'
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Sidebar from "./Components/CommonComponent/Sidebar";
+import Header from "./Components/CommonComponent/Header";
+import Navbar from "./Components/CommonComponent/Navbar/index";
+import Login from "./Components/Layouts/Login";
+import "./App.css";
 
 class App extends Component {
   state = {};
   render() {
     return (
       <div className="App">
-    <Router>
+        <Router>
+          <Switch>
+            <Route path="/login" component={Login} exact />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <div>
+                  <Sidebar />
+                  <Navbar />
 
-      <Route exact path='/' render={()=>(
-        <div>
- <Sidebar />
- <Navbar />
- 
-          <Header />
-        </div>
-         
-       
-         )} /> 
-    </Router>
-      
-    
-        {/* <Home />
-      <TableComponent
-        pageName="customers"
-        columns={[{
-          key: 54, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }, {
-          key: 56, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }]}
-        viewPopup={viewPopup}
-        editPopup={editPopup}
-        deletePopup={deletePopup}
-      /> */}
-    </div>
+                  <Header />
+                </div>
+              )}
+            />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
