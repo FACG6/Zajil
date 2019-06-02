@@ -1,7 +1,11 @@
 .navbar{
     background-color: #201F2B;
     height: 3.5rem;
-    width: 65.6rem;
+    width: 81.3vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
   
 }
 
@@ -9,23 +13,22 @@
     line-height: 3.2rem;    
     height: 5rem;
     width: 20rem;
-    margin-left: 50rem;
     color: #fdeeee;
     font-size: 1.6rem;
     font-weight: 800;
+    margin-right: -11vw;
 }
 
 .circle{
     border-radius: 50%;
     text-align: center;
     height: 2.7rem;
+    width: 2.7rem;
     line-height: 3.1rem;
     margin-left: 4rem;
     font-weight: 600;
-    width: 2.7rem;
     background-color: #88B0D6;
-       
-        display: inline;
+     display: inline;
 }
 
 .logout{
@@ -35,5 +38,131 @@
 }
 .navbar__container{
     display: flex;
-    margin-top: -5.5rem;
+    
+}
+.navbar{
+    background-color: #201F2B;
+    height: 3.5rem;
+    width: 81.3vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  
+}
+
+.control-board{
+    line-height: 3.2rem;    
+    height: 5rem;
+    width: 20rem;
+    color: #fdeeee;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-right: -11vw;
+}
+
+.circle{
+    border-radius: 50%;
+    text-align: center;
+    height: 2.7rem;
+    width: 2.7rem;
+    line-height: 3.1rem;
+    margin-left: 4rem;
+    font-weight: 600;
+    background-color: #88B0D6;
+     display: inline;
+}
+
+.logout{
+    margin-top: .7rem;
+    color: #ecdfdf;
+    margin-left: 1.5rem;
+}
+.navbar__container{
+    display: flex;
+    
+}
+.navbar{
+    background-color: #201F2B;
+    height: 3.5rem;
+    width: 84.3vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  
+}
+
+.control-board{
+    line-height: 3.2rem;    
+    height: 5rem;
+    width: 20rem;
+    color: #fdeeee;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-right: -11vw;
+}
+
+.circle{
+    border-radius: 50%;
+    text-align: center;
+    height: 2.7rem;
+    width: 2.7rem;
+    line-height: 3.1rem;
+    margin-left: 4rem;
+    font-weight: 600;
+    background-color: #88B0D6;
+     display: inline;
+}
+
+.logout{
+    margin-top: .7rem;
+    color: #ecdfdf;
+    margin-left: 1.5rem;
+}
+.navbar__container{
+    display: flex;
+    
+}
+.navbar{
+    background-color: #201F2B;
+    height: 3.5rem;
+    width: 81.3vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  
+}
+
+.control-board{
+    line-height: 3.2rem;    
+    height: 5rem;
+    width: 20rem;
+    color: #fdeeee;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-right: -11vw;
+}
+
+.circle{
+    border-radius: 50%;
+    text-align: center;
+    height: 2.7rem;
+    width: 2.7rem;
+    line-height: 3.1rem;
+    margin-left: 4rem;
+    font-weight: 600;
+    background-color: #88B0D6;
+     display: inline;
+}
+
+.logout{
+    margin-top: .7rem;
+    color: #ecdfdf;
+    margin-left: 1.5rem;
+}
+.navbar__container{
+    display: flex;
+    
 }
