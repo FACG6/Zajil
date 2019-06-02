@@ -28,7 +28,18 @@ class App extends Component {
                 </div>
               )}
             />
-            <Route path="/customers/profile/:id" component = {Profile} />
+
+            <Route
+              exact
+              path="/customers/profile/:id"
+              render={() => (
+                <div>
+                  <Sidebar />
+                  <Navbar />
+                  <Profile />
+                </div>
+              )}
+            />
           </Switch>
         </Router>
 
