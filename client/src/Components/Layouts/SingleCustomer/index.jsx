@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
 
-import Sidebar from "../../CommonComponent/Sidebar";
-import Navbar from "../../CommonComponent/Navbar";
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
@@ -27,8 +25,6 @@ class Profile extends Component {
     } = this.state;
     return (
       <>
-        <Navbar />
-        <Sidebar />
         <Header Icon={<Icon type="user" />} title="الصفحة الشخصية" />
         <div className="profile">
           <div className="profile__info">
