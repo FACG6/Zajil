@@ -137,7 +137,7 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={ () => {this.props.history.push(`/getCustomerDetails/${record.key}`)}}
+                    <Icon onClick={ () => {this.props.history.push(`/customers/profile/${record.key}`)}}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
