@@ -1,19 +1,18 @@
 .header {
-  font-family: "Cairo";
     font-style: normal;
     font-weight: bold;
     display: flex;
     flex-direction: row-reverse;
     font-size: 1.8 rem;
-    margin-right: 21.9rem;
     margin-top: 1.5rem;
 }
-.header__line{
-    width: 65.4rem;   
+
+.header__line {
+    width: 65.4rem;
     margin-left: 0.4rem;
 }
-.icon{
+
+.icon {
     font-size: 1.4rem;
     margin-left: 1rem;
-
 }
