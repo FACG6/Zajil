@@ -32,9 +32,6 @@
   font-weight: 400;
   margin-top: 45px;
 }
-.table-dropdown .anticon svg{
-  margin-bottom: 0px;
-}
 .ant-dropdown-menu {
   text-align: right;
   right: 0.6rem;
