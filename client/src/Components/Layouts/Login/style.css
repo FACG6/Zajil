@@ -51,6 +51,11 @@
   transition: all 1s ease-in-out;
 } 
 
+.login__box-button:hover{
+  background: #101017;
+  box-shadow: 0 0 5px #201f2c;
+}
+
 .login__box__title{
   color: #201F2B;
 }
