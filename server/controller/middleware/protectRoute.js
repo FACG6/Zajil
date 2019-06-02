@@ -1,4 +1,4 @@
-exports.protect = (req, res, next) => {
+exports.protectRoutes = (req, res, next) => {
   if (req.payload) {
     next();
   } else {
