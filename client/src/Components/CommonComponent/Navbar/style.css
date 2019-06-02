@@ -2,7 +2,7 @@
     background-color: #201F2B;
     height: 3.5rem;
     width: 65.6rem;
-    margin-top: -2rem;
+  
 }
 
 .control-board{
@@ -16,8 +16,7 @@
 }
 
 .circle{
-    margin-top: -3.5rem;
-    border-radius: 5rem;
+    border-radius: 50%;
     text-align: center;
     height: 2.7rem;
     line-height: 3.1rem;
@@ -25,10 +24,16 @@
     font-weight: 600;
     width: 2.7rem;
     background-color: #88B0D6;
+       
+        display: inline;
 }
 
 .logout{
-    margin-top: -5.7rem;
+    margin-top: .7rem;
     color: #ecdfdf;
-    margin-left: -45rem;
+    margin-left: 1.5rem;
+}
+.navbar__container{
+    display: flex;
+    margin-top: -5.5rem;
 }
