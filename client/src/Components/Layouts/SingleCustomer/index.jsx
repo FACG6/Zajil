@@ -3,9 +3,14 @@ import { Icon } from "antd";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
-import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
+import Popup from "./popup";
+import {
+  viewPopup,
+  editPopup,
+  deletePopup
+} from "../../CommonComponent/Table/Popups";
 
-import './style.css';
+import "./style.css";
 
 class Profile extends Component {
   state = {
@@ -16,19 +21,25 @@ class Profile extends Component {
       email: "shrooqabdullahsaad@gmail.com",
       address: "غزة",
       licence: "059999999999",
-      ID: "00000000"
-    }
+      ID: "00000000",
+    },
+    visible: false ,
   };
+  handleClick = () => {
+    this.setState({visible: true});
+  }
   render() {
     const {
       personalInformation: { name, phone, status, email, address, licence, ID }
     } = this.state;
     return (
       <>
+      {/* <button onClick={this.handleClick}>click</button>
+      <Popup visible={this.state.visible} /> */}
         <Header Icon={<Icon type="user" />} title="الصفحة الشخصية" />
         <div className="profile">
           <div className="profile__info">
-          <h3 className="profile__info__title">المعلومات الشخصية</h3>
+            <h3 className="profile__info__title">المعلومات الشخصية</h3>
             <div className="profile__box">
               <p className="profile__box__title">الاسم</p>
               <p className="profile__value">{name}</p>
@@ -59,9 +70,26 @@ class Profile extends Component {
               <p className="profile__value">{ID}</p>
             </div>
           </div>
-            <div className="profile__orders">
-                <Table pageName="singleCustomer" columns={[{key: "1", email:"shrooqabdullah@gmail.com", mobileNo:"059999999", date:"14-7-2019", status:"تم", address:"غزة", captain:"محمد", price:"50$"}]}  viewPopup={viewPopup} editPopup={editPopup} deletePopup={deletePopup}/>
-            </div>
+          <div className="profile__orders">
+            <Table
+              pageName="singleCustomer"
+              columns={[
+                {
+                  key: "1",
+                  email: "shrooqabdullah@gmail.com",
+                  mobileNo: "059999999",
+                  date: "14-7-2019",
+                  status: "تم",
+                  address: "غزة",
+                  captain: "محمد",
+                  price: "50$"
+                }
+              ]}
+              viewPopup={viewPopup}
+              EditPopup={Popup}
+              deletePopup={deletePopup}
+            />
+          </div>
         </div>
       </>
     );
