@@ -1,0 +1,32 @@
+.profile {
+    width: 66rem;
+}
+
+.profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    padding: 1rem;
+}
+
+.profile__box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    min-width: 4rem;
+    padding: 0.3rem;
+    margin: 1rem 0.5rem;
+    /* justify-content: left; */
+}
+
+.profile__box__title {
+    font-weight: bolder;
+    margin-left: 1rem;
+}
+.profile__value {
+    color: #353535;
+}
+.profile__box__title::before{
+    content: ':';
+    margin-right: 0.5rem; 
+}
