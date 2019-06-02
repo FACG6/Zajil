@@ -1,34 +1,46 @@
 .container {
-    position: relative;
+    position: fixed;
+    right: 0rem;
     min-height: 100vh;
     background: #2B2A37;
     width: 225px;
     float: right;
     font-family: 'cairo';
-    
+    z-index: 3;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
-.sidebar{
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
     width: 14.11rem;
     position: absolute;
-    top:0rem;
-    right:0rem;
+    top: 0rem;
+    right: 0rem;
     padding-top: 1rem;
     color: white;
     display: flex;
     background-color: #2B2A37;
     flex-direction: column;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 }
-.sidebar__header{
+
+.sidebar__header {
     position: absolute;
     top: 0rem;
     right: 4.5rem;
     color: orange;
-    margin-top:1.4rem;
+    margin-top: 1.4rem;
     font-family: 'cairo';
 }
-.sidebar__bar{
+
+.sidebar__bar {
     margin-top: 5rem;
     margin-right: 2rem;
     text-align: right;
@@ -36,45 +48,60 @@
     flex-direction: column;
 }
 
- .sidebar__links{
+.sidebar__links {
     margin: .6rem .8rem .6rem 1.6rem;
     text-decoration: none;
     color: white;
 }
-.sidebar__dropdowncontainer{
+
+.sidebar__dropdowncontainer {
     display: flex;
     flex-direction: column;
     margin-right: 23px;
     margin-top: -1rem;
     margin-bottom: 1rem;
+    font-size: .65rem
 }
-.hidden{
-    
+
+.hidden {
     display: none;
     transition: all 2s ease-in-out;
 }
-.block{
+
+.block {
     display: flex;
     transition: all 2s ease-in-out;
 }
-.home{
+
+.home {
     margin-right: -11px;
     margin-bottom: 1.5rem;
-
 }
 
-.lists{
+.lists {
     margin-right: -1px;
     margin-bottom: 1.5rem;
     cursor: pointer;
-
 }
-.icon-style{
+
+.icon-style {
     margin-left: 1.3rem;
 }
-.icons-style{
+
+.icons-style {
     margin-left: 1rem;
 }
-.iconstyle{
+
+.iconstyle {
     margin-left: .5rem;
+}
+
+@media only screen and (max-width: 700px) {
+    .container {
+        width: 25vw;
+    }
+    .sidebar {
+        font-size: 0.8rem;
+        width: 25vw;
+    }
 }
