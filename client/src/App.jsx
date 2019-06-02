@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
 //import TableComponent from './Components/CommonComponent/table/Table';
-//import Addcaptain from './Components/CommonComponent/Table/Popups'
+import Addcaptain from './Components/CommonComponent/Table/Popups'
 // import { BrowserRouter, Route } from 'react-router-dom';
 // import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
 // import TableComponent from './Components/CommonComponent/table/Table';
@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <Addcaptain /> */}
+        <Addcaptain />
         {/* <TableComponent
   state = {};
   render() {
