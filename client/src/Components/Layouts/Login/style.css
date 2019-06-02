@@ -59,3 +59,7 @@
 .login__box__title{
   color: #201F2B;
 }
+
+.login__box-error{
+  color: rgb(255, 83, 83);
+}
