@@ -6,6 +6,7 @@ import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar/index";
 import Profile from "./Components/Layouts/SingleCustomer";
 
+import Login from "./Components/Layouts/Login";
 import "./App.css";
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
+            <Route path="/login" component={Login} exact />
             <Route
               exact
               path="/"
