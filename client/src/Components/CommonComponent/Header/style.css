@@ -2,15 +2,19 @@
     display: flex;
     width: 78vw;
     direction: rtl;
-    margin-top: 67px;
-    padding-right: 3vw;
+    margin-top: 23px;
+    padding-right: 2vw;
     align-self: flex-end;
     margin-right: 19.5vw;
     border-bottom: groove;
-    border-color: #201f2b
+    border-color: #2b2a374f
+    
 }
 
 .icon {
     margin-left: 1vw;
-    "fontSize": 2.2vw;
+    font-size: 2.2vw;
+}
+.anticon svg{
+    margin-bottom: 5px;
 }
