@@ -381,7 +381,6 @@ class TableCmponent extends Component {
 TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
-  viewPopup: PropTypes.func.isRequired,
   deletePopup: PropTypes.func.isRequired,
 };
 
