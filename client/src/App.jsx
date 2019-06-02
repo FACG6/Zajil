@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import './App.css';
 import Sidebar from './Components/CommonComponent/Sidebar';
+import Header from './Components/CommonComponent/Header';
+import Navbar from './Components/CommonComponent/Navbar/index'
 
 class App extends Component {
   state = {};
@@ -10,7 +12,16 @@ class App extends Component {
       <div className="App">
     <Router>
 
-      <Route exact path='/' component={Sidebar} /> 
+      <Route exact path='/' render={()=>(
+        <div>
+ <Sidebar />
+ <Navbar />
+ 
+          <Header />
+        </div>
+         
+       
+         )} /> 
     </Router>
       
     
