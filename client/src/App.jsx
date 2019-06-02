@@ -26,6 +26,7 @@ class App extends Component {
                 </div>
               )}
             />
+            <Route path="/customers/profile/:id" component = {Profile} />
           </Switch>
         </Router>
 
