@@ -1,6 +1,6 @@
 const { verify } = require('jsonwebtoken');
 
-exports.check = (req, res, next) => {
+exports.checkAuth = (req, res, next) => {
   const { jwt } = req.cookies;
   if (jwt) {
     verify(process.env.SECRET, jwt, (error, payload) => {
