@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './style.css';
 import { Icon } from 'antd';
 import Header from '../../CommonComponent/Header';
-import Navbar from '../../CommonComponent/Navbar';
-import SideBar from '../../CommonComponent/Sidebar'
 import Table from '../../CommonComponent/Table/Table';
 import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
 
@@ -28,25 +26,26 @@ export default class Viewcaptain extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <SideBar />
+
         <Header title='ناريمان محمد حلس' Icon={<Icon type="user" className="header__icon" />} />
-        <div className='view-captain-personal-information'>
-          <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
-          <div className='personal-box'>
-            <p>الاسم:{this.state.name}</p>
-            <p>البريد الالكتروني:{this.state.email}</p>
-            <p>رقم الهوية:{this.state.id_number}</p>
-            <p>الهاتف المحمول:{this.state.phone_number}</p>
-            <p>الحالة:{this.state.status}</p>
-            <p>العنوان:{this.state.address}</p>
-            <p>رقم الرخصة:{this.state.licience_number}</p>
+        <div className='view-captain'>
+          <div className='view-captain-personal-information'>
+            <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
+            <div className='view-captain-personal-information-box'>
+              <p>الاسم:{this.state.name}</p>
+              <p>{this.state.email}:البريد الالكتروني</p>
+              <p>رقم الهوية:{this.state.id_number}</p>
+              <p>الهاتف المحمول:{this.state.phone_number}</p>
+              <p>الحالة:{this.state.status}</p>
+              <p>العنوان:{this.state.address}</p>
+              <p>رقم الرخصة:{this.state.licience_number}</p>
+            </div>
           </div>
-        </div>
-        <div className='captain-orders'>
-          <h2>الطلبات الخاصة بالمستخدم</h2>
-          <div className="order-table">
-            <Table pageName="singleCaptain" columns={this.state.columns} viewPopup={viewPopup} editPopup={editPopup} deletePopup={deletePopup} />
+          <div className='view-captain-orders'>
+            <h2 className='view-captain-orders-title'>الطلبات الخاصة بالمستخدم</h2>
+            <div className="order-table">
+              <Table pageName="singleCaptain" columns={this.state.columns} viewPopup={viewPopup} editPopup={editPopup} deletePopup={deletePopup} />
+            </div>
           </div>
         </div>
       </div>

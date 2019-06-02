@@ -1,6 +1,32 @@
-.view-captain-personal-information-title{
-  font-weight: bold;
-}
+
 .view-captain-personal-information{
-  
+ margin-right: 18rem;
+}
+.view-captain-personal-information-title{
+  margin-top: 2rem;
+  margin-bottom: 2.6rem;
+  text-align: end;
+}
+.view-captain-personal-information-box{
+ display: flex;
+ flex-wrap: wrap;
+ flex-direction: row-reverse;
+ text-align: end;
+}
+p{
+  width: 25%;
+}
+.view-captain-orders{
+  margin-right: 18rem;
+
+}
+.view-captain-orders-title{
+  margin-top: 2rem;
+  margin-bottom: 2.6rem;
+  text-align: end;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.order-table{
+  margin-left: -4rem;
 }
