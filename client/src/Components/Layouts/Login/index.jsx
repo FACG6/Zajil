@@ -39,7 +39,7 @@ export default class Login extends Component {
         <h3 className="login__box__title">تسجيل الدخول</h3>
           <input type="text" name="userName" id="userName" placeholder="إسم المستخدم" onChange={this.handleChange} className='login__box__input' />
           <input type="password" name="password" id="password" placeholder="كلمة المرور" onChange={this.handleChange} className='login__box__input' />
-          <input type="submit" value="تسجيل الدخول" onClick={this.handleClick} className='login__box-button' />
+          <input type="submit" value="تسجيل الدخول" onClick={this.handleClick} className='login__box__button' />
         </div>
       </div>
     );
