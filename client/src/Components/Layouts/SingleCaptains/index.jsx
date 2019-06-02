@@ -3,8 +3,9 @@ import './style.css';
 import { Icon } from 'antd';
 import Header from '../../CommonComponent/Header';
 import Navbar from '../../CommonComponent/Navbar';
-import Table from '../../CommonComponent/table/Table';
-import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/table/Popups";
+import SideBar from '../../CommonComponent/Sidebar'
+import Table from '../../CommonComponent/Table/Table';
+import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
 
 export default class Viewcaptain extends Component {
   state = {
@@ -28,9 +29,10 @@ export default class Viewcaptain extends Component {
     return (
       <div>
         <Navbar />
+        <SideBar />
         <Header title='ناريمان محمد حلس' Icon={<Icon type="user" className="header__icon" />} />
-        <div className='captain-personal-information'>
-          <h2>المعلومات الشخصية</h2>
+        <div className='view-captain-personal-information'>
+          <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
           <div className='personal-box'>
             <p>الاسم:{this.state.name}</p>
             <p>البريد الالكتروني:{this.state.email}</p>

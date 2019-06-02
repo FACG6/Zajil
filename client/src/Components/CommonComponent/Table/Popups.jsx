@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import swal from 'sweetalert2';
 import './style.css';
 
