@@ -6,6 +6,7 @@ export default class Login extends Component {
   state = {
     userName: "",
     password: "",
+    error: ""
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -32,6 +33,7 @@ export default class Login extends Component {
   };
 
   render() {
+    const { error } = this.state;
     return (
       <div className='login'>
         <h2 className='login__title'>زاجل</h2>
@@ -40,6 +42,7 @@ export default class Login extends Component {
           <input type="text" name="userName" id="userName" placeholder="إسم المستخدم" onChange={this.handleChange} className='login__box__input' />
           <input type="password" name="password" id="password" placeholder="كلمة المرور" onChange={this.handleChange} className='login__box__input' />
           <input type="submit" value="تسجيل الدخول" onClick={this.handleClick} className='login__box__button' />
+          {error && <p className="login__box-error">{error}</p>}
         </div>
       </div>
     );
