@@ -4,6 +4,8 @@ import { Icon } from "antd";
 import Sidebar from "../../CommonComponent/Sidebar";
 import Navbar from "../../CommonComponent/Navbar";
 import Header from "../../CommonComponent/Header";
+import Table from "../../CommonComponent/Table/Table";
+import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
 
 import './style.css';
 
@@ -61,6 +63,9 @@ class Profile extends Component {
               <p className="profile__value">{ID}</p>
             </div>
           </div>
+            <div className="profile__orders">
+                <Table pageName="singleCustomer" columns={[{key: "1", email:"shrooqabdullah@gmail.com", mobileNo:"059999999", date:"14-7-2019", status:"تم", address:"غزة", captain:"محمد", price:"50$"}]}  viewPopup={viewPopup} editPopup={editPopup} deletePopup={deletePopup}/>
+            </div>
         </div>
       </>
     );
