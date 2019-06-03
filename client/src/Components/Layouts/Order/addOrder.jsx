@@ -1,102 +1,143 @@
-import React,{Component} from 'react';
-import axios from "axios";
-import swal from 'sweetalert2';
-import './style.css'
-import { orderSchema } from '../../helper/validationSchemaOrder'
-import { async } from 'q';
-// const Swal = require('sweetalert2')
+import React, { Component } from "react";
+import { Button, Modal, Form, Select, Input, Radio } from "antd";
 
-// CommonJS
-class AddOrder extends Component{
-  state = {
-    data: {
-      username: "",
-      phone: "",
-      captenName: "",
-      market: "",
-      addItem: "",
-      address: "",
+const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
+  // eslint-disable-next-line
+  class extends React.Component {
+    render() {
+      const { visible, onCancel, onCreate, form } = this.props;
+      const { getFieldDecorator } = form;
+      const { Option } = Select;
+      const prefixSelector = getFieldDecorator("prefix", {
+        initialValue: "972"
+      })(
+        <Select style={{ width: 80 }}>
+          <Option value="972">+972</Option>
+          <Option value="970">+970 </Option>
+        </Select>
+      );
+      return (
+        <Modal
+          visible={visible}
+          title="اضافة طلب"
+          okText="Create"
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <Form layout="vertical">
+            <Form.Item label="اسم الزبون" dir="ltr">
+              {getFieldDecorator("username", {
+                rules: [
+                  { required: true, message: "Please input your username!" }
+                ]
+              })(<Input />)}
+            </Form.Item>
+
+            <Form.Item label="اسم الكابتن">
+              {getFieldDecorator("captenname", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input the title of collection!"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+
+            <Form.Item label="اضافة عنصر">
+              {getFieldDecorator("additem", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input the title of collection!"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+
+            <Form.Item label="اختر متجر">
+              {getFieldDecorator("market", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input the title of collection!"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+
+            <Form.Item label="Phone Number">
+              {getFieldDecorator("phone", {
+                rules: [
+                  { required: true, message: "Please input your phone number!" }
+                ]
+              })(
+                <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+              )}
+            </Form.Item>
+
+            <Form.Item label="العنوان">
+              {getFieldDecorator("title", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Please input the title of collection!"
+                  }
+                ]
+              })(<Input />)}
+            </Form.Item>
+          </Form>
+        </Modal>
+      );
     }
+  }
+);
+
+class CollectionsPage extends React.Component {
+  state = {
+    visible: false
   };
 
-  handleChange = async() => {
-    console.log('error')
+  showModal = () => {
+    this.setState({ visible: true });
+  };
 
-  }
-  popup = async () => {
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
 
-    const { value: formValues } = await swal.fire({
-      title: '',
-      html:`
-    <label class="title">اضافة طلب</label>
-    <hr className="header__line" />
-    
-    <label  dir="ltr" id="market" class="market"><input class="input"/>:اختر متجر</label>
-    <label  dir="ltr" id="username" class="username"><input class="input"/>:اسم الزبون</label>
-    <br/>
-    <br/>
-    <label  dir="ltr" id="captenName" class="captenName"><input class="input"/>:اسم الكابتن </label>
-    <br/>
-    
-    <br/>
-    <label  dir="ltr" id="address" class="addres"><input class="inputt"/>:العنوان</label>
-    
-    <br/>
-    <br/>
-    
-    <label  dir="ltr" id="addItem" class="addItem"><input class="input"/>:اضافة عنصر</label>
-    
-    <br/>
-    <br/>
-    
-    <label  dir="ltr" id="phone" class="phone"><input  class="inputPhone"/>:رقم الهاتف</label>
-      `,
-      showCancelButton: true,
-      showConfirmButton: true,
-      confirmButtonColor: '#28a745',
-      confirmButtonText: 'حفظ',
-      cancelButtonText: 'إلغاء',
-      cancelButtonColor: '#2b2a37',
-      closeOnConfirm: true,
-      reverseButtons: true,
-      preConfirm: () => {
-        return {
-          username: document.getElementById('username').value,
-          phone: document.getElementById('phone').value,
-          address: document.getElementById('address').value,
-          market: document.getElementById('market').value,
-          captenName: document.getElementById('captenName').value,
-          addItem: document.getElementById('addItem').value,
-        }
-
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
       }
-    })
-  
-  if (formValues) {
-    this.setState({ data: formValues });
-    orderSchema
-      .validate(formValues)
-      .then((validateFormValue) => {
-        // console.log(validateFormValue)
-        axios.post("/api/v1/postCaptain", validateFormValue)
-          .then(res => {
-            //change state as responce from back
-            console.log(res)
-          })
-          .catch(e => {
-            //enternal server error
-          })
 
-        }
-        )
+      console.log("Received values of form: ", values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  };
 
-    }
+  saveFormRef = formRef => {
+    this.formRef = formRef;
+  };
+
+  render() {
+    return (
+      <div>
+        <Button type="primary" onClick={this.showModal}>
+          New Collection
+        </Button>
+        <CollectionCreateForm
+          wrappedComponentRef={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
+      </div>
+    );
   }
-    render() {
-      return (
-        <button onClick={this.popup} onChange={this.handleChange} >add Order</button>
-      );
-    };
-  }
+}
 
-export default AddOrder;
+export default CollectionsPage;

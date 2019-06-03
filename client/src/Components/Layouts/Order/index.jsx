@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import AddOrder from './addOrder'
+import CollectionsPage from './addOrder'
 
 class Order extends Component{
   render(){
       return(
         <div>
-         <AddOrder />
+         <CollectionsPage />
         </div>
 );
 }
