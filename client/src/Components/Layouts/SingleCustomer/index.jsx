@@ -3,7 +3,7 @@ import { Icon } from "antd";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
-import Popup from "./popup";
+import Popup from "./Popup";
 import {
   viewPopup,
   editPopup,
