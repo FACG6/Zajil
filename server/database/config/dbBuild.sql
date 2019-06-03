@@ -11,17 +11,6 @@ CREATE TABLE users
     password TEXT NOT NULL
 );
 
-CREATE TABLE items
-(
-    pk_i_id SERIAL PRIMARY KEY,
-    s_name TEXT NOT NULL,
-    fk_i_order_id INTEGER REFERENCES users (id),
-    dt_modified_date DATE,
-    dt_create_at DATE DEFAULT current_date,
-    dt_delete_at DATE
-
-);
-
 CREATE TABLE places
 (
     pk_i_id SERIAL PRIMARY KEY,
@@ -36,7 +25,7 @@ CREATE TABLE TUser
     s_name TEXT NOT NULL,
     s_mobile_number TEXT NOT NULL,
     s_email TEXT NOT NULL,
-    b_status BOOLEAN,
+    b_status BOOLEAN NOT NULL,
     s_address TEXT NOT NULL,
     s_access_token TEXT,
     s_image TEXT NOT NULL,
@@ -65,6 +54,17 @@ CREATE TABLE orders
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
     dt_modified_date DATE
+);
+
+CREATE TABLE items
+(
+    pk_i_id SERIAL PRIMARY KEY,
+    s_name TEXT NOT NULL,
+    fk_i_order_id INTEGER REFERENCES orders (id),
+    dt_modified_date DATE,
+    dt_create_at DATE DEFAULT current_date,
+    dt_delete_at DATE
+
 );
 
 CREATE TABLE TUser_order
