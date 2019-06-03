@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-//import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
-//import TableComponent from './Components/CommonComponent/table/Table';
-import Addcaptain from './Components/CommonComponent/Table/Popups'
-// import { BrowserRouter, Route } from 'react-router-dom';
-// import { viewPopup, editPopup, deletePopup } from './Components/CommonComponent/table/Popups';
-// import TableComponent from './Components/CommonComponent/table/Table';
-// import SideBar from './Components/CommonComponent/Sidebar';
-import './App.css';
-
-// import Home from './Components/Layouts/Home';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AddCaptain from './Components/CommonComponent/Table/Popups'
+//import Sidebar from "./Components/CommonComponent/Sidebar";
+//import Header from "./Components/CommonComponent/Header";
+//import Navbar from "./Components/CommonComponent/Navbar/index";
+//import Login from "./Components/Layouts/Login";
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -17,24 +14,24 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Addcaptain />
-        {/* <TableComponent
-  state = {};
-  render() {
-    return (
-      <div className="App">
-        <Home />
-      <TableComponent
-        pageName="customers"
-        columns={[{
-          key: 54, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }, {
-          key: 56, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }]}
-        viewPopup={viewPopup}
-        editPopup={editPopup}
-        deletePopup={deletePopup}
-      /> */}
+
+        <Router>
+          <Switch>
+            {/* <Route path="/login" component={Login} exact /> */}
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <div>
+                  {/* <Sidebar />
+                  <Navbar /> */}
+                  <AddCaptain />
+                  {/* <Header /> */}
+                </div>
+              )}
+            />
+          </Switch>
+        </Router>
       </div>
     );
   }
