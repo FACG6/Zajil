@@ -50,3 +50,7 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.tablecustomer-container {
+  width: 71vw;
+  margin-left: 5vw;
+}
