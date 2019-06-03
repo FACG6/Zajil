@@ -24,7 +24,7 @@ CREATE TABLE TUser
     pk_i_id SERIAL PRIMARY KEY,
     s_name TEXT NOT NULL,
     s_mobile_number TEXT NOT NULL,
-    s_email TEXT NOT NULL,
+    s_email TEXT NOT NULL UNIQUE,
     b_status BOOLEAN NOT NULL,
     s_address TEXT NOT NULL,
     s_access_token TEXT,
