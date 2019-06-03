@@ -13,6 +13,12 @@ BEGIN;
         ('فنور عماد نور', '+970599999999', 'test@hotmail.com', false, 'gaza', 'test.png', 1, '123'),
         ('سنور عماد نور', '+970599999999', 'test@hotmail.com', true, 'dear albalah', 'test.png', 1, '123');
     
-    
+    INSERT INTO places(s_name) VALUES
+    ('مكان 1'),
+    ('مكان 2'),
+    ('مكان 3'),
+    ('مكان 4'),
+    ('مكان 5'),
+    ('مكان 6')
 
     COMMIT;
