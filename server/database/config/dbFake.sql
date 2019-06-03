@@ -44,4 +44,11 @@ BEGIN;
         ('لبن', 4),
         ('شاورما', 5);
 
+    INSERT INTO TUser_order
+        (tuser_id, order_id)
+    VALUES
+        (1, 1),
+        (6, 1),
+        (2, 2),
+        (6, 2);
     COMMIT;
