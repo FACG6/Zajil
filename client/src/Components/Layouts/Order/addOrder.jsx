@@ -3,22 +3,26 @@ import axios from "axios";
 import swal from 'sweetalert2';
 import './style.css'
 import { orderSchema } from '../../helper/validationSchemaOrder'
+import { async } from 'q';
 // const Swal = require('sweetalert2')
 
 // CommonJS
 class AddOrder extends Component{
   state = {
     data: {
-      name: "",
+      username: "",
       phone: "",
-      IDNumber: "",
-      status: "",
-      email: "",
+      captenName: "",
+      market: "",
+      addItem: "",
       address: "",
-      licenceNumber: "",
-      avatar: "",
     }
   };
+
+  handleChange = async() => {
+    console.log('error')
+
+  }
   popup = async () => {
 
     const { value: formValues } = await swal.fire({
@@ -73,10 +77,11 @@ class AddOrder extends Component{
     orderSchema
       .validate(formValues)
       .then((validateFormValue) => {
-        console.log(validateFormValue)
+        // console.log(validateFormValue)
         axios.post("/api/v1/postCaptain", validateFormValue)
           .then(res => {
             //change state as responce from back
+            console.log(res)
           })
           .catch(e => {
             //enternal server error
@@ -89,7 +94,7 @@ class AddOrder extends Component{
   }
     render() {
       return (
-        <button onClick={this.popup} >add Order</button>
+        <button onClick={this.popup} onChange={this.handleChange} >add Order</button>
       );
     };
   }
