@@ -2,9 +2,7 @@ import React, { Component } from "react";
 
 import { Icon } from "antd";
 
-import Navbar from "../../CommonComponent/Navbar";
 import CountBox from "../../CommonComponent/CountBox";
-import Header from "../../CommonComponent/Header";
 
 import "./style.css";
 
@@ -34,7 +32,7 @@ class Home extends Component {
             title="الطلبات"
             number="40"
             color="#55B690"
-            icon={<Icon type="container" />}
+            icon={<Icon type="shopping-cart" />}
           />
         </div>
       </div>
