@@ -1,0 +1,76 @@
+.swal2-header {
+    color: red!important;
+}
+.username {
+    margin-left: 6rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.captenName {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 25.5rem;
+}
+.market{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.addres{
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 25.5rem;
+}
+.addItem{
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 25.5rem;
+}
+.phone{
+    font-weight: 600;
+    font-size: 1rem;
+    margin-left: 24.5rem;
+}
+.swal2-actions{
+    margin-left: -15rem;
+    outline: none;
+}
+.inputt{
+    margin-right: 4.3rem;
+    border: none;
+    border-bottom: 1px solid #b9b2b2;
+    border-radius: 5px;
+    outline: none;
+
+}
+.inputPhone{
+    margin-right: 2.5rem;
+    border: none;
+    border-bottom: 1px solid #b9b2b2;
+    border-radius: 5px;
+    outline: none;
+}
+.input{
+    border: none;
+    border-bottom: 1px solid #b9b2b2;
+    border-radius: 5px;
+    outline: none;
+    margin-right: 2rem;
+}
+.swal2-popup ,swal2-modal ,swal2-show{
+    width: 53.3rem!important;
+}
+.titleOrder {
+    color: blue;
+}
+.swal2-input {
+    width: 9rem;
+    height: 2rem;
+}
+.title{
+    display: block;
+    margin-left: 39rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}

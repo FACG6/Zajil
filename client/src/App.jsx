@@ -22,7 +22,6 @@ class App extends Component {
                 <div>
                   <Sidebar />
                   <Navbar />
-
                   <Header />
                 </div>
               )}
