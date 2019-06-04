@@ -9,16 +9,11 @@ import Header from "../../CommonComponent/Header";
 import "./style.css";
 
 class Home extends Component {
-  state = {
-    
-  }
+  state = {};
   render() {
-    <div>
-      <Navbar />
-      <Header title="الرئيسية" Icon={<Icon type="bank" />} />
-
-      <div>
-        <div className="box1">
+    return (
+      <div className="box">
+        <div className="box__container">
           <CountBox
             title="الزبائن"
             number="10"
@@ -26,7 +21,7 @@ class Home extends Component {
             icon={<Icon type="team" />}
           />
         </div>
-        <div className="box-two">
+        <div className="box__container">
           <CountBox
             title="الكباتن"
             number="15"
@@ -34,7 +29,7 @@ class Home extends Component {
             icon={<Icon type="car" />}
           />
         </div>
-        <div className="box-three">
+        <div className="box__container">
           <CountBox
             title="الطلبات"
             number="40"
@@ -43,7 +38,7 @@ class Home extends Component {
           />
         </div>
       </div>
-    </div>;
+    );
   }
 }
 
