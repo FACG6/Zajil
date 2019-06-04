@@ -6,7 +6,7 @@ exports.deleteOrder = (req, res) => {
     .then(() => {
       res.send({ result: 'delete done' });
     })
-    .catch((error) => {
-      res.status(500).send({ error });
+    .catch(() => {
+      res.status(500).send({ error: 'Internal Server Error' });
     });
 };
