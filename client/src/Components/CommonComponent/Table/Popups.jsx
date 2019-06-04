@@ -2,7 +2,7 @@
 import swal from 'sweetalert2';
 import './style.css';
 
-const viewPopup = (id, viewPopupHtmlString) => {
+const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
   const span = document.createElement('span');
   const details = viewPopupHtmlString;
   span.innerHTML = `${details}`;
@@ -20,7 +20,7 @@ const viewPopup = (id, viewPopupHtmlString) => {
   });
 };
 
-const editPopup = (id, editPopupHtmlString) => {
+const editPopup = (id, DataToBeDisplayedObject, editPopupHtmlString) => {
   const span = document.createElement('span');
   const details = editPopupHtmlString;
   span.innerHTML = `${details}`;
@@ -38,7 +38,7 @@ const editPopup = (id, editPopupHtmlString) => {
   });
 };
 
-const deletePopup = (id, deletePopupHtmlString) => {
+const deletePopup = (id, DataToBeDisplayedObject, deletePopupHtmlString) => {
   const span = document.createElement('span');
   const details = deletePopupHtmlString;
   span.innerHTML = `${details}`;
