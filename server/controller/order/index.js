@@ -4,7 +4,7 @@ const { deleteOrder } = require('./deleteOrder');
 
 const router = express.Router();
 
-router.route('deleteOrder/:id')
+router.route('/deleteOrder/:id')
   .delete(deleteOrder);
 
 module.exports = router;
