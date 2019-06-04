@@ -6,6 +6,9 @@
   margin-top: 2rem;
   margin-bottom: 2.6rem;
   text-align: end;
+  margin-top: 7rem;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 .view-captain-personal-information-box{
  display: flex;
@@ -15,6 +18,7 @@
 }
 p{
   width: 25%;
+  font-weight: lighter;
 }
 .view-captain-orders{
   margin-right: 18rem;

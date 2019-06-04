@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
-import { Icon } from 'antd';
-import Header from '../../CommonComponent/Header';
+
 import Table from '../../CommonComponent/Table/Table';
 import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
 
@@ -27,7 +26,6 @@ export default class Viewcaptain extends Component {
     return (
       <div>
 
-        <Header title='ناريمان محمد حلس' Icon={<Icon type="user" className="header__icon" />} />
         <div className='view-captain'>
           <div className='view-captain-personal-information'>
             <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
