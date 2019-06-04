@@ -1,17 +1,6 @@
-.box1{
-    margin-left: 42.5rem;
-    margin-top: 2rem;
-}
-
-.box-two{
-    margin-left: 26.5rem;
-    margin-top: -9rem;
-}
-
-.box-three{
-    margin-left: 10.5rem;
-    margin-top: -9rem;
-}
-.text-header{
-margin-left: 20px;
+.box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8rem;
+    width: 68rem;
 }
