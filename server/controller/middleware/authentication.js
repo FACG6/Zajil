@@ -6,11 +6,10 @@ exports.checkAuth = (req, res, next) => {
     verify(jwt, process.env.SECRET, (error, payload) => {
       if (error) {
         res.clearCookie(jwt);
-        next();
       } else {
         req.payload = payload;
       }
+      next();
     });
-  }
-  next();
+  } else next();
 };
