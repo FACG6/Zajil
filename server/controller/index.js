@@ -6,6 +6,7 @@ const { checkAuth } = require('./middleware/authentication');
 const { protectRoutes } = require('./middleware/protectRoute');
 const adminHandler = require('./accountsMangment/admin');
 const customerHandler = require('./accountsMangment/customer');
+const orderHandler = require('./order');
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use(protectRoutes);
 // the protected route start from here
 
 router.use(customerHandler);
+router.use(orderHandler);
 
 module.exports = router;
