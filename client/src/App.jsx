@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AddCaptain from './Components/CommonComponent/Table/Popups'
-//import Sidebar from "./Components/CommonComponent/Sidebar";
-//import Header from "./Components/CommonComponent/Header";
-//import Navbar from "./Components/CommonComponent/Navbar/index";
+import AddCaptain from './Components/Layouts/AddCaptain/index';
+// import { Icon } from 'antd';
+
+// import Sidebar from "./Components/CommonComponent/Sidebar";
+// import Header from "./Components/CommonComponent/Header";
+// import Navbar from "./Components/CommonComponent/Navbar/index";
 //import Login from "./Components/Layouts/Login";
 import "./App.css";
 
