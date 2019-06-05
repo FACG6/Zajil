@@ -48,7 +48,7 @@ CREATE TABLE TUser
 CREATE TABLE orders
 (
     pk_i_id SERIAL PRIMARY KEY,
-    fk_i_place_id INTEGER REFERENCES places(pk_i_id),
+    fk_i_place_id INTEGER REFERENCES places(pk_i_id) on delete cascade,
     s_customer_address TEXT NOT NULL,
     s_customer_phone TEXT NOT NULL,
     dt_create_at DATE DEFAULT current_date,
@@ -60,7 +60,7 @@ CREATE TABLE items
 (
     pk_i_id SERIAL PRIMARY KEY,
     s_name TEXT NOT NULL,
-    fk_i_order_id INTEGER REFERENCES orders (pk_i_id),
+    fk_i_order_id INTEGER REFERENCES orders (pk_i_id) on delete cascade,
     dt_modified_date DATE,
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE
@@ -70,8 +70,8 @@ CREATE TABLE items
 CREATE TABLE TUser_order
 (
     id SERIAL PRIMARY KEY,
-    tuser_id INTEGER REFERENCES TUser(pk_i_id),
-    order_id INTEGER REFERENCES orders(pk_i_id)
+    tuser_id INTEGER REFERENCES TUser(pk_i_id) on delete cascade,
+    order_id INTEGER REFERENCES orders(pk_i_id) on delete cascade
 );
 
 COMMIT;
