@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
+import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
@@ -15,28 +16,68 @@ import "./style.css";
 class Profile extends Component {
   state = {
     personalInformation: {
-      name: "شروق عبدالله سعد",
-      phone: "0599999999",
-      status: "فعال",
-      email: "shrooqabdullahsaad@gmail.com",
-      address: "غزة",
-      licence: "059999999999",
-      ID: "00000000",
+      name: "",
+      phone: "",
+      status: "",
+      email: "",
+      address: "",
+      avatar: ""
     },
-    visible: false ,
+    visible: false,
+    error: ""
   };
-  handleClick = () => {
-    this.setState({visible: true});
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    let customerInformation;
+    fetch(`/api/v1/getCustomerDetails/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        const { error, result } = res;
+        if (error === "unauthorized") {
+          this.props.history.push("/login");
+        } else if (result) {
+          customerInformation = result[0];
+          return fetch(`/api/v1/image/${result[0].s_image}`);
+        } else {
+          this.setState({ error });
+        }
+      })
+      .then(res => res.arrayBuffer())
+      .then(response => {
+        const {
+          s_name,
+          s_mobile_number,
+          s_email,
+          status,
+          s_address
+        } = customerInformation;
+        let typeArray = new Uint8Array(response);
+        const stringChar = String.fromCharCode.apply(null, typeArray);
+        this.setState({
+          personalInformation: {
+            name: s_name,
+            phone: s_mobile_number,
+            email: s_email,
+            status,
+            address: s_address,
+            avatar: stringChar
+          }
+        });
+      })
+      .catch(() => {
+        this.setState({ error: "Something error please try again" });
+      });
   }
+  handleClick = () => {
+    this.setState({ visible: true });
+  };
   render() {
     const {
-      personalInformation: { name, phone, status, email, address, licence, ID }
+      personalInformation: { name, phone, status, email, address, avatar }
     } = this.state;
     return (
       <>
-      {/* <button onClick={this.handleClick}>click</button>
-      <Popup visible={this.state.visible} /> */}
-        <Header Icon={<Icon type="user" />} title="الصفحة الشخصية" />
+        <Header Icon={<img src={avatar} className="avatar"/>} title={name} />
         <div className="profile">
           <div className="profile__info">
             <h3 className="profile__info__title">المعلومات الشخصية</h3>
@@ -61,14 +102,14 @@ class Profile extends Component {
               <p className="profile__value">{address}</p>
             </div>
 
-            <div className="profile__box">
+            {/* <div className="profile__box">
               <p className="profile__box__title">رقم الرخصة</p>
               <p className="profile__value">{licence}</p>
             </div>
             <div className="profile__box">
               <p className="profile__box__title">رقم الهوية</p>
               <p className="profile__value">{ID}</p>
-            </div>
+            </div> */}
           </div>
           <div className="profile__orders">
             <Table
@@ -96,4 +137,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(Profile);
