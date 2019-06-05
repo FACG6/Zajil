@@ -7,6 +7,7 @@ const { protectRoutes } = require('./middleware/protectRoute');
 const adminHandler = require('./accountsMangment/admin');
 const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
+const { getImage } = require('./getImage');
 
 const router = express.Router();
 
@@ -20,5 +21,7 @@ router.use(protectRoutes);
 
 router.use(customerHandler);
 router.use(orderHandler);
+router.route('/image/:name')
+  .get(getImage);
 
 module.exports = router;
