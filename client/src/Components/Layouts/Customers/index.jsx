@@ -24,10 +24,13 @@ export default class Customers extends Component {
         }],
         title: ' إدارةالمستخدمين ',
         allData: [],
-        filterDateStatus: false,
-        filterDate: [],
-        filterNameStatus: false,
-        filterName: []
+        name: '',
+        date: '',
+        filteredcustomersDate: [],
+        filteredcustomersName: [],
+        filter: false
+
+
     }
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json()).then(result => {
@@ -39,20 +42,48 @@ export default class Customers extends Component {
         }
         )
     }
-    onOk = (value) => {
-        console.log(value)
+
+    filter = (date, name) => {
+        const value = name.trim();
+        if (date) {
+            if (this.state.name) {
+                this.dateFilter(date, this.state.filteredcustomersName)
+            } else this.dateFilter(date, this.state.allData)
+
+        } else if (name) {
+            console.log(111111111111111111111,this.state.date)
+            if (this.state.date) {
+            
+                this.nameFilter(name, this.state.filteredcustomersDate)
+            } else this.nameFilter(name, this.state.allData)
+        } else if (this.state.date) this.setState({
+            customers: this.state.filteredcustomersDate
+        })
+        else if (this.state.name &&name) this.setState({
+            customers: this.state.filteredcustomersName
+        })
+        else {
+            this.setState({
+
+                customers: this.state.allData
+            })
+        }
+    };
+
+
+    dateFilter = (value, customers) => {
+        console.log('date filter',customers)
         if (value.length !== 0) {
             const from = value[0]._d.setHours(0, 0, 0, 0);
             const to = value[1]._d.setHours(0, 0, 0, 0);
-            let filterOrderDate = this.state.allData.filter(customer => {
+            let filterCustomer = customers.filter(customer => {
                 let createdDate = new Date(customer.dt_create_at).setHours(0, 0, 0, 0);
-                console.log(createdDate)
                 if (createdDate >= from && createdDate <= to) return customer;
             })
             this.setState({
-                customers: filterOrderDate,
-                filterDateStatus: true,
-                filterDate: filterOrderDate
+                customers: filterCustomer,
+                date: value,
+                filteredcustomersDate: filterCustomer
 
             })
         }
@@ -62,32 +93,17 @@ export default class Customers extends Component {
             })
         }
     }
-    onChange = (e) => {
-        const value = e.target.value.trim();
-        if (!this.state.filterNameStatus) {
-            let filterOrderDate = this.state.filterDate.filter(customer => {
-                if (customer.s_name.includes(value)) return customer;
-            })
-            this.setState({
-                customers: filterOrderDate,
-                filterDateStatus:true,
-                filterName:filterOrderDate
-            })
-
-        }else{
-            this.setState({
-                customers: this.state.allData
-            }) 
-        }
-
-        // else {
-        //     let filterOrderDate = this.state.allData.filter(customer => {
-        //         if (customer.s_name.includes(value)) return customer;
-        //     })
-        //     this.setState({
-        //         customers: filterOrderDate
-        //     })
-        // }
+    nameFilter = (name, customers) => {
+        console.log('name filter',customers)
+        const value = name.trim();
+        let filterCustomerDate = customers.filter(customer => {
+            if (customer.s_name.includes(value)) return customer;
+        })
+        this.setState({
+            customers: filterCustomerDate,
+            name,
+            filteredcustomersName: filterCustomerDate
+        })
     }
     render() {
         const { title } = this.state
@@ -105,12 +121,12 @@ export default class Customers extends Component {
                                     showTime={{ format: 'HH:mm' }}
                                     format="YYYY-MM-DD HH:mm"
                                     placeholder={['من', 'الى']}
-                                    onChange={this.onOk}
+                                    onChange={e => this.filter(e, '')}
                                     style={{ direction: "rtl" }}
                                 />
                                 <span className='filtercontainer__orderdate-date'>فلترة حسب الوقت</span>
                             </div>
-                            <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={this.onChange} />
+                            <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filter('', e.target.value)} />
                         </div>
                     </div>
                     <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' viewPopup={viewPopup}
