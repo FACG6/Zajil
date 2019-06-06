@@ -46,7 +46,7 @@ CREATE TABLE TUser
     d_rate FLOAT,
     b_online BOOLEAN,
     dt_modified_date DATE,
-    dt_create_at DATE DEFAULT current_date,
+    dt_create_at TIMESTAMP DEFAULT current_date,
     dt_delete_at DATE,
     s_password TEXT NOT NULL,
     s_id_number INTEGER,
