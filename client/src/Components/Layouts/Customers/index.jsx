@@ -32,7 +32,8 @@ export default class Customers extends Component {
 
     }
     componentDidMount() {
-        fetch('api/v1/customers').then(res => res.json()).then(result => {
+        fetch('api/v1/customers').then(res => res.json())
+        .then(result => {
             console.log(result)
             this.setState({
                 customers: result,
@@ -48,7 +49,9 @@ export default class Customers extends Component {
                 if (this.state.name) this.dateFilter(date, this.state.filteredcustomersName, date)
                 else this.dateFilter(date, this.state.allData, date)
             } else {
-                if (this.state.name) this.setState({ customers: this.state.filteredcustomersName, date: '', filterCustomerDate: [] })
+                if (this.state.name) {
+                    this.nameFilter(this.state.name,this.state.allData)
+                    this.setState({ date: '', filterCustomerDate: [] })}
                 else this.setState({ customers: this.state.allData, date: '', filterCustomerDate: [] })
             }
         } else if (check === 'name') {
@@ -56,7 +59,9 @@ export default class Customers extends Component {
                 if (this.state.date) this.nameFilter(name, this.state.filteredcustomersDate)
                 else this.nameFilter(name, this.state.allData)
             } else {
-                if (this.state.date) this.setState({ customers: this.state.filteredcustomersDate, name })
+                if (this.state.date) {
+                    this.dateFilter(this.state.date,this.state.allData)
+                    this.setState({  name ,filterCustomerName:[]})}
                 else this.setState({ customers: this.state.allData, name })
             }
         } else this.setState({ customers: this.state.allData })
