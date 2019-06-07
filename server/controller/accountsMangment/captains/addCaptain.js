@@ -22,6 +22,7 @@ const addCaptain = (req, res) => {
     licenceNumber,
     status,
     avatar,
+    type: 2,
   };
 
   insertCaptain(captainInfo)
