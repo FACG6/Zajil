@@ -189,8 +189,7 @@ class CollectionsPage extends React.Component {
         }
       })
         .then(res => {
-          console.log(15,res)
-          //expermint res.json()
+          console.log(15, res)
         })
         .catch(e => {
           console.log(2222222222, e)
