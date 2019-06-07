@@ -5,14 +5,14 @@ BEGIN;
     VALUES('admin', '$2a$05$WRLE5TPY4ppszWklRiX0m.kjyX8uMtZ76O9lt8y8zXilM.vl/5hjS', 'admin');
     -- for TUser information 1 captain , 2 customer
     INSERT INTO TUser
-        (s_name, s_mobile_number, s_email, b_status, s_address, s_image, i_type, s_password)
+        (s_name, s_mobile_number, s_email, b_status, s_address, s_image, i_type, s_password, s_id_number, s_driver_licence_number)
     VALUES
         ('نور عماد نور', '+970599999999', 'test1@hotmail.com', true, 'gaza', 'test.png', 2, '123'),
         ('أنور عماد نور', '+970599999999', 'test2@hotmail.com', true, 'khanyouns', 'test.png', 2, '123'),
         ('منور عماد نور', '+970599999999', 'test3@hotmail.com', true, 'rafah', 'test.png', 2, '123'),
         ('فنور عماد نور', '+970599999999', 'test4@hotmail.com', false, 'gaza', 'test.png', 2, '123'),
         ('سنور عماد نور', '+970599999999', 'test5@hotmail.com', true, 'dear albalah', 'test.png', 2, '123'),
-        ('احمد محمد محمود', '+970599999999', 'test6@hotmail.com', true, 'gaza', 'test.png', 1, '123');
+        ('احمد محمد محمود', '+970599999999', 'test6@hotmail.com', true, 'gaza', 'test.png', 1, '123',444,333);
 
     INSERT INTO places
         (s_name)

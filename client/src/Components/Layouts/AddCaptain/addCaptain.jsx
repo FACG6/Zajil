@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal, Form, Select, Input } from "antd";
-import './style.css'
+import './style.css';
 import { Upload, Icon, message } from 'antd';
 
 function getBase64(img, callback) {
@@ -45,7 +45,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       const uploadButton = (
         <div>
           <Icon type={this.state.loading ? 'loading' : 'plus'} />
-          <div className="ant-upload-text">Upload</div>
+          <div className="ant-upload-text">أرفق صورة</div>
         </div>
       );
       const imageUrl = this.state.imageUrl;
@@ -177,9 +177,24 @@ class CollectionsPage extends React.Component {
       if (err) {
         return;
       }
-
-      console.log(values);
+      values["avatar"] = values.avatar.file.name;
       form.resetFields();
+      fetch('/api/v1/addCaptain', {
+        method: 'POST',
+        body: JSON.stringify(values),
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      })
+        .then(res => {
+          console.log(15,res)
+          //expermint res.json()
+        })
+        .catch(e => {
+          console.log(2222222222, e)
+        })
       this.setState({ visible: false });
     });
   };
