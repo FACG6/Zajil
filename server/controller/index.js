@@ -8,6 +8,7 @@ const { getCounts } = require('./getCounts');
 const adminHandler = require('./accountsMangment/admin');
 const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
+const captainHandler = require('./accountsMangment/captains');
 
 const router = express.Router();
 
@@ -16,12 +17,13 @@ router.use(checkAuth);
 
 router.use(adminHandler);
 
-router.use(protectRoutes);
+// router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
 
 router.use(customerHandler);
 router.use(orderHandler);
+router.use(captainHandler);
 
 module.exports = router;
