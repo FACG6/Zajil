@@ -1,11 +1,22 @@
-import React from "react";
-import { Menu, Dropdown, Icon } from "antd";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Menu, Dropdown, Icon } from 'antd';
+import PropTypes from 'prop-types';
 
 const DropdownMenu = ({ pageSize, paginationSize }) => {
   const handleMenuClick = e => {
     paginationSize(e.key);
   };
+  const numberMenu = () => {
+    let size = pageSize;
+    let total = 0;
+    let number = [];
+    while (Math.floor(size / 10)) {
+      number.push(total + 10);
+      size -= 10;
+    }
+    return number;
+  };
+  
   const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="10">10</Menu.Item>
@@ -15,12 +26,16 @@ const DropdownMenu = ({ pageSize, paginationSize }) => {
       <Menu.Item key="الكل">الكل</Menu.Item>
     </Menu>
   );
+
   return (
     <div className="table-dropdown">
       {` عرض `}
-      <Dropdown overlay={menu} trigger={["click"]}>
+      <Dropdown overlay={menu} trigger={['click']}>
         <span className="ant-dropdown-link">
-          <span>{pageSize} </span>
+          <span>
+            {pageSize}
+            {' '}
+          </span>
           <Icon type="down" />
         </span>
       </Dropdown>
