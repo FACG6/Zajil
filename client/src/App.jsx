@@ -5,6 +5,7 @@ import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar/index";
 import Login from "./Components/Layouts/Login";
+import Order from './Components/Layouts/Order/index'
 import "./App.css";
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
                   <Navbar />
 
                   <Header />
+                  <Order />
                 </div>
               )}
             />
