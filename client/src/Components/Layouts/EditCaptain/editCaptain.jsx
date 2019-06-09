@@ -241,15 +241,7 @@ class CollectionsPage extends React.Component {
         })
       this.setState({ visible: false });
     });
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     if (res.result) {
-    //       toast.success(res.result);
-    //     }
-    //     else toast.error(res.error);
-    //   })
-    //   .catch(err => toast.error(err))
-    // 
+   
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
