@@ -10,8 +10,12 @@ import "./style.css";
 
 class TableCmponent extends Component {
   state = {
-    pageSize: "10"
+    pageSize: "0"
   };
+
+  componentDidMount(){
+    this.setState({pageSize: this.props.columns.length});
+  }
 
   paginationSize = pageSize => {
     this.setState({ pageSize });
