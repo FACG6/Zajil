@@ -1,28 +1,46 @@
-.filtercontainer{
+.containercustomers {
+    display: flex;
+}
+
+.conatinercustomers__customer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.containercustomers__customer-rangpicker {
+    direction: rtl;
+}
+
+.filtercontainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    width:75%
-
+    width: 75%
 }
-.addcustomer{
+
+.addcustomer {
     margin-top: 1rem;
     margin-left: 3.5rem;
 }
-.filtercontainer__orderdate{
+
+.filtercontainer__orderdate {
     display: flex;
-    flex-direction: row; 
-    width:50%
+    flex-direction: row;
+    width: 50%
 }
-.filtercontainer__ordername{
-    width:15rem;
+
+.filtercontainer__ordername {
+    width: 15rem;
     direction: rtl;
 }
-.table{
+
+.table {
     margin-right: 10px;
 }
-.filtercontainer__orderdate-date{
+
+.filtercontainer__orderdate-date {
     margin-left: 2rem;
 }

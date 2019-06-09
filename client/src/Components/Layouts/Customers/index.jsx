@@ -9,19 +9,12 @@ import Navbar from "../../CommonComponent/Navbar/index"
 import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
 import { Icon } from 'antd';
 import { DatePicker } from 'antd';
+
 const { RangePicker } = DatePicker;
-
 const Search = Input.Search;
-
-
-
 export default class Customers extends Component {
     state = {
-        customers: [{
-            key: 1, customer: 'fgd', email: "jamalat@em", mobileNo: 'fgdf', status: 'فعال',
-        }, {
-            key: 2, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }],
+        customers: [],
         title: ' إدارةالمستخدمين ',
         allData: [],
         name: '',
@@ -34,7 +27,6 @@ export default class Customers extends Component {
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json())
         .then(result => {
-            console.log(result)
             this.setState({
                 customers: result,
                 allData: result
@@ -101,11 +93,11 @@ export default class Customers extends Component {
         })
     }
     render() {
-        const { title } = this.state
-        return (
-            <div style={{ display: "flex" }}>
+        if(this.state.customers)
+       { return (
+            <div className="containercustomers">
                 <Sidebar />
-                <div style={{ display: "flex", "flex-direction": "column", width: "100vw" }}>
+                <div className="conatinercustomers__customer">
                     <Navbar />
                     <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
                     <div className='addcustomer'>
@@ -117,7 +109,7 @@ export default class Customers extends Component {
                                     format="YYYY-MM-DD HH:mm"
                                     placeholder={['من', 'الى']}
                                     onChange={e => this.filterfunction(e, '', 'date')}
-                                    style={{ direction: "rtl" }}
+                                   className="containercustomers__customer-rangpicker"
                                 />
                                 <span className='filtercontainer__orderdate-date'>فلترة حسب الوقت</span>
                             </div>
@@ -129,6 +121,6 @@ export default class Customers extends Component {
                         deletePopup={deletePopup} className="table" />
                 </div>
             </div>
-        )
+        )}
     }
 }
