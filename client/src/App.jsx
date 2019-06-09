@@ -46,19 +46,6 @@ class App extends Component {
             />
           </Switch>
         </Router>
-
-        {/* <Home />
-      <TableComponent
-        pageName="customers"
-        columns={[{
-          key: 54, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }, {
-          key: 56, customer: 'fgd', captain: 'fgdf', date: 'dfsdf',
-        }]}
-        viewPopup={viewPopup}
-        editPopup={editPopup}
-        deletePopup={deletePopup}
-      /> */}
       </div>
     );
   }
