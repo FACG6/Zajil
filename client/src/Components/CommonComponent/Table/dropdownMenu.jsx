@@ -19,9 +19,7 @@ const DropdownMenu = ({ pageSize, paginationSize }) => {
   
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="10">10</Menu.Item>
-      <Menu.Item key="30">30</Menu.Item>
-      <Menu.Item key="50">50</Menu.Item>
+      {numberMenu().map(number => <Menu.Item key={number}>{number}</Menu.Item>)}
       <Menu.Divider />
       <Menu.Item key="الكل">الكل</Menu.Item>
     </Menu>
