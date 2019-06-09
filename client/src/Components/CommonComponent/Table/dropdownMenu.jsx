@@ -31,8 +31,7 @@ const DropdownMenu = ({ pageSize, paginationSize }) => {
       <Dropdown overlay={menu} trigger={['click']}>
         <span className="ant-dropdown-link">
           <span>
-            {pageSize}
-            {' '}
+            {numberMenu().length? numberMenu()[0] : 'الكل'}
           </span>
           <Icon type="down" />
         </span>
