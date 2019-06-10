@@ -1,4 +1,4 @@
-.swal2-header {
+/* .swal2-header {
     color: red!important;
 }
 .username {
@@ -73,4 +73,38 @@
     margin-bottom: 1rem;
     font-size: 1.4rem;
     font-weight: 600;
+} */
+
+.ant-modal-content{
+    direction: rtl;
+    width: 49rem!important;
+    margin-left: -8rem!important;
+}
+
+.ant-modal-title{
+    margin-left: 39rem!important;
+    font-weight: 600!important;
+}
+
+.ant-col .ant-form-item-label{
+    width: 5rem!important;
+    height: 3rem!important;
+    margin-top: -1.5rem!important;
+    margin-left: 40rem!important;
+    font-weight: 600;
+}
+
+.ant-col .ant-form-item-control-wrapper{
+    width: fit-content!important;
+    margin-top: -1.5rem!important;
+    margin-left: 27rem!important;
+}
+
+.ant-input{
+    width: 12rem!important;
+    margin-top: -1rem!important;
+}
+
+.ant-form-item-required{
+    margin-left: 27rem!important;
 }
