@@ -6,11 +6,14 @@ const { checkAuth } = require('./middleware/authentication');
 const { protectRoutes } = require('./middleware/protectRoute');
 const { getCounts } = require('./getCounts');
 const adminHandler = require('./accountsMangment/admin');
-const { getCustomer } = require('./accountsMangment/customer/getCustomers');
 const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
 
 const router = express.Router();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 530de03af1830575aab78839bd7bdea5c8cd9877
 router.use(checkAuth);
 // the all routes start from here
 
