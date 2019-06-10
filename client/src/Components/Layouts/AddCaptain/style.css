@@ -1,0 +1,71 @@
+.add-captain-container-left{
+  width: 42%;
+}
+.add-captain-container-right{
+  width: 42%;
+}
+.add-captain-container-center{
+  margin: 0.2rem 2.2rem;
+  width: 1.5px;
+  background-color: #e0e0e0;
+  height: 30.5rem;
+}
+.ant-form{
+  width: 100%;
+  display: flex;
+  margin-left: 0rem;
+ }
+.ant-modal-content {
+  width: 130%;
+}
+.ant-modal-header{
+  padding: 16px 0px;
+  float: right;
+  margin-right: 63px;
+}
+.ant-modal-body{
+  padding-bottom: 0px;
+}
+.ant-form-item-label{
+  display: block;
+}
+.ant-select{
+  margin: -0.5rem 84px;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+}
+form .ant-upload{
+  margin-left: 90px;
+  margin-top: -21px;
+}
+.ant-modal-footer{
+  text-align: unset;
+  margin: 1em auto 0;
+}
+
+.ant-form-item-required::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: black;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: ':';
+
+}
+
+.ant-form-item-label > label::after {
+  content: '*';
+  position: relative;
+  color: #f5222d;
+  top: -0.5px;
+  margin: 0 8px 0 2px;
+}
+form .ant-select, form .ant-cascader-picker{
+  position: absolute;
+  bottom: 0.8rem;
+}
+.ant-input{
+  direction: rtl;
+}

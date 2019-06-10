@@ -31,7 +31,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         );
       }
     };
- render() {
+    render() {
       const uploadButton = (
         <div>
           <Icon type={this.state.loading ? 'check-circle' : 'plus'} />
@@ -121,7 +121,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   ]
                 })(<Input type="email" id="email" />)}
               </Form.Item>
-  <Form.Item label="كلمة المرور">
+              <Form.Item label="كلمة المرور">
                 {getFieldDecorator("password", {
                   rules: [
                     {
@@ -157,7 +157,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
     }
   }
 );
- 
+
 class CollectionsPage extends React.Component {
   state = {
     visible: false
@@ -208,7 +208,7 @@ class CollectionsPage extends React.Component {
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
- 
+
   render() {
     return (
       <div>
@@ -227,4 +227,3 @@ class CollectionsPage extends React.Component {
 }
 
 export default CollectionsPage;
-_
