@@ -1,33 +1,21 @@
 import React from "react";
 import { Button, Modal, Form, Select, Input } from "antd";
 import './style.css';
-import { Upload, Icon, message } from 'antd';
+import { Upload, Icon } from 'antd';
 
- function getBase64(img, callback) {
+function getBase64(img, callback) {
   const reader = new FileReader();
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
 
- function beforeUpload(file) {
-  const isJPG = file.type === 'image/jpeg';
-  if (!isJPG) {
-    message.error('You can only upload JPG file!');
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJPG && isLt2M;
-}
-
- const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
+const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   class extends React.Component {
     state = {
       loading: false,
     };
 
-     handleChange = info => {
+    handleChange = info => {
       if (info.file.status === 'uploading') {
         this.setState({ loading: true });
         return;
@@ -44,17 +32,17 @@ import { Upload, Icon, message } from 'antd';
     render() {
       const uploadButton = (
         <div>
-          <Icon type={this.state.loading ? 'loading' : 'plus'} />
+          <Icon type={this.state.loading ? 'check-circle' : 'plus'} />
           <div className="ant-upload-text">أرفق صورة</div>
         </div>
       );
       const imageUrl = this.state.imageUrl;
 
-       const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       const { Option } = Select;
 
-       return (
+      return (
         <Modal
           visible={visible}
           title="إضافة كابتن"
@@ -68,14 +56,14 @@ import { Upload, Icon, message } from 'antd';
               <Form.Item label="رقم الهوية" >
                 {getFieldDecorator("IDNumber", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]+$/ }
+                    { required: true, message: "يرجى ملئ الحقل تسع ارقام ", pattern: /^[0-9]{9}$/ }
                   ]
                 })(<Input type="text" id="IDNumber" />)}
               </Form.Item>
               <Form.Item label="رقم الرخصة">
                 {getFieldDecorator("licenceNumber", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]+$/ }
+                    { required: true, message: "رقم الرخصة يجب ألا يقل عن سبعة أرقام", pattern: /^[0-9]{7}$/ }
                   ]
                 })(<Input type="text" id="licenceNumber" />)}
               </Form.Item>
@@ -86,8 +74,8 @@ import { Upload, Icon, message } from 'antd';
                   ]
                 })(
                   <Select id="licenceNumber" style={{ width: 80 }}>
-                    <Option value="0">غير فعال</Option>
-                    <Option value="1">فعال </Option>
+                    <Option value="true">غير فعال</Option>
+                    <Option value="false">فعال </Option>
                   </Select>
                 )}
               </Form.Item>
@@ -96,7 +84,7 @@ import { Upload, Icon, message } from 'antd';
                   rules: [
                     {
                       required: true,
-                      message: "ى رفع صورة الكابتن"
+                      message: "ىرجى رفع صورة الكابتن"
                     }
                   ]
                 })(<Upload
@@ -104,20 +92,19 @@ import { Upload, Icon, message } from 'antd';
                   name="avatar"
                   className="avatar-uploader"
                   showUploadList={false}
-                  beforeUpload={beforeUpload}
                   onChange={this.handleChange}
                 >
                   {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
                 </Upload>)}
               </Form.Item>
 
-             </div>
+            </div>
             <div className='add-captain-container-center'></div>
             <div className='add-captain-container-right'>
               <Form.Item label="الاسم">
                 {getFieldDecorator("name", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([a-z]|\s)+$/ }
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-ي]|\s)+$/ }
                   ]
                 })(<Input type="text" id="name" />)}
               </Form.Item>
@@ -138,7 +125,7 @@ import { Upload, Icon, message } from 'antd';
                     {
                       required: true,
                       message: "الرجاء ملئ الحقل بارقام",
-                      pattern: /^[0-9]+$/
+                      pattern: /^\+?[0-9]+$/
                     }
                   ]
                 })(<Input type="text" id="phone" />)}
@@ -146,7 +133,7 @@ import { Upload, Icon, message } from 'antd';
               <Form.Item label="العنوان" dir="ltr">
                 {getFieldDecorator("address", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([a-z]|\s)+$/ }
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-ي]|\s)+$/ }
                   ]
                 })(<Input type="text" id="address" />)}
               </Form.Item>
@@ -158,20 +145,20 @@ import { Upload, Icon, message } from 'antd';
   }
 );
 
- class CollectionsPage extends React.Component {
+class CollectionsPage extends React.Component {
   state = {
     visible: false
   };
 
-   showModal = () => {
+  showModal = () => {
     this.setState({ visible: true });
   };
 
-   handleCancel = () => {
+  handleCancel = () => {
     this.setState({ visible: false });
   };
 
-   handleCreate = () => {
+  handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
@@ -179,6 +166,7 @@ import { Upload, Icon, message } from 'antd';
       }
       values["avatar"] = values.avatar.file.name;
       form.resetFields();
+      console.log(values);
       fetch('/api/v1/addCaptain', {
         method: 'POST',
         body: JSON.stringify(values),
@@ -194,15 +182,15 @@ import { Upload, Icon, message } from 'antd';
         .catch(e => {
           console.log(2222222222, e)
         })
-      this.setState({ visible: false });
+      // this.setState({ visible: false });
     });
   };
 
-   saveFormRef = formRef => {
+  saveFormRef = formRef => {
     this.formRef = formRef;
   };
 
-   render() {
+  render() {
     return (
       <div>
         <Button type="primary" onClick={this.showModal}>
@@ -219,5 +207,4 @@ import { Upload, Icon, message } from 'antd';
   }
 }
 
- export default CollectionsPage;
- 
+export default CollectionsPage;

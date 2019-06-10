@@ -43,3 +43,29 @@ form .ant-upload{
   text-align: unset;
   margin: -2em auto 0;
 }
+
+.ant-form-item-required::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: black;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: ':';
+
+}
+
+.ant-form-item-label > label::after {
+  content: '*';
+  position: relative;
+  color: #f5222d;
+  top: -0.5px;
+  margin: 0 8px 0 2px;
+}
+form .ant-select, form .ant-cascader-picker{
+  position: absolute;
+  bottom: 0.8rem;
+}
+.ant-input{
+  direction: rtl;
+}
