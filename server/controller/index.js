@@ -10,7 +10,6 @@ const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
 
 const router = express.Router();
-
 router.use(checkAuth);
 // the all routes start from here
 
