@@ -3,7 +3,9 @@ const { getCustomers } = require('../../../database/queries/customer/getCustomer
 const getCustomer = (request, response) => {
   getCustomers()
     .then((res) => {
-      if (res.rows) { response.status(200).json(res.rows); }
+      if (res.rows) {
+        response.status(200).send({ result: res.rows });
+      }
     })
     .catch(() => {
       response.status(500).send({ error: 'Internal Server Error' });
