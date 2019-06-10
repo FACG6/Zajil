@@ -192,7 +192,7 @@ class CollectionsPage extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (res.result) {
-            toast.success('Student added successfuly ');
+            toast.success('captain added successfuly ');
           }
           else {
             toast.error(res.error);
