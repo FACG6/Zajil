@@ -28,8 +28,8 @@ export default class Customers extends Component {
         fetch('api/v1/customers').then(res => res.json())
         .then(result => {
             this.setState({
-                customers: result,
-                allData: result
+                customers: result.result,
+                allData: result.result
             })
         }
         )
