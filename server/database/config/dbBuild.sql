@@ -53,6 +53,7 @@ CREATE TABLE orders
     s_customer_phone TEXT NOT NULL,
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
+    i_status INTEGER NOT NULL,--0 INPROGRESS 1 DONE
     dt_modified_date DATE
 );
 
