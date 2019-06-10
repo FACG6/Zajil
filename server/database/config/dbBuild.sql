@@ -11,17 +11,6 @@ CREATE TABLE users
     password TEXT NOT NULL
 );
 
-CREATE TABLE items
-(
-    pk_i_id SERIAL PRIMARY KEY,
-    s_name TEXT NOT NULL,
-    fk_i_order_id INTEGER REFERENCES users (id),
-    dt_modified_date DATE,
-    dt_create_at DATE DEFAULT current_date,
-    dt_delete_at DATE
-
-);
-
 CREATE TABLE places
 (
     pk_i_id SERIAL PRIMARY KEY,
@@ -35,8 +24,8 @@ CREATE TABLE TUser
     pk_i_id SERIAL PRIMARY KEY,
     s_name TEXT NOT NULL,
     s_mobile_number TEXT NOT NULL,
-    s_email TEXT NOT NULL,
-    b_status BOOLEAN,
+    s_email TEXT NOT NULL UNIQUE,
+    b_status BOOLEAN NOT NULL,
     s_address TEXT NOT NULL,
     s_access_token TEXT,
     s_image TEXT NOT NULL,
@@ -59,7 +48,7 @@ CREATE TABLE TUser
 CREATE TABLE orders
 (
     pk_i_id SERIAL PRIMARY KEY,
-    fk_i_place_id INTEGER REFERENCES places(pk_i_id),
+    fk_i_place_id INTEGER REFERENCES places(pk_i_id) on delete cascade,
     s_customer_address TEXT NOT NULL,
     s_customer_phone TEXT NOT NULL,
     dt_create_at DATE DEFAULT current_date,
@@ -67,11 +56,22 @@ CREATE TABLE orders
     dt_modified_date DATE
 );
 
+CREATE TABLE items
+(
+    pk_i_id SERIAL PRIMARY KEY,
+    s_name TEXT NOT NULL,
+    fk_i_order_id INTEGER REFERENCES orders (pk_i_id) on delete cascade,
+    dt_modified_date DATE,
+    dt_create_at DATE DEFAULT current_date,
+    dt_delete_at DATE
+
+);
+
 CREATE TABLE TUser_order
 (
     id SERIAL PRIMARY KEY,
-    tuser_id INTEGER REFERENCES TUser(pk_i_id),
-    order_id INTEGER REFERENCES orders(pk_i_id)
+    tuser_id INTEGER REFERENCES TUser(pk_i_id) on delete cascade,
+    order_id INTEGER REFERENCES orders(pk_i_id) on delete cascade
 );
 
 COMMIT;
