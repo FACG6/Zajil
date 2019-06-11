@@ -107,6 +107,13 @@ export default class Customers extends Component {
             if (err) {
                 return;
             }
+            let addCustomer = {
+                name: values.name,
+                email: values.email,
+                phone: parseInt(values.prefixPhone + values.phone),
+                status: values.status,
+                address: values.address
+            }
             form.resetFields();
             this.setState({ visible: false });
         });
