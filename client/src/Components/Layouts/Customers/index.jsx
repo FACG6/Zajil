@@ -114,6 +114,12 @@ export default class Customers extends Component {
                 status: values.status,
                 address: values.address
             }
+            fetch('api/v1/addcustomer',{
+                method:'POST',
+                headers:{'content-type':'application/json'},
+                body:JSON.stringify(addCustomer)
+            }).then(res=>res.json())
+            .then(res=>console.log(res))
             form.resetFields();
             this.setState({ visible: false });
         });
