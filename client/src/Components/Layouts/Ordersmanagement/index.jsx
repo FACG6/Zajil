@@ -97,6 +97,31 @@ class OrdersManagement extends Component {
     return filtered;
   };
 
+  filter = async (type, value) => {
+    const { date, status, name, orders } = this.state;
+    let filtered = [];
+    if (type === "date") {
+      await this.setState({ date: value });
+      if (status) {
+        filtered = this.statusFilter(orders);
+        if (name) {
+          filtered = this.nameFilter(filtered);
+        }
+        filtered = this.dateFilter(filtered);
+        this.setState({ filteredOrders: filtered, filter: true });
+      } else if (name) {
+        filtered = this.nameFilter(orders);
+        filtered = this.dateFilter(filtered);
+        this.setState({ filteredOrders: filtered, filter: true });
+      } else if (value.length > 0) {
+        filtered = this.dateFilter(orders);
+        this.setState({ filteredOrders: filtered, filter: true });
+      } else {
+        this.setState({ filteredOrders: [], filter: false });
+      }
+    }
+  };
+
   clearFields = async () => {
     await this.setState({
       date:"", status:"", name:"", filter:false
