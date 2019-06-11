@@ -10,13 +10,13 @@ const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
 const captainHandler = require('./accountsMangment/captains');
 const { getImage } = require('./getImage');
-const { addCaptain } = require('./accountsMangment/captains/addCaptain');
 
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
-router.route('/addCaptain')
-  .post(addCaptain);
+router.use(captainHandler);
+
+
 router.use(adminHandler);
 
 router.use(protectRoutes);
@@ -26,7 +26,6 @@ router.route('/counts')
 
 router.use(customerHandler);
 router.use(orderHandler);
-router.use(captainHandler);
 router.route('/image/:name')
   .get(getImage);
 
