@@ -43,6 +43,7 @@ class OrdersManagement extends Component {
         });
       });
   }
+
   dateFilter = object => {
     const { date } = this.state;
     if (date[0] && date[1]) {
@@ -65,6 +66,7 @@ class OrdersManagement extends Component {
       }
     }
   };
+
   statusFilter = object => {
     const { status } = this.state;
     let filtered = [];
@@ -86,6 +88,7 @@ class OrdersManagement extends Component {
     });
     return filtered;
   };
+
   nameFilter = object => {
     const { name } = this.state;
     let filtered = [];
@@ -119,7 +122,7 @@ class OrdersManagement extends Component {
       } else {
         this.setState({ filteredOrders: [], filter: false });
       }
-    }else if (type === "status") {
+    } else if (type === "status") {
       await this.setState({ status: value });
       if (date) {
         filtered = this.dateFilter(orders);
@@ -138,7 +141,7 @@ class OrdersManagement extends Component {
       } else {
         this.setState({ filteredOrders: [], filter: false });
       }
-    }else if (type === "name") {
+    } else if (type === "name") {
       await this.setState({ name: value });
       if (date) {
         filtered = this.dateFilter(orders);
@@ -314,4 +317,5 @@ class OrdersManagement extends Component {
     }
   }
 }
+
 export default OrdersManagement;
