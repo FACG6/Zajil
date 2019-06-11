@@ -45,32 +45,42 @@ class OrdersManagement extends Component {
   }
 
   dateFilter = object => {
+    if(object)
+    {
     const { date } = this.state;
-    if (date[0] && date[1]) {
-      if (date[0].isValid() && date[1].isValid()) {
-        const fromDate = date[0].toDate().setHours(0, 0, 0, 0);
-        const toDate = date[1].toDate().setHours(0, 0, 0, 0);
-        let filtered = object.filter(order => {
-          if (
-            moment(order.date)
-              .toDate()
-              .setHours(0, 0, 0, 0) >= fromDate &&
-            moment(order.date)
-              .toDate()
-              .setHours(0, 0, 0, 0) <= toDate
-          ) {
-            return true;
-          }
-        });
-        return filtered;
+    if(date.length){
+      if (date[0] && date[1]) {
+        if (date[0].isValid() && date[1].isValid()) {
+          const fromDate = date[0].toDate().setHours(0, 0, 0, 0);
+          const toDate = date[1].toDate().setHours(0, 0, 0, 0);
+          let filtered = object.filter(order => {
+            if (
+              moment(order.date)
+                .toDate()
+                .setHours(0, 0, 0, 0) >= fromDate &&
+              moment(order.date)
+                .toDate()
+                .setHours(0, 0, 0, 0) <= toDate
+            ) {
+              return true;
+            }
+          });
+          return filtered;
+        }
       }
+    }else{
+      return object;
     }
+  }
   };
 
   statusFilter = object => {
+    if(object)
+    {
     const { status } = this.state;
+    if(status){
     let filtered = [];
-    const regex1 = new RegExp(/^[(ت)]+/);
+    const regex1 = new RegExp(/^[(ت)]/);
     const regex2 = new RegExp(/^[(ل)]/);
     filtered = object.filter(order => {
       if (
@@ -85,12 +95,19 @@ class OrdersManagement extends Component {
       } else if (order.b_status == status) {
         return true;
       }
-    });
+    })
     return filtered;
+  }else {
+    return object;
+  }
+}
   };
 
   nameFilter = object => {
+    if(object)
+    {
     const { name } = this.state;
+    if(name){
     let filtered = [];
     filtered = object.filter(order => {
       if (order.captain.indexOf(name) != -1) {
@@ -98,19 +115,26 @@ class OrdersManagement extends Component {
       }
     });
     return filtered;
+  }else{
+    return object;
+  }
+}
   };
 
   filter = async (type, value) => {
+    console.log(type, value)
     const { date, status, name, orders } = this.state;
     let filtered = [];
     if (type === "date") {
       await this.setState({ date: value });
       if (status) {
         filtered = this.statusFilter(orders);
+        console.log(222555,filtered)
         if (name) {
           filtered = this.nameFilter(filtered);
         }
         filtered = this.dateFilter(filtered);
+        console.log(222666,filtered)
         this.setState({ filteredOrders: filtered, filter: true });
       } else if (name) {
         filtered = this.nameFilter(orders);
@@ -118,6 +142,7 @@ class OrdersManagement extends Component {
         this.setState({ filteredOrders: filtered, filter: true });
       } else if (value.length > 0) {
         filtered = this.dateFilter(orders);
+        console.log(filtered)
         this.setState({ filteredOrders: filtered, filter: true });
       } else {
         this.setState({ filteredOrders: [], filter: false });
@@ -125,11 +150,13 @@ class OrdersManagement extends Component {
     } else if (type === "status") {
       await this.setState({ status: value });
       if (date) {
+        console.log(777)
         filtered = this.dateFilter(orders);
         if (name) {
           filtered = this.nameFilter(filtered);
         }
         filtered = this.statusFilter(filtered);
+        console.log(66666,filtered)
         this.setState({ filteredOrders: filtered, filter: true });
       } else if (name) {
         filtered = this.nameFilter(orders);
@@ -139,6 +166,7 @@ class OrdersManagement extends Component {
         filtered = this.statusFilter(orders);
         this.setState({ filteredOrders: filtered, filter: true });
       } else {
+        console.log(888)
         this.setState({ filteredOrders: [], filter: false });
       }
     } else if (type === "name") {
