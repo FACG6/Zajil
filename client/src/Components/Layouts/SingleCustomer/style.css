@@ -50,3 +50,14 @@
     border: 1px solid gray;
     padding: 1px;
 }
+.deleteModal .ant-modal-footer{
+    text-align: left;
+}
+.deleteModal{
+    direction: "rtl"
+}
+.deleteModal .ant-btn-primary{
+    background: rgb(255, 68, 68);
+    border: none;
+    margin-right: 1rem;
+}
