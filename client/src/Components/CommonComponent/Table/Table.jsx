@@ -12,20 +12,30 @@ class TableCmponent extends Component {
   state = {
     pageSize: "10",
     singleCustomer: {
-      editVisibilty: false
-    }
+      editVisibilty: false,
+      deleteVisibility: false,
+      viewVisibility: false,
+      id: ''
+    },
+    tableData: this.props.columns
+    
   };
 
-  handleClick = (value1, value2) => (e) => {
+  handleClick = (value1, value2, id) => (e) => {
     this.setState(
       prev => {
         return {
           [value1]: {
-            [value2]: !prev[value1][value2]
+            [value2]: !prev[value1][value2],
+            id
           }
         };
       });
   };
+
+  componentWillReceiveProps(props) {
+    this.setState({tableData: props.columns});
+  }
 
   paginationSize = pageSize => {
     this.setState({ pageSize });
@@ -33,8 +43,9 @@ class TableCmponent extends Component {
 
   render() {
     
-    const { viewPopup, editPopup, EditPopup, deletePopup, columns, viewHtml, editHtml, deleteHtml } = this.props;
+    const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
+    const { tableData: columns, singleCustomer: { id }} = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -264,13 +275,20 @@ class TableCmponent extends Component {
                     information={record}
                   />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record,deleteHtml)}
+                    <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
                       }}
                       type="delete"
+                      className={record.key}
                     />
+                    <DeletePopup
+                    visible={this.state.singleCustomer.deleteVisibility}
+                    visibleFun = {this.handleClick}
+                    id={id}
+                    updateState={this.deleteRow}
+                  />
                 </span>
               )}
             />
