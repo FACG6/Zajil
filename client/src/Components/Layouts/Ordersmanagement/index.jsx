@@ -55,7 +55,7 @@ class OrdersManagement extends Component {
   render() {
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
-
+    if (!this.state.error) {
       return (
         <div className="ordersManagement-bars-container">
           <Sidebar />
@@ -123,7 +123,71 @@ class OrdersManagement extends Component {
           </div>
         </div>
       );
+    } else if (this.state.error.response.status === 204) {
+      return (
+        <div>
+          <div className="ordersManagement-bars-container">
+            <Sidebar />
+            <div className="ordersManagement-main-container">
+              <Navbar />
+              <Header
+                title={"إدارة الطلبات"}
+                Icon={<Icon type="carry-out" />}
+              />
+              <div className="ordersManagement_sub-container">
+                <div>
+                  <Button
+                    className="ordersManagement_addOrder-button"
+                    type="primary"
+                  >
+                    إضافة طلب
+                  </Button>
+                  <div className="ordersManagement_filters-container">
+                    <div className="ordersManagement_filters-container-timeFilter">
+                      <p
+                        style={{ textAlign: "right" }}
+                        className="ordersManagemet_timePicker-lable"
+                      >
+                        إختر الفترة
+                      </p>
+                      <RangePicker
+                        placeholder={["من", "إلى"]}
+                        format={dateFormat}
+                        onChange={this.ordersDateFilter}
+                      />
+                    </div>
+                    <Input
+                      className="ordersManagement_status-filter-input"
+                      placeholder="الفلترة حسب الحالة :"
+                    />
+                    <Input
+                      className="ordersManagement_status-filter-input"
+                      placeholder="الفلترة حسب اسم الكابتن :"
+                    />
+                    <Button
+                      className="ordersManagement_filter-button"
+                      type="primary"
+                    >
+                      إفراغ الحقول
+                    </Button>
+                  </div>
+                  <div className="ordersManagement_error-class">
+                    <h4>لا توجد طلبات للعرض بعد</h4>
+                  </div>
+                  <TableComponent
+                    // viewPopup={viewPopup}
+                    // editPopup={editPopup}
+                    deletePopup={deletePopup}
+                    columns={this.state.orders}
+                    pageName="customers"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     } 
 }
-
+}
 export default OrdersManagement;
