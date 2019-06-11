@@ -124,6 +124,7 @@ export default class Customers extends Component {
                         <Navbar />
                         <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
                         <div className='addcustomer'>
+                        <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
                             <div className="filtercontainer">
                                 <div classNam="filtercontainer__orderdate">
                                     <RangePicker
