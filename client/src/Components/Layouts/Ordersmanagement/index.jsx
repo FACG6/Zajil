@@ -187,7 +187,17 @@ class OrdersManagement extends Component {
           </div>
         </div>
       );
-    } 
-}
+    } else {
+      return (
+        <div className="ordersManagement_error-class">
+          <h1>
+            {" "}
+            Error {this.state.error.response.status} ,{" "}
+            {this.state.error.response.data}{" "}
+          </h1>
+        </div>
+      );
+    }
+  }
 }
 export default OrdersManagement;
