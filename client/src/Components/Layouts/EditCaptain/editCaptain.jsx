@@ -42,7 +42,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       }
     };
     componentDidMount() {
-      const { id } = this.props.match.params;
+      const id=6;
+      // const { id } = this.props.id;
       fetch(`/api/v1//getCaptainDetails/${id}`)
         .then(res => res.json())
         .then(res => {
@@ -62,7 +63,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           }
           if (res.error) console.log(2222222222, res.e);
         })
-        .catch(err => console.log(2222222222, e))
+        .catch(err => console.log(2222222222, err))
     }
     render() {
       const uploadButton = (
@@ -209,7 +210,8 @@ class CollectionsPage extends React.Component {
       if (err) {
         return;
       }
-      const { id } = this.props.match.params;
+      // const { id } = this.props.id;
+      const id = 6;
       values["avatar"] = values.avatar.file.name;
       form.resetFields();
       fetch(`/api/v1/putCaptain/${id}`, {
