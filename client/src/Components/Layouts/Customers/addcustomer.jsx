@@ -9,6 +9,25 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   // eslint-disable-next-line
 
   class extends React.Component {
+    handelEmail = (rule, value, cb) => {
+      if (value) {
+        if (!validator.isEmail(value)) cb('الرجاء ادخال قيمة صحيحة')
+        else cb()
+      } else cb('يرجى ادخال البريد الالكتروني')
+    }
+    handelName = (rule, value, cb) => {
+      if (!value) cb('يرجى ادخال الاسم')
+      else cb()
+    }
+    handlePhone = (rule, value, cb) => {
+      if (value) {
+
+        if (!value.match(/^[0-9]{9}$/)) {
+          cb(' رقم الهاتف يجب ان يكون ارقام فقط وعددها 9 خانات')
+        }
+        else cb()
+      } else cb('يرجى ادخال رقم الهاتف')
+    }
     render()
      {
       const { visible, onCancel, onCreate, form } = this.props;
