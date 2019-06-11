@@ -86,6 +86,16 @@ class OrdersManagement extends Component {
     });
     return filtered;
   };
+  nameFilter = object => {
+    const { name } = this.state;
+    let filtered = [];
+    filtered = object.filter(order => {
+      if (order.captain.indexOf(name) != -1) {
+        return true;
+      }
+    });
+    return filtered;
+  };
 
   clearFields = async () => {
     await this.setState({
