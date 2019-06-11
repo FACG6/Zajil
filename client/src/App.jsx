@@ -7,7 +7,7 @@ import Customers from './Components/Layouts/Customers/index'
 // import Navbar from "./Components/CommonComponent/Navbar/index";
 import Login from "./Components/Layouts/Login";
 // import Home from "./Components/Layouts/Home";
-import EditCaptain from './Components/Layouts/EditCaptain/index';
+import EditCaptain from './Components/Layouts/Captains/EditCaptain/index';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,18 +20,6 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <>
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar
-              newestOnTop
-              closeOnClick
-              rtl={false}
-              pauseOnVisibilityChange
-              draggable
-              pauseOnHover
-            />
             <Switch>
               <Route path="/login" component={Login} exact />
               <Route
@@ -53,7 +41,7 @@ class App extends Component {
                 render={() => (<Customers />)}
               />
             </Switch>
-          </>
+        
         </Router>
       </div>
     );
