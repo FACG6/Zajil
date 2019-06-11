@@ -24,7 +24,8 @@ class Profile extends Component {
       avatar: ""
     },
     visible: false,
-    error: ""
+    error: "",
+    tableInfo: ""
   };
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -63,17 +64,43 @@ class Profile extends Component {
             avatar: stringChar
           }
         });
+        return fetch (`/api/v1/getCustomerOrders/${id}`)
+      })
+      .then(res => res.json())
+      .then(res => {
+        const {error} = res;
+        if(error) this.setState({error});
+        else {
+          this.convertToObjectForTable(res.result);
+        }
       })
       .catch(() => {
         this.setState({ error: "Something error please try again" });
       });
+  }
+  
+  convertToObjectForTable = (results) => {
+    const table = results.map(result => {
+      const obj = {};
+      const key = Object.keys(result)[0];
+      obj.key = key;
+      obj.date= result[key][0].date.split('T')[0];
+      obj.status= result[key][0].status;
+      obj.captain= result[key][0].name;
+      obj.price= result[key][0].total + '$';
+      obj.place = result[key][0].place;
+      obj.items= result[key][0].items_names;
+      return obj;
+    });
+    this.setState({tableInfo: table});
   }
   handleClick = () => {
     this.setState({ visible: true });
   };
   render() {
     const {
-      personalInformation: { name, phone, status, email, address, avatar }
+      personalInformation: { name, phone, status, email, address, avatar },
+      tableInfo
     } = this.state;
     return (
       <>
@@ -101,31 +128,11 @@ class Profile extends Component {
               <p className="profile__box__title">العنوان</p>
               <p className="profile__value">{address}</p>
             </div>
-
-            {/* <div className="profile__box">
-              <p className="profile__box__title">رقم الرخصة</p>
-              <p className="profile__value">{licence}</p>
-            </div>
-            <div className="profile__box">
-              <p className="profile__box__title">رقم الهوية</p>
-              <p className="profile__value">{ID}</p>
-            </div> */}
           </div>
           <div className="profile__orders">
             <Table
               pageName="singleCustomer"
-              columns={[
-                {
-                  key: "1",
-                  email: "shrooqabdullah@gmail.com",
-                  mobileNo: "059999999",
-                  date: "14-7-2019",
-                  status: "تم",
-                  address: "غزة",
-                  captain: "محمد",
-                  price: "50$"
-                }
-              ]}
+              columns={tableInfo}
               viewPopup={viewPopup}
               EditPopup={Popup}
               deletePopup={deletePopup}
