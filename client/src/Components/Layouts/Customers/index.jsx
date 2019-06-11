@@ -5,13 +5,14 @@ import Table from '../../CommonComponent/Table/Table';
 import Button from '../../CommonComponent/Button';
 import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index"
+import Navbar from "../../CommonComponent/Navbar/index";
+import CollectionCreateForm from "./addcustomer"
 import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
 import { Icon } from 'antd';
 import { DatePicker } from 'antd';
 
 const { RangePicker } = DatePicker;
-const Search = Input.Search;
+
 export default class Customers extends Component {
     state = {
         customers: [],
@@ -21,29 +22,28 @@ export default class Customers extends Component {
         date: '',
         filteredcustomersDate: [],
         filteredcustomersName: [],
-
-
+        visible: false,
     }
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json())
-        .then(result => {
-            this.setState({
-                customers: result.result,
-                allData: result.result
-            })
-        }
-        )
+            .then(result => {
+                this.setState({
+                    customers: result.result,
+                    allData: result.result
+                })
+            }
+            )
     }
     filterfunction = (date, name, check) => {
-        const value = name.trim();
         if (check === 'date') {
             if (date.length !== 0) {
                 if (this.state.name) this.dateFilter(date, this.state.filteredcustomersName, date)
                 else this.dateFilter(date, this.state.allData, date)
             } else {
                 if (this.state.name) {
-                    this.nameFilter(this.state.name,this.state.allData)
-                    this.setState({ date: '', filterCustomerDate: [] })}
+                    this.nameFilter(this.state.name, this.state.allData)
+                    this.setState({ date: '', filterCustomerDate: [] })
+                }
                 else this.setState({ customers: this.state.allData, date: '', filterCustomerDate: [] })
             }
         } else if (check === 'name') {
@@ -52,8 +52,9 @@ export default class Customers extends Component {
                 else this.nameFilter(name, this.state.allData)
             } else {
                 if (this.state.date) {
-                    this.dateFilter(this.state.date,this.state.allData)
-                    this.setState({  name ,filterCustomerName:[]})}
+                    this.dateFilter(this.state.date, this.state.allData)
+                    this.setState({ name, filterCustomerName: [] })
+                }
                 else this.setState({ customers: this.state.allData, name })
             }
         } else this.setState({ customers: this.state.allData })
@@ -72,7 +73,6 @@ export default class Customers extends Component {
                 customers: filterCustomer,
                 date: value,
                 filteredcustomersDate: filterCustomer
-
             })
         }
         else {
@@ -92,35 +92,58 @@ export default class Customers extends Component {
             filteredcustomersName: filterCustomerName
         })
     }
+
+
+    showModal = () => {
+        this.setState({ visible: true });
+    };
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
+
+    handleCreate = () => {
+        const form = this.formRef.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
+            form.resetFields();
+            this.setState({ visible: false });
+        });
+    };
+
+    saveFormRef = formRef => {
+        this.formRef = formRef;
+    };
     render() {
-        if(this.state.customers)
-       { return (
-            <div className="containercustomers">
-                <Sidebar />
-                <div className="conatinercustomers__customer">
-                    <Navbar />
-                    <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
-                    <div className='addcustomer'>
-                        <Button name='إضافة مستخدم' icon={<Icon type="user" />} />
-                        <div className="filtercontainer">
-                            <div classNam="filtercontainer__orderdate">
-                                <RangePicker
-                                    showTime={{ format: 'HH:mm' }}
-                                    format="YYYY-MM-DD HH:mm"
-                                    placeholder={['من', 'الى']}
-                                    onChange={e => this.filterfunction(e, '', 'date')}
-                                   className="containercustomers__customer-rangpicker"
-                                />
-                                <span className='filtercontainer__orderdate-date'>فلترة حسب الوقت</span>
+        if (this.state.customers) {
+            return (
+                <div className="containercustomers">
+                    <Sidebar />
+                    <div className="conatinercustomers__customer">
+                        <Navbar />
+                        <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
+                        <div className='addcustomer'>
+                            <div className="filtercontainer">
+                                <div classNam="filtercontainer__orderdate">
+                                    <RangePicker
+                                        showTime={{ format: 'HH:mm' }}
+                                        format="YYYY-MM-DD HH:mm"
+                                        placeholder={['من', 'الى']}
+                                        onChange={e => this.filterfunction(e, '', 'date')}
+                                        className="containercustomers__customer-rangpicker"
+                                    />
+                                    <span className='filtercontainer__orderdate-date'>فلترة حسب الوقت</span>
+                                </div>
+                                <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                             </div>
-                            <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                         </div>
+                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' viewPopup={viewPopup}
+                            editPopup={editPopup}
+                            deletePopup={deletePopup} className="table" />
                     </div>
-                    <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' viewPopup={viewPopup}
-                        editPopup={editPopup}
-                        deletePopup={deletePopup} className="table" />
                 </div>
-            </div>
-        )}
+            )
+        }
     }
 }
