@@ -65,7 +65,27 @@ class OrdersManagement extends Component {
       }
     }
   };
-
+  statusFilter = object => {
+    const { status } = this.state;
+    let filtered = [];
+    const regex1 = new RegExp(/^[(ت)]+/);
+    const regex2 = new RegExp(/^[(ل)]/);
+    filtered = object.filter(order => {
+      if (
+        (order.b_status === true &&
+          regex1.test(status) &&
+          "تم".indexOf(status) != -1) ||
+        (order.b_status === false &&
+          regex2.test(status) &&
+          "لم يتم".indexOf(status) != -1)
+      ) {
+        return true;
+      } else if (order.b_status == status) {
+        return true;
+      }
+    });
+    return filtered;
+  };
 
   clearFields = async () => {
     await this.setState({
