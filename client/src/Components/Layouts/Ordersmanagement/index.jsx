@@ -43,7 +43,28 @@ class OrdersManagement extends Component {
         });
       });
   }
-
+  dateFilter = object => {
+    const { date } = this.state;
+    if (date[0] && date[1]) {
+      if (date[0].isValid() && date[1].isValid()) {
+        const fromDate = date[0].toDate().setHours(0, 0, 0, 0);
+        const toDate = date[1].toDate().setHours(0, 0, 0, 0);
+        let filtered = object.filter(order => {
+          if (
+            moment(order.date)
+              .toDate()
+              .setHours(0, 0, 0, 0) >= fromDate &&
+            moment(order.date)
+              .toDate()
+              .setHours(0, 0, 0, 0) <= toDate
+          ) {
+            return true;
+          }
+        });
+        return filtered;
+      }
+    }
+  };
 
 
   clearFields = async () => {
