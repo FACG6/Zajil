@@ -4,7 +4,8 @@ import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
-import Popup from "./Popup";
+import Popup from "./Popups/Popup";
+import DeletePopup from "./Popups/deletePopup";
 import {
   viewPopup,
   editPopup,
@@ -25,7 +26,7 @@ class Profile extends Component {
     },
     visible: false,
     error: "",
-    tableInfo: ""
+    tableInfo: []
   };
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -78,7 +79,7 @@ class Profile extends Component {
         this.setState({ error: "Something error please try again" });
       });
   }
-  
+
   convertToObjectForTable = (results) => {
     const table = results.map(result => {
       const obj = {};
@@ -135,7 +136,7 @@ class Profile extends Component {
               columns={tableInfo}
               viewPopup={viewPopup}
               EditPopup={Popup}
-              deletePopup={deletePopup}
+              DeletePopup={DeletePopup}
             />
           </div>
         </div>
