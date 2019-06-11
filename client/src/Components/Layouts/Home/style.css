@@ -1,3 +1,7 @@
+.Home_navbar-and-header-container {
+    display:flex;
+    flex-direction:column;
+}
 .box1{
     margin-left: 42.5rem;
     margin-top: 2rem;
