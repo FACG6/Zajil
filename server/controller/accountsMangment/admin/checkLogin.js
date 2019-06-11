@@ -22,7 +22,7 @@ exports.checkAdmin = (req, res) => {
 
               const payload = sign({ id, role, user_name }, process.env.SECRET);
 
-              res.cookie('jwt', payload, { httpOnly: true, maxAge: 60 * 60 * 24 * 7 });
+              res.cookie('jwt', payload, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 });
 
               res.status(200).send({ result: 'login success' });
             } else {
