@@ -53,7 +53,8 @@ CREATE TABLE orders
     s_customer_phone TEXT NOT NULL,
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
-    dt_modified_date DATE
+    dt_modified_date DATE,
+    s_customer_name TEXT 
 );
 
 CREATE TABLE items
