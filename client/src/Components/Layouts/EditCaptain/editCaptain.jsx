@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, Form, Select, Input } from "antd";
 import './style.css';
-import { Upload, Icon, message } from 'antd';
+import { Upload, Icon } from 'antd';
 import { toast } from "react-toastify";
 
 
@@ -42,10 +42,9 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       }
     };
     componentDidMount() {
-      const id=6;
+      const id = 6;
       // const { id } = this.props.id;
       fetch(`/api/v1//getCaptainDetails/${id}`)
-        .then(res => res.json())
         .then(res => {
           if (res.result) {
             const rows = res.result;
@@ -61,14 +60,17 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               password: rows.s_password,
             })
           }
-          if (res.error) console.log(2222222222, res.e);
+          else {
+            toast.error(res.error);
+          }
+
         })
-        .catch(err => console.log(2222222222, err))
+        .catch(err => toast.error(err));
     }
     render() {
       const uploadButton = (
         <div>
-          <Icon type={this.state.loading ? 'loading' : 'plus'} />
+          <Icon type={this.state.loading ? 'check-circle' : 'plus'} />
           <div className="ant-upload-text">أرفق صورة</div>
         </div>
       );
@@ -91,14 +93,14 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               <Form.Item label="رقم الهوية" >
                 {getFieldDecorator("IDNumber", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]+$/ }
+                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{9}$/ }
                   ]
                 })(<Input type="text" id="IDNumber" value={this.state.IDNumber} />)}
               </Form.Item>
               <Form.Item label="رقم الرخصة">
                 {getFieldDecorator("licenceNumber", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]+$/ }
+                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{7}$/ }
                   ]
                 })(<Input type="text" id="licenceNumber" value={this.state.licenseNumber} />)}
               </Form.Item>
