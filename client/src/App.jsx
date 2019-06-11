@@ -43,6 +43,7 @@ class App extends Component {
                   <Profile />
                 </div>
               )}
+              />
              <Route
               exact
               path="/customers"
