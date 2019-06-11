@@ -6,14 +6,15 @@ import './style.css';
 const Header = ({ title, Icon }) => (
   <React.Fragment>
     <div className="header">
+      {/* <Icon type="carry-out" /> */}
       <div className="icon">{Icon}</div>
-      <h2 className="header__h2">{title}</h2>
+      <h2>{title}</h2>
     </div>
-    <hr className="header__line" />
   </React.Fragment>
 );
+
 Header.propTypes = {
   Icon: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 export default Header;

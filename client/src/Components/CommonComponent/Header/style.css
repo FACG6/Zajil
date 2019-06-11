@@ -1,18 +1,21 @@
 .header {
-    font-style: normal;
-    font-weight: bold;
     display: flex;
-    flex-direction: row-reverse;
-    font-size: 1.8 rem;
-    margin-top: 1.5rem;
-}
-
-.header__line {
-    width: 65.4rem;
-    margin-left: 0.4rem;
+    width: 78vw;
+    direction: rtl;
+    margin-top: 23px;
+    padding-right: 2vw;
+    align-self: flex-end;
+    margin-right: 19.5vw;
+    border-bottom: groove;
+    border-color: #2b2a374f;
+    border-width: 2px;
+    
 }
 
 .icon {
-    font-size: 1.4rem;
-    margin-left: 1rem;
+    margin-left: 1vw;
+    font-size: 2.2vw;
+}
+.header .anticon svg{
+    margin-bottom: 5px;
 }
