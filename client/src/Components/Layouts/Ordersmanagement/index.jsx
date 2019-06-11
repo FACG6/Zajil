@@ -138,6 +138,25 @@ class OrdersManagement extends Component {
       } else {
         this.setState({ filteredOrders: [], filter: false });
       }
+    }else if (type === "name") {
+      await this.setState({ name: value });
+      if (date) {
+        filtered = this.dateFilter(orders);
+        if (status) {
+          filtered = this.statusFilter(filtered);
+        }
+        filtered = this.nameFilter(filtered);
+        this.setState({ filteredOrders: filtered, filter: true });
+      } else if (status) {
+        filtered = this.statusFilter(orders);
+        filtered = this.nameFilter(filtered);
+        this.setState({ filteredOrders: filtered, filter: true });
+      } else if (value.length > 0) {
+        filtered = this.nameFilter(orders);
+        this.setState({ filteredOrders: filtered, filter: true });
+      } else {
+        this.setState({ filteredOrders: [], filter: false });
+      }
     }
   };
 
