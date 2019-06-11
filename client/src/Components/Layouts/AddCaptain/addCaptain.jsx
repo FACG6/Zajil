@@ -40,6 +40,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       );
       const imageUrl = this.state.imageUrl;
 
+      console.log(imageUrl)
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       const { Option } = Select;
@@ -106,7 +107,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               <Form.Item label="الاسم">
                 {getFieldDecorator("name", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-ي]|\s)+$/ }
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-يa-z]|\s)+$/ }
                   ]
                 })(<Input type="text" id="name" />)}
               </Form.Item>
@@ -126,8 +127,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   rules: [
                     {
                       required: true,
-                      message: "كلمة المرور يجب ان تحتوي على الاقل رقم واحد وان تكون من اربعة الى ثمانية أحرف",
-                      pattern: /^(?=.*\d).{4,8}$/,
                     }
                   ]
                 })(<Input type="password" id="password" />)}
@@ -138,7 +137,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     {
                       required: true,
                       message: "الرجاء ملئ الحقل بارقام",
-                      pattern: /^\+?[0-9]+$/
+                      pattern: /^\+?[0-9]{10,12}$/
                     }
                   ]
                 })(<Input type="text" id="phone" />)}
@@ -146,7 +145,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               <Form.Item label="العنوان" dir="ltr">
                 {getFieldDecorator("address", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-ي]|\s)+$/ }
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يa-z]*$/ }
                   ]
                 })(<Input type="text" id="address" />)}
               </Form.Item>
@@ -174,10 +173,11 @@ class CollectionsPage extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
+
       if (err) {
         return;
       }
-      values["avatar"] = values.avatar.file.name;
+      values["avatar"] = values.avatar.file;
       form.resetFields();
       fetch('/api/v1/addCaptain', {
         method: 'POST',
