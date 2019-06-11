@@ -118,7 +118,7 @@ class TableCmponent extends Component {
       );
     } else if (this.props.pageName === "customers") {
       return (
-        <div className="table-container">
+        <div className='tablecustomer-container'>
           <DropdownMenu
             pageSize={this.state.pageSize}
             paginationSize={this.paginationSize}
@@ -131,26 +131,26 @@ class TableCmponent extends Component {
                 : parseInt(this.state.pageSize)
             }}
           >
-            <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
-            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
-            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
+            <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
+            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
+            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
             <Column
               title="الحالة"
-              dataIndex="status"
+              dataIndex="b_status"
               key="status"
               render={status => (
                 <span>
                   <Tag
                     color={
-                      status === "غير فعال"
+                      status === false
                         ? "volcano"
-                        : status === "فعال"
+                        : status === true
                         ? "green"
                         : "blue"
                     }
                     key={status}
-                  >
-                    {status}
+                  > 
+                    {status  === true ? "فعال" : status === false ? "غير فعال" : status }
                   </Tag>
                 </span>
               )}

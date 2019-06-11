@@ -8,9 +8,9 @@ const { getCounts } = require('./getCounts');
 const adminHandler = require('./accountsMangment/admin');
 const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
+const { getImage } = require('./getImage');
 
 const router = express.Router();
-
 router.use(checkAuth);
 // the all routes start from here
 
@@ -23,5 +23,7 @@ router.route('/counts')
 
 router.use(customerHandler);
 router.use(orderHandler);
+router.route('/image/:name')
+  .get(getImage);
 
 module.exports = router;
