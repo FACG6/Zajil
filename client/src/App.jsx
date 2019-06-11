@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Icon } from 'antd'
-import Customers from './Components/Layouts/Customers/index'
+import Customers from './Components/Layouts/Customers'
 import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
-import Navbar from "./Components/CommonComponent/Navbar/index";
+import Navbar from "./Components/CommonComponent/Navbar";
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
-import AddCaptain from "./Components/Layouts/AddCaptain"
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import AddCaptain from "./Components/Layouts/Captains/AddCaptain"
+
 
 import "./App.css";
 
@@ -19,17 +18,6 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnVisibilityChange
-            draggable
-            pauseOnHover
-          />
           <Switch>
             <Route path="/login" component={Login} exact />
             <Route

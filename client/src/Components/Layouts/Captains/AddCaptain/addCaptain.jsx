@@ -2,7 +2,8 @@ import React from "react";
 import { Button, Modal, Form, Select, Input } from "antd";
 import './style.css';
 import { Upload, Icon } from 'antd';
-import { toast } from "react-toastify";
+import { notification } from 'antd';
+
 
 
 function getBase64(img, callback) {
@@ -192,14 +193,28 @@ class CollectionsPage extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (res.result) {
-            toast.success('captain added successfuly ');
+            notification.open({
+              message: 'success',
+              description:
+                'captain added successfuly',
+              icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+            });
+
           }
           else {
-            toast.error(res.error);
+            notification.open({
+              message: 'fail',
+              description: res.error,
+              icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+            });
           }
         })
         .catch(err =>
-          toast.error(err)
+          notification.open({
+            message: 'fail',
+            description: err,
+            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+          })
         )
       this.setState({ visible: false });
     });
