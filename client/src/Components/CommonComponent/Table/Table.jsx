@@ -32,7 +32,12 @@ class TableCmponent extends Component {
         };
       });
   };
-
+  deleteRow = (id) => {
+    this.setState((prev) => {
+      return {tableData: prev.tableData.filter((data) => data.key !== id)}
+    });
+  }
+  
   componentWillReceiveProps(props) {
     this.setState({tableData: props.columns});
   }
