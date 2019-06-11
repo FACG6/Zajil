@@ -125,6 +125,13 @@ export default class Customers extends Component {
                         <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
                         <div className='addcustomer'>
                         <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
+                        <CollectionCreateForm
+                                wrappedComponentRef={this.saveFormRef}
+                                visible={this.state.visible}
+                                onCancel={this.handleCancel}
+                                onCreate={this.handleCreate}
+                                onchange={this.onchange}
+                            />
                             <div className="filtercontainer">
                                 <div classNam="filtercontainer__orderdate">
                                     <RangePicker
