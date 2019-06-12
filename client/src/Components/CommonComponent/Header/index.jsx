@@ -1,16 +1,15 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-/* when pass Icon put insilde it <Icon type="..." className="header__icon" /> */
+// to insert the Icon =>> <Icon type="carry-out" />
 
 const Header = ({ title, Icon }) => (
-  <React.Fragment>
+  <Fragment>
     <div className="header">
-      {/* <Icon type="carry-out" /> */}
       <div className="icon">{Icon}</div>
       <h2>{title}</h2>
     </div>
-  </React.Fragment>
+  </Fragment>
 );
 
 Header.propTypes = {
