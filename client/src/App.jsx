@@ -5,6 +5,7 @@ import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar/index";
 import Login from "./Components/Layouts/Login";
+import Ordersmanagement from "./Components/Layouts/Ordersmanagement/index";
 import "./App.css";
 
 class App extends Component {
@@ -20,10 +21,10 @@ class App extends Component {
               path="/"
               render={() => (
                 <div>
-                  <Sidebar />
-                  <Navbar />
-
-                  <Header />
+                  {/* <Sidebar /> */}
+                  {/* <Navbar /> */}
+                  <Ordersmanagement />
+                  {/* <Header /> */}
                 </div>
               )}
             />
