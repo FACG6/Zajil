@@ -7,9 +7,7 @@ import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar/index";
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
-import AddCaptain from "./Components/Layouts/AddCaptain"
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Captains from "./Components/Layouts/Captains"
 
 import "./App.css";
 
@@ -19,17 +17,6 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnVisibilityChange
-            draggable
-            pauseOnHover
-          />
           <Switch>
             <Route path="/login" component={Login} exact />
             <Route
@@ -37,11 +24,10 @@ class App extends Component {
               path="/"
               render={() => (
                 <div>
-                  {/* <Sidebar />
+                  <Sidebar />
                   <Navbar />
                   <Header title="الرئيسية" Icon={<Icon type="bank" />} />
-                  <Home /> */}
-                  <AddCaptain />
+                  <Home />
                 </div>
               )}
             />
@@ -49,6 +35,11 @@ class App extends Component {
               exact
               path="/customers"
               render={() => (<Customers />)}
+            />
+            <Route
+              exact
+              path="/captains"
+              render={() => (<Captains />)}
             />
           </Switch>
         </Router>
