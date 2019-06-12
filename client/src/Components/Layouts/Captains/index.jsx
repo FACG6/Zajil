@@ -11,7 +11,8 @@ import "./style.css";
 
 class Captains extends Component {
   state = {
-    visible: false
+    visible: false,
+    tableData: []
   };
   handleVisible = () => {
     this.setState(prev => {
@@ -25,7 +26,6 @@ class Captains extends Component {
       if (err) {
         this.openNotificationWithIcon('error', 'هناك خطأ في البانات المدخلة')
       } else {
-        console.log(values);
         const {IDNumber,  address, email, licenceNumber, name, password, phone, status, file} = values;
        const formData = new FormData();
        formData.append('file', file.fileList[0].originFileObj);
@@ -43,11 +43,20 @@ class Captains extends Component {
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res);
+          const { error } = res;
+          if (error) {
+            this.openNotificationWithIcon('error', error);
+          } else {
+            this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
+            console.log(res.result);
+            //the result will be store in state in next pull request
+          }
+          
         })
         .catch(() => {
           this.openNotificationWithIcon('warning', 'هناك خطأ ما الرجاء اعادة ارسال البيانات')
-        })
+        });
+        this.handleVisible();
       }
     });
   };
