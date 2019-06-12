@@ -6,6 +6,7 @@ import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar/index";
 import Login from "./Components/Layouts/Login";
 import "./App.css";
+import OrdersManagement from "./Components/Layouts/Ordersmanagement";
 
 class App extends Component {
   state = {};
@@ -19,11 +20,10 @@ class App extends Component {
               exact
               path="/"
               render={() => (
-                <div>
+                <div className="app" >
                   <Sidebar />
                   <Navbar />
-
-                  <Header />
+                {/* <OrdersManagement /> */}
                 </div>
               )}
             />
