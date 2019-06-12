@@ -103,6 +103,13 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   rules: [{ required: true, message: 'يرجى ادخال العنوان' }],
                 })(<Input />)}
               </Form.Item>
+              <Form.item label='كلمة المرور'>
+               {getFieldDecorator('password',{
+                 rule:[{require:true, message:'يرجى ادخال كلمة المرور'}]
+               }
+
+               )(<Input />)} 
+              </Form.item>
             </div>
           </Form>
         </Modal>
