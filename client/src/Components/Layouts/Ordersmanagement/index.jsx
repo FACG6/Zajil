@@ -202,10 +202,8 @@ class OrdersManagement extends Component {
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
       return (
-        <div className="ordersManagement-bars-container">
-          <Sidebar />
-          <div className="ordersManagement-main-container">
-            <Navbar />
+        <div className="">
+          <div className="ordersManagement-bars-container ordersManagement-main-container">
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
