@@ -8,14 +8,15 @@ const { getCounts } = require('./getCounts');
 const adminHandler = require('./accountsMangment/admin');
 const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
+const captainHandler = require('./accountsMangment/captains');
 const { getImage } = require('./getImage');
-const { addCaptain } = require('./accountsMangment/captains/addCaptain');
 
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
-router.route('/addCaptain')
-  .post(addCaptain);
+router.use(captainHandler);
+
+
 router.use(adminHandler);
 
 router.use(protectRoutes);
