@@ -14,8 +14,6 @@ const { getImage } = require('./getImage');
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
-router.use(captainHandler);
-
 
 router.use(adminHandler);
 
@@ -23,6 +21,7 @@ router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
+router.use(captainHandler);
 
 router.use(customerHandler);
 router.use(orderHandler);
