@@ -179,7 +179,7 @@ class TableCmponent extends Component {
                   <Icon
                     onClick={() => {
                       this.props.history.push(
-                        `/customers/profile/${record.key}`
+                        `/customers/profile/${record.pk_i_id}`
                       );
                     }}
                     style={{
