@@ -1,60 +1,36 @@
+const path = require('path');
+const { hash } = require('bcryptjs');
+
 const { insertCaptain } = require('../../../database/queries/captain/addCaptain');
 
 const addCaptain = (req, res) => {
-  console.log('body', req.body);
-  console.log('files', req.files);
-  // const {
-  //   name,
-  //   email,
-  //   phone,
-  //   address,
-  //   IDNumber,
-  //   licenceNumber,
-  //   status,
-  //   avatar,
-  //   password,
-  // } = req.body;
-
-  // const captainInfo = {
-  //   name,
-  //   email,
-  //   phone,
-  //   address,
-  //   IDNumber,
-  //   licenceNumber,
-  //   status,
-  //   avatar,
-  //   type: 1,
-  //   password,
-  // };
-  // insertCaptain(captainInfo)
-  //   .then(({ rows: captain }) => {
-  //     const data = {
-  //       name: captain[0].s_name,
-  //       email: captain[0].s_email,
-  //       phone: captain[0].s_mobile_number,
-  //       address: captain[0].s_address,
-  //       IDNumber: captain[0].s_id_number,
-  //       licenceNumber: captain[0].s_driver_licence_number,
-  //       status: captain[0].b_status,
-  //       avatar: captain[0].s_image,
-  //       password: captain[0].s_password,
-  //     };
-  //     if (!captain[0]) {
-  //       res.status(400).send({
-  //         error: 'captain dose not added',
-  //       });
-  //     } else {
-  //       res.status(201).send({
-  //         result: { id: captain[0].pk_i_id, data },
-  //       });
-  //     }
-  //   })
-  //   .catch(() => {
-  //     res.status(500).send({
-  //       error: 'Sorry we have some issues',
-  //     });
-  //   });
+  const { file } = req.files;
+  const {
+    name, email, phone, address, IDNumber, licenceNumber, status, password,
+  } = req.body;
+  const extName = path.extname(file.name).slice(1);
+  const newName = `${new Date().getTime()}id_photo.${extName}`;
+  if (['png', 'jpg', 'jpeg'].some(ext => ext === extName)) {
+    req.files.file.mv(path.join(__dirname, '..', '..', '..', 'upload', `${newName}`), (err) => {
+      if (err) res.status(500).send({ error: 'Internal Server Error' });
+      else {
+        hash(password, 5, (error, pass) => {
+          if (error) res.status(500).send({ error: 'Internal Server Error' });
+          else {
+            insertCaptain([name, email, phone, address, IDNumber, licenceNumber, status, newName, 1, pass])
+              .then((response) => {
+                res.send({ result: response.rows });
+              })
+              .catch(() => {
+                res.status(500).send({ error: 'Internal Server Error' });
+              });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(400).send({ error: 'Bad Request' });
+  }
 };
 
 module.exports = { addCaptain };
