@@ -114,24 +114,23 @@ export default class Customers extends Component {
                 status: values.status,
                 address: values.address
             }
-            fetch('api/v1/addcustomer',{
-                method:'POST',
-                headers:{'content-type':'application/json'},
-                body:JSON.stringify(addCustomer)
-            }).then(res=>res.json())
-            .then(result=>{
-                // console.log(res.result[0])
-
-                if(result.result){
-                    let newcustomer=[...this.state.customers];
-                    newcustomer.push(result.result[0])
-                    let newallData=[...this.state.customers];
-                    newallData.push(result.result[0])
-                this.setState({
-                    customers:newcustomer,
-                    allData:newallData
-                })}
-            })
+            fetch('api/v1/addcustomer', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(addCustomer)
+            }).then(res => res.json())
+                .then(result => {
+                    if (result.result) {
+                        let newcustomer = [...this.state.customers];
+                        newcustomer.push(result.result[0])
+                        let newallData = [...this.state.customers];
+                        newallData.push(result.result[0])
+                        this.setState({
+                            customers: newcustomer,
+                            allData: newallData
+                        })
+                    }
+                })
             form.resetFields();
             this.setState({ visible: false });
         });
@@ -149,8 +148,8 @@ export default class Customers extends Component {
                         <Navbar />
                         <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
                         <div className='addcustomer'>
-                        <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
-                        <CollectionCreateForm
+                            <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
+                            <CollectionCreateForm
                                 wrappedComponentRef={this.saveFormRef}
                                 visible={this.state.visible}
                                 onCancel={this.handleCancel}
