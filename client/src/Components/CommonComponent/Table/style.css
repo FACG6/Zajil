@@ -30,6 +30,7 @@
   direction: rtl;
   color: #2b2a37;
   font-weight: 400;
+  margin-top: 45px !important;
 }
 .ant-dropdown-menu {
   text-align: right;
@@ -46,4 +47,8 @@
 .swal2-modal .swal2-styled:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+.tablecustomer-container {
+  width: 71vw;
+  margin-left: 5vw;
 }
