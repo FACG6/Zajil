@@ -119,7 +119,19 @@ export default class Customers extends Component {
                 headers:{'content-type':'application/json'},
                 body:JSON.stringify(addCustomer)
             }).then(res=>res.json())
-            .then(res=>console.log(res))
+            .then(result=>{
+                // console.log(res.result[0])
+
+                if(result.result){
+                    let newcustomer=[...this.state.customers];
+                    newcustomer.push(result.result[0])
+                    let newallData=[...this.state.customers];
+                    newallData.push(result.result[0])
+                this.setState({
+                    customers:newcustomer,
+                    allData:newallData
+                })}
+            })
             form.resetFields();
             this.setState({ visible: false });
         });
