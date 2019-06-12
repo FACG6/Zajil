@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import { Table, Divider, Tag, Icon } from "antd";
 import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
+import Deletepopup from "../../Layouts/Customers/deletecustomer"
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
@@ -17,8 +18,12 @@ class TableCmponent extends Component {
       viewVisibility: false,
       id: ''
     },
-    tableData: this.props.columns
+    tableData: this.props.columns,
     
+    pageCustomers: {
+      deleteVisibility: false,
+      id: ''
+    },
   };
 
   handleClick = (value1, value2, id) => (e) => {
@@ -197,7 +202,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record, deleteHtml)}
+                    <Icon onClick={<Deletepopup visible={this.state.pageCustomers.deleteVisibility} id={this.state.pageCustomers.id}/>}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"

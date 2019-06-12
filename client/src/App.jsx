@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Icon } from 'antd'
-import Customers from './Components/Layouts/Customers'
+import {Icon}from 'antd';
+import Customers from './Components/Layouts/Customers/index';
+import CollectionsPage from './Components/Layouts/Customers/deletecustomer'
 import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar";
@@ -55,6 +56,12 @@ class App extends Component {
               path="/captains"
               render={() => (<Captains />)}
             />
+              <Route
+              exact
+              path="/test"
+              render={() => ( <CollectionsPage/> )}
+            />
+          
           </Switch>
         </Router>
       </div>
