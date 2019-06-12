@@ -10,11 +10,36 @@ import "./style.css";
 
 class TableCmponent extends Component {
   state = {
-    pageSize: "0"
+    pageSize: "10",
+    singleCustomer: {
+      editVisibilty: false,
+      deleteVisibility: false,
+      viewVisibility: false,
+      id: ''
+    },
+    tableData: this.props.columns
+    
   };
 
-  componentDidMount(){
-    this.setState({pageSize: this.props.columns.length});
+  handleClick = (value1, value2, id) => (e) => {
+    this.setState(
+      prev => {
+        return {
+          [value1]: {
+            [value2]: !prev[value1][value2],
+            id
+          }
+        };
+      });
+  };
+  deleteRow = (id) => {
+    this.setState((prev) => {
+      return {tableData: prev.tableData.filter((data) => data.key !== id)}
+    });
+  }
+  
+  componentWillReceiveProps(props) {
+    this.setState({tableData: props.columns});
   }
 
   paginationSize = pageSize => {
@@ -22,8 +47,10 @@ class TableCmponent extends Component {
   };
 
   render() {
-    const { viewPopup, editPopup, deletePopup, columns, viewHtml, editHtml, deleteHtml } = this.props;
+    
+    const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
+    const { tableData: columns, singleCustomer: { id }} = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -33,7 +60,11 @@ class TableCmponent extends Component {
           />
           <Table
             dataSource={columns}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
+            pagination={{
+              pageSize: isNaN(this.state.pageSize)
+                ? columns.length
+                : parseInt(this.state.pageSize)
+            }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
@@ -103,35 +134,39 @@ class TableCmponent extends Component {
       );
     } else if (this.props.pageName === "customers") {
       return (
-        <div className="table-container">
+        <div className='tablecustomer-container'>
           <DropdownMenu
             pageSize={this.state.pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
+            pagination={{
+              pageSize: isNaN(this.state.pageSize)
+                ? columns.length
+                : parseInt(this.state.pageSize)
+            }}
           >
-            <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
-            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
-            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
+            <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
+            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
+            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
             <Column
               title="الحالة"
-              dataIndex="status"
+              dataIndex="b_status"
               key="status"
               render={status => (
                 <span>
                   <Tag
                     color={
-                      status === "غير فعال"
+                      status === false
                         ? "volcano"
-                        : status === "فعال"
+                        : status === true
                         ? "green"
                         : "blue"
                     }
                     key={status}
-                  >
-                    {status}
+                  > 
+                    {status  === true ? "فعال" : status === false ? "غير فعال" : status }
                   </Tag>
                 </span>
               )}
@@ -141,13 +176,18 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={ () => {this.props.history.push(`/getCustomerDetails/${record.key}`)}}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="profile"
-                    />
+                  <Icon
+                    onClick={() => {
+                      this.props.history.push(
+                        `/customers/profile/${record.pk_i_id}`
+                      );
+                    }}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="profile"
+                  />
                   <Divider type="vertical" />
                     <Icon onClick={event => editPopup(record.key,record, editHtml)}
                       style={{
@@ -179,7 +219,11 @@ class TableCmponent extends Component {
           />
           <Table
             dataSource={columns}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
+            pagination={{
+              pageSize: isNaN(this.state.pageSize)
+                ? columns.length
+                : parseInt(this.state.pageSize)
+            }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
             <Column title="التاريخ" dataIndex="date" key="date" />
@@ -218,21 +262,38 @@ class TableCmponent extends Component {
                       type="profile"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key,record,editHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="edit"
-                    />
+                    <Icon
+                    onClick={this.handleClick(
+                      "singleCustomer",
+                      "editVisibilty"
+                    )}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="edit"
+                  />
+                  <EditPopup
+                    visible={this.state.singleCustomer.editVisibilty}
+                    visibleFun = {this.handleClick}
+                    id={record.key}
+                    information={record}
+                  />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record,deleteHtml)}
+                    <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
                       }}
                       type="delete"
+                      className={record.key}
                     />
+                    <DeletePopup
+                    visible={this.state.singleCustomer.deleteVisibility}
+                    visibleFun = {this.handleClick}
+                    id={id}
+                    updateState={this.deleteRow}
+                  />
                 </span>
               )}
             />
@@ -248,7 +309,11 @@ class TableCmponent extends Component {
           />
           <Table
             dataSource={columns}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
+            pagination={{
+              pageSize: isNaN(this.state.pageSize)
+                ? columns.length
+                : parseInt(this.state.pageSize)
+            }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
             <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
@@ -280,13 +345,18 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={ () => {this.props.history.push(`/getCaptainDetails/${record.key}`)}}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="profile"
-                    />
+                  <Icon
+                    onClick={() => {
+                      this.props.history.push(
+                        `/getCaptainDetails/${record.key}`
+                      );
+                    }}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="profile"
+                  />
                   <Divider type="vertical" />
                     <Icon onClick={event => editPopup(record.key,record,editHtml)}
                       style={{
@@ -318,7 +388,11 @@ class TableCmponent extends Component {
           />
           <Table
             dataSource={columns}
-            pagination={{ pageSize: isNaN(this.state.pageSize) ? columns.length : parseInt(this.state.pageSize) }}
+            pagination={{
+              pageSize: isNaN(this.state.pageSize)
+                ? columns.length
+                : parseInt(this.state.pageSize)
+            }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
@@ -392,6 +466,6 @@ TableCmponent.propTypes = {
   deleteHtml: PropTypes.string.isRequired,
 };
 
-const TableComponent =  withRouter(TableCmponent);
+const TableComponent = withRouter(TableCmponent);
 
 export default TableComponent;

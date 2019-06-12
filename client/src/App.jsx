@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Icon } from 'antd';
-
+import {Icon}from 'antd'
+import Customers from './Components/Layouts/Customers/index'
 import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar/index";
+import Profile from "./Components/Layouts/SingleCustomer";
+
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
 
@@ -29,6 +31,23 @@ class App extends Component {
                   <Home />
                 </div>
               )}
+            />
+
+            <Route
+              exact
+              path="/customers/profile/:id"
+              render={() => (
+                <div>
+                  <Sidebar />
+                  <Navbar />
+                  <Profile />
+                </div>
+              )}
+              />
+             <Route
+              exact
+              path="/customers"
+              render={() => ( <Customers/> )}
             />
           </Switch>
         </Router>
