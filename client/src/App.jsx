@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Icon } from 'antd';
-
-
-import Customers from './Components/Layouts/Customers/index'
+import { Icon } from 'antd'
+import Customers from './Components/Layouts/Customers'
 import Sidebar from "./Components/CommonComponent/Sidebar";
-import Navbar from "./Components/CommonComponent/Navbar/index";
-import Header from './Components/CommonComponent/Header'
-//import Login from "./Components/Layouts/Login";
+import Header from "./Components/CommonComponent/Header";
+import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
 
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
+import Captains from "./Components/Layouts/Captains"
 
 import "./App.css";
 
@@ -58,6 +56,7 @@ class App extends Component {
               path="/customers"
               render={() => (<Customers />)}
             />
+
           </Switch>
         </Router>
       </div>
