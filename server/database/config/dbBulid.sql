@@ -28,7 +28,7 @@ CREATE TABLE TUser
     b_status BOOLEAN NOT NULL,
     s_address TEXT NOT NULL,
     s_access_token TEXT,
-    s_image TEXT NOT NULL,
+    s_image TEXT DEFAULT 'user.png',
     d_latitude FLOAT,
     d_longitude FLOAT,
     i_type INTEGER NOT NULL,
@@ -38,9 +38,9 @@ CREATE TABLE TUser
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
     s_password TEXT NOT NULL,
-    s_id_number INTEGER,
+    s_id_number text,
     s_attachment TEXT,
-    s_driver_licence_number INTEGER,
+    s_driver_licence_number text,
     s_extra_1 TEXT,
     s_extra_2 TEXT
 );
