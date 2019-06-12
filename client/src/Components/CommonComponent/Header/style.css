@@ -11,6 +11,9 @@
     border-width: 2px;
     float: right;
 }
+hr{
+    overflow: hidden;
+}
 
 .icon {
     margin-left: 1vw;
