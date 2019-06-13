@@ -212,12 +212,6 @@ class TableCmponent extends Component {
                       }}
                       type="delete"
                     />
-                      <Deletepopup
-                    visible={this.state.customersPage.deleteVisibility}
-                     id={this.state.customersPage.id}
-                     visibleFun={this.handleClick}
-
-                  /> 
                 </span>
               )}
             />
