@@ -56,12 +56,7 @@ class App extends Component {
               path="/captains"
               render={() => (<Captains />)}
             />
-              <Route
-              exact
-              path="/test"
-              render={() => ( <CollectionsPage/> )}
-            />
-          
+            
           </Switch>
         </Router>
       </div>
