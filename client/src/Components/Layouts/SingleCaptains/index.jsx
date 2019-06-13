@@ -28,8 +28,8 @@ export default class Viewcaptain extends Component {
   }
 
   componentDidMount() {
-    // const id = 6;
-    const { id } = this.props.id;
+    const id = 6;
+    // const { id } = this.props.id;
 
     fetch(`/api/v1/getCaptainDetails/${id}`, {
       method: 'GET'

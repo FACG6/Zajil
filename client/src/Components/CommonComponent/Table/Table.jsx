@@ -58,6 +58,7 @@ class TableCmponent extends Component {
     const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
     const { tableData: columns, singleCustomer: { id } } = this.state;
+    const { singleCaptain } = this.state;
 
     if (this.props.pageName === "orders") {
       return (
@@ -475,7 +476,7 @@ class TableCmponent extends Component {
                   <DeletePopup
                     visible={this.state.singleCaptain.deleteVisibility}
                     visibleFun={this.handleClick}
-                    id={id}
+                    id={singleCaptain.id}
                     updateState={this.deleteRow}
                   />
 

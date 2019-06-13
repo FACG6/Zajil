@@ -14,7 +14,7 @@ import Captains from "./Components/Layouts/Captains"
 import "./App.css";
 
 import Viewcaptain from "./Components/Layouts/SingleCaptains";
-import Captains from "./Components/Layouts/Captains/index"
+// import Captains from "./Components/Layouts/Captains/index"
 
 class App extends Component {
   state = {};
@@ -24,10 +24,7 @@ class App extends Component {
         <Router>
           <Switch>
             {/* <Route path="/login" component={Login} exact /> */}
-            <Route
-              exact
-              path="/captains"
-              render={() => (<Captains />)} />
+
             <Route
               exact
               path="/captains/profile/:id"
