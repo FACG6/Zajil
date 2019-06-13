@@ -50,8 +50,7 @@ class Popup extends Component {
         cancelText="الغاء"
         okText="حذف"
         onCancel={this.handleCancel}
-        closable={false}
-        style={{ direction: "rtl" }}
+        style={{ direction: "rtl", }}
         className="deleteModal"
       >
         <p>هل تريد بالتأكيد حذف الطلب ؟</p>
