@@ -18,18 +18,11 @@ class TableCmponent extends Component {
       viewVisibility: false,
       id: ''
     },
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    tableData: this.props.columns,
-=======
-=======
->>>>>>> Stashed changes
     customersPage:{
       deleteVisibility:false,
       id:''
     },
     tableData: this.props.columns
->>>>>>> Stashed changes
     
     pageCustomers: {
       deleteVisibility: false,
@@ -213,15 +206,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                    <Icon onClick={<Deletepopup visible={this.state.pageCustomers.deleteVisibility} id={this.state.pageCustomers.id}/>}
-=======
                      <Icon onClick={this.handleClick("customersPage","deleteVisibility", record.pk_i_id)}
->>>>>>> Stashed changes
-=======
-                     <Icon onClick={this.handleClick("customersPage","deleteVisibility", record.pk_i_id)}
->>>>>>> Stashed changes
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
