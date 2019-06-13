@@ -1,20 +1,48 @@
 .title{
-    margin: '0px 10px'
+    margin: '0px 10px';
+    /* font-size: 1.5rem;
+    font-family: cairo; */
+}
+.ant-modal-title{
+    font-size: 1.5rem;
+    font-family: cairo;
 }
 
 .userName{
-    direction: 'rtl' 
+    direction: 'rtl' ;
+    font-family: cairo;
 }
 
 .phone{
-    direction: 'rtl'
+    direction: 'rtl';
+    font-family: cairo;
 }
 
 .addcustomer {
     margin-top: 1rem;
     margin-left: 3.5rem;
+    font-family: cairo;
 }
 
+.captainName {
+    direction: 'rtl';
+    font-family: cairo;
+}
+
+.itam{
+    direction: 'rtl' ;
+    font-family: cairo;
+}
+
+.markit{
+    direction: 'rtl' ;
+    font-family: cairo;
+}
+
+.address{
+    display: "block" ;
+    font-family: cairo;
+}
 .filtercontainer__orderdate {
     display: flex;
     flex-direction: row;

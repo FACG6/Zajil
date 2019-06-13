@@ -83,7 +83,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 </Form.Item>
                 
               </div>
-              <Form.Item label="اسم الكابتن" layout="horizontal" style={{ direction: 'rtl' }} >
+              <Form.Item label="اسم الكابتن" layout="horizontal" className="captainName" >
                 {getFieldDecorator('captainName', {
                   rules: [{ required: true, validator: this.handelCaptainName }],
                 })(<div>
@@ -92,10 +92,10 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 )}
                 
               </Form.Item>
-              <Form.Item label="اضافة عنصر" layout="horizontal" style={{ direction: 'rtl' }} >
+              <Form.Item label="اضافة عنصر" layout="horizontal" className="itam" >
                 {getFieldDecorator('item', {
                   rules: [{ required: true, validator: this.handelItem }],
-                })(<div>
+                })(<div className="addItem">
                   <WrappedDynamicFieldSet />
                 </div>
                 )}
@@ -104,12 +104,12 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
 
             </div>
             <div className='left-container'>
-              <Form.Item label="اختر متجر" layout="horizontal" style={{ direction: 'rtl' }}>
+              <Form.Item label="اختر متجر" layout="horizontal" className="markit">
                 {getFieldDecorator('markit', {
                   rules: [{ required: true, message: '', validator: this.handelMarket }],
                 })(<Input />)}
               </Form.Item>
-              <Form.Item style={{ display: "block" }} label="العنوان">
+              <Form.Item label="العنوان" className="address">
                 {getFieldDecorator('address', {
                   rules: [{ required: true, message: 'يرجى ادخال العنوان' }],
                 })(<Input />)}
