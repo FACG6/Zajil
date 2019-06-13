@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import './style.css';
-import { Input } from 'antd';
+import { Input, notification, Icon, DatePicker } from 'antd';
 import Table from '../../CommonComponent/Table/Table';
 import Button from '../../CommonComponent/Button';
 import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./addcustomer"
-import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
-import { Icon } from 'antd';
-import { DatePicker } from 'antd';
 
 const { RangePicker } = DatePicker;
 
@@ -59,8 +56,6 @@ export default class Customers extends Component {
             }
         } else this.setState({ customers: this.state.allData })
     };
-
-
     dateFilter = (value, customers) => {
         if (value.length !== 0) {
             const from = value[0]._d.setHours(0, 0, 0, 0);
@@ -92,10 +87,17 @@ export default class Customers extends Component {
             filteredcustomersName: filterCustomerName
         })
     }
-
+    openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: message,
+            duration: 2
+        });
+    };
 
     showModal = () => {
-        this.setState({ visible: true });
+        this.setState(prev => {
+            return { visible: !prev.visible };
+        })
     };
     handleCancel = () => {
         this.setState({ visible: false });
@@ -105,14 +107,15 @@ export default class Customers extends Component {
         const form = this.formRef.props.form;
         form.validateFields((err, values) => {
             if (err) {
-                return;
+                this.openNotificationWithIcon('error', err);
             }
             let addCustomer = {
                 name: values.name,
                 email: values.email,
                 phone: parseInt(values.prefixPhone + values.phone),
                 status: values.status,
-                address: values.address
+                address: values.address,
+                password: values.password
             }
             fetch('api/v1/addcustomer', {
                 method: 'POST',
@@ -123,14 +126,15 @@ export default class Customers extends Component {
                     if (result.result) {
                         let newcustomer = [...this.state.customers];
                         newcustomer.push(result.result[0])
-                        let newallData = [...this.state.customers];
+                        let newallData = [...this.state.allData];
                         newallData.push(result.result[0])
                         this.setState({
                             customers: newcustomer,
                             allData: newallData
                         })
+                        this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
                     }
-                })
+                }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
             form.resetFields();
             this.setState({ visible: false });
         });
@@ -170,9 +174,7 @@ export default class Customers extends Component {
                                 <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                             </div>
                         </div>
-                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' viewPopup={viewPopup}
-                            editPopup={editPopup}
-                            deletePopup={deletePopup} className="table" />
+                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' className="table" />
                     </div>
                 </div>
             )
