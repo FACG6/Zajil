@@ -5,7 +5,6 @@ const { getOrderDetails } = require('../../../database/queries/order/getOrderDet
 
 exports.getOrdersDetails = (req, res) => {
   const { id } = req.params;
-  console.log('nnnnnnn', id);
 
   if (!id || !(/^[0-9]+$/.test(id))) {
     res.status(400).send({ error: 'Bad Request' });

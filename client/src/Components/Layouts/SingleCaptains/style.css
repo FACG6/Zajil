@@ -16,7 +16,7 @@
  flex-direction: row-reverse;
  text-align: end;
 }
-p{
+.paragraph{
   width: 25%;
   font-weight: lighter;
 }

@@ -28,16 +28,13 @@ export default class Viewcaptain extends Component {
   }
 
   componentDidMount() {
-    const id = 6;
-    // const { id } = this.props.id;
-
+    const { id } = this.props.id;
     fetch(`/api/v1/getCaptainDetails/${id}`, {
       method: 'GET'
     })
       .then(res => res.json())
       .then(res => {
         if (res.result) {
-
           const rows = res.result[0];
           fetch(`/api/v1/image/${rows.s_image}`)
             .then(res => res.arrayBuffer())
@@ -137,13 +134,13 @@ export default class Viewcaptain extends Component {
             <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
             <div className='view-captain-personal-information-box'>
 
-              <p><span>الاسم:</span>{this.state.name}</p>
-              <p>{this.state.email}<span>:البريد الالكتروني</span></p>
-              <p><span>رقم الهوية:</span> {this.state.id_number}</p>
-              <p><span>الهاتف المحمول:</span>{this.state.phone_number}</p>
-              <p><span>الحالة:</span>{this.state.status}</p>
-              <p><span>العنوان:</span>{this.state.address}</p>
-              <p><span>رقم الرخصة:</span>{this.state.licience_number}</p>
+              <p className='paragraph'><span>الاسم:</span>{this.state.name}</p>
+              <p className='paragraph'>{this.state.email}<span>:البريد الالكتروني</span></p>
+              <p className='paragraph'><span>رقم الهوية:</span> {this.state.id_number}</p>
+              <p className='paragraph'><span>الهاتف المحمول:</span>{this.state.phone_number}</p>
+              <p className='paragraph'><span>الحالة:</span>{this.state.status}</p>
+              <p className='paragraph'><span>العنوان:</span>{this.state.address}</p>
+              <p className='paragraph'><span>رقم الرخصة:</span>{this.state.licience_number}</p>
             </div>
           </div>
           <div className='view-captain-orders'>
