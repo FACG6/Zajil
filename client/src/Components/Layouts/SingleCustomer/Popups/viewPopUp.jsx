@@ -13,7 +13,6 @@ class View extends Component {
   };
   componentWillReceiveProps(props) {
     const { visible, id, information } = props;
-    console.log(props);
     this.setState({ visible, id, information });
   }
 
