@@ -61,7 +61,6 @@
     justify-content: space-between;
   
 }
-
 .modalform__left-container {
     margin-left: 5px;
     width: 50%;
@@ -96,16 +95,16 @@
     font-family: SimSun, sans-serif;
     line-height: 1;
 }
-.modeltitle{
+ /* .modeltitle{
      margin: 0px 10px ;
-}
-.modalform{
+} */
+ .modalform{
 
   display: flex;
-}
-.modalform_formitem{
+} 
+/* .modalform_formitem{
      direction: rtl;
-}
+}  */
 .modalform_formitem-select {
     direction: ltr ;
     margin-right: -21px !important;
@@ -115,3 +114,16 @@
   .has-error .ant-form-explain, .has-error .ant-form-split{ 
       font-size: 9px !important;
   }
+  .passwordinput{
+      margin-right: 16px;
+  }
+ .addressinput{
+      margin-right: 37px;
+  }
+  .emailinput{
+    margin-right: 6px;
+  }
+   .has-error .ant-form-explain, .has-error .ant-form-split{
+    margin-top: 1px !important;
+  }
+ 
