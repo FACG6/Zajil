@@ -24,6 +24,7 @@ router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
+router.use(captainHandler);
 
 router.use(customerHandler);
 router.use(orderHandler);
