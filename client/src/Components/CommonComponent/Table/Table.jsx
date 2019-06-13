@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 import { Table, Divider, Tag, Icon } from "antd";
 import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
-import Deletepopup from "../../Layouts/Customers/deletecustomer"
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
