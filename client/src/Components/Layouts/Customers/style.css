@@ -126,4 +126,7 @@
    .has-error .ant-form-explain, .has-error .ant-form-split{
     margin-top: 1px !important;
   }
+  .ant-calendar-footer-btn{
+    display: none;
+}
  
