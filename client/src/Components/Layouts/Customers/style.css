@@ -95,16 +95,9 @@
     font-family: SimSun, sans-serif;
     line-height: 1;
 }
- /* .modeltitle{
-     margin: 0px 10px ;
-} */
  .modalform{
-
   display: flex;
 } 
-/* .modalform_formitem{
-     direction: rtl;
-}  */
 .modalform_formitem-select {
     direction: ltr ;
     margin-right: -21px !important;
@@ -129,4 +122,50 @@
   .ant-calendar-footer-btn{
     display: none;
 }
- 
+.ant-calendar {
+    direction: rtl !important;
+  }
+  .ant-calendar-picker {
+    direction: rtl;
+    border-radius: 2px !important;
+  }
+  .ant-calendar-body {
+    direction: rtl !important;
+  }
+  .ant-calendar-range .ant-calendar-month-panel-body {
+    direction: rtl !important;
+  }
+  .ant-calendar-range .ant-calendar-year-panel-body {
+    direction: rtl !important;
+  }
+  .ant-calendar-range-left {
+    float: right !important;
+  }
+  .ant-calendar-range-right {
+    float: left !important;
+  }
+  .ant-calendar-header .ant-calendar-prev-year-btn {
+    left: 15rem !important;
+  }
+  .ant-calendar-header .ant-calendar-prev-month-btn {
+    left: 14rem !important;
+  }
+  .ant-calendar-header .ant-calendar-next-month-btn {
+    right: 14rem !important;
+  }
+  .ant-calendar-header .ant-calendar-next-year-btn {
+    right: 15rem !important;
+  }
+  .ant-calendar-picker:hover .ant-calendar-picker-input:not(.ant-input-disabled) {
+    border-color: var(--main-component-color, #212a63);
+  }
+  .ant-calendar-selected-date .ant-calendar-date:hover,
+  .ant-calendar-selected-start-date .ant-calendar-date:hover,
+  .ant-calendar-selected-end-date .ant-calendar-date:hover {
+    background: var(--main-component-color, #212a63) !important;
+  }
+ .sweet-loading{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+ }
