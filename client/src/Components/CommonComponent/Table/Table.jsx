@@ -24,7 +24,7 @@ class TableCmponent extends Component {
     },
     tableData: this.props.columns
     
-    pageCustomers: {
+   , pageCustomers: {
       deleteVisibility: false,
       id: ''
     },
