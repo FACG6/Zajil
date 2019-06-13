@@ -57,7 +57,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 
                 )}
               </Form.Item>
-              <div style={{ display: 'flex' }}>
+              <div className='modalform'>
                 <Form.Item label="الهاتف" layout="horizontal" className='modalform_formitem'>
                   {getFieldDecorator('phone', {
                     rules: [
