@@ -85,7 +85,7 @@ class Profile extends Component {
       obj.status= result[key][0].status;
       obj.captain= result[key][0].name;
       obj.price= result[key][0].total + '$';
-      obj.place = result[key][0].place;
+      obj.place = result[key][0].place_name;
       obj.items= result[key][0].items_names;
       return obj;
     });
