@@ -38,7 +38,6 @@ class App extends Component {
                   <Sidebar />
                   <Navbar />
                   <Header title="الرئيسية" Icon={<Icon type="bank" />} />
-                  <Home />
                 </div>
               )}
             />

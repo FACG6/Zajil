@@ -64,131 +64,131 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               err,
             icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
           })
-          );
+        );
     }
-render() {
-  const uploadButton = (
-    <div>
-      <Icon type={this.state.loading ? 'check-circle' : 'plus'} />
-      <div className="ant-upload-text">أرفق صورة</div>
-    </div>
-  );
-  const imageUrl = this.state.imageUrl;
-
-  const { visible, onCancel, onCreate, form } = this.props;
-  const { getFieldDecorator } = form;
-  const { Option } = Select;
-  return (
-    <Modal
-      visible={visible}
-      title="تعديل كابتن"
-      okText="حفظ"
-      onCancel={onCancel}
-      onOk={onCreate}
-      cancelText="إلغاء"
-    >
-      <Form >
-        <div className="edit-captain-container-left">
-          <Form.Item label="رقم الهوية" >
-            {getFieldDecorator("IDNumber", {
-              rules: [
-                { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{9}$/ }
-              ]
-            })(<Input type="text" id="IDNumber" />)}
-          </Form.Item>
-          <Form.Item label="رقم الرخصة">
-            {getFieldDecorator("licenceNumber", {
-              rules: [
-                { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{7}$/ }
-              ]
-            })(<Input type="text" id="licenceNumber" />)}
-          </Form.Item>
-          <Form.Item label="الحالة">
-            {getFieldDecorator("status", {
-              rules: [
-                { required: true, message: "يرجى اختيار حالة" }
-              ]
-            })(
-              <Select style={{ width: 80 }} id='status'>
-                <Option value="false">غير فعال</Option>
-                <Option value="true">فعال </Option>
-              </Select>
-            )}
-          </Form.Item>
-          <Form.Item label="صورة الهوية">
-            {getFieldDecorator("avatar", {
-              rules: [
-                {
-                  required: true,
-                  message: "يرجى رفع صورة الكابتن"
-                }
-              ]
-            })(<Upload
-              accept=".jpg , .png"
-              name="avatar"
-              className="avatar-uploader"
-              showUploadList={false}
-              onChange={this.handleChange}
-            >
-              {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-            </Upload>)}
-          </Form.Item>
-
+    render() {
+      const uploadButton = (
+        <div>
+          <Icon type={this.state.loading ? 'check-circle' : 'plus'} />
+          <div className="ant-upload-text">أرفق صورة</div>
         </div>
-        <div className='edit-captain-container-center'></div>
-        <div className='edit-captain-container-right'>
-          <Form.Item label="الاسم">
-            {getFieldDecorator("name", {
-              rules: [
-                { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-يa-z]|\s)+$/ }
-              ]
-            })(<Input type="text" id="name"
-            />)}
-          </Form.Item>
-          <Form.Item label="البريد">
-            {getFieldDecorator("email", {
-              rules: [
-                {
-                  required: true,
-                  message: "يرجى ملئ الحقل بريد الكتروني",
-                  pattern: /.+\@.+\..+/
-                }
-              ]
-            })(<Input type="email" id="email" />)}
-          </Form.Item>
-          <Form.Item label="كلمة المرور">
-            {getFieldDecorator("password", {
-              rules: [
-                {
-                  required: true,
-                }
-              ]
-            })(<Input type="password" id="password" />)}
-          </Form.Item>
-          <Form.Item label="الهاتف">
-            {getFieldDecorator("phone", {
-              rules: [
-                {
-                  required: true,
-                  message: "الرجاء ملئ الحقل بارقام",
-                  pattern: /^\+?[0-9]{10,12}$/
-                }
-              ]
-            })(<Input type="text" id="phone" />)}
-          </Form.Item>
+      );
+      const imageUrl = this.state.imageUrl;
 
-          <Form.Item label="العنوان" dir="ltr">
-            {getFieldDecorator("address", {
-              rules: [
-                { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يa-z]*$/ }
-              ]
-            })(<Input type="text" id="address" />)}
-          </Form.Item>
-        </div>
-      </Form>
-    </Modal>
-  );
-}
+      const { visible, onCancel, onCreate, form } = this.props;
+      const { getFieldDecorator } = form;
+      const { Option } = Select;
+      return (
+        <Modal
+          visible={visible}
+          title="تعديل كابتن"
+          okText="حفظ"
+          onCancel={onCancel}
+          onOk={onCreate}
+          cancelText="إلغاء"
+        >
+          <Form >
+            <div className="edit-captain-container-left">
+              <Form.Item label="رقم الهوية" >
+                {getFieldDecorator("IDNumber", {
+                  rules: [
+                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{9}$/ }
+                  ]
+                })(<Input type="text" id="IDNumber" />)}
+              </Form.Item>
+              <Form.Item label="رقم الرخصة">
+                {getFieldDecorator("licenceNumber", {
+                  rules: [
+                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{7}$/ }
+                  ]
+                })(<Input type="text" id="licenceNumber" />)}
+              </Form.Item>
+              <Form.Item label="الحالة">
+                {getFieldDecorator("status", {
+                  rules: [
+                    { required: true, message: "يرجى اختيار حالة" }
+                  ]
+                })(
+                  <Select style={{ width: 80 }} id='status'>
+                    <Option value="false">غير فعال</Option>
+                    <Option value="true">فعال </Option>
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item label="صورة الهوية">
+                {getFieldDecorator("avatar", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "يرجى رفع صورة الكابتن"
+                    }
+                  ]
+                })(<Upload
+                  accept=".jpg , .png"
+                  name="avatar"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  onChange={this.handleChange}
+                >
+                  {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                </Upload>)}
+              </Form.Item>
+
+            </div>
+            <div className='edit-captain-container-center'></div>
+            <div className='edit-captain-container-right'>
+              <Form.Item label="الاسم">
+                {getFieldDecorator("name", {
+                  rules: [
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-يa-z]|\s)+$/ }
+                  ]
+                })(<Input type="text" id="name"
+                />)}
+              </Form.Item>
+              <Form.Item label="البريد">
+                {getFieldDecorator("email", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "يرجى ملئ الحقل بريد الكتروني",
+                      pattern: /.+\@.+\..+/
+                    }
+                  ]
+                })(<Input type="email" id="email" />)}
+              </Form.Item>
+              <Form.Item label="كلمة المرور">
+                {getFieldDecorator("password", {
+                  rules: [
+                    {
+                      required: true,
+                    }
+                  ]
+                })(<Input type="password" id="password" />)}
+              </Form.Item>
+              <Form.Item label="الهاتف">
+                {getFieldDecorator("phone", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "الرجاء ملئ الحقل بارقام",
+                      pattern: /^\+?[0-9]{10,12}$/
+                    }
+                  ]
+                })(<Input type="text" id="phone" />)}
+              </Form.Item>
+
+              <Form.Item label="العنوان" dir="ltr">
+                {getFieldDecorator("address", {
+                  rules: [
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يa-z]*$/ }
+                  ]
+                })(<Input type="text" id="address" />)}
+              </Form.Item>
+            </div>
+          </Form>
+        </Modal>
+      );
+    }
   }
 );
 
