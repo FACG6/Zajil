@@ -42,7 +42,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
               {' '}
             </div>
           )}
-          okText="أنشئ"
+          okText="إضافة"
           cancelText="إالغاء"
           onCancel={onCancel}
           onOk={onCreate}
@@ -53,9 +53,9 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
               <Form.Item label="الاسم" layout="horizontal" className='modalform_formitem'>
                 {getFieldDecorator('name', {
                   rules: [{ required: true, validator: this.handelName }],
-                })(<div>
+                })(
                   <Input />
-                </div>
+                
                 )}
               </Form.Item>
               <div style={{ display: 'flex' }}>
@@ -64,6 +64,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                     rules: [
                       {
                         required: true,
+
                         validator: this.handlePhone
 
                       }],
@@ -71,7 +72,9 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                     <Input />
                   )}
                 </Form.Item>
-                <Form.Item layout="horizontal" className='modalform_formitem'>
+                <Form.Item layout="horizontal"
+                 className='modalform_formitem'
+                >
                   {getFieldDecorator('prefixPhone', { initialValue: '970' })(
                     <Select
                       className='modalform_formitem-select'
@@ -94,22 +97,23 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
               <Form.Item label="البريدالالكتروني" layout="horizontal" className='modalform_formitem'>
                 {getFieldDecorator('email', {
                   rules: [{ required: true, message: '', validator: this.handelEmail }],
-                })(<Input />)}
+                })(<Input className='emailinput'/>)}
               </Form.Item>
               <Form.Item
                 label="العنوان"
               >
                 {getFieldDecorator('address', {
                   rules: [{ required: true, message: 'يرجى ادخال العنوان' }],
-                })(<Input />)}
+                })(<Input className='addressinput'/>)}
               </Form.Item>
-              <Form.item label='كلمة المرور'>
-               {getFieldDecorator('password',{
-                 rule:[{require:true, message:'يرجى ادخال كلمة المرور'}]
-               }
-
-               )(<Input />)} 
-              </Form.item>
+              <Form.Item
+                label={<span>كلمة المرور</span> }
+              >
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'يرجى ادخال كلمة المرور' }],
+                })(
+                <Input className='passwordinput' type='password'/>)}
+              </Form.Item>
             </div>
           </Form>
         </Modal>
