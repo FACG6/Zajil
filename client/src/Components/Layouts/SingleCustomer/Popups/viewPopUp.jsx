@@ -61,12 +61,4 @@ class View extends Component {
   }
 }
 
-// captain: "احمد محمد محمود"
-// date: "2019-06-11"
-// items: ["بندورة"]
-// key: "3"
-// place: undefined
-// price: "20$"
-// status: "تم"
-
 export default View;
