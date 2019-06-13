@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:4400",
   "dependencies": {
+    "@emotion/core": "^10.0.10",
     "antd": "^3.19.1",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.2",
@@ -23,6 +24,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
+    "react-spinners": "^0.5.4",
     "react-toastify": "^5.2.1",
     "sweetalert2": "^8.11.1"
   },
