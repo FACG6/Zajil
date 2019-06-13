@@ -6,7 +6,7 @@ exports.updateOrder = (req, res) => {
   } = req.body.orderObj;
   updateOrdersQuery(phone, address, item, date, storeID, req.params.id).then(
     (response) => {
-      if (response.error) {
+      if (response && response.error) {
         res.status(500).send('Internal server error');
       } else {
         res.status(200).send('updated successfully');
