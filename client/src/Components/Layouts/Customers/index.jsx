@@ -113,7 +113,7 @@ export default class Customers extends Component {
                 name: values.name,
                 email: values.email,
                 phone: parseInt(values.prefixPhone + values.phone),
-                status: values.status,
+                status:(values.status),
                 address: values.address,
                 password: values.password
             }
