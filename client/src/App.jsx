@@ -23,7 +23,7 @@ class App extends Component {
                 <div className="app" >
                   <Sidebar />
                   <Navbar />
-                {/* <OrdersManagement /> */}
+                <OrdersManagement />
                 </div>
               )}
             />
