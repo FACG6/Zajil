@@ -108,8 +108,8 @@ export default class Customers extends Component {
         form.validateFields((err, values) => {
             if (err) {
                 this.openNotificationWithIcon('error', err);
-            }
-            let addCustomer = {
+            } else if (values)
+            {let addCustomer = {
                 name: values.name,
                 email: values.email,
                 phone: parseInt(values.prefixPhone + values.phone),
@@ -137,7 +137,7 @@ export default class Customers extends Component {
                 }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
             form.resetFields();
             this.setState({ visible: false });
-        });
+         } });
     };
 
     saveFormRef = formRef => {
