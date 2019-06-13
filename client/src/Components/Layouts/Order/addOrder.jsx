@@ -1,5 +1,6 @@
 import antd, { Icon } from 'antd';
 import React from 'react'
+import WrappedDynamicFieldSet from './addItem';
 import validator from 'validator'
 import './style.css';
 const { Button, Modal, Form, Input, Select } = antd;
@@ -95,7 +96,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 {getFieldDecorator('item', {
                   rules: [{ required: true, validator: this.handelItem }],
                 })(<div>
-                  <Input />
+                  <WrappedDynamicFieldSet />
                 </div>
                 )}
                 
