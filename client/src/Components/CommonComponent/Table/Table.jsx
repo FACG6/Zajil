@@ -19,8 +19,11 @@ class TableCmponent extends Component {
       id: ''
     },
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     tableData: this.props.columns,
 =======
+=======
+>>>>>>> Stashed changes
     customersPage:{
       deleteVisibility:false,
       id:''
@@ -211,7 +214,11 @@ class TableCmponent extends Component {
                     />
                   <Divider type="vertical" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                     <Icon onClick={<Deletepopup visible={this.state.pageCustomers.deleteVisibility} id={this.state.pageCustomers.id}/>}
+=======
+                     <Icon onClick={this.handleClick("customersPage","deleteVisibility", record.pk_i_id)}
+>>>>>>> Stashed changes
 =======
                      <Icon onClick={this.handleClick("customersPage","deleteVisibility", record.pk_i_id)}
 >>>>>>> Stashed changes
