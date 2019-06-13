@@ -26,7 +26,8 @@
     "react-scripts": "3.0.1",
     "react-spinners": "^0.5.4",
     "react-toastify": "^5.2.1",
-    "sweetalert2": "^8.11.1"
+    "sweetalert2": "^8.11.1",
+    "validator": "^11.0.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
