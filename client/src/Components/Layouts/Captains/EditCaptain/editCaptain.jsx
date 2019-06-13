@@ -115,6 +115,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   </Select>
                 )}
               </Form.Item>
+
               <Form.Item label="صورة الهوية">
                 {getFieldDecorator("avatar", {
                   rules: [

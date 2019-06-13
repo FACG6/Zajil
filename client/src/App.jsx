@@ -35,9 +35,9 @@ class App extends Component {
               render={() => (
                 <div>
                   <EditCaptain />
-                  <Sidebar />
+                  {/* <Sidebar />
                   <Navbar />
-                  <Header title="الرئيسية" Icon={<Icon type="bank" />} />
+                  <Header title="الرئيسية" Icon={<Icon type="bank" />} /> */}
                 </div>
               )}
             />
