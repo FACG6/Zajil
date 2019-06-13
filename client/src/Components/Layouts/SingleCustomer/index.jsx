@@ -6,11 +6,7 @@ import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
-import {
-  viewPopup,
-  editPopup,
-  deletePopup
-} from "../../CommonComponent/Table/Popups";
+import View from './Popups/viewPopUp';
 
 import "./style.css";
 
@@ -134,7 +130,7 @@ class Profile extends Component {
             <Table
               pageName="singleCustomer"
               columns={tableInfo}
-              viewPopup={viewPopup}
+              ViewPopup={View}
               EditPopup={Popup}
               DeletePopup={DeletePopup}
             />
