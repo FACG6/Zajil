@@ -6,7 +6,6 @@ import './style.css'
 const { Modal, Form, Input, Select } = antd;
 const { Option } = Select;
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
-  // eslint-disable-next-line
 
   class extends React.Component {
     handelEmail = (rule, value, cb) => {
@@ -66,7 +65,6 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                         required: true,
 
                         validator: this.handlePhone
-
                       }],
                   })(
                     <Input />
