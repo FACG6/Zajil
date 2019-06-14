@@ -34,8 +34,9 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           onCancel={onCancel}
           onOk={onCreate}
           cancelText="إلغاء"
+          className="add-captain__popup"
         >
-          <Form>
+          <Form className="add-captain__form">
             <div className="add-captain-container-left">
             <Form.Item label="العنوان" dir="ltr">
                 {getFieldDecorator("address", {

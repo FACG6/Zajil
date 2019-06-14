@@ -17,8 +17,16 @@ class TableCmponent extends Component {
       viewVisibility: false,
       id: ''
     },
+    customersPage:{
+      deleteVisibility:false,
+      id:''
+    },
     tableData: this.props.columns
     
+   , pageCustomers: {
+      deleteVisibility: false,
+      id: ''
+    },
   };
 
   handleClick = (value1, value2, id) => (e) => {
@@ -197,7 +205,7 @@ class TableCmponent extends Component {
                       type="edit"
                     />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record, deleteHtml)}
+                     <Icon onClick={this.handleClick("customersPage","deleteVisibility", record.pk_i_id)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"

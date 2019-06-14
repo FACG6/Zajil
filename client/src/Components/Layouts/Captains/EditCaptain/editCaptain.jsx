@@ -4,51 +4,34 @@ import './style.css';
 import { Upload, Icon } from 'antd';
 import { notification } from 'antd';
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
-
 const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   class extends React.Component {
     state = {
       loading: false,
+      imageUrl: null
+
     };
 
-    handleChange = info => {
-      if (info.file.status === 'uploading') {
-        this.setState({ loading: true });
-        return;
-      }
-      if (info.file.status === 'done') {
-        getBase64(info.file.originFileObj, imageUrl =>
-          this.setState({
-            imageUrl,
-            loading: false,
-          }),
-        );
-      }
+
+    handleReuest = e => {
+      this.setState({ imageUrl: e.file });
     };
     componentDidMount() {
-      const id = 6;
-      // const { id } = this.props.id;
+      const { id } = this.props.id;
       fetch(`/api/v1/getCaptainDetails/${id}`)
         .then(res => res.json())
         .then(res => {
-
           if (res.result) {
             const rows = res.result[0];
             this.props.form.setFieldsValue({
               name: rows.s_name, email: rows.s_email, phone: rows.s_mobile_number,
               address: rows.s_address, IDNumber: rows.s_id_number, licenceNumber: rows.s_driver_licence_number,
-              status: rows.b_status, avatar: rows.s_image, password: rows.s_password,
+              status: rows.b_status, file: rows.s_image, password: rows.s_password,
             });
-
           }
           else {
             notification.open({
-              message: 'fail',
+              message: 'فشل',
               description:
                 res.error,
               icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
@@ -57,21 +40,24 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
 
         })
 
-        .catch(err =>
+        .catch(err => {
           notification.open({
-            message: 'fail',
-            description:
-              err,
+            message: 'فشل',
+            description: 'هناك خطأ ما الرجاء اعادة ارسال البيانات',
             icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
           })
+        }
         );
+
     }
     render() {
       const uploadButton = (
-        <div>
-          <Icon type={this.state.loading ? 'check-circle' : 'plus'} />
-          <div className="ant-upload-text">أرفق صورة</div>
-        </div>
+        <Button className="btn--upload">
+
+          <Icon type={this.state.loading ? 'check-circle' : 'upload'} />
+             أرفق صورة
+        </Button>
+
       );
       const imageUrl = this.state.imageUrl;
 
@@ -115,9 +101,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   </Select>
                 )}
               </Form.Item>
-
               <Form.Item label="صورة الهوية">
-                {getFieldDecorator("avatar", {
+                {getFieldDecorator("file", {
                   rules: [
                     {
                       required: true,
@@ -125,13 +110,17 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     }
                   ]
                 })(<Upload
-                  accept=".jpg , .png"
-                  name="avatar"
+                  accept=".jpg , .png, .jpeg"
+                  name="file"
                   className="avatar-uploader"
                   showUploadList={false}
-                  onChange={this.handleChange}
+                  customRequest={this.handleReuest}
+                  multiple={false}
                 >
-                  {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                  {uploadButton}
+                  <div className="image__name">
+                    {imageUrl && <><Icon type="check-circle" />{imageUrl.name}</>}
+                  </div>
                 </Upload>)}
               </Form.Item>
 
@@ -206,53 +195,64 @@ class CollectionsPage extends React.Component {
     this.setState({ visible: false });
   };
 
+
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
         return;
       }
-      console.log(values);
-      // const { id } = this.props.id;
-      const id = 6;
-      form.resetFields();
-
-      fetch(`/api/v1/putCaptain/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(values),
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        }
-      })
-
-        .then(res => res.json())
-        .then(res => {
-          if (res.result) {
-            notification.open({
-              message: 'success',
-              description:
-                'captain edit successfuly',
-              icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
-            });
-          }
-          else {
-            notification.open({
-              message: 'fail',
-              description: res.error,
-              icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-            });
-          }
+      else {
+        const { IDNumber, address, email, licenceNumber, name, password, phone, status, file } = values;
+        const formData = new FormData();
+        formData.append('file', file.fileList[0].originFileObj);
+        formData.append('IDNumber', IDNumber);
+        formData.append('address', address);
+        formData.append('email', email);
+        formData.append('licenceNumber', licenceNumber);
+        formData.append('name', name);
+        formData.append('password', password);
+        formData.append('phone', phone);
+        formData.append('status', status);
+        const { id } = this.props.id;
+        fetch(`/api/v1/putCaptain/${id}`, {
+          method: 'PUT',
+          body: formData,
         })
-        .catch(err =>
-          notification.open({
-            message: 'fail',
-            description: err,
-            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+          .then(res => res.json())
+          .then(res => {
+            if (res.result) {
+              notification.open({
+                message: 'نجح',
+                description:
+                  'تم التعديل بنجاح',
+                icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+              });
+            }
+            else {
+              notification.open({
+                message: 'يتعذر',
+                description: res.error,
+                icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+              });
+            }
           })
-        )
-      this.setState({ visible: false });
+          .catch(err => {
+            console.log(err)
+            notification.open({
+              message: 'يتعذر',
+              description: 'هناك خطأ ما الرجاء اعادة ارسال البيانات',
+              icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+            })
+          }
+          )
+        form.resetFields();
+        this.setState({ visible: false });
+      }
+
+
+
+
     });
 
   };

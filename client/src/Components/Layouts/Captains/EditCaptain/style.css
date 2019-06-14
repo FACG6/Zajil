@@ -68,3 +68,14 @@ form .ant-select, form .ant-cascader-picker{
 .ant-input{
   direction: rtl;
 }
+
+.btn--upload {
+  position: absolute;
+  bottom: 2rem;
+  right: 1.5rem;
+}  
+
+ .image__name{
+  position: absolute;
+  width: fit-content;
+} 
