@@ -1,16 +1,33 @@
 const updateOrdersQuery = require('../../database/queries/order/editOrder');
+const updateItemQuery = require('../../database/queries/item/editItem');
+const checkIfItemExistQuery = require('../../database/queries/item/checkItem');
+const insertItemQuery = require('../../database/queries/item/insertItem');
 
-exports.updateOrder = (req, res) => {
+const updateOrder = (req, res) => {
   const {
-    phone, address, item, date, storeID,
-  } = req.body.orderObj;
-  updateOrdersQuery(phone, address, item, date, storeID, req.params.id).then(
-    (response) => {
-      if (response && response.error) {
-        res.status(500).send('Internal server error');
-      } else {
-        res.status(200).send('updated successfully');
-      }
-    },
-  );
+    phone, address, items, date, storeID, price,
+  } = req.body;
+  updateOrdersQuery(phone, address, date, storeID, req.params.id)
+    .then(
+      () => new Promise((resolve, reject) => {
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < items.length; i++) {
+          checkIfItemExistQuery(
+            items[i],
+            // eslint-disable-next-line no-loop-func
+          ).then((result) => {
+            if (result) {
+              updateItemQuery(items[i], date, price, req.params.id).catch(e => reject(e));
+            } else {
+              insertItemQuery(items[i], price, req.params.id).catch(e => reject(e));
+            }
+          }).catch(e => reject(e));
+        }
+      }),
+    )
+    .then(() => res.status(200).send('updated successfully'))
+    .catch(() => {
+      res.status(500).send('Internal server error');
+    });
 };
+module.exports = { updateOrder };

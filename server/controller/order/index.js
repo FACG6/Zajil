@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { deleteOrder } = require('./deleteOrder');
+const { updateOrder } = require('./updateOrder');
 
 const router = express.Router();
 
