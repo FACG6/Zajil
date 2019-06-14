@@ -18,7 +18,7 @@ router.use(checkAuth);
 
 router.use(adminHandler);
 
-//   router.use(protectRoutes);
+  router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
@@ -26,7 +26,7 @@ router.use(captainHandler);
 
 router.use(customerHandler);
 router.use(orderHandler);
-router.user(placeHandler);
+router.use(placeHandler);
 router.route('/image/:name')
   .get(getImage);
 
