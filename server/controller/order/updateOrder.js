@@ -15,13 +15,24 @@ const updateOrder = (req, res) => {
           checkIfItemExistQuery(
             items[i],
             // eslint-disable-next-line no-loop-func
-          ).then((result) => {
-            if (result) {
-              updateItemQuery(items[i].name, date, items[i].price, req.params.id).catch(e => reject(e));
-            } else {
-              insertItemQuery(items[i].name, items[i].price, req.params.id).catch(e => reject(e));
-            }
-          }).catch(e => reject(e));
+          )
+            .then((result) => {
+              if (result) {
+                updateItemQuery(
+                  items[i].name,
+                  date,
+                  items[i].price,
+                  req.params.id,
+                ).catch(e => reject(e));
+              } else {
+                insertItemQuery(
+                  items[i].name,
+                  items[i].price,
+                  req.params.id,
+                ).catch(e => reject(e));
+              }
+            })
+            .catch(e => reject(e));
         }
       }),
     )
