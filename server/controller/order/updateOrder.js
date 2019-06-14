@@ -5,7 +5,7 @@ const insertItemQuery = require('../../database/queries/item/insertItem');
 
 const updateOrder = (req, res) => {
   const {
-    phone, address, items, date, storeID, price,
+    phone, address, items, date, storeID,
   } = req.body;
   updateOrdersQuery(phone, address, date, storeID, req.params.id)
     .then(
@@ -17,9 +17,9 @@ const updateOrder = (req, res) => {
             // eslint-disable-next-line no-loop-func
           ).then((result) => {
             if (result) {
-              updateItemQuery(items[i], date, price, req.params.id).catch(e => reject(e));
+              updateItemQuery(items[i].name, date, items[i].price, req.params.id).catch(e => reject(e));
             } else {
-              insertItemQuery(items[i], price, req.params.id).catch(e => reject(e));
+              insertItemQuery(items[i].name, items[i].price, req.params.id).catch(e => reject(e));
             }
           }).catch(e => reject(e));
         }
