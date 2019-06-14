@@ -7,7 +7,7 @@ import Customers from './Components/Layouts/Customers/index'
 // import Navbar from "./Components/CommonComponent/Navbar/index";
 import Login from "./Components/Layouts/Login";
 // import Home from "./Components/Layouts/Home";
-import EditCaptain from './Components/Layouts/Captains/EditCaptain/index';
+import EditCaptain from './Components/Layouts/Captains/EditCaptain';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
