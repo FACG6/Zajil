@@ -10,40 +10,40 @@
   background-color: #e0e0e0;
   height: 30.5rem;
 }
-.ant-form{
+.edit-captain__form{
   width: 100%;
   display: flex;
   margin-left: 0rem;
  }
-.ant-modal-content {
+.edit-captain__popup .ant-modal-content {
   width: 130%;
 }
-.ant-modal-header{
+.edit-captain__popup .ant-modal-header{
   padding: 16px 0px;
   float: right;
   margin-right: 63px;
 }
-.ant-modal-body{
+.edit-captain__popup .ant-modal-body{
   padding-bottom: 0px;
 }
-.ant-form-item-label{
+.edit-captain__popup .ant-form-item-label{
   display: block;
 }
-.ant-select{
+.edit-captain__popup .ant-select{
   margin: -0.5rem 84px;
   border: 0.1rem solid #ccc;
   border-radius: 0.4rem;
   box-sizing: border-box;
 }
-form .ant-upload{
+.edit-captain__popup form .ant-upload{
   margin-left: 90px;
   margin-top: -21px;
 }
-.ant-modal-footer{
+.edit-captain__popup .ant-modal-footer{
   text-align: unset;
   margin: 1em auto 0;
 }
-.ant-form-item-required::before {
+.edit-captain__popup .ant-form-item-required::before {
   display: inline-block;
   margin-right: 4px;
   color: black;
@@ -53,19 +53,18 @@ form .ant-upload{
   content: ':';
 
  }
-
- .ant-form-item-label > label::after {
+ .edit-captain__popup .ant-form-item-label > label::after {
   content: '*';
   position: relative;
   color: #f5222d;
   top: -0.5px;
   margin: 0 8px 0 2px;
 }
-form .ant-select, form .ant-cascader-picker{
+.edit-captain__popup .ant-select, .edit-captain__popup .ant-cascader-picker{
   position: absolute;
   bottom: 0.8rem;
 }
-.ant-input{
+.edit-captain__popup .ant-input{
   direction: rtl;
 }
 

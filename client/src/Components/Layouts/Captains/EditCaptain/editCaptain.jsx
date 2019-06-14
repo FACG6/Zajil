@@ -55,7 +55,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         <Button className="btn--upload">
 
           <Icon type={this.state.loading ? 'check-circle' : 'upload'} />
-             أرفق صورة
+          أرفق صورة
         </Button>
 
       );
@@ -72,8 +72,9 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           onCancel={onCancel}
           onOk={onCreate}
           cancelText="إلغاء"
+          className="edit-captain__popup"
         >
-          <Form >
+          <Form className='edit-captain__form'>
             <div className="edit-captain-container-left">
               <Form.Item label="رقم الهوية" >
                 {getFieldDecorator("IDNumber", {
