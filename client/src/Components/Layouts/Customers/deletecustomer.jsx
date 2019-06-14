@@ -1,34 +1,46 @@
-import React,{Component} from 'react'
-import { Modal,Button } from 'antd';
+import React, { Component } from 'react'
+import { Modal, Button, notification } from 'antd';
 
-  // eslint-disable-next-line
-  class  Deletepopup  extends Component {
-    state = 
-    { visible: this.props.visible,
-     id:this.props.id
-   
-   }
-   onCancel = e => {
-    this.props.visibleFun("customersPage", "deleteVisibility")(e);
+class Deletepopup extends Component {
+  state =
+    {
+      visible: this.props.visible,
+      id: this.props.id
+    }
+  onCancel = e => {
+    this.props.changevisibility("customersPage", "deleteVisibility")(e);
     console.log(this.state.id)
   };
-  onDelete=e=>{
-fetch(`api/v1/deleteCustomer/${this.props.id}`,
-{method:"DELETE" ,
-// body:{this.props.id}
-}).then(res=>res.json()).then(console.log('هنا راح يستدعي دالة الحزف من الفرونت'))
+  openNotificationWithIcon = (type, message) => {
+    notification[type]({
+      message: message,
+      duration: 2
+    });
+  };
+  onDelete = e => {
+    fetch(`api/v1/deleteCustomer/${this.props.id}`,
+      {
+        method: "delete"
+      }).then(res => res.json()).then(result => {
+        if (result.result) {
+          this.openNotificationWithIcon('success', result.result)
+          this.props.changevisibility("customersPage", "deleteVisibility")(e)
+          this.props.updateState(this.state.id)
+        } else this.openNotificationWithIcon('error', result.error)
+      })
   }
+
   componentWillReceiveProps(props) {
     const { visible, id } = props;
     this.setState({ visible, id });
   }
-    render() {
-      
-      return (
-        <Modal
+  render() {
+
+    return (
+      <Modal
         title="حذف مستخدم"
         visible={this.state.visible}
-        onOk={this.ondelete}
+        onOk={this.onDelete}
         cancelText="الغاء"
         okText="حذف"
         onCancel={this.onCancel}
@@ -36,10 +48,11 @@ fetch(`api/v1/deleteCustomer/${this.props.id}`,
         style={{ direction: "rtl", }}
         className="deleteModal"
       >
-        <p>هل تريد بالتأكيد حذف المستخدم؟</p>
+        <p>هل تريد بالتأكيد حذف هذا المستخدم؟</p>
 
-        </Modal>
-      );
-     }}
-  export default  Deletepopup 
+      </Modal>
+    );
+  }
+}
+export default Deletepopup
 
