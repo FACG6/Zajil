@@ -92,6 +92,62 @@ export default class Customers extends Component {
             filteredcustomersName: filterCustomerName
         })
     }
+    openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: message,
+            duration: 2
+        });
+    };
+
+    showModal = () => {
+        this.setState(prev => {
+            return { visible: !prev.visible };
+        })
+    };
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
+
+    handleCreate = () => {
+        const form = this.formRef.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                this.openNotificationWithIcon('error', err);
+            } else if (values)
+            {let addCustomer = {
+                name: values.name,
+                email: values.email,
+                phone: parseInt(values.prefixPhone + values.phone),
+                status:(values.status),
+                address: values.address,
+                password: values.password
+            }
+            fetch('api/v1/addcustomer', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(addCustomer)
+            }).then(res => res.json())
+                .then(result => {
+                    if (result.result) {
+                        let newcustomer = [...this.state.customers];
+                        newcustomer.push(result.result[0])
+                        let newallData = [...this.state.allData];
+                        newallData.push(result.result[0])
+                        this.setState({
+                            customers: newcustomer,
+                            allData: newallData
+                        })
+                        this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
+                    }else  this.openNotificationWithIcon('error', result.error);
+                }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
+            form.resetFields();
+            this.setState({ visible: false });
+         } });
+    };
+
+    saveFormRef = formRef => {
+        this.formRef = formRef;
+    };
     render() {
         if(this.state.customers)
        { return (
