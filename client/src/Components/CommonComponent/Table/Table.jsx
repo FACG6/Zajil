@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import { Table, Divider, Tag, Icon } from "antd";
 import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
+import Deletepopup from "../../Layouts/Customers/deletecustomer"
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
@@ -17,8 +18,16 @@ class TableCmponent extends Component {
       viewVisibility: false,
       id: ''
     },
+    customersPage: {
+      deleteVisibility: false,
+      id: ''
+    },
     tableData: this.props.columns
-    
+
+    , pageCustomers: {
+      deleteVisibility: false,
+      id: ''
+    },
   };
 
   handleClick = (value1, value2, id) => (e) => {
@@ -34,12 +43,12 @@ class TableCmponent extends Component {
   };
   deleteRow = (id) => {
     this.setState((prev) => {
-      return {tableData: prev.tableData.filter((data) => data.key !== id)}
+      return { tableData: prev.tableData.filter((data) => data.key !== id) }
     });
   }
-  
+
   componentWillReceiveProps(props) {
-    this.setState({tableData: props.columns});
+    this.setState({ tableData: props.columns });
   }
 
   paginationSize = pageSize => {
@@ -47,10 +56,10 @@ class TableCmponent extends Component {
   };
 
   render() {
-    
+
     const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id }} = this.state;
+    const { tableData: columns, singleCustomer: { id } } = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -80,8 +89,8 @@ class TableCmponent extends Component {
                       status === "تم إلغاؤه"
                         ? "volcano"
                         : status === "تم"
-                        ? "green"
-                        : "blue"
+                          ? "green"
+                          : "blue"
                     }
                     key={status}
                   >
@@ -96,36 +105,36 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  
-                    <Icon
-                      onClick={event => viewPopup(record.key,record, viewHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="profile"
-                    />
-                  
+
+                  <Icon
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="profile"
+                  />
+
                   <Divider type="vertical" />
-                  
-                    <Icon onClick={event => editPopup(record.key,record, editHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="edit"
-                    />
-                  
+
+                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="edit"
+                  />
+
                   <Divider type="vertical" />
-                  
-                    <Icon onClick={event => deletePopup(record.key,record, deleteHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="delete"
-                    />
-                  
+
+                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="delete"
+                  />
+
                 </span>
               )}
             />
@@ -161,12 +170,12 @@ class TableCmponent extends Component {
                       status === false
                         ? "volcano"
                         : status === true
-                        ? "green"
-                        : "blue"
+                          ? "green"
+                          : "blue"
                     }
                     key={status}
-                  > 
-                    {status  === true ? "فعال" : status === false ? "غير فعال" : status }
+                  >
+                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
                   </Tag>
                 </span>
               )}
@@ -189,21 +198,28 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key,record, editHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="edit"
-                    />
+                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="edit"
+                  />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record, deleteHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="delete"
-                    />
+                  <Icon onClick={this.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="delete"
+                  />
+                  < Deletepopup
+                    visible={this.state.customersPage.deleteVisibility}
+                    changevisibility={this.handleClick}
+                    id={this.state.customersPage.id}
+                    updateState={this.deleteRow}
+                  />
+
                 </span>
               )}
             />
@@ -238,8 +254,8 @@ class TableCmponent extends Component {
                       status === "جاري التنفيذ"
                         ? "#FFC700"
                         : status === "تم"
-                        ? "green"
-                        : "blue"
+                          ? "green"
+                          : "blue"
                     }
                     key={status}
                   >
@@ -254,15 +270,15 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={event => viewPopup(record.key,record, viewHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="profile"
-                    />
+                  <Icon onClick={event => viewPopup(record.key, record, viewHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="profile"
+                  />
                   <Divider type="vertical" />
-                    <Icon
+                  <Icon
                     onClick={this.handleClick(
                       "singleCustomer",
                       "editVisibilty"
@@ -275,22 +291,22 @@ class TableCmponent extends Component {
                   />
                   <EditPopup
                     visible={this.state.singleCustomer.editVisibilty}
-                    visibleFun = {this.handleClick}
+                    visibleFun={this.handleClick}
                     id={record.key}
                     information={record}
                   />
                   <Divider type="vertical" />
-                    <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="delete"
-                      className={record.key}
-                    />
-                    <DeletePopup
+                  <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="delete"
+                    className={record.key}
+                  />
+                  <DeletePopup
                     visible={this.state.singleCustomer.deleteVisibility}
-                    visibleFun = {this.handleClick}
+                    visibleFun={this.handleClick}
                     id={id}
                     updateState={this.deleteRow}
                   />
@@ -330,8 +346,8 @@ class TableCmponent extends Component {
                       status === "غير فعال"
                         ? "volcano"
                         : status === "فعال"
-                        ? "green"
-                        : "blue"
+                          ? "green"
+                          : "blue"
                     }
                     key={status}
                   >
@@ -358,21 +374,21 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key,record,editHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="edit"
-                    />
+                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="edit"
+                  />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record,deleteHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="delete"
-                    />
+                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="delete"
+                  />
                 </span>
               )}
             />
@@ -407,8 +423,8 @@ class TableCmponent extends Component {
                       status === "جاري التنفيذ"
                         ? "#FFC700"
                         : status === "تم"
-                        ? "green"
-                        : "blue"
+                          ? "green"
+                          : "blue"
                     }
                     key={status}
                   >
@@ -423,29 +439,29 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={event => viewPopup(record.key,record,viewHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="profile"
-                    />
+                  <Icon onClick={event => viewPopup(record.key, record, viewHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="profile"
+                  />
                   <Divider type="vertical" />
-                    <Icon onClick={event => editPopup(record.key,record,editHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="edit"
-                    />
+                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="edit"
+                  />
                   <Divider type="vertical" />
-                    <Icon onClick={event => deletePopup(record.key,record,deleteHtml)}
-                      style={{
-                        fontSize: "1.2rem",
-                        color: "rgba(0, 0, 0, 0.65)"
-                      }}
-                      type="delete"
-                    />
+                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="delete"
+                  />
                 </span>
               )}
             />

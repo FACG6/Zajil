@@ -44,3 +44,147 @@
 .filtercontainer__orderdate-date {
     margin-left: 2rem;
 }
+
+.ant-modal-close {
+    left: 0;
+}
+
+.ant-form-vertical .ant-form-item-label {
+    text-align: right;
+}
+
+.modalform__right-container {
+    margin-left: 15px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modalform__left-container {
+    margin-left: 5px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+
+.ant-row {
+    display: flex !important;
+}
+
+.ant-form-item-control-wrapper {
+    width: 75% !important
+}
+
+.modalcontainer {
+    width: 783px !important;
+    direction: rtl;
+}
+
+.ant-modal-footer {
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+.nameconatainer {
+    display: inline-block;
+    margin-top: 15px;
+    color: #f5222d;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+}
+
+.modalform {
+    display: flex;
+}
+
+.modalform_formitem-select {
+    direction: ltr;
+    margin-right: -21px !important;
+    width: 83px !important;
+}
+
+.has-error .ant-form-explain, .has-error .ant-form-split {
+    font-size: 9px !important;
+}
+
+.passwordinput {
+    margin-right: 16px;
+}
+
+.addressinput {
+    margin-right: 37px;
+}
+
+.emailinput {
+    margin-right: 6px;
+}
+
+.has-error .ant-form-explain, .has-error .ant-form-split {
+    margin-top: 1px !important;
+}
+
+.ant-calendar-footer-btn {
+    display: none;
+}
+
+.ant-calendar {
+    direction: rtl !important;
+}
+
+.ant-calendar-picker {
+    direction: rtl;
+    border-radius: 2px !important;
+}
+
+.ant-calendar-body {
+    direction: rtl !important;
+}
+
+.ant-calendar-range .ant-calendar-month-panel-body {
+    direction: rtl !important;
+}
+
+.ant-calendar-range .ant-calendar-year-panel-body {
+    direction: rtl !important;
+}
+
+.ant-calendar-range-left {
+    float: right !important;
+}
+
+.ant-calendar-range-right {
+    float: left !important;
+}
+
+.ant-calendar-header .ant-calendar-prev-year-btn {
+    left: 15rem !important;
+}
+
+.ant-calendar-header .ant-calendar-prev-month-btn {
+    left: 14rem !important;
+}
+
+.ant-calendar-header .ant-calendar-next-month-btn {
+    right: 14rem !important;
+}
+
+.ant-calendar-header .ant-calendar-next-year-btn {
+    right: 15rem !important;
+}
+
+.ant-calendar-picker:hover .ant-calendar-picker-input:not(.ant-input-disabled) {
+    border-color: var(--main-component-color, #212a63);
+}
+
+.ant-calendar-selected-date .ant-calendar-date:hover, .ant-calendar-selected-start-date .ant-calendar-date:hover, .ant-calendar-selected-end-date .ant-calendar-date:hover {
+    background: var(--main-component-color, #212a63) !important;
+}
+
+.sweet-loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}

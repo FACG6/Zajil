@@ -17,7 +17,7 @@ router.use(checkAuth);
 
 router.use(adminHandler);
 
-router.use(protectRoutes);
+//   router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
