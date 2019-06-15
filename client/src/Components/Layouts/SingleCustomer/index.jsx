@@ -6,11 +6,7 @@ import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
-import {
-  viewPopup,
-  editPopup,
-  deletePopup
-} from "../../CommonComponent/Table/Popups";
+import View from './Popups/viewPopUp';
 
 import "./style.css";
 
@@ -89,7 +85,7 @@ class Profile extends Component {
       obj.status= result[key][0].status;
       obj.captain= result[key][0].name;
       obj.price= result[key][0].total + '$';
-      obj.place = result[key][0].place;
+      obj.place = result[key][0].place_name;
       obj.items= result[key][0].items_names;
       return obj;
     });
@@ -134,7 +130,7 @@ class Profile extends Component {
             <Table
               pageName="singleCustomer"
               columns={tableInfo}
-              viewPopup={viewPopup}
+              ViewPopup={View}
               EditPopup={Popup}
               DeletePopup={DeletePopup}
             />

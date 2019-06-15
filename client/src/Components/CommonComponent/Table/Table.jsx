@@ -16,7 +16,8 @@ class TableCmponent extends Component {
       editVisibilty: false,
       deleteVisibility: false,
       viewVisibility: false,
-      id: ''
+      id: '',
+      information: null
     },
     customersPage: {
       deleteVisibility: false,
@@ -30,13 +31,14 @@ class TableCmponent extends Component {
     },
   };
 
-  handleClick = (value1, value2, id) => (e) => {
+  handleClick = (value1, value2, id, information) => (e) => {
     this.setState(
       prev => {
         return {
           [value1]: {
             [value2]: !prev[value1][value2],
-            id
+            id,
+            information
           }
         };
       });
@@ -56,10 +58,10 @@ class TableCmponent extends Component {
   };
 
   render() {
-
-    const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    
+    const { viewPopup, ViewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id } } = this.state;
+    const { tableData: columns, singleCustomer: { id, information }} = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -270,18 +272,26 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={event => viewPopup(record.key, record, viewHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="profile"
-                  />
+                    <Icon onClick={this.handleClick("singleCustomer", "viewVisibility", record.key, record)}
+                      style={{
+                        fontSize: "1.2rem",
+                        color: "rgba(0, 0, 0, 0.65)"
+                      }}
+                      type="profile"
+                    />
+                    <ViewPopup 
+                    visible={this.state.singleCustomer.viewVisibility}
+                    visibleFun = {this.handleClick}
+                    id={id}
+                    information={information}
+                    />
                   <Divider type="vertical" />
                   <Icon
                     onClick={this.handleClick(
                       "singleCustomer",
-                      "editVisibilty"
+                      "editVisibilty",
+                      record.key,
+                      record
                     )}
                     style={{
                       fontSize: "1.2rem",
@@ -296,15 +306,15 @@ class TableCmponent extends Component {
                     information={record}
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                    className={record.key}
-                  />
-                  <DeletePopup
+                    <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key, record)}
+                      style={{
+                        fontSize: "1.2rem",
+                        color: "rgba(0, 0, 0, 0.65)"
+                      }}
+                      type="delete"
+                      className={record.key}
+                    />
+                    <DeletePopup
                     visible={this.state.singleCustomer.deleteVisibility}
                     visibleFun={this.handleClick}
                     id={id}
