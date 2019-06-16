@@ -38,7 +38,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         >
           <Form className="add-captain__form">
             <div className="add-captain-container-left">
-            <Form.Item label="العنوان" dir="ltr">
+            <Form.Item label="العنوان"
+             >
                 {getFieldDecorator("address", {
                   rules: [
                     {
@@ -81,32 +82,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   </Select>
                 )}
               </Form.Item>
-              <Form.Item label="صورة الهوية">
-                {getFieldDecorator("file", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "ىرجى رفع صورة هوية الكابتن"
-                    }
-                  ]
-                })(
-                  <Upload
-                    accept=".jpg , .png, .jpeg"
-                    name="file"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    customRequest={this.handleReuest}
-                    multiple= {false}
-                  >
-                     {uploadButton}
-                     <div className="image__name">
-                     {imageUrl &&<><Icon type="check-circle" />{imageUrl.name}</>}
-                     </div>
-                  </Upload>
-                )}
-              </Form.Item>
+              
             </div>
-            <div className="add-captain-container-center" />
             <div className="add-captain-container-right">
               <Form.Item label="الاسم">
                 {getFieldDecorator("name", {
@@ -150,6 +127,30 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     }
                   ]
                 })(<Input type="text" id="phone" />)}
+              </Form.Item>
+              <Form.Item label="صورة الهوية">
+                {getFieldDecorator("file", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "ىرجى رفع صورة هوية الكابتن"
+                    }
+                  ]
+                })(
+                  <Upload
+                    accept=".jpg , .png, .jpeg"
+                    name="file"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    customRequest={this.handleReuest}
+                    multiple= {false}
+                  >
+                     {uploadButton}
+                     <div className="image__name">
+                     {imageUrl &&<><Icon type="check-circle" />{imageUrl.name}</>}
+                     </div>
+                  </Upload>
+                )}
               </Form.Item>
             </div>
           </Form>
