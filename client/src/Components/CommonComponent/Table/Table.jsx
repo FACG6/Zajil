@@ -11,13 +11,13 @@ import "./style.css";
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
-    singleCustomer: {
-      editVisibilty: false,
-      deleteVisibility: false,
-      viewVisibility: false,
-      id: '',
-      information: null
-    },
+    // singleCustomer: {
+    //   editVisibilty: false,
+    //   deleteVisibility: false,
+    //   viewVisibility: false,
+    //   id: '',
+    //   information: null
+    // },
     customersPage:{
       deleteVisibility:false,
       id:''
@@ -30,23 +30,23 @@ class TableCmponent extends Component {
     },
   };
 
-  handleClick = (value1, value2, id, information) => (e) => {
-    this.setState(
-      prev => {
-        return {
-          [value1]: {
-            [value2]: !prev[value1][value2],
-            id,
-            information
-          }
-        };
-      });
-  };
-  deleteRow = (id) => {
-    this.setState((prev) => {
-      return {tableData: prev.tableData.filter((data) => data.key !== id)}
-    });
-  }
+  // handleClick = (value1, value2, id, information) => (e) => {
+  //   this.setState(
+  //     prev => {
+  //       return {
+  //         [value1]: {
+  //           [value2]: !prev[value1][value2],
+  //           id,
+  //           information
+  //         }
+  //       };
+  //     });
+  // };
+  // deleteRow = (id) => {
+  //   this.setState((prev) => {
+  //     return {tableData: prev.tableData.filter((data) => data.key !== id)}
+  //   });
+  // }
   
   componentWillReceiveProps(props) {
     this.setState({tableData: props.columns});
@@ -60,7 +60,8 @@ class TableCmponent extends Component {
     
     const { viewPopup, ViewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id, information }} = this.state;
+    const { tableData: columns} = this.state;
+    // const { tableData: columns, singleCustomer: { id, information }} = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -264,41 +265,26 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                    <Icon onClick={this.handleClick("singleCustomer", "viewVisibility", record.key, record)}
+                    <Icon onClick = {this.props.viewValues("singleCustomer", "viewVisibility", record.key, record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
                       }}
                       type="profile"
                     />
-                    <ViewPopup 
-                    visible={this.state.singleCustomer.viewVisibility}
-                    visibleFun = {this.handleClick}
-                    id={id}
-                    information={information}
-                    />
                   <Divider type="vertical" />
-                    <Icon
-                    onClick={this.handleClick(
-                      "singleCustomer",
+                    <Icon onClick = {this.props.viewValues("singleCustomer",
                       "editVisibilty",
                       record.key,
-                      record
-                    )}
+                      record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="edit"
                   />
-                  <EditPopup
-                    visible={this.state.singleCustomer.editVisibilty}
-                    visibleFun = {this.handleClick}
-                    id={record.key}
-                    information={record}
-                  />
                   <Divider type="vertical" />
-                    <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key, record)}
+                    <Icon onClick = {this.props.viewValues("singleCustomer", "deleteVisibility", record.key, record)}
                       style={{
                         fontSize: "1.2rem",
                         color: "rgba(0, 0, 0, 0.65)"
@@ -306,12 +292,6 @@ class TableCmponent extends Component {
                       type="delete"
                       className={record.key}
                     />
-                    <DeletePopup
-                    visible={this.state.singleCustomer.deleteVisibility}
-                    visibleFun = {this.handleClick}
-                    id={id}
-                    updateState={this.deleteRow}
-                  />
                 </span>
               )}
             />
@@ -476,12 +456,12 @@ class TableCmponent extends Component {
 
 TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
-  viewPopup: PropTypes.func.isRequired,
-  editPopup: PropTypes.func.isRequired,
-  deletePopup: PropTypes.func.isRequired,
-  viewHtml: PropTypes.string.isRequired,
-  editHtml: PropTypes.string.isRequired,
-  deleteHtml: PropTypes.string.isRequired,
+  // viewPopup: PropTypes.func.isRequired,
+  // editPopup: PropTypes.func.isRequired,
+  // deletePopup: PropTypes.func.isRequired,
+  // viewHtml: PropTypes.string.isRequired,
+  // editHtml: PropTypes.string.isRequired,
+  // deleteHtml: PropTypes.string.isRequired,
 };
 
 const TableComponent = withRouter(TableCmponent);
