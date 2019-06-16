@@ -5,6 +5,11 @@ import "./style.css";
 const { Button, Modal, Form, Input, Select, AutoComplete, notification } = antd;
 const { Option } = Select;
 let id = 0;
+const openNotificationWithIcon = (type, message) => {
+  notification[type]({
+    message
+  });
+};
 const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   // eslint-disable-next-line
   class extends React.Component {
@@ -12,8 +17,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       dataSourceCaptains: [],
       dataSourcePlaces: [],
       error: {
-        errCaptain: '',
-        errPalce: ''
+        errCaptain: "",
+        errPalce: ""
       }
     };
     componentDidMount() {
@@ -44,12 +49,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           );
         });
     }
-
-    openNotificationWithIcon = (type, message) => {
-      notification[type]({
-        message
-      });
-    };
     remove = k => {
       const { form } = this.props;
       const keys = form.getFieldValue("keys");
@@ -69,19 +68,59 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         keys: nextKeys
       });
     };
-    handleBlureCaptain = (value) => {
-      if(!value.trim())
-      this.setState({error: {errCaptain: 'الرجاء مليء الحقل من القائمة المقترحة'}})
-    }
-    handleBlurePlace = (value) => {
-      if(!value.trim())
-      this.setState({error: {errPalce: 'الرجاء مليء الحقل من القائمة المقترحة'}})
-    }
+    handleBlureCaptain = value => {
+      const { dataSourceCaptains } = this.state;
+      if (!value || !dataSourceCaptains.some(data => data.s_name === value)) {
+        this.setState(prev => {
+          return {
+            error: {
+              ...prev.error,
+              errCaptain: "الرجاء مليء الحقل من القائمة المقترحة"
+            }
+          };
+        });
+        this.props.selectedCaptain("");
+      } else
+        this.setState(prev => {
+          return {
+            error: {
+              ...prev.error,
+              errCaptain: ""
+            }
+          };
+        });
+    };
+    handleBlurePlace = value => {
+      const { dataSourcePlaces } = this.state;
+      if (!value || !dataSourcePlaces.some(data => data.s_name === value)) {
+        this.setState(prev => {
+          return {
+            error: {
+              ...prev.error,
+              errPalce: "الرجاء مليء الحقل من القائمة المقترحة"
+            }
+          };
+        });
+        this.props.selectedPlaces("");
+      } else
+        this.setState(prev => {
+          return {
+            error: {
+              ...prev.error,
+              errPalce: ""
+            }
+          };
+        });
+    };
 
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator, getFieldValue } = form;
-      const { dataSourceCaptains, dataSourcePlaces, error: {errCaptain, errPalce} } = this.state;
+      const {
+        dataSourceCaptains,
+        dataSourcePlaces,
+        error: { errCaptain, errPalce }
+      } = this.state;
       const formItemLayout = {
         labelCol: {
           xs: { span: 24 },
@@ -107,7 +146,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           required={false}
           key={k}
         >
-          {getFieldDecorator(`names[${k}]`, {
+          {getFieldDecorator(`items[${k}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
               {
@@ -233,24 +272,26 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 layout="horizontal"
                 className="captainName"
               >
-                  <AutoComplete
-                    className="certain-category-search"
-                    dropdownClassName="certain-category-search-dropdown"
-                    dropdownMatchSelectWidth={false}
-                    dropdownStyle={{ width: 300 }}
-                    size="large"
-                    style={{ width: "100%" }}
-                    dataSource={optionsCaptains}
-                    placeholder="اختر الكابتن"
-                    optionLabelProp="value"
-                    onBlur = {this.handleBlureCaptain}
-                    filterOption={(inputValue, option) =>
-                      option.props.children
-                        .toUpperCase()
-                        .indexOf(inputValue.toUpperCase()) !== -1
-                    }
-                  />
-                  {errCaptain && <p className="auto-complete-error">{errCaptain}</p>}
+                <AutoComplete
+                  className="certain-category-search"
+                  dropdownClassName="certain-category-search-dropdown"
+                  dropdownMatchSelectWidth={false}
+                  dropdownStyle={{ width: 300 }}
+                  size="large"
+                  style={{ width: "100%" }}
+                  dataSource={optionsCaptains}
+                  placeholder="اختر الكابتن"
+                  optionLabelProp="value"
+                  onBlur={this.handleBlureCaptain}
+                  filterOption={(inputValue, option) =>
+                    option.props.children
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                {errCaptain && (
+                  <p className="auto-complete-error">{errCaptain}</p>
+                )}
               </Form.Item>
             </div>
             <div className="left-container">
@@ -269,7 +310,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   dataSource={optionsPlaces}
                   placeholder="اختر المتجر"
                   optionLabelProp="value"
-                  onBlur = {this.handleBlurePlace}
+                  onBlur={this.handleBlurePlace}
                   filterOption={(inputValue, option) =>
                     option.props.children
                       .toUpperCase()
@@ -308,6 +349,7 @@ export default class CollectionsPage extends React.Component {
     this.setState(prev => {
       return { visible: !prev.visible };
     });
+    this.formRef.form.resetFields();
   };
   handleSlectedCaptain = id => {
     this.setState({ selectedCaptain: id });
@@ -319,9 +361,34 @@ export default class CollectionsPage extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
-      if (err) {
-        console.log(err);
+      const { address, items, phone, phone1, username } = values;
+      const { selectedCaptain, selectedPlaces } = this.state;
+      if (err || !items || !selectedCaptain || !selectedPlaces) {
+        openNotificationWithIcon("warning", "يرجى ملىء جميع الحقول");
       } else {
+        const orderData = {
+          address,
+          items,
+          phone: `+${phone1}${phone}`,
+          customerName: username,
+          placeId: selectedPlaces,
+          captainId: selectedCaptain
+        };
+        fetch("/api/v1/addOrder", {
+          method: "POST",
+          body: JSON.stringify(orderData),
+          headers: { "content-type": "application/json" }
+        })
+          .then(res => res.json())
+          .then(res => {
+            if (res.error) {
+              openNotificationWithIcon("error", "لم تتم عملية الاضافة");
+            } else openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
+            this.handleVisible();
+          })
+          .catch(() => {
+            openNotificationWithIcon('warning', 'هناك خطأ ما الرجاء اعادة المحاولة')
+          })
       }
     });
   };
