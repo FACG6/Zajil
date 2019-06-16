@@ -255,7 +255,6 @@ class TableCmponent extends Component {
                         color: "rgba(0, 0, 0, 0.65)"
                       }}
                       type="delete"
-                      className={record.key}
                     />
                 </span>
               )}
