@@ -1,4 +1,4 @@
-.containercustomers {
+ .containercustomers {
     display: flex;
 }
 
@@ -7,7 +7,6 @@
     flex-direction: column;
     width: 100vw;
 }
-
 .containercustomers__customer-rangpicker {
     direction: rtl;
 }
@@ -20,7 +19,6 @@
     margin-bottom: 2rem;
     width: 75%
 }
-
 .addcustomer {
     margin-top: 1rem;
     margin-left: 3.5rem;
@@ -69,8 +67,13 @@
     align-items: flex-start
 }
 
-.ant-row {
+.modalform__right-container .ant-row {
     display: flex !important;
+
+}
+
+.modalform__left-container .ant-row{
+    display:flex !important;
 }
 
 .ant-form-item-control-wrapper {
@@ -81,6 +84,7 @@
     width: 783px !important;
     direction: rtl;
 }
+
 
 .ant-modal-footer {
     text-align: left !important;
@@ -190,4 +194,4 @@
 }
  .ant-modal-mask{
     background-color: rgba(0, 0, 0, 0.3) !important;
-}
+} 
