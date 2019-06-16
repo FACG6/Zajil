@@ -54,7 +54,7 @@ CREATE TABLE orders
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
     customer_name TEXT,
-    i_status INTEGER NOT NULL,--0 INPROGRESS 1 DONE
+    i_status INTEGER DEFAULT 0,--0 INPROGRESS 1 DONE
     dt_modified_date DATE
 );
 
