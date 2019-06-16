@@ -86,3 +86,6 @@
 .add-captain-container-right .ant-input {
   width: 170px !important;
 }
+.add-captain__form .ant-modal{
+  margin:0 19%;
+} 
