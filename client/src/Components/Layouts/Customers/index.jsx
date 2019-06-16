@@ -8,7 +8,9 @@ import Button from '../../CommonComponent/Button';
 import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
-import CollectionCreateForm from "./addcustomer"
+import CollectionCreateForm from "./addcustomer";
+import Deletepopup from "./deletecustomer"
+
 
 const { RangePicker } = DatePicker;
 const override = css`
@@ -27,11 +29,16 @@ export default class Customers extends Component {
         filteredcustomersDate: [],
         filteredcustomersName: [],
         visible: false,
-        loading: true
+        loading: true,
+        customersPage: {
+            deleteVisibility: false,
+            id: ''
+        },
     }
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json())
             .then(result => {
+                console.log(result)
                 this.setState({
                     customers: result.result,
                     allData: result.result
@@ -116,38 +123,57 @@ export default class Customers extends Component {
         form.validateFields((err, values) => {
             if (err) {
                 this.openNotificationWithIcon('error', err);
-            } else if (values)
-            {let addCustomer = {
-                name: values.name,
-                email: values.email,
-                phone: parseInt(values.prefixPhone + values.phone),
-                status:(values.status),
-                address: values.address,
-                password: values.password
+            } else if (values) {
+                let addCustomer = {
+                    name: values.name,
+                    email: values.email,
+                    phone: parseInt(values.prefixPhone + values.phone),
+                    status: (values.status),
+                    address: values.address,
+                    password: values.password
+                }
+                fetch('api/v1/addcustomer', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(addCustomer)
+                }).then(res => res.json())
+                    .then(result => {
+                        if (result.result) {
+                            let newcustomer = [...this.state.customers];
+                            newcustomer.push(result.result[0])
+                            let newallData = [...this.state.allData];
+                            newallData.push(result.result[0])
+                            this.setState({
+                                customers: newcustomer,
+                                allData: newallData
+                            })
+                            this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
+                        } else this.openNotificationWithIcon('error', result.error);
+                    }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
+                form.resetFields();
+                this.setState({ visible: false });
             }
-            fetch('api/v1/addcustomer', {
-                method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(addCustomer)
-            }).then(res => res.json())
-                .then(result => {
-                    if (result.result) {
-                        let newcustomer = [...this.state.customers];
-                        newcustomer.push(result.result[0])
-                        let newallData = [...this.state.allData];
-                        newallData.push(result.result[0])
-                        this.setState({
-                            customers: newcustomer,
-                            allData: newallData
-                        })
-                        this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
-                    }else  this.openNotificationWithIcon('success', result.error);
-                }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
-            form.resetFields();
-            this.setState({ visible: false });
-         } });
+        });
     };
-
+    handleClick = (value1, value2, id, information) => (e) => {
+        this.setState(
+            prev => {
+                return {
+                    [value1]: {
+                        [value2]: !prev[value1][value2],
+                        id,
+                        information
+                    }
+                };
+            });
+    };
+    deleteRowCustomer = (id) => {
+        this.setState((prev) => {
+            return {
+                customers: prev.customers.filter((data) => data.pk_i_id !== id)
+            }
+        });
+    }
     saveFormRef = formRef => {
         this.formRef = formRef;
     };
@@ -168,6 +194,12 @@ export default class Customers extends Component {
                                 onCreate={this.handleCreate}
                                 onchange={this.onchange}
                             />
+                            < Deletepopup
+                                visible={this.state.customersPage.deleteVisibility}
+                                changevisibility={this.handleClick}
+                                id={this.state.customersPage.id}
+                                updateState={this.deleteRowCustomer}
+                            />
                             <div className="filtercontainer">
                                 <div classNam="filtercontainer__orderdate">
                                     <RangePicker
@@ -182,21 +214,21 @@ export default class Customers extends Component {
                                 <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                             </div>
                         </div>
-                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' className="table" />
+                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' className="table" handleClick={this.handleClick} />
                     </div>
                 </div>
             )
-        }else{
+        } else {
             return (
                 <div className='sweet-loading'>
-                  <ClipLoader
-                    css={override}
-                    sizeUnit={"px"}
-                    size={150}
-                    color={'#123abc'}
+                    <ClipLoader
+                        css={override}
+                        sizeUnit={"px"}
+                        size={150}
+                        color={'#123abc'}
 
-                    loading={this.state.loading}
-                  />
+                        loading={this.state.loading}
+                    />
                 </div>)
         }
     }
