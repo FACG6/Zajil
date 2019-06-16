@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 import { Table, Divider, Tag, Icon } from "antd";
 import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
-import Deletepopup from "../../Layouts/Customers/deletecustomer"
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
@@ -19,44 +18,9 @@ class TableCmponent extends Component {
       id: '',
       information: null
     },
-    customersPage: {
-      deleteVisibility: false,
-      id: ''
-    },
     tableData: this.props.columns
-
-    , pageCustomers: {
-      deleteVisibility: false,
-      id: ''
-    },
   };
 
-  handleClick = (value1, value2, id, information) => (e) => {
-    this.setState(
-      prev => {
-        return {
-          [value1]: {
-            [value2]: !prev[value1][value2],
-            id,
-            information
-          }
-        };
-      });
-  };
-  deleteRow = (id) => {
-    this.setState((prev) => {
-      return {
-        tableData: prev.tableData.filter((data) => data.key !== id)
-      }
-    });
-  }
-  deleteRowCustomer = (id) => {
-    this.setState((prev) => {
-      return {
-        tableData: prev.tableData.filter((data) => data.pk_i_id !== id)
-      }
-    });
-  }
 
   componentWillReceiveProps(props) {
     this.setState({ tableData: props.columns });
@@ -217,20 +181,13 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
+                  <Icon onClick={this.props.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
                   />
-                  < Deletepopup
-                    visible={this.state.customersPage.deleteVisibility}
-                    changevisibility={this.handleClick}
-                    id={this.state.customersPage.id}
-                    updateState={this.deleteRowCustomer }
-                  />
-
                 </span>
               )}
             />
