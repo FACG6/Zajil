@@ -420,12 +420,12 @@ class TableCmponent extends Component {
 
 TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
-  // viewPopup: PropTypes.func.isRequired,
-  // editPopup: PropTypes.func.isRequired,
-  // deletePopup: PropTypes.func.isRequired,
-  // viewHtml: PropTypes.string.isRequired,
-  // editHtml: PropTypes.string.isRequired,
-  // deleteHtml: PropTypes.string.isRequired,
+  viewPopup: PropTypes.func.isRequired,
+  editPopup: PropTypes.func.isRequired,
+  deletePopup: PropTypes.func.isRequired,
+  viewHtml: PropTypes.string.isRequired,
+  editHtml: PropTypes.string.isRequired,
+  deleteHtml: PropTypes.string.isRequired,
 };
 
 const TableComponent = withRouter(TableCmponent);
