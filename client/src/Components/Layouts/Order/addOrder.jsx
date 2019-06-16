@@ -349,7 +349,7 @@ export default class CollectionsPage extends React.Component {
     this.setState(prev => {
       return { visible: !prev.visible };
     });
-    this.formRef.form.resetFields();
+    this.formRef.props.form.resetFields();
   };
   handleSlectedCaptain = id => {
     this.setState({ selectedCaptain: id });
@@ -410,6 +410,7 @@ export default class CollectionsPage extends React.Component {
           onchange={this.onchange}
           selectedCaptain={this.handleSlectedCaptain}
           selectedPlaces={this.handleSelectedPlaces}
+          destroyOnClose={true}
         />
       </div>
     );
