@@ -10,6 +10,7 @@ const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
 const captainHandler = require('./accountsMangment/captains');
 const { getImage } = require('./getImage');
+const placeHandler = require('./place');
 
 const router = express.Router();
 router.use(checkAuth);
@@ -17,7 +18,7 @@ router.use(checkAuth);
 
 router.use(adminHandler);
 
-//   router.use(protectRoutes);
+router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
@@ -25,6 +26,7 @@ router.use(captainHandler);
 
 router.use(customerHandler);
 router.use(orderHandler);
+router.use(placeHandler);
 router.route('/image/:name')
   .get(getImage);
 
