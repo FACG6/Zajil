@@ -26,11 +26,10 @@ class Deletepopup extends Component {
           this.openNotificationWithIcon('success', result.result)
           this.props.changevisibility("customersPage", "deleteVisibility")(e)
           this.props.updateState(id)
-        
+
         } else this.openNotificationWithIcon('error', result.error)
       })
   }
-
   componentWillReceiveProps(props) {
     const { visible, id } = props;
     this.setState({ visible, id });
@@ -50,7 +49,6 @@ class Deletepopup extends Component {
         className="deleteModal"
       >
         <p>هل تريد بالتأكيد حذف هذا المستخدم؟</p>
-
       </Modal>
     );
   }
