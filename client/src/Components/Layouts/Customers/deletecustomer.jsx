@@ -9,7 +9,6 @@ class Deletepopup extends Component {
     }
   onCancel = e => {
     this.props.changevisibility("customersPage", "deleteVisibility")(e);
-    console.log(this.state.id)
   };
   openNotificationWithIcon = (type, message) => {
     notification[type]({
@@ -18,6 +17,7 @@ class Deletepopup extends Component {
     });
   };
   onDelete = e => {
+    const id = this.props.id
     fetch(`api/v1/deleteCustomer/${this.props.id}`,
       {
         method: "delete"
@@ -25,7 +25,8 @@ class Deletepopup extends Component {
         if (result.result) {
           this.openNotificationWithIcon('success', result.result)
           this.props.changevisibility("customersPage", "deleteVisibility")(e)
-          this.props.updateState(this.state.id)
+          this.props.updateState(id)
+        
         } else this.openNotificationWithIcon('error', result.error)
       })
   }
