@@ -1,14 +1,14 @@
 .add-captain-container-left{
     width: 42%;
+    
   }
   .add-captain-container-right{
     width: 42%;
+    margin-left: 5rem;
   }
   .add-captain-container-center{
     margin: 0.2rem 2.2rem;
     width: 1.5px;
-    background-color: #e0e0e0;
-    height: 30.5rem;
   }
   .add-captain__form{
     width: 100%;
@@ -19,18 +19,13 @@
     width: 130%;
   }
  .add-captain__popup .ant-modal-header{
-    padding: 16px 0px;
-    float: right;
-    margin-right: 63px;
+    direction: rtl;
   }
  .add-captain__popup .ant-modal-body{
     padding-bottom: 0px;
   }
- .add-captain__popup .ant-form-item-label{
-    display: block;
-  }
  .add-captain__popup .ant-select{
-    margin: -0.5rem 84px;
+    margin: 0 84px;
     border: 0.1rem solid #ccc;
     border-radius: 0.4rem;
     box-sizing: border-box;
@@ -60,18 +55,15 @@
     position: relative;
     color: #f5222d;
     top: -0.5px;
-    margin: 0 8px 0 2px;
   }
   .add-captain__popup .ant-select, .add-captain__popup .ant-cascader-picker{
-    position: absolute;
-    bottom: 0.8rem;
+    position: absolute;   
   }
   .add-captain__popup .ant-input{
     direction: rtl;
   }
   .btn--upload {
     position: absolute;
-    bottom: 2rem;
     right: 1.5rem;
   }  
 
@@ -79,3 +71,21 @@
     position: absolute;
     width: fit-content;
   }
+
+  .add-captain-container-right .ant-row {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+} 
+.add-captain-container-left .ant-row {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+} 
+.add-captain-container-left .ant-input {
+  width: 170px !important;
+}
+.add-captain-container-right .ant-input {
+  width: 170px !important;
+}
+.add-captain__form .ant-modal{
+  margin:0 19%;
+} 
