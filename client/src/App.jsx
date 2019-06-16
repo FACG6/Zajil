@@ -29,8 +29,6 @@ class App extends Component {
                 <div>
                   <Sidebar />
                   <Navbar />
-
-                  <Order />
                   <Header title="الرئيسية" Icon={<Icon type="bank" />} />
                   <Home />
                 </div>
@@ -48,6 +46,13 @@ class App extends Component {
                 </div>
               )}
               />
+              <Route exact path="/orders" render = {() => (
+                <div>
+                <Sidebar />
+                <Navbar />
+                <Order />
+              </div>
+              )} />
              <Route
               exact
               path="/customers"
