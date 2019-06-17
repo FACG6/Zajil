@@ -113,10 +113,20 @@
     width: 120%;
 }
 
-.addOrder {
-    margin-right: 4.1rem;
-}
-.auto-complete-error{
+.auto-complete-error {
     color: #f5222d;
     font-size: 9px;
+}
+
+.items .ant-form-item-control-wrapper {
+    position: absolute;
+    right: 31%;
+}
+.singleItem{
+    margin-right: 7rem;
+    width: 22rem;
+}
+.items label::before, .markit label::before, .captainName label::before object{
+    content: '*';
+    color: #f5222d;
 }
