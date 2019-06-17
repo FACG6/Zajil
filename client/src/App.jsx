@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Icon } from 'antd'
-import Customers from './Components/Layouts/Customers/index'
+// import Customers from './Components/Layouts/Customers/index'
 import Header from "./Components/CommonComponent/Header";
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
@@ -42,11 +42,11 @@ class App extends Component {
                 </div>
               )}
             />
-            <Route
+            {/* <Route
               exact
               path="/customers"
               render={() => (<Customers />)}
-            />
+            /> */}
             <Route
               exact
               path="/captains"

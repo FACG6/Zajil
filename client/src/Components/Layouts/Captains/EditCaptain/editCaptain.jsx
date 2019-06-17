@@ -1,14 +1,17 @@
 import React from "react";
 import { Button, Modal, Form, Select, Input } from "antd";
-import './style.css';
 import { Upload, Icon } from 'antd';
 import { notification } from 'antd';
+import './style.css';
+
+const { Option } = Select;
 
 const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   class extends React.Component {
     state = {
       loading: false,
-      imageUrl: null
+      imageUrl: null,
+      photoUrl: null,
 
     };
 
@@ -17,17 +20,32 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       this.setState({ imageUrl: e.file });
     };
     componentDidMount() {
-      const { id } = this.props.id;
+      // const { id } = this.props.id;
+      const id = 6;
       fetch(`/api/v1/getCaptainDetails/${id}`)
         .then(res => res.json())
         .then(res => {
           if (res.result) {
             const rows = res.result[0];
+            const status = rows.b_status ? "true" : "false";
             this.props.form.setFieldsValue({
               name: rows.s_name, email: rows.s_email, phone: rows.s_mobile_number,
               address: rows.s_address, IDNumber: rows.s_id_number, licenceNumber: rows.s_driver_licence_number,
-              status: rows.b_status, file: rows.s_image, password: rows.s_password,
+              status, file: rows.s_image,
             });
+            var formData = this.props.form.getFieldsValue();
+            fetch(`/api/v1/image/${rows.s_image}`)
+              .then(res => res.arrayBuffer())
+              .then(response => {
+                let typeArray = new Uint8Array(response);
+                const stringChar = String.fromCharCode.apply(null, typeArray);
+
+                this.setState({
+                  photoUrl: stringChar
+                });
+              })
+
+            // this.setState({ photoUrl: rows.s_image })
           }
           else {
             notification.open({
@@ -49,6 +67,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         }
         );
 
+
     }
     render() {
       const uploadButton = (
@@ -60,10 +79,9 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
 
       );
       const imageUrl = this.state.imageUrl;
-
+      const photoUrl = this.state.photoUrl;
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
-      const { Option } = Select;
       return (
         <Modal
           visible={visible}
@@ -97,8 +115,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   ]
                 })(
                   <Select style={{ width: 80 }} id='status'>
-                    <Option value="false">غير فعال</Option>
                     <Option value="true">فعال </Option>
+                    <Option value="false">غير فعال</Option>
                   </Select>
                 )}
               </Form.Item>
@@ -120,7 +138,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 >
                   {uploadButton}
                   <div className="image__name">
-                    {imageUrl && <><Icon type="check-circle" />{imageUrl.name}</>}
+                    {(imageUrl) ? imageUrl && <><Icon type="check-circle" />{imageUrl.name}</> : photoUrl && <><Icon /><img src={photoUrl} className="upload-photo" /></>}
+
                   </div>
                 </Upload>)}
               </Form.Item>
@@ -147,11 +166,10 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   ]
                 })(<Input type="email" id="email" />)}
               </Form.Item>
-              <Form.Item label="كلمة المرور">
+              <Form.Item label="كلمة المرورالجديدة">
                 {getFieldDecorator("password", {
                   rules: [
                     {
-                      required: true,
                     }
                   ]
                 })(<Input type="password" id="password" />)}
@@ -206,7 +224,11 @@ class CollectionsPage extends React.Component {
       else {
         const { IDNumber, address, email, licenceNumber, name, password, phone, status, file } = values;
         const formData = new FormData();
-        formData.append('file', file.fileList[0].originFileObj);
+        if (!file.fileList) {
+          formData.append('file', file);
+        } else {
+          formData.append('file', file.fileList[0].originFileObj);
+        }
         formData.append('IDNumber', IDNumber);
         formData.append('address', address);
         formData.append('email', email);
@@ -215,7 +237,9 @@ class CollectionsPage extends React.Component {
         formData.append('password', password);
         formData.append('phone', phone);
         formData.append('status', status);
-        const { id } = this.props.id;
+
+        const id = 6;
+        // const {id} = this.props.id;
         fetch(`/api/v1/putCaptain/${id}`, {
           method: 'PUT',
           body: formData,
@@ -231,6 +255,7 @@ class CollectionsPage extends React.Component {
               });
             }
             else {
+
               notification.open({
                 message: 'يتعذر',
                 description: res.error,
@@ -239,7 +264,6 @@ class CollectionsPage extends React.Component {
             }
           })
           .catch(err => {
-            console.log(err)
             notification.open({
               message: 'يتعذر',
               description: 'هناك خطأ ما الرجاء اعادة ارسال البيانات',
@@ -250,10 +274,6 @@ class CollectionsPage extends React.Component {
         form.resetFields();
         this.setState({ visible: false });
       }
-
-
-
-
     });
 
   };
