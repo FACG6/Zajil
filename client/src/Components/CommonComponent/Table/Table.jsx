@@ -6,24 +6,16 @@ import DropdownMenu from "./dropdownMenu";
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
 
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
-    singleCustomer: {
-      editVisibilty: false,
-      deleteVisibility: false,
-      viewVisibility: false,
-      id: '',
-      information: null
-    },
-    tableData: this.props.columns
+    stores: []
   };
 
-
-  componentWillReceiveProps(props) {
-    this.setState({ tableData: props.columns });
+  componentDidMount() {
+    // this.setState({stores:this.props.stores})
   }
 
   paginationSize = pageSize => {
@@ -31,11 +23,104 @@ class TableCmponent extends Component {
   };
 
   render() {
-
-    const { viewPopup, ViewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const {
+      viewPopup,
+      EditPopup,
+      deletePopup,
+      columns,
+    } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id, information } } = this.state;
     if (this.props.pageName === "orders") {
+      return (
+        <div className="table-container">
+          <DropdownMenu
+            pageSize={this.state.pageSize}
+            paginationSize={this.paginationSize}
+          />
+          <Table
+            dataSource={columns}
+            pagination={{
+              pageSize: isNaN(this.state.pageSize)
+                ? columns
+                  ? columns.length
+                  : parseInt(this.state.pageSize)
+                : parseInt(this.state.pageSize)
+            }}
+          >
+            <Column title="إسم الزبون" dataIndex="customer" key="customer" />
+            <Column title="التاريخ" dataIndex="date" key="date" />
+            <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
+            <Column
+              title="الحالة"
+              dataIndex="b_status"
+              key="b_status"
+              render={b_status => (
+                <span>
+                  <Tag
+                    color={
+                      b_status === false
+                        ? "volcano"
+                        : b_status === true
+                        ? "green"
+                        : "blue"
+                    }
+                    key={b_status}
+                  >
+                    {b_status === true
+                      ? "تم"
+                      : b_status === false
+                      ? "لم يتم"
+                      : b_status}
+                  </Tag>
+                </span>
+              )}
+            />
+            <Column title="السعر" dataIndex="price" key="price" />
+            <Column
+              title="خيارات"
+              key="options"
+              render={(text, record) => (
+                <span>
+                  <Icon
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="profile"
+                  />
+
+                  <Divider type="vertical" />
+
+                  <EditPopup
+                    customerName={record.customer}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
+                  />
+
+                  <Divider type="vertical" />
+
+                  <Icon
+                    onClick={event =>
+                      deletePopup(record.key, record, deleteHtml)
+                    }
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="delete"
+                  />
+                </span>
+              )}
+            />
+          </Table>
+        </div>
+      );
+    } else if (this.props.pageName === "customers") {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -50,107 +135,26 @@ class TableCmponent extends Component {
                 : parseInt(this.state.pageSize)
             }}
           >
-            <Column title="إسم الزبون" dataIndex="customer" key="customer" />
-            <Column title="التاريخ" dataIndex="date" key="date" />
-            <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
-            <Column
-              title="الحالة"
-              dataIndex="status"
-              key="status"
-              render={status => (
-                <span>
-                  <Tag
-                    color={
-                      status === "تم إلغاؤه"
-                        ? "volcano"
-                        : status === "تم"
-                          ? "green"
-                          : "blue"
-                    }
-                    key={status}
-                  >
-                    {status}
-                  </Tag>
-                </span>
-              )}
-            />
-            <Column title="السعر" dataIndex="price" key="price" />
-            <Column
-              title="خيارات"
-              key="options"
-              render={(text, record) => (
-                <span>
-
-                  <Icon
-                    onClick={event => viewPopup(record.key, record, viewHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="profile"
-                  />
-
-                  <Divider type="vertical" />
-
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
-
-                  <Divider type="vertical" />
-
-                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                  />
-
-                </span>
-              )}
-            />
-          </Table>
-        </div>
-      );
-    } else if (this.props.pageName === "customers") {
-      return (
-        <div className='tablecustomer-container'>
-          <DropdownMenu
-            pageSize={this.state.pageSize}
-            paginationSize={this.paginationSize}
-          />
-          <Table
-            dataSource={columns}
-            pagination={{
-              pageSize: isNaN(this.state.pageSize)
-                ? columns.length
-                : parseInt(this.state.pageSize)
-            }}
-          >
-            <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
-            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
-            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
+            <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
+            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
+            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
             <Column
               title="الحالة"
               dataIndex="b_status"
-              key="status"
-              render={status => (
+              key="b_status"
+              render={b_status => (
                 <span>
                   <Tag
                     color={
-                      status === false
+                      b_status === "غير فعال"
                         ? "volcano"
-                        : status === true
-                          ? "green"
-                          : "blue"
+                        : b_status === "فعال"
+                        ? "green"
+                        : "blue"
                     }
-                    key={status}
+                    key={b_status}
                   >
-                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
+                    {b_status}
                   </Tag>
                 </span>
               )}
@@ -163,7 +167,7 @@ class TableCmponent extends Component {
                   <Icon
                     onClick={() => {
                       this.props.history.push(
-                        `/customers/profile/${record.pk_i_id}`
+                        `/getCustomerDetails/${record.key}`
                       );
                     }}
                     style={{
@@ -173,15 +177,12 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
+                  <Icon
+                    onClick={event =>
+                      deletePopup(record.key, record, deleteHtml)
+                    }
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -213,21 +214,21 @@ class TableCmponent extends Component {
             <Column title="التاريخ" dataIndex="date" key="date" />
             <Column
               title="الحالة"
-              dataIndex="status"
-              key="status"
-              render={status => (
+              dataIndex="b_status"
+              key="b_status"
+              render={b_status => (
                 <span>
                   <Tag
                     color={
-                      status === "جاري التنفيذ"
+                      b_status === "جاري التنفيذ"
                         ? "#FFC700"
-                        : status === "تم"
-                          ? "green"
-                          : "blue"
+                        : b_status === "تم"
+                        ? "green"
+                        : "blue"
                     }
-                    key={status}
+                    key={b_status}
                   >
-                    {status}
+                    {b_status}
                   </Tag>
                 </span>
               )}
@@ -238,53 +239,26 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={this.handleClick("singleCustomer", "viewVisibility", record.key, record)}
+                  <Icon
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="profile"
                   />
-                  <ViewPopup
-                    visible={this.state.singleCustomer.viewVisibility}
-                    visibleFun={this.handleClick}
-                    id={id}
-                    information={information}
-                  />
+                  <Divider type="vertical" />
+                  <EditPopup orderId={record.key} />
                   <Divider type="vertical" />
                   <Icon
-                    onClick={this.handleClick(
-                      "singleCustomer",
-                      "editVisibilty",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
-                  <EditPopup
-                    visible={this.state.singleCustomer.editVisibilty}
-                    visibleFun={this.handleClick}
-                    id={record.key}
-                    information={record}
-                  />
-                  <Divider type="vertical" />
-                  <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key, record)}
+                    onClick={event =>
+                      deletePopup(record.key, record, deleteHtml)
+                    }
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                    className={record.key}
-                  />
-                  <DeletePopup
-                    visible={this.state.singleCustomer.deleteVisibility}
-                    visibleFun={this.handleClick}
-                    id={id}
-                    updateState={this.deleteRow}
                   />
                 </span>
               )}
@@ -313,21 +287,21 @@ class TableCmponent extends Component {
             <Column title="العنوان" dataIndex="address" key="address" />
             <Column
               title="الحالة"
-              dataIndex="status"
-              key="status"
-              render={status => (
+              dataIndex="b_status"
+              key="b_status"
+              render={b_status => (
                 <span>
                   <Tag
                     color={
-                      status === "غير فعال"
+                      b_status === "غير فعال"
                         ? "volcano"
-                        : status === "فعال"
-                          ? "green"
-                          : "blue"
+                        : b_status === "فعال"
+                        ? "green"
+                        : "blue"
                     }
-                    key={status}
+                    key={b_status}
                   >
-                    {status}
+                    {b_status}
                   </Tag>
                 </span>
               )}
@@ -350,15 +324,12 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup />
                   <Divider type="vertical" />
-                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                  <Icon
+                    onClick={event =>
+                      deletePopup(record.key, record, deleteHtml)
+                    }
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -390,21 +361,21 @@ class TableCmponent extends Component {
             <Column title="التاريخ" dataIndex="date" key="date" />
             <Column
               title="الحالة"
-              dataIndex="status"
-              key="status"
-              render={status => (
+              dataIndex="b_status"
+              key="b_status"
+              render={b_status => (
                 <span>
                   <Tag
                     color={
-                      status === "جاري التنفيذ"
+                      b_status === "جاري التنفيذ"
                         ? "#FFC700"
-                        : status === "تم"
-                          ? "green"
-                          : "blue"
+                        : b_status === "تم"
+                        ? "green"
+                        : "blue"
                     }
-                    key={status}
+                    key={b_status}
                   >
-                    {status}
+                    {b_status}
                   </Tag>
                 </span>
               )}
@@ -415,7 +386,8 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={event => viewPopup(record.key, record, viewHtml)}
+                  <Icon
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -423,15 +395,12 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup />
                   <Divider type="vertical" />
-                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                  <Icon
+                    onClick={event =>
+                      deletePopup(record.key, record, deleteHtml)
+                    }
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -451,11 +420,10 @@ class TableCmponent extends Component {
 TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
-  editPopup: PropTypes.func.isRequired,
   deletePopup: PropTypes.func.isRequired,
   viewHtml: PropTypes.string.isRequired,
   editHtml: PropTypes.string.isRequired,
-  deleteHtml: PropTypes.string.isRequired,
+  deleteHtml: PropTypes.string.isRequired
 };
 
 const TableComponent = withRouter(TableCmponent);
