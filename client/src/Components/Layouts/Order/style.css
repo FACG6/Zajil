@@ -126,7 +126,7 @@
     margin-right: 7rem;
     width: 22rem;
 }
-.items label::before, .markit label::before, .captainName label::before object{
+.items label::before, .markit label::before, .captainName label::before{
     content: '*';
     color: #f5222d;
 }
