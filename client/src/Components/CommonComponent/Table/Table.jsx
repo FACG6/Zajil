@@ -6,25 +6,16 @@ import DropdownMenu from "./dropdownMenu";
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
 
-+
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
-    singleCustomer: {
-      editVisibilty: false,
-      deleteVisibility: false,
-      viewVisibility: false,
-      id: '',
-      information: null
-    },
-    tableData: this.props.columns
+    stores: []
   };
 
-
-  componentWillReceiveProps(props) {
-    this.setState({ tableData: props.columns });
+  componentDidMount() {
+    // this.setState({stores:this.props.stores})
   }
 
   paginationSize = pageSize => {
@@ -34,15 +25,11 @@ class TableCmponent extends Component {
   render() {
     const {
       viewPopup,
-      editPopup,
+      EditPopup,
       deletePopup,
       columns,
-      viewHtml,
-      editHtml,
-      deleteHtml
     } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id, information } } = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -54,7 +41,9 @@ class TableCmponent extends Component {
             dataSource={columns}
             pagination={{
               pageSize: isNaN(this.state.pageSize)
-                ? columns.length
+                ? columns
+                  ? columns.length
+                  : parseInt(this.state.pageSize)
                 : parseInt(this.state.pageSize)
             }}
           >
@@ -77,7 +66,11 @@ class TableCmponent extends Component {
                     }
                     key={b_status}
                   >
-                    {b_status === true ? "تم" : b_status === false ? "لم يتم" : b_status}
+                    {b_status === true
+                      ? "تم"
+                      : b_status === false
+                      ? "لم يتم"
+                      : b_status}
                   </Tag>
                 </span>
               )}
@@ -99,13 +92,14 @@ class TableCmponent extends Component {
 
                   <Divider type="vertical" />
 
-                  <Icon
-                    onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
+                  <EditPopup
+                    customerName={record.customer}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
                   />
 
                   <Divider type="vertical" />
@@ -128,7 +122,7 @@ class TableCmponent extends Component {
       );
     } else if (this.props.pageName === "customers") {
       return (
-        <div className='tablecustomer-container'>
+        <div className="table-container">
           <DropdownMenu
             pageSize={this.state.pageSize}
             paginationSize={this.paginationSize}
@@ -141,9 +135,9 @@ class TableCmponent extends Component {
                 : parseInt(this.state.pageSize)
             }}
           >
-            <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
-            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
-            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
+            <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
+            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
+            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
             <Column
               title="الحالة"
               dataIndex="b_status"
@@ -183,14 +177,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup />
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
@@ -261,14 +248,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup orderId={record.key} />
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
@@ -344,14 +324,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup />
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
@@ -422,14 +395,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
+                  <EditPopup />
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
@@ -454,7 +420,6 @@ class TableCmponent extends Component {
 TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
-  editPopup: PropTypes.func.isRequired,
   deletePopup: PropTypes.func.isRequired,
   viewHtml: PropTypes.string.isRequired,
   editHtml: PropTypes.string.isRequired,

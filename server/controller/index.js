@@ -11,13 +11,9 @@ const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
 const captainHandler = require('./accountsMangment/captains');
 const { getImage } = require('./getImage');
-const placeHandler = require('./place');
+const { getStores } = require('./stores/index');
 
 const router = express.Router();
-
-
-router.get('/viewOrders', orders.get);
-
 // router.use(check);
 // router.use(checkAuth);
 // the all routes start from here
@@ -28,11 +24,11 @@ router.get('/viewOrders', orders.get);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
+router.get('/getStores', getStores);
 router.use(captainHandler);
 
 router.use(customerHandler);
 router.use(orderHandler);
-router.use(placeHandler);
 router.route('/image/:name')
   .get(getImage);
 

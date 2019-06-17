@@ -8,6 +8,7 @@ import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
 
 import Login from "./Components/Layouts/Login";
+import Ordersmanagement from "./Components/Layouts/Ordersmanagement/index";
 import Home from "./Components/Layouts/Home";
 import Captains from "./Components/Layouts/Captains"
 
