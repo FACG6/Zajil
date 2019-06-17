@@ -20,12 +20,8 @@ class EditForm extends React.Component {
 
   componentDidMount() {
     this.setState({
-      itemsInputs: this.props.itemsArray
-        ? JSON.parse(JSON.stringify(this.props.itemsArray))
-        : [],
-      originalItems: this.props.itemsArray
-        ? JSON.parse(JSON.stringify(this.props.itemsArray))
-        : []
+      itemsInputs: this.props.itemsArray ?  JSON.parse(JSON.stringify(this.props.itemsArray)) : [],
+      originalItems: this.props.itemsArray ? JSON.parse(JSON.stringify(this.props.itemsArray)) : []
     });
   }
 
@@ -41,13 +37,10 @@ class EditForm extends React.Component {
       }
       let deletedItems = [],
         newItems = [];
-      for (let i = 0; i < this.state.originalItems.length; i++) {
+      for (let i =0; i < this.state.originalItems.length; i++) {
         let exist = false;
         for (let j = 0; j < this.state.itemsInputs.length; j++) {
-          if (
-            JSON.stringify(this.state.originalItems[i]) ===
-            JSON.stringify(this.state.itemsInputs[j])
-          ) {
+          if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
             exist = true;
           }
         }
@@ -58,10 +51,7 @@ class EditForm extends React.Component {
       for (let j in this.state.itemsInputs) {
         let edited = true;
         for (let i in this.state.originalItems) {
-          if (
-            JSON.stringify(this.state.originalItems[i]) ===
-            JSON.stringify(this.state.itemsInputs[j])
-          ) {
+          if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
             edited = false;
           }
         }
@@ -79,7 +69,7 @@ class EditForm extends React.Component {
               "-" +
               values.phone,
             address: values.address,
-            items: { deleted: deletedItems, edited: newItems },
+            items: { deleted:deletedItems, edited:newItems },
             storeID: storeId
           })
           .then(res => {
@@ -187,8 +177,8 @@ class EditForm extends React.Component {
   };
   resetEverything = () => {
     this.props.form.resetFields();
-    this.setState({ itemsInputs: this.state.originalItems });
-  };
+    this.setState({itemsInputs: this.state.originalItems})
+  }
   render() {
     const { customerName, phoneNumber, customerAddress, storeId } = this.props;
     const { getFieldDecorator } = this.props.form;
@@ -491,6 +481,7 @@ class EditForm extends React.Component {
     }
   }
 }
+
 const EditPopup = Form.create()(EditForm);
 
 const deletePopup = (id, DataToBeDisplayedObject, deletePopupHtmlString) => {
