@@ -148,11 +148,7 @@ export default class Customers extends Component {
                                 allData: newallData
                             })
                             this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
-<<<<<<< HEAD
-                        } else this.openNotificationWithIcon('success', result.error);
-=======
                         } else this.openNotificationWithIcon('error', result.error);
->>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
                     }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
                 form.resetFields();
                 this.setState({ visible: false });
