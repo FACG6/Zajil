@@ -279,6 +279,53 @@ class EditForm extends React.Component {
                     })(<Input />)}
                   </Form.Item>
                 </div>
+                <div className="popupModal_form-items-container">
+                  <Form.Item
+                    className="popupModal_formItem-item-price-container"
+                    label="إضافة عنصر"
+                  >
+                    {getFieldDecorator("item", {
+                      initialValue: this.state.itemsInputs[0]
+                        ? this.state.itemsInputs[0].name
+                        : "",
+                      rules: [
+                        {
+                          required: true,
+                          message: " "
+                        },
+                        {
+                          validator: this.validateItem
+                        }
+                      ]
+                    })(
+                      <Input
+                        onChange={e => this.setNewItem("name", e, 0)}
+                        placeholder="أدخل العنصر"
+                      />
+                    )}
+                    <Form.Item>
+                      {getFieldDecorator("itemPrice", {
+                        initialValue: this.state.itemsInputs[0]
+                          ? this.state.itemsInputs[0].price
+                          : "",
+                        rules: [
+                          {
+                            required: true,
+                            message: " "
+                          },
+                          {
+                            validator: this.validateItemPrice
+                          }
+                        ]
+                      })(
+                        <Input
+                          onChange={e => this.setNewItem("price", e, 0)}
+                          className="popupModal_item-price-input"
+                          placeholder="$"
+                        />
+                      )}
+                    </Form.Item>
+                  </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                   <Button type="primary" htmlType="submit">
                     حفظ
