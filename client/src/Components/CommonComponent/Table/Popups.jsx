@@ -61,6 +61,35 @@ class EditForm extends React.Component {
             newItems.push(this.state.itemsInputs[j]);
           }
         }
+        if (!error) {
+          axios
+            .put(`/api/v1/editOrder/${this.props.orderId}`, {
+              phone:
+                document.querySelector(
+                  ".popupModal .ant-select-selection-selected-value"
+                ).title +
+                "-" +
+                values.phone,
+              address: values.address,
+              items: { deleted:deletedItems, edited:newItems },
+              storeID: storeId
+            })
+            .then(res => {
+              if (res.status == 200) {
+                this.props.form.resetFields();
+                this.setState({ visible: false });
+              } else {
+                this.setState({ error: "Try again please" });
+              }
+            })
+            .catch(err => {
+              this.setState({
+                error: err
+              });
+            });
+        }
+      });
+        }
       }
   render() {
     const { customerName, phoneNumber, customerAddress, storeId } = this.props;
