@@ -24,7 +24,44 @@ class EditForm extends React.Component {
       originalItems: this.props.itemsArray ? JSON.parse(JSON.stringify(this.props.itemsArray)) : []
     });
   }
-
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields(async (error, values) => {
+      await this.setState({ storeNameArray: values.storeName });
+      let storeId = "";
+      for (let i = 0; i < this.props.stores.length; i++) {
+        if (this.props.stores[i].value == values.storeName) {
+          storeId = this.props.stores[i].id;
+          for (let i = 0; i < this.props.stores.length; i++) {
+            if (this.props.stores[i].value == values.storeName) {
+              storeId = this.props.stores[i].id;
+            }
+          }
+          let deletedItems = [],
+          newItems = [];
+        for (let i =0; i < this.state.originalItems.length; i++) {
+          let exist = false;
+          for (let j = 0; j < this.state.itemsInputs.length; j++) {
+            if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
+              exist = true;
+            }
+          }
+          if (!exist) {
+            deletedItems.push(this.state.originalItems[i]);
+          }
+        }
+        for (let j in this.state.itemsInputs) {
+          let edited = true;
+          for (let i in this.state.originalItems) {
+            if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
+              edited = false;
+            }
+          }
+          if (edited) {
+            newItems.push(this.state.itemsInputs[j]);
+          }
+        }
+      }
   render() {
     const { customerName, phoneNumber, customerAddress, storeId } = this.props;
     const { getFieldDecorator } = this.props.form;
@@ -141,7 +178,7 @@ class EditForm extends React.Component {
         </React.Fragment>
       );
     }
-
+  }
 const EditPopup = Form.create()(EditForm);
 
 
