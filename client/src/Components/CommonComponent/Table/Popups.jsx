@@ -378,6 +378,24 @@ class EditForm extends React.Component {
                                 )}
                               </Form.Item>
                             </Form.Item>
+                            <Icon
+                              onClick={() => this.removeInput(index + 1)}
+                              className="popupModal_remove-item-icon"
+                              type="minus-circle"
+                            />
+                          </React.Fragment>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <Icon
+                    onClick={this.appendInput}
+                    className="popupModal_add-item-icon"
+                    type="plus-circle"
+                  />
+                </div>
+              </div>
+              <div className="marketAndButtonsDiv">
                 <Form.Item {...tailFormItemLayout}>
                   <Button type="primary" htmlType="submit">
                     حفظ
