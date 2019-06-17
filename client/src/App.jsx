@@ -13,6 +13,7 @@ import Home from "./Components/Layouts/Home";
 import Captains from "./Components/Layouts/Captains"
 
 import "./App.css";
+import OrdersManagement from "./Components/Layouts/Ordersmanagement";
 
 class App extends Component {
   state = {};
@@ -26,7 +27,7 @@ class App extends Component {
               exact
               path="/"
               render={() => (
-                <div>
+                <div className="app" >
                   <Sidebar />
                   <Navbar />
                   {/* <Header title="الرئيسية" Icon={<Icon type="bank" />} /> */}

@@ -5,8 +5,8 @@ import "./style.css";
 import { Button, Select, Modal } from "antd";
 
 import { Form, Input, Cascader, Icon } from "antd";
-const { Option } = Select;
 
+const { Option } = Select;
 class EditForm extends React.Component {
   state = {
     visible: false,
@@ -503,3 +503,39 @@ const deletePopup = (id, DataToBeDisplayedObject, deletePopupHtmlString) => {
 };
 
 export { EditPopup, deletePopup };
+
+// const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
+//   const span = document.createElement('span');
+//   const details = viewPopupHtmlString;
+//   span.innerHTML = `${details}`;
+//   swal.fire({
+//     title: 'Are you sure?',
+//     showCancelButton: true,
+//     showConfirmButton: true,
+//     confirmButtonColor: '#28a745',
+//     confirmButtonText: 'تعديل',
+//     cancelButtonText: 'إغلاق',
+//     cancelButtonColor: '#2b2a37',
+//     closeOnConfirm: true,
+//     reverseButtons: true,
+//     html: span,
+//   });
+// };
+
+// const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
+//   const span = document.createElement('span');
+//   const details = viewPopupHtmlString;
+//   span.innerHTML = `${details}`;
+//   swal.fire({
+//     title: 'Are you sure?',
+//     showCancelButton: true,
+//     showConfirmButton: true,
+//     confirmButtonColor: '#28a745',
+//     confirmButtonText: 'تعديل',
+//     cancelButtonText: 'إغلاق',
+//     cancelButtonColor: '#2b2a37',
+//     closeOnConfirm: true,
+//     reverseButtons: true,
+//     html: span,
+//   });
+// };

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 
-import { Icon } from "antd";
+import Navbar from '../../CommonComponent/Navbar';
+import Sidebar from '../../CommonComponent/Sidebar/index';
+import CountBox from '../../CommonComponent/CountBox';
+import Header from '../../CommonComponent/Header';
 
 import CountBox from "../../CommonComponent/CountBox";
 

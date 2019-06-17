@@ -1,21 +1,20 @@
 .navbar{
     background-color: #201F2B;
     height: 3.5rem;
-    width: 84.3vw;
-    z-index: 2;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    width: 83.5vw;
+  
 }
 
 .control-board{
-    line-height: 3.2rem;    
+    line-height: 3.2rem;
     height: 5rem;
     width: 20rem;
+    margin-right: 2vw;
     color: #fdeeee;
     font-size: 1.6rem;
     font-weight: 800;
-    margin-right: -11vw;
+    float: right;
+    direction: rtl;
 }
 
 .circle{
@@ -37,5 +36,5 @@
 }
 .navbar__container{
     display: flex;
-    
+    margin-top: 0.4rem;
 }
