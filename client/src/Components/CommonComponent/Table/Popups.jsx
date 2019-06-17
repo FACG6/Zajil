@@ -396,6 +396,25 @@ class EditForm extends React.Component {
                 </div>
               </div>
               <div className="marketAndButtonsDiv">
+              <Form.Item
+                  label={
+                    <span>
+                      <span className="popupModal_storeName-label">*</span> إختر
+                      المتجر
+                    </span>
+                  }
+                >
+                  {getFieldDecorator("storeName", {
+                    rules: [
+                      {
+                        type: "array"
+                      },
+                      {
+                        validator: this.validateStoreName
+                      }
+                    ]
+                  })(<Cascader options={this.props.stores} />)}
+                </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                   <Button type="primary" htmlType="submit">
                     حفظ
