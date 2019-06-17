@@ -80,6 +80,12 @@
   position: absolute;
   bottom: 0.8rem;
 }
+.edit-captain__popup .ant-form-item label{
+  font-weight: bold;
+  font-family: cairo;
+  font-size: 13px;
+
+}
 .edit-captain__popup .ant-input{
   direction: rtl;
 }
