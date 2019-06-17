@@ -209,7 +209,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           visible={visible}
           title={
             <div>
-              <Icon type="user-add" className="title" />
+              <Icon type="plus-circle" className="title" />
               اضافة طلب{" "}
             </div>
           }
@@ -424,7 +424,7 @@ export default class CollectionsPage extends React.Component {
     return (
       <div>
         <Button type="primary" onClick={this.handleVisible}>
-          إضافة طلب <Icon type="user" />
+          إضافة طلب <Icon type="plus-circle" />
         </Button>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
