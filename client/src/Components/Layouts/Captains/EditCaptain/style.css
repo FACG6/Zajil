@@ -22,11 +22,6 @@
  right: calc(50% - 166px);
 }
 .edit-captain__popup .ant-modal-header{
-  /* padding: 16px 0px;
-  float: right;
-  margin-right: 63px;
- */
-
   width: 96%;
   direction: rtl;
   margin-bottom: -4px;

@@ -14,14 +14,11 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       photoUrl: null,
 
     };
-
-
     handleReuest = e => {
       this.setState({ imageUrl: e.file });
     };
     componentDidMount() {
-      const id = 6;
-      // const { id } = this.props.id;
+      const { id } = this.props.id;
       fetch(`/api/v1/getCaptainDetails/${id}`)
         .then(res => res.json())
         .then(res => {
@@ -33,7 +30,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               address: rows.s_address, IDNumber: rows.s_id_number, licenceNumber: rows.s_driver_licence_number,
               status, file: rows.s_image,
             });
-            var formData = this.props.form.getFieldsValue();
             fetch(`/api/v1/image/${rows.s_image}`)
               .then(res => res.arrayBuffer())
               .then(response => {
@@ -44,8 +40,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   photoUrl: stringChar
                 });
               })
-
-            // this.setState({ photoUrl: rows.s_image })
           }
           else {
             notification.open({
@@ -78,8 +72,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         </Button>
 
       );
-      const imageUrl = this.state.imageUrl;
-      const photoUrl = this.state.photoUrl;
+      const { photoUrl, imageUrl } = this.state;
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
@@ -139,7 +132,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   {uploadButton}
                   <div className="image__name">
                     {(imageUrl) ? imageUrl && <><Icon type="check-circle" />{imageUrl.name}</> : photoUrl && <><Icon /><img src={photoUrl} className="upload-photo" /></>}
-
                   </div>
                 </Upload>)}
               </Form.Item>
@@ -180,7 +172,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     {
                       required: true,
                       message: "الرجاء ملئ الحقل بارقام",
-                      pattern: /^\+?[0-9]{10,12}$/
+                      pattern: /^\+?[0-9.-\s]{10,16}$/
                     }
                   ]
                 })(<Input type="text" id="phone" />)}
@@ -189,7 +181,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               <Form.Item label="العنوان" dir="ltr">
                 {getFieldDecorator("address", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يa-z]*$/ }
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يA-Za-z0-9.-_\s]*$/ }
                   ]
                 })(<Input type="text" id="address" />)}
               </Form.Item>
@@ -219,7 +211,12 @@ class CollectionsPage extends React.Component {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
-        return;
+        notification.open({
+          message: 'هناك خطأ في ادخال البيانات',
+          description:
+            err,
+          icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+        });
       }
       else {
         const { IDNumber, address, email, licenceNumber, name, password, phone, status, file } = values;
@@ -237,8 +234,7 @@ class CollectionsPage extends React.Component {
         formData.append('password', password);
         formData.append('phone', phone);
         formData.append('status', status);
-        const id = 6;
-        // const { id } = this.props.id;
+        const { id } = this.props.id;
         fetch(`/api/v1/putCaptain/${id}`, {
           method: 'PUT',
           body: formData,

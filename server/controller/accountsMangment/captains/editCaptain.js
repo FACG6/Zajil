@@ -61,7 +61,7 @@ const updateCaptain = (req, res) => {
       IDNumber,
       licenceNumber,
       status,
-      file,
+      newName: file,
     };
     const { id } = req.params;
     if (password !== 'undefined') {

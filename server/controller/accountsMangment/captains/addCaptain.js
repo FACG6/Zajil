@@ -1,7 +1,6 @@
 const path = require('path');
 const { hash } = require('bcryptjs');
 
-
 const { insertCaptain } = require('../../../database/queries/captain/addCaptain');
 
 const addCaptain = (req, res) => {
