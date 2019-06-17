@@ -76,9 +76,9 @@
     display:flex !important;
 }
 
-.ant-form-item-control-wrapper {
+.modalform_formitem .ant-form-item-control-wrapper {
     width: 75% !important
-}
+} 
 
 .modalcontainer {
     width: 783px !important;
@@ -110,7 +110,7 @@
     width: 83px !important;
 }
 
-.has-error .ant-form-explain, .has-error .ant-form-split {
+.modalform .has-error .ant-form-explain, .has-error .ant-form-split {
     font-size: 9px !important;
 }
 
@@ -126,9 +126,9 @@
     margin-right: 6px;
 }
 
-.has-error .ant-form-explain, .has-error .ant-form-split {
+/* .has-error .ant-form-explain, .has-error .ant-form-split {
     margin-top: 1px !important;
-}
+} */
 
 .ant-calendar-footer-btn {
     display: none;
