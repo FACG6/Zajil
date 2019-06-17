@@ -8,7 +8,9 @@ import Button from '../../CommonComponent/Button';
 import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
-import CollectionCreateForm from "./addcustomer"
+import CollectionCreateForm from "./addcustomer";
+import Deletepopup from "./deletecustomer"
+
 
 const { RangePicker } = DatePicker;
 const override = css`
@@ -27,11 +29,16 @@ export default class Customers extends Component {
         filteredcustomersDate: [],
         filteredcustomersName: [],
         visible: false,
-        loading: true
+        loading: true,
+        customersPage: {
+            deleteVisibility: false,
+            id: ''
+        },
     }
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json())
             .then(result => {
+                console.log(result)
                 this.setState({
                     customers: result.result,
                     allData: result.result
@@ -141,14 +148,36 @@ export default class Customers extends Component {
                                 allData: newallData
                             })
                             this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
+<<<<<<< HEAD
                         } else this.openNotificationWithIcon('success', result.error);
+=======
+                        } else this.openNotificationWithIcon('error', result.error);
+>>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
                     }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
                 form.resetFields();
                 this.setState({ visible: false });
             }
         });
     };
-
+    handleClick = (value1, value2, id, information) => (e) => {
+        this.setState(
+            prev => {
+                return {
+                    [value1]: {
+                        [value2]: !prev[value1][value2],
+                        id,
+                        information
+                    }
+                };
+            });
+    };
+    deleteRowCustomer = (id) => {
+        this.setState((prev) => {
+            return {
+                customers: prev.customers.filter((data) => data.pk_i_id !== id)
+            }
+        });
+    }
     saveFormRef = formRef => {
         this.formRef = formRef;
     };
@@ -169,6 +198,12 @@ export default class Customers extends Component {
                                 onCreate={this.handleCreate}
                                 onchange={this.onchange}
                             />
+                            < Deletepopup
+                                visible={this.state.customersPage.deleteVisibility}
+                                changevisibility={this.handleClick}
+                                id={this.state.customersPage.id}
+                                updateState={this.deleteRowCustomer}
+                            />
                             <div className="filtercontainer">
                                 <div classNam="filtercontainer__orderdate">
                                     <RangePicker
@@ -183,7 +218,7 @@ export default class Customers extends Component {
                                 <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                             </div>
                         </div>
-                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' className="table" />
+                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' className="table" handleClick={this.handleClick} />
                     </div>
                 </div>
             )

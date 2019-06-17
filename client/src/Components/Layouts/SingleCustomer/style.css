@@ -50,7 +50,7 @@
     border: 1px solid gray;
     padding: 1px;
 }
-.deleteModal .ant-modal-footer{
+.deleteModal .ant-modal-footer, .viewModal .ant-modal-footer{
     text-align: left;
 }
 .deleteModal{
@@ -60,4 +60,34 @@
     background: rgb(255, 68, 68);
     border: none;
     margin-right: 1rem;
+}
+.viewModal .ant-btn-primary {
+    display: none;
+}
+
+.view__captain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+.view__captain-box{
+    display: flex;
+    margin-left: 1.3rem;
+    padding: 0.3rem;
+}
+.viewModal .ant-modal-content{
+    width: 105%;
+}
+.viewModal .ant-modal-title{
+    font-weight: bold;
+    font-family: 'cairo';
+}
+.view__captain-value{
+    font-weight: lighter;
+    margin-right: 0.7rem;
+}
+.view__captain-table{
+    width: 100%;
+    margin: 1rem 0;
 }
