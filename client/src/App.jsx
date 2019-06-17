@@ -30,8 +30,7 @@ class App extends Component {
                 <div className="app" >
                   <Sidebar />
                   <Navbar />
-                  {/* <Header title="الرئيسية" Icon={<Icon type="bank" />} /> */}
-                  <Ordersmanagement />
+                <OrdersManagement />
                   {/* <Home /> */}
                 </div>
               )}

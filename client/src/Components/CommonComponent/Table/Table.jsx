@@ -6,7 +6,7 @@ import DropdownMenu from "./dropdownMenu";
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, deleteHtml).
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
 
 class TableCmponent extends Component {
   state = {
@@ -82,7 +82,7 @@ class TableCmponent extends Component {
               render={(text, record) => (
                 <span>
                   <Icon
-                    onClick={event => viewPopup(record.key, record)}
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -106,7 +106,7 @@ class TableCmponent extends Component {
 
                   <Icon
                     onClick={event =>
-                      deletePopup(record.key, record)
+                      deletePopup(record.key, record, deleteHtml)
                     }
                     style={{
                       fontSize: "1.2rem",
@@ -181,7 +181,7 @@ class TableCmponent extends Component {
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
-                      deletePopup(record.key, record)
+                      deletePopup(record.key, record, deleteHtml)
                     }
                     style={{
                       fontSize: "1.2rem",
@@ -240,7 +240,7 @@ class TableCmponent extends Component {
               render={(text, record) => (
                 <span>
                   <Icon
-                    onClick={event => viewPopup(record.key, record)}
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -252,7 +252,7 @@ class TableCmponent extends Component {
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
-                      deletePopup(record.key, record)
+                      deletePopup(record.key, record, deleteHtml)
                     }
                     style={{
                       fontSize: "1.2rem",
@@ -328,7 +328,7 @@ class TableCmponent extends Component {
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
-                      deletePopup(record.key, record)
+                      deletePopup(record.key, record, deleteHtml)
                     }
                     style={{
                       fontSize: "1.2rem",
@@ -387,7 +387,7 @@ class TableCmponent extends Component {
               render={(text, record) => (
                 <span>
                   <Icon
-                    onClick={event => viewPopup(record.key, record)}
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -399,7 +399,7 @@ class TableCmponent extends Component {
                   <Divider type="vertical" />
                   <Icon
                     onClick={event =>
-                      deletePopup(record.key, record)
+                      deletePopup(record.key, record, deleteHtml)
                     }
                     style={{
                       fontSize: "1.2rem",
@@ -421,6 +421,9 @@ TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
   deletePopup: PropTypes.func.isRequired,
+  viewHtml: PropTypes.string.isRequired,
+  editHtml: PropTypes.string.isRequired,
+  deleteHtml: PropTypes.string.isRequired
 };
 
 const TableComponent = withRouter(TableCmponent);
