@@ -90,7 +90,97 @@ class EditForm extends React.Component {
         }
       });
         }
-      }
+        showModal = () => {
+          this.setState({
+            visible: true,
+            error: ""
+          });
+        };
+      
+        handleCancel = () => {
+          this.props.form.resetFields();
+          this.setState({
+            visible: false,
+            itemsInputs: this.state.originalItems
+          });
+        };
+      
+        storeNameInput = async e => {
+          await this.setState({
+            storeNameManual: e.target.value
+          });
+        };
+      
+        validateStoreName = async (rule, value, callback) => {
+          await this.setState({ storeNameArray: value });
+          const { storeNameArray, storeNameManual } = this.state;
+          if (
+            (storeNameArray && storeNameArray.length >= 1) ||
+            (storeNameManual && storeNameManual.length >= 3)
+          ) {
+            callback();
+          } else {
+            callback("يرجى إدخال المتجر !");
+          }
+        };
+      
+        validateStoreNameManual = (rule, value, callback) => {
+          const { storeNameArray, storeNameManual } = this.state;
+          if (
+            (storeNameArray && storeNameArray.length >= 1) ||
+            (storeNameManual && storeNameManual.length >= 3)
+          ) {
+            callback();
+          } else {
+            callback("يرجى إدخال المتجر !");
+          }
+        };
+        validateItem = (rule, value, callback) => {
+          if (value && value.length >= 3) {
+            callback();
+          } else {
+            callback("يرجى إدخال عنصر !");
+          }
+        };
+        validateItemPrice = (rule, value, callback) => {
+          if (value && value.length >= 1) {
+            callback();
+          } else {
+            callback("يرجى إدخال السعر !");
+          }
+        };
+        appendInput = () => {
+          this.setState({
+            itemsInputs: this.state.itemsInputs.concat([{ name: "", price: "" }])
+          });
+        };
+        removeInput = index => {
+          let stateItems = this.state.itemsInputs;
+          stateItems.splice(index, 1);
+          this.props.form.resetFields();
+          this.setState({
+            itemsInputs: stateItems
+          });
+        };
+        setNewItem = async (key, val, index) => {
+          let newItem = [...this.state.itemsInputs];
+          if (key == "name") {
+            newItem[index].name = val.target.value;
+            this.setState({
+              itemsInputs: newItem
+            });
+          } else if (key == "price") {
+            newItem[index].price = val.target.value;
+            this.setState({
+              itemsInputs: newItem
+            });
+          }
+        };
+        resetEverything = () => {
+          this.props.form.resetFields();
+          this.setState({itemsInputs: this.state.originalItems})
+        }
+
   render() {
     const { customerName, phoneNumber, customerAddress, storeId } = this.props;
     const { getFieldDecorator } = this.props.form;
