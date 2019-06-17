@@ -14,7 +14,7 @@ exports.postOrder = (req, res) => {
     })
     .then(() => insertItem(orderId, items.filter(item => item !== null)))
     .then(() => {
-      res.status(201).send({ result: 'the add order is done' });
+      res.status(201).send({ result: { id: orderId, ...req.body } });
     })
     .catch(() => {
       res.status(500).send({ error: 'Internal Server Error' });
