@@ -1,4 +1,4 @@
-import antd, { Icon } from 'antd';
+import antd, { Icon, AutoComplete } from 'antd';
 import React from 'react'
 import WrappedDynamicFieldSet from './addItem';
 import validator from 'validator'
@@ -7,34 +7,9 @@ const { Button, Modal, Form, Input, Select } = antd;
 const { Option } = Select;
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   // eslint-disable-next-line
+
+  
   class extends React.Component {
-    handelName = (rule, value, cb) => {
-      if (!value) cb('!يرجى ادخال اسم الزبون')
-      else cb()
-    }
-    handelCaptainName = (rule, value, cb) => {
-      if (!value) cb('!يرجى ادخال اسم الكابتن')
-      else cb()
-    }
-    handelMarket = (rule, value, cb) => {
-      if (!value) cb('!يرجى ادخال اسم المتجر')
-      else cb()
-    }
-    handelItem = (rule, value, cb) => {
-      if (!value) cb('!يرجى اضافة العنصر')
-      else cb()
-    }
-    handelTitle = (rule, value, cb) => {
-      if (!value) cb('!يرجى ادخال العنوان')
-      else cb()
-    }
-    handlePhone = (rule, value, cb) => {
-      if (value) {
-        console.log(value)
-        if (value.length !== 9) cb('!يجب ان يكون رقم الهاتف 9 خانات فقط')
-        else cb()
-      } else cb('!يرجى ادخال رقم الهاتف')
-    }
 
     render() {
       const { visible, onCancel, onCreate, form } = this.props;
@@ -56,7 +31,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
             <div className='right-container'>
               <Form.Item label="اسم الزبون" layout="horizontal" className='userName'>
                 {getFieldDecorator('userName', {
-                  rules: [{ required: true, validator: this.handelName }],
+                  rules: [{ required: true, message: "يرجى ادخال اسم الزبون", pattern: /^[أ-يa-z]*$/ }],
                 })(<div>
                   <Input />
                 </div>
@@ -67,7 +42,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 <Form.Item label="الهاتف" layout="horizontal" className='phone'>
                   {getFieldDecorator('phone', {
                     rules: [
-                      { required: true, validator: this.handlePhone }],
+                      {required: true, message: "يرجى ادخال رقم الهاتف", pattern: /^[0-9]*$/  }],
                   })(
                     <Input />
                   )}
@@ -85,7 +60,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
               </div>
               <Form.Item label="اسم الكابتن" layout="horizontal" className="captainName" >
                 {getFieldDecorator('captainName', {
-                  rules: [{ required: true, validator: this.handelCaptainName }],
+                  rules: [{ required: true, message: "يرجى ادخال اسم الكابتن", pattern: /^[أ-يa-z]*$/ }],
                 })(<div>
                   <Input />
                 </div>
@@ -94,7 +69,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
               </Form.Item>
               <Form.Item label="اضافة عنصر" layout="horizontal" className="itam" >
                 {getFieldDecorator('item', {
-                  rules: [{ required: true, validator: this.handelItem }],
+                  rules: [{ required: true, message: "يرجى ادخال الطلبية", pattern: /^[أ-يa-z]*$/ }],
                 })(<div className="addItem">
                   <WrappedDynamicFieldSet />
                 </div>
@@ -106,12 +81,12 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
             <div className='left-container'>
               <Form.Item label="اختر متجر" layout="horizontal" className="markit">
                 {getFieldDecorator('markit', {
-                  rules: [{ required: true, message: '', validator: this.handelMarket }],
+                  rules: [{ required: true, message: "يرجى ادخال اسم المتجر", pattern: /^[أ-يa-z]*$/ }],
                 })(<Input />)}
               </Form.Item>
-              <Form.Item label="العنوان" className="address">
+              <Form.Item label="عنوان الزبون" className="address">
                 {getFieldDecorator('address', {
-                  rules: [{ required: true, message: 'يرجى ادخال العنوان' }],
+                  rules: [{ required: true, message: "يرجى ادخال عنوان الزبون ", pattern: /^[أ-يa-z]*$/}],
                 })(<Input />)}
               </Form.Item>
             </div>
@@ -124,9 +99,11 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
 export default class CollectionsPage extends React.Component {
   state = {
     visible: false,
-
+    dataSource: [],
   };
+  componentDidMount() {
 
+  }
   showModal = () => {
     this.setState({ visible: true });
   };
@@ -140,7 +117,7 @@ export default class CollectionsPage extends React.Component {
       console.log(values)
 
       if (err) {
-        return;
+        return
       }
       form.resetFields();
       this.setState({ visible: false });
