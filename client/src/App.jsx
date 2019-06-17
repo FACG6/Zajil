@@ -29,8 +29,9 @@ class App extends Component {
                 <div>
                   <Sidebar />
                   <Navbar />
-                  <Header title="الرئيسية" Icon={<Icon type="bank" />} />
-                  <Home />
+                  {/* <Header title="الرئيسية" Icon={<Icon type="bank" />} /> */}
+                  <Ordersmanagement />
+                  {/* <Home /> */}
                 </div>
               )}
             />
