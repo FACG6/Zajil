@@ -6,12 +6,26 @@ import DropdownMenu from "./dropdownMenu";
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
 
++
 class TableCmponent extends Component {
   state = {
-    pageSize: "10"
+    pageSize: "10",
+    singleCustomer: {
+      editVisibilty: false,
+      deleteVisibility: false,
+      viewVisibility: false,
+      id: '',
+      information: null
+    },
+    tableData: this.props.columns
   };
+
+
+  componentWillReceiveProps(props) {
+    this.setState({ tableData: props.columns });
+  }
 
   paginationSize = pageSize => {
     this.setState({ pageSize });
@@ -28,6 +42,7 @@ class TableCmponent extends Component {
       deleteHtml
     } = this.props;
     const { Column } = Table;
+    const { tableData: columns, singleCustomer: { id, information } } = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -113,7 +128,7 @@ class TableCmponent extends Component {
       );
     } else if (this.props.pageName === "customers") {
       return (
-        <div className="table-container">
+        <div className='tablecustomer-container'>
           <DropdownMenu
             pageSize={this.state.pageSize}
             paginationSize={this.paginationSize}
@@ -126,9 +141,9 @@ class TableCmponent extends Component {
                 : parseInt(this.state.pageSize)
             }}
           >
-            <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
-            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
-            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
+            <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
+            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
+            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
             <Column
               title="الحالة"
               dataIndex="b_status"

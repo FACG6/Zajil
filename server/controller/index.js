@@ -3,22 +3,37 @@ require('dotenv').config();
 const express = require('express');
 const orders = require('./order/index');
 
-const { check } = require('./middleware/authentication');
-const { protect } = require('./middleware/protectRoute');
+const { checkAuth } = require('./middleware/authentication');
+const { protectRoutes } = require('./middleware/protectRoute');
+const { getCounts } = require('./getCounts');
+const adminHandler = require('./accountsMangment/admin');
+const customerHandler = require('./accountsMangment/customer');
+const orderHandler = require('./order');
+const captainHandler = require('./accountsMangment/captains');
+const { getImage } = require('./getImage');
+const placeHandler = require('./place');
 
 const router = express.Router();
 
 
 router.get('/viewOrders', orders.get);
 
-router.use(check);
+// router.use(check);
+// router.use(checkAuth);
 // the all routes start from here
 
-router.get('/', (req, res) => {
-  res.send('First setup');
-});
+// router.use(adminHandler);
 
-router.use(protect);
+// router.use(protectRoutes);
 // the protected route start from here
+router.route('/counts')
+  .get(getCounts);
+router.use(captainHandler);
+
+router.use(customerHandler);
+router.use(orderHandler);
+router.use(placeHandler);
+router.route('/image/:name')
+  .get(getImage);
 
 module.exports = router;

@@ -11,11 +11,17 @@
     margin-left: 26.5rem;
     margin-top: -9rem;
 }
-
-.box-three{
-    margin-left: 10.5rem;
-    margin-top: -9rem;
+.box {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 8rem;
+    width: 68rem;
 }
-.text-header{
-margin-left: 20px;
+
+.box__error {
+    color: red;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const getOrdersQuery = require('../../database/queries/order/getOrders');
 
 exports.get = (req, res) => {
@@ -113,3 +114,15 @@ exports.get = (req, res) => {
   //   res.status(204).send('No orders yet');
   res.send(orders);
 };
+=======
+const express = require('express');
+
+const { deleteOrder } = require('./deleteOrder');
+
+const router = express.Router();
+
+router.route('/deleteOrder/:id')
+  .delete(deleteOrder);
+
+module.exports = router;
+>>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
