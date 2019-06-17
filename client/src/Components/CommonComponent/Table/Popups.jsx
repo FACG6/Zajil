@@ -326,6 +326,58 @@ class EditForm extends React.Component {
                       )}
                     </Form.Item>
                   </Form.Item>
+
+                  <div className="popupModal_form-extra-items-container">
+                    <div style={{ "margin-bottom": "24px" }}>
+                      {this.state.itemsInputs.slice(1).map((field, index) => {
+                        return (
+                          <React.Fragment>
+                            <Form.Item>
+                              <Form.Item>
+                                {getFieldDecorator(index.toString(), {
+                                  initialValue: field.name,
+                                  rules: [
+                                    {
+                                      required: true,
+                                      message: " "
+                                    },
+                                    {
+                                      validator: this.validateItem
+                                    }
+                                  ]
+                                })(
+                                  <Input
+                                    className="popupModal_item-extra-input"
+                                    placeholder="أدخل العنصر"
+                                    onChange={e =>
+                                      this.setNewItem("name", e, index + 1)
+                                    }
+                                  />
+                                )}
+                              </Form.Item>
+                              <Form.Item>
+                                {getFieldDecorator(index.toString() + "*", {
+                                  initialValue: field.price,
+                                  rules: [
+                                    {
+                                      required: true,
+                                      message: " "
+                                    },
+                                    {
+                                      validator: this.validateItemPrice
+                                    }
+                                  ]
+                                })(
+                                  <Input
+                                    className="popupModal_item-price-input"
+                                    placeholder="$"
+                                    onChange={e =>
+                                      this.setNewItem("price", e, index + 1)
+                                    }
+                                  />
+                                )}
+                              </Form.Item>
+                            </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                   <Button type="primary" htmlType="submit">
                     حفظ
