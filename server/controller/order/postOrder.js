@@ -3,7 +3,6 @@ const { insertTuserOrder } = require('../../database/queries/captain/insertTuser
 const { insertItem } = require('../../database/queries/item/insertItem');
 
 exports.postOrder = (req, res) => {
-  console.log(req.body);
   const {
     address, items, phone, customerName, placeId, captainId,
   } = req.body;
