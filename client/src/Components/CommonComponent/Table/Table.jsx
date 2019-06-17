@@ -14,8 +14,8 @@ class TableCmponent extends Component {
     stores: []
   };
 
-  componentDidMount() {
-    // this.setState({stores:this.props.stores})
+  componentWillReceiveProps(props) {
+    this.setState({ tableData: props.columns });
   }
 
   paginationSize = pageSize => {
@@ -30,6 +30,7 @@ class TableCmponent extends Component {
       columns,
     } = this.props;
     const { Column } = Table;
+    const { tableData: columns} = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -239,27 +240,32 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon
-                    onClick={event => viewPopup(record.key, record)}
+                    <Icon onClick = {this.props.viewValues("singleCustomer", "viewVisibility", record.key, record)}
+                      style={{
+                        fontSize: "1.2rem",
+                        color: "rgba(0, 0, 0, 0.65)"
+                      }}
+                      type="profile"
+                    />
+                  <Divider type="vertical" />
+                    <Icon onClick = {this.props.viewValues("singleCustomer",
+                      "editVisibilty",
+                      record.key,
+                      record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
-                    type="profile"
+                    type="edit"
                   />
                   <Divider type="vertical" />
-                  <EditPopup orderId={record.key} />
-                  <Divider type="vertical" />
-                  <Icon
-                    onClick={event =>
-                      deletePopup(record.key, record)
-                    }
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                  />
+                    <Icon onClick = {this.props.viewValues("singleCustomer", "deleteVisibility", record.key, record)}
+                      style={{
+                        fontSize: "1.2rem",
+                        color: "rgba(0, 0, 0, 0.65)"
+                      }}
+                      type="delete"
+                    />
                 </span>
               )}
             />
