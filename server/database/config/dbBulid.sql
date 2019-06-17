@@ -28,7 +28,7 @@ CREATE TABLE TUser
     b_status BOOLEAN NOT NULL,
     s_address TEXT NOT NULL,
     s_access_token TEXT,
-    s_image TEXT NOT NULL,
+    s_image TEXT DEFAULT 'user.png',
     d_latitude FLOAT,
     d_longitude FLOAT,
     i_type INTEGER NOT NULL,
@@ -38,9 +38,9 @@ CREATE TABLE TUser
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
     s_password TEXT NOT NULL,
-    s_id_number INTEGER,
+    s_id_number text,
     s_attachment TEXT,
-    s_driver_licence_number INTEGER,
+    s_driver_licence_number text,
     s_extra_1 TEXT,
     s_extra_2 TEXT
 );
@@ -53,6 +53,7 @@ CREATE TABLE orders
     s_customer_phone TEXT NOT NULL,
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
+    i_status INTEGER NOT NULL,--0 INPROGRESS 1 DONE
     dt_modified_date DATE
 );
 
@@ -63,6 +64,7 @@ CREATE TABLE items
     fk_i_order_id INTEGER REFERENCES orders (pk_i_id) on delete cascade,
     dt_modified_date DATE,
     dt_create_at DATE DEFAULT current_date,
+    f_price FLOAT NOT NULL,
     dt_delete_at DATE
 
 );

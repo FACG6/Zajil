@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import { css } from '@emotion/core';
+import { ClipLoader } from 'react-spinners';
 import './style.css';
-import { Input } from 'antd';
+import { Input, notification, Icon, DatePicker } from 'antd';
 import Table from '../../CommonComponent/Table/Table';
 import Button from '../../CommonComponent/Button';
 import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index"
-import { viewPopup, editPopup, deletePopup } from "../../CommonComponent/Table/Popups";
-import { Icon } from 'antd';
-import { DatePicker } from 'antd';
+import Navbar from "../../CommonComponent/Navbar/index";
+import CollectionCreateForm from "./addcustomer";
+import Deletepopup from "./deletecustomer"
+
 
 const { RangePicker } = DatePicker;
-const Search = Input.Search;
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
+
 export default class Customers extends Component {
     state = {
         customers: [],
@@ -21,29 +28,34 @@ export default class Customers extends Component {
         date: '',
         filteredcustomersDate: [],
         filteredcustomersName: [],
-
-
+        visible: false,
+        loading: true,
+        customersPage: {
+            deleteVisibility: false,
+            id: ''
+        },
     }
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json())
-        .then(result => {
-            this.setState({
-                customers: result.result,
-                allData: result.result
-            })
-        }
-        )
+            .then(result => {
+                console.log(result)
+                this.setState({
+                    customers: result.result,
+                    allData: result.result
+                })
+            }
+            )
     }
     filterfunction = (date, name, check) => {
-        const value = name.trim();
         if (check === 'date') {
             if (date.length !== 0) {
                 if (this.state.name) this.dateFilter(date, this.state.filteredcustomersName, date)
                 else this.dateFilter(date, this.state.allData, date)
             } else {
                 if (this.state.name) {
-                    this.nameFilter(this.state.name,this.state.allData)
-                    this.setState({ date: '', filterCustomerDate: [] })}
+                    this.nameFilter(this.state.name, this.state.allData)
+                    this.setState({ date: '', filterCustomerDate: [] })
+                }
                 else this.setState({ customers: this.state.allData, date: '', filterCustomerDate: [] })
             }
         } else if (check === 'name') {
@@ -52,14 +64,13 @@ export default class Customers extends Component {
                 else this.nameFilter(name, this.state.allData)
             } else {
                 if (this.state.date) {
-                    this.dateFilter(this.state.date,this.state.allData)
-                    this.setState({  name ,filterCustomerName:[]})}
+                    this.dateFilter(this.state.date, this.state.allData)
+                    this.setState({ name, filterCustomerName: [] })
+                }
                 else this.setState({ customers: this.state.allData, name })
             }
         } else this.setState({ customers: this.state.allData })
     };
-
-
     dateFilter = (value, customers) => {
         if (value.length !== 0) {
             const from = value[0]._d.setHours(0, 0, 0, 0);
@@ -72,7 +83,6 @@ export default class Customers extends Component {
                 customers: filterCustomer,
                 date: value,
                 filteredcustomersDate: filterCustomer
-
             })
         }
         else {
@@ -92,35 +102,134 @@ export default class Customers extends Component {
             filteredcustomersName: filterCustomerName
         })
     }
+    openNotificationWithIcon = (type, message) => {
+        notification[type]({
+            message: message,
+            duration: 2
+        });
+    };
+
+    showModal = () => {
+        this.setState(prev => {
+            return { visible: !prev.visible };
+        })
+    };
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
+
+    handleCreate = () => {
+        const form = this.formRef.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                this.openNotificationWithIcon('error', err);
+            } else if (values) {
+                let addCustomer = {
+                    name: values.name,
+                    email: values.email,
+                    phone: parseInt(values.prefixPhone + values.phone),
+                    status: (values.status),
+                    address: values.address,
+                    password: values.password
+                }
+                fetch('api/v1/addcustomer', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(addCustomer)
+                }).then(res => res.json())
+                    .then(result => {
+                        if (result.result) {
+                            let newcustomer = [...this.state.customers];
+                            newcustomer.push(result.result[0])
+                            let newallData = [...this.state.allData];
+                            newallData.push(result.result[0])
+                            this.setState({
+                                customers: newcustomer,
+                                allData: newallData
+                            })
+                            this.openNotificationWithIcon('success', 'تمت الاضافة بنجاح');
+                        } else this.openNotificationWithIcon('error', result.error);
+                    }).catch(() => this.openNotificationWithIcon('error', 'خطأ في ارسال البيانات'))
+                form.resetFields();
+                this.setState({ visible: false });
+            }
+        });
+    };
+    handleClick = (value1, value2, id, information) => (e) => {
+        this.setState(
+            prev => {
+                return {
+                    [value1]: {
+                        [value2]: !prev[value1][value2],
+                        id,
+                        information
+                    }
+                };
+            });
+    };
+    deleteRowCustomer = (id) => {
+        this.setState((prev) => {
+            return {
+                customers: prev.customers.filter((data) => data.pk_i_id !== id)
+            }
+        });
+    }
+    saveFormRef = formRef => {
+        this.formRef = formRef;
+    };
     render() {
-        if(this.state.customers)
-       { return (
-            <div className="containercustomers">
-                <Sidebar />
-                <div className="conatinercustomers__customer">
-                    <Navbar />
-                    <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
-                    <div className='addcustomer'>
-                        <Button name='إضافة مستخدم' icon={<Icon type="user" />} />
-                        <div className="filtercontainer">
-                            <div classNam="filtercontainer__orderdate">
-                                <RangePicker
-                                    showTime={{ format: 'HH:mm' }}
-                                    format="YYYY-MM-DD HH:mm"
-                                    placeholder={['من', 'الى']}
-                                    onChange={e => this.filterfunction(e, '', 'date')}
-                                   className="containercustomers__customer-rangpicker"
-                                />
-                                <span className='filtercontainer__orderdate-date'>فلترة حسب الوقت</span>
+        if (this.state.customers) {
+            return (
+                <div className="containercustomers">
+                    <Sidebar />
+                    <div className="conatinercustomers__customer">
+                        <Navbar />
+                        <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
+                        <div className='addcustomer'>
+                            <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
+                            <CollectionCreateForm
+                                wrappedComponentRef={this.saveFormRef}
+                                visible={this.state.visible}
+                                onCancel={this.handleCancel}
+                                onCreate={this.handleCreate}
+                                onchange={this.onchange}
+                            />
+                            < Deletepopup
+                                visible={this.state.customersPage.deleteVisibility}
+                                changevisibility={this.handleClick}
+                                id={this.state.customersPage.id}
+                                updateState={this.deleteRowCustomer}
+                            />
+                            <div className="filtercontainer">
+                                <div classNam="filtercontainer__orderdate">
+                                    <RangePicker
+                                        showTime={{ format: 'HH:mm' }}
+                                        format="YYYY-MM-DD HH:mm"
+                                        placeholder={['من', 'الى']}
+                                        onChange={e => this.filterfunction(e, '', 'date')}
+                                        className="containercustomers__customer-rangpicker"
+                                    />
+                                    <span className='filtercontainer__orderdate-date'>فلترة حسب الوقت</span>
+                                </div>
+                                <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                             </div>
-                            <Input size="defaul" placeholder="فلترة حسب الاسم" className="filtercontainer__ordername" onChange={e => this.filterfunction('', e.target.value, 'name')} />
                         </div>
+                        <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' className="table" handleClick={this.handleClick} />
                     </div>
-                    <Table pageName="customers" columns={this.state.customers} classname='tablecustomer-container' viewPopup={viewPopup}
-                        editPopup={editPopup}
-                        deletePopup={deletePopup} className="table" />
                 </div>
-            </div>
-        )}
+            )
+        } else {
+            return (
+                <div className='sweet-loading'>
+                    <ClipLoader
+                        css={override}
+                        sizeUnit={"px"}
+                        size={150}
+                        color={'#123abc'}
+
+                        loading={this.state.loading}
+                    />
+                </div>)
+        }
     }
 }
