@@ -21,7 +21,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         errPalce: ""
       }
     };
-    componentDidMount() {
+
+    loadCaptainsNames = () => {
       fetch("/api/v1/getCaptainsNames")
         .then(res => res.json())
         .then(res => {
@@ -31,8 +32,16 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           } else {
             this.setState({ dataSourceCaptains: res.result });
           }
-          return fetch("/api/v1/getPlacesNames");
         })
+        .catch(() => {
+          this.openNotificationWithIcon(
+            "erro",
+            "Something error please refersh the page"
+          );
+        });
+    };
+    loadPlacesNames = () => {
+      fetch("/api/v1/getPlacesNames")
         .then(res => res.json())
         .then(res => {
           const { error } = res;
@@ -48,6 +57,10 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
             "Something error please refersh the page"
           );
         });
+    };
+    componentDidMount() {
+      this.loadCaptainsNames();
+      this.loadPlacesNames();
     }
     remove = k => {
       const { form } = this.props;
@@ -383,12 +396,16 @@ export default class CollectionsPage extends React.Component {
           .then(res => {
             if (res.error) {
               openNotificationWithIcon("error", "لم تتم عملية الاضافة");
-            } else openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
+            } else
+              openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
             this.handleVisible();
           })
           .catch(() => {
-            openNotificationWithIcon('warning', 'هناك خطأ ما الرجاء اعادة المحاولة')
-          })
+            openNotificationWithIcon(
+              "warning",
+              "هناك خطأ ما الرجاء اعادة المحاولة"
+            );
+          });
       }
     });
   };
