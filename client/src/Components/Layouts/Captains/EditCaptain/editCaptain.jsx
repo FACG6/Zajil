@@ -20,8 +20,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       this.setState({ imageUrl: e.file });
     };
     componentDidMount() {
-      // const { id } = this.props.id;
-      const id = 6;
+      const { id } = this.props.id;
       fetch(`/api/v1/getCaptainDetails/${id}`)
         .then(res => res.json())
         .then(res => {
@@ -238,8 +237,7 @@ class CollectionsPage extends React.Component {
         formData.append('phone', phone);
         formData.append('status', status);
 
-        const id = 6;
-        // const {id} = this.props.id;
+        const { id } = this.props.id;
         fetch(`/api/v1/putCaptain/${id}`, {
           method: 'PUT',
           body: formData,
