@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const orders = require('./order/index');
 
 const { checkAuth } = require('./middleware/authentication');
 const { protectRoutes } = require('./middleware/protectRoute');
@@ -13,6 +14,7 @@ const { getImage } = require('./getImage');
 const { getStores } = require('./stores/index');
 
 const router = express.Router();
+// router.use(check);
 // router.use(checkAuth);
 // the all routes start from here
 

@@ -128,19 +128,16 @@ class OrdersManagement extends Component {
   };
 
   filter = async (type, value) => {
-    console.log(type, value);
     const { date, status, name, orders } = this.state;
     let filtered = [];
     if (type === "date") {
       await this.setState({ date: value });
       if (status) {
         filtered = this.statusFilter(orders);
-        console.log(222555, filtered);
         if (name) {
           filtered = this.nameFilter(filtered);
         }
         filtered = this.dateFilter(filtered);
-        console.log(222666, filtered);
         this.setState({ filteredOrders: filtered, filter: true });
       } else if (name) {
         filtered = this.nameFilter(orders);
@@ -148,7 +145,6 @@ class OrdersManagement extends Component {
         this.setState({ filteredOrders: filtered, filter: true });
       } else if (value.length > 0) {
         filtered = this.dateFilter(orders);
-        console.log(filtered);
         this.setState({ filteredOrders: filtered, filter: true });
       } else {
         this.setState({ filteredOrders: [], filter: false });
@@ -156,10 +152,10 @@ class OrdersManagement extends Component {
     } else if (type === "status") {
       await this.setState({ status: value });
       if (date) {
+        filtered = this.dateFilter(orders);
         if (name) {
         }
         filtered = this.statusFilter(filtered);
-        console.log(66666, filtered);
         this.setState({ filteredOrders: filtered, filter: true });
       } else if (name) {
         filtered = this.nameFilter(orders);
@@ -169,7 +165,6 @@ class OrdersManagement extends Component {
         filtered = this.statusFilter(orders);
         this.setState({ filteredOrders: filtered, filter: true });
       } else {
-        console.log(888);
         this.setState({ filteredOrders: [], filter: false });
       }
     } else if (type === "name") {
@@ -204,7 +199,6 @@ class OrdersManagement extends Component {
   };
 
   render() {
-    console.log(33333333, this.state.error.response);
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
@@ -276,72 +270,7 @@ class OrdersManagement extends Component {
           </div>
         </div>
       );
-    } else if (this.state.error.response.status === 204) {
-      return (
-        <div>
-          <div className="ordersManagement-bars-container">
-            <Sidebar />
-            <div className="ordersManagement-main-container">
-              <Navbar />
-              <Header
-                title={"إدارة الطلبات"}
-                Icon={<Icon type="carry-out" />}
-              />
-              <div className="ordersManagement_sub-container">
-                <div>
-                  <Button
-                    className="ordersManagement_addOrder-button"
-                    type="primary"
-                  >
-                    إضافة طلب
-                  </Button>
-                  <div className="ordersManagement_filters-container">
-                    <div className="ordersManagement_filters-container-timeFilter">
-                      <p
-                        style={{ textAlign: "right" }}
-                        className="ordersManagemet_timePicker-lable"
-                      >
-                        إختر الفترة
-                      </p>
-                      <RangePicker
-                        placeholder={["من", "إلى"]}
-                        format={dateFormat}
-                        onChange={this.ordersDateFilter}
-                      />
-                    </div>
-                    <Input
-                      className="ordersManagement_status-filter-input"
-                      placeholder="الفلترة حسب الحالة :"
-                    />
-                    <Input
-                      className="ordersManagement_status-filter-input"
-                      placeholder="الفلترة حسب اسم الكابتن :"
-                    />
-                    <Button
-                      className="ordersManagement_filter-button"
-                      type="primary"
-                    >
-                      إفراغ الحقول
-                    </Button>
-                  </div>
-                  <div className="ordersManagement_error-class">
-                    <h4>لا توجد طلبات للعرض بعد</h4>
-                  </div>
-                  <TableComponent
-                    // viewPopup={viewPopup}
-                    editPopup={EditPopup}
-                    deletePopup={deletePopup}
-                    stores={this.state.stores}
-                    columns={this.state.orders}
-                    pageName="customers"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    } else {
+    }else {
       return (
         <div className="ordersManagement_error-class">
           <h1>

@@ -1,17 +1,10 @@
 // const getOrdersQuery = require('../../database/queries/order/getOrders');
 
+// / just a fake data file for testing
+
+
 exports.getOrders = (req, res) => {
   let orders = [];
-
-  //   getOrdersQuery()
-  // .then((resposne) => {
-  //   if (!Response[0]) {
-  //   res.status(204).send('No orders yet');
-  //   } else {
-  // res.send(JSON.stringify(resposne));
-  //   }
-  // })
-  // .catch(error => res.status(500).send(JSON.stringify({ error })));
 
   orders = JSON.stringify([
     {
@@ -114,7 +107,5 @@ exports.getOrders = (req, res) => {
       price: '20$',
     },
   ]);
-  // res.status(204).send('No orders yet');
-  // res.status(500).send('');
   res.status(200).send(orders);
 };

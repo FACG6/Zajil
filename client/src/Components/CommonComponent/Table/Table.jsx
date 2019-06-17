@@ -8,7 +8,6 @@ import "./style.css";
 // the passed input to this component has to be in the following form:
 // (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup).
 
-+
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
