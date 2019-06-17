@@ -403,8 +403,11 @@ export default class CollectionsPage extends React.Component {
           .then(res => {
             if (res.error) {
               openNotificationWithIcon("error", "لم تتم عملية الاضافة");
-            } else
+            } else{
               openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
+              // here make function to update table of orders
+              console.log(res.result);
+            }
             this.handleVisible();
           })
           .catch(() => {
