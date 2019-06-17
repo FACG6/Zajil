@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-const getOrdersQuery = require('../../database/queries/order/getOrders');
+// const getOrdersQuery = require('../../database/queries/order/getOrders');
 
-exports.get = (req, res) => {
+exports.getOrders = (req, res) => {
   let orders = [];
 
   //   getOrdersQuery()
@@ -17,20 +15,23 @@ exports.get = (req, res) => {
 
   orders = JSON.stringify([
     {
-      key: '25',
+      key: '4',
       customer: 'أحمد',
+      phone: 56432145,
       date: Date.now(),
       captain: 'محمود',
       b_status: true,
-      price: '20$',
+      address: 'غزة-الرمال',
+      storeId: '3',
+      items: [{ name: 'خوخ', price: '10' }, { name: 'بطيخ', price: '50' }, { name: 'شمام', price: '40' }],
     },
     {
-      key: '26',
+      key: '1',
       customer: 'سمير',
+      phone: 56432146565,
       date: '10/04/2019',
       captain: 'خالد',
       b_status: 'قيد التنفيذ',
-      price: '20$',
     },
     {
       key: '27',
@@ -87,7 +88,8 @@ exports.get = (req, res) => {
       captain: 'سامر',
       b_status: false,
       price: '20$',
-    }, {
+    },
+    {
       key: '25132',
       customer: 'أحمد',
       date: Date.now(),
@@ -112,27 +114,7 @@ exports.get = (req, res) => {
       price: '20$',
     },
   ]);
-  //   res.status(204).send('No orders yet');
-  res.send(orders);
+  // res.status(204).send('No orders yet');
+  // res.status(500).send('');
+  res.status(200).send(orders);
 };
-=======
-=======
->>>>>>> EditPopupFront
-const express = require('express');
-const { deleteOrder } = require('./deleteOrder');
-// const { updateOrder } = require('./updateOrder');
-const { getOrders } = require('../order/getOrders');
-
-const router = express.Router();
-
-router.route('/deleteOrder/:id')
-  .delete(deleteOrder);
-
-router.get('/viewOrders', getOrders);
-// router.put('/editOrder/:id', updateOrder);
-
-module.exports = router;
-<<<<<<< HEAD
->>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
-=======
->>>>>>> EditPopupFront

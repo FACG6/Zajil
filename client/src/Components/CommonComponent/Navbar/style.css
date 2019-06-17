@@ -1,35 +1,21 @@
 .navbar{
     background-color: #201F2B;
     height: 3.5rem;
-<<<<<<< HEAD
-    width: 83.5vw;
-  
-=======
     width: 84.3vw;
     z-index: 2;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
->>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
 }
 
 .control-board{
-    line-height: 3.2rem;
+    line-height: 3.2rem;    
     height: 5rem;
     width: 20rem;
-<<<<<<< HEAD
-    margin-right: 2vw;
-    color: #fdeeee;
-    font-size: 1.6rem;
-    font-weight: 800;
-    float: right;
-    direction: rtl;
-=======
     color: #fdeeee;
     font-size: 1.6rem;
     font-weight: 800;
     margin-right: -11vw;
->>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
 }
 
 .circle{
@@ -51,9 +37,5 @@
 }
 .navbar__container{
     display: flex;
-<<<<<<< HEAD
-    margin-top: 0.4rem;
-=======
     
->>>>>>> 94c7a13e55f11b231a72d34777be0d4c472d4e1e
 }
