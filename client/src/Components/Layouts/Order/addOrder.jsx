@@ -155,7 +155,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       const formItems = keys.map((k, index) => (
         <Form.Item
           {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-          label={index === 0 ? "" : ""}
+          label=""
           required={false}
           key={k}
         >
