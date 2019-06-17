@@ -424,7 +424,7 @@ export default class CollectionsPage extends React.Component {
     return (
       <div>
         <Button type="primary" onClick={this.handleVisible}>
-          إضافة مستخدم <Icon type="user" />
+          إضافة طلب <Icon type="user" />
         </Button>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
