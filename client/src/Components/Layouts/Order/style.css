@@ -1,19 +1,20 @@
-.title{
+.title {
     margin: '0px 10px';
     /* font-size: 1.5rem;
     font-family: cairo; */
 }
-.ant-modal-title{
+
+.ant-modal-title {
     font-size: 1.5rem;
     font-family: cairo;
 }
 
-.userName{
-    direction: 'rtl' ;
+.userName {
+    direction: 'rtl';
     font-family: cairo;
 }
 
-.phone{
+.phone {
     direction: 'rtl';
     font-family: cairo;
 }
@@ -29,20 +30,21 @@
     font-family: cairo;
 }
 
-.itam{
-    direction: 'rtl' ;
+.itam {
+    direction: 'rtl';
     font-family: cairo;
 }
 
-.markit{
-    direction: 'rtl' ;
+.markit {
+    direction: 'rtl';
     font-family: cairo;
 }
 
-.address{
-    display: "block" ;
+.address {
+    display: "block";
     font-family: cairo;
 }
+
 .filtercontainer__orderdate {
     display: flex;
     flex-direction: row;
@@ -105,4 +107,16 @@
     font-size: 14px;
     font-family: SimSun, sans-serif;
     line-height: 1;
+}
+
+.phone input {
+    width: 120%;
+}
+
+.addOrder {
+    margin-right: 4.1rem;
+}
+.auto-complete-error{
+    color: #f5222d;
+    font-size: 9px;
 }

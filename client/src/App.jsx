@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Icon } from 'antd'
-import Customers from './Components/Layouts/Customers'
+import {Icon}from 'antd';
+import Customers from './Components/Layouts/Customers/index';
 import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar";
@@ -29,8 +29,6 @@ class App extends Component {
                 <div>
                   <Sidebar />
                   <Navbar />
-
-                  <Order />
                   <Header title="الرئيسية" Icon={<Icon type="bank" />} />
                   <Home />
                 </div>
@@ -48,6 +46,13 @@ class App extends Component {
                 </div>
               )}
               />
+              <Route exact path="/orders" render = {() => (
+                <div>
+                <Sidebar />
+                <Navbar />
+                <Order />
+              </div>
+              )} />
              <Route
               exact
               path="/customers"
@@ -58,6 +63,7 @@ class App extends Component {
               path="/captains"
               render={() => (<Captains />)}
             />
+            
           </Switch>
         </Router>
       </div>
