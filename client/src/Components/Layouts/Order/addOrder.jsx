@@ -158,6 +158,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           label=""
           required={false}
           key={k}
+          className="singleItem"
         >
           {getFieldDecorator(`items[${k}]`, {
             validateTrigger: ["onChange", "onBlur"],
@@ -299,7 +300,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   filterOption={(inputValue, option) =>
                     option.props.children
                       .toUpperCase()
-                      .indexOf(inputValue.toUpperCase()) !== -1
+                      .indexOf(inputValue.trim().toUpperCase()) !== -1
                   }
                 />
                 {errCaptain && (
@@ -333,8 +334,13 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 {errPalce && <p className="auto-complete-error">{errPalce}</p>}
               </Form.Item>
               <div className="addOrder">
-                {formItems}
-                <Form.Item {...formItemLayoutWithOutLabel}>
+              {formItems}
+                <Form.Item
+                  label="اضف طلب"
+                  layout="horizontal"
+                  className="items"
+                  {...formItemLayoutWithOutLabel}
+                >
                   <Button
                     type="dashed"
                     onClick={this.add}
@@ -342,6 +348,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   >
                     <Icon type="plus" /> اضافة طلب
                   </Button>
+                  
                 </Form.Item>
                 <Form.Item {...formItemLayoutWithOutLabel} />
               </div>
