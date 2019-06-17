@@ -415,6 +415,22 @@ class EditForm extends React.Component {
                     ]
                   })(<Cascader options={this.props.stores} />)}
                 </Form.Item>
+                <p className="popupModal_storeName-manualInput">
+                  أو أدخل إسم المتجر
+                </p>
+                <Form.Item>
+                  {getFieldDecorator("storeNameManual", {
+                    rules: [
+                      {
+                        // required: true,
+                        message: " "
+                      },
+                      {
+                        validator: this.validateStoreNameManual
+                      }
+                    ]
+                  })(<Input readOnly onChange={this.storeNameInput} />)}
+                </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
                   <Button type="primary" htmlType="submit">
                     حفظ
