@@ -12,7 +12,7 @@ exports.postOrder = (req, res) => {
       orderId = rows[0].pk_i_id;
       return insertTuserOrder(captainId, orderId);
     })
-    .then(() => insertItem(orderId, items))
+    .then(() => insertItem(orderId, items.filter(item => item !== null)))
     .then(() => {
       res.status(201).send({ result: 'the add order is done' });
     })
