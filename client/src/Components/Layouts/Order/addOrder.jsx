@@ -21,8 +21,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         errPalce: ""
       }
     };
-
-    loadCaptainsNames = () => {
+    componentDidMount() {
       fetch("/api/v1/getCaptainsNames")
         .then(res => res.json())
         .then(res => {
@@ -32,16 +31,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           } else {
             this.setState({ dataSourceCaptains: res.result });
           }
+          return fetch("/api/v1/getPlacesNames");
         })
-        .catch(() => {
-          this.openNotificationWithIcon(
-            "erro",
-            "Something error please refersh the page"
-          );
-        });
-    };
-    loadPlacesNames = () => {
-      fetch("/api/v1/getPlacesNames")
         .then(res => res.json())
         .then(res => {
           const { error } = res;
@@ -57,10 +48,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
             "Something error please refersh the page"
           );
         });
-    };
-    componentDidMount() {
-      this.loadCaptainsNames();
-      this.loadPlacesNames();
     }
     remove = k => {
       const { form } = this.props;
@@ -155,10 +142,9 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       const formItems = keys.map((k, index) => (
         <Form.Item
           {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-          label=""
+          label={index === 0 ? "" : ""}
           required={false}
           key={k}
-          className="singleItem"
         >
           {getFieldDecorator(`items[${k}]`, {
             validateTrigger: ["onChange", "onBlur"],
@@ -209,7 +195,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           visible={visible}
           title={
             <div>
-              <Icon type="plus-circle" className="title" />
+              <Icon type="user-add" className="title" />
               اضافة طلب{" "}
             </div>
           }
@@ -300,7 +286,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   filterOption={(inputValue, option) =>
                     option.props.children
                       .toUpperCase()
-                      .indexOf(inputValue.trim().toUpperCase()) !== -1
+                      .indexOf(inputValue.toUpperCase()) !== -1
                   }
                 />
                 {errCaptain && (
@@ -334,13 +320,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 {errPalce && <p className="auto-complete-error">{errPalce}</p>}
               </Form.Item>
               <div className="addOrder">
-              {formItems}
-                <Form.Item
-                  label="اضف طلب"
-                  layout="horizontal"
-                  className="items"
-                  {...formItemLayoutWithOutLabel}
-                >
+                {formItems}
+                <Form.Item {...formItemLayoutWithOutLabel}>
                   <Button
                     type="dashed"
                     onClick={this.add}
@@ -348,7 +329,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   >
                     <Icon type="plus" /> اضافة طلب
                   </Button>
-                  
                 </Form.Item>
                 <Form.Item {...formItemLayoutWithOutLabel} />
               </div>
@@ -403,19 +383,12 @@ export default class CollectionsPage extends React.Component {
           .then(res => {
             if (res.error) {
               openNotificationWithIcon("error", "لم تتم عملية الاضافة");
-            } else{
-              openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
-              // here make function to update table of orders
-              console.log(res.result);
-            }
+            } else openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
             this.handleVisible();
           })
           .catch(() => {
-            openNotificationWithIcon(
-              "warning",
-              "هناك خطأ ما الرجاء اعادة المحاولة"
-            );
-          });
+            openNotificationWithIcon('warning', 'هناك خطأ ما الرجاء اعادة المحاولة')
+          })
       }
     });
   };
@@ -427,7 +400,7 @@ export default class CollectionsPage extends React.Component {
     return (
       <div>
         <Button type="primary" onClick={this.handleVisible}>
-          إضافة طلب <Icon type="plus-circle" />
+          إضافة مستخدم <Icon type="user" />
         </Button>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
