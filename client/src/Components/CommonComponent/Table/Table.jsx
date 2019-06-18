@@ -15,12 +15,27 @@ class TableCmponent extends Component {
       editVisibilty: false,
       deleteVisibility: false,
       viewVisibility: false,
-      id: '',
-      information: null
+      id: ''
     },
      tableData: this.props.columns
   };
 
+  handleClick = (value1, value2, id) => (e) => {
+    this.setState(
+      prev => {
+        return {
+          [value1]: {
+            [value2]: !prev[value1][value2],
+            id
+          }
+        };
+      });
+  };
+  deleteRow = (id) => {
+    this.setState((prev) => {
+      return { tableData: prev.tableData.filter((data) => data.key !== id) }
+    });
+  }
 
   componentWillReceiveProps(props) {
     this.setState({ tableData: props.columns });
@@ -32,11 +47,14 @@ class TableCmponent extends Component {
 
   render() {
 
-    const { viewPopup, ViewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
     const { 
       tableData: columns,
-       singleCustomer: { id, information } } = this.state;
+      //  singleCustomer: { id, information } 
+    } = this.state;
+    const { singleCaptain } = this.state;
+
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
@@ -240,53 +258,31 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={this.handleClick("singleCustomer", "viewVisibility", record.key, record)}
+                  <Icon onClick={this.props.viewValues("singleCustomer", "viewVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="profile"
                   />
-                  <ViewPopup
-                    visible={this.state.singleCustomer.viewVisibility}
-                    visibleFun={this.handleClick}
-                    id={id}
-                    information={information}
-                  />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={this.handleClick(
-                      "singleCustomer",
-                      "editVisibilty",
-                      record.key,
-                      record
-                    )}
+                  <Icon onClick={this.props.viewValues("singleCustomer",
+                    "editVisibilty",
+                    record.key,
+                    record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="edit"
                   />
-                  <EditPopup
-                    visible={this.state.singleCustomer.editVisibilty}
-                    visibleFun={this.handleClick}
-                    id={record.key}
-                    information={record}
-                  />
                   <Divider type="vertical" />
-                  <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key, record)}
+                  <Icon onClick={this.props.viewValues("singleCustomer", "deleteVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                    className={record.key}
-                  />
-                  <DeletePopup
-                    visible={this.state.singleCustomer.deleteVisibility}
-                    visibleFun={this.handleClick}
-                    id={id}
-                    updateState={this.deleteRow}
                   />
                 </span>
               )}
@@ -374,6 +370,9 @@ class TableCmponent extends Component {
         </div>
       );
     } else if (this.props.pageName === "singleCaptain") {
+
+
+
       return (
         <div className="table-container">
           <DropdownMenu
@@ -411,7 +410,11 @@ class TableCmponent extends Component {
                 </span>
               )}
             />
+
+
+
             <Column title="السعر" dataIndex="price" key="price" />
+
             <Column
               title="خيارات"
               key="options"
@@ -425,21 +428,39 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                  <Icon onClick={this.handleClick(
+                    "singleCaptain",
+                    "editVisibilty"
+                  )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="edit"
                   />
+
+                  <EditPopup
+                    visible={this.state.singleCaptain.editVisibilty}
+                    visibleFun={this.handleClick}
+                    id={record.key}
+                    information={record}
+                  />
                   <Divider type="vertical" />
-                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                  <Icon onClick={this.handleClick("singleCaptain", "deleteVisibility", record.key)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
+                    className={record.key}
                   />
+                  <DeletePopup
+                    visible={this.state.singleCaptain.deleteVisibility}
+                    visibleFun={this.handleClick}
+                    id={singleCaptain.id}
+                    updateState={this.deleteRow}
+                  />
+
                 </span>
               )}
             />

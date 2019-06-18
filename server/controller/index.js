@@ -6,17 +6,23 @@ const { checkAuth } = require('./middleware/authentication');
 const { protectRoutes } = require('./middleware/protectRoute');
 const { getCounts } = require('./getCounts');
 const adminHandler = require('./accountsMangment/admin');
+const captainHandler = require('./accountsMangment/captains');
 const customerHandler = require('./accountsMangment/customer');
 const orderHandler = require('./order');
-const captainHandler = require('./accountsMangment/captains');
 const { getImage } = require('./getImage');
 const placeHandler = require('./place');
 
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
+router.use(customerHandler);
+
+router.use(captainHandler);
+
 
 router.use(adminHandler);
+router.use(orderHandler);
+
 
 // router.use(protectRoutes);
 // the protected route start from here
