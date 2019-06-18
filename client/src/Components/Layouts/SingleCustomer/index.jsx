@@ -118,7 +118,7 @@ class Profile extends Component {
     const {
       personalInformation: { name, phone, status, email, address, avatar },
       tableInfo,
-      singleCustomer: {id, information}
+      singleCustomer: { id, information }
     } = this.state;
     return (
       <>
