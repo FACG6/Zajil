@@ -24,7 +24,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       }
     };
     componentDidMount() {
-      fetch("/api/v1//getCaptainsNames")
+      fetch("/api/v1/getCaptainsNames")
         .then(res => res.json())
         .then(res => {
           const { error } = res;
