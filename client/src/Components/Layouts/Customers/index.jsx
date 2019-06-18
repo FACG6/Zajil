@@ -209,9 +209,7 @@ export default class Customers extends Component {
         if (this.state.customers) {
             return (
                 <div className="containercustomers">
-                    <Sidebar />
                     <div className="conatinercustomers__customer">
-                        <Navbar />
                         <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
                         <div className='addcustomer'>
                             <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
