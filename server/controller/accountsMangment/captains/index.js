@@ -1,9 +1,13 @@
 const express = require('express');
+const { getOrdersDetails } = require('./getCaptainOrders');
 const { addCaptain } = require('./addCaptain');
 const { getDetails } = require('./getCaptainDetails');
 const { getCaptainsNames } = require('./getCaptaisnNames');
 
 const router = express.Router();
+
+router.route('/getCaptainOrders/:id')
+  .get(getOrdersDetails);
 
 router.route('/getCaptainDetails/:id')
   .get(getDetails);
