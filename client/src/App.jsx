@@ -1,20 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {Icon}from 'antd';
-// import Customers from './Components/Layouts/Customers/index';
+import Customers from './Components/Layouts/Customers/index';
 import Sidebar from "./Components/CommonComponent/Sidebar";
-import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar";
-import Profile from "./Components/Layouts/SingleCustomer";
-
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
+import OrdersManagement from "./Components/Layouts/Ordersmanagement";
+import SingleCaptain from "./Components/Layouts/SingleCaptains";
+import SingleCastomer from "./Components/Layouts/SingleCustomer";
 import Captains from "./Components/Layouts/Captains"
 
 import "./App.css";
-
-import Viewcaptain from "./Components/Layouts/SingleCaptains";
-// import Captains from "./Components/Layouts/Captains/index"
 
 class App extends Component {
   state = {};
@@ -22,38 +18,32 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+          <Route exact path="/login" component={Login} exact />
+          <Sidebar />
+          <Navbar />
           <Switch>
-            {/* <Route path="/login" component={Login} exact /> */}
-
+            <Route path="/" component={Home} exact />
+            <Route path="/orders" component={OrdersManagement} exact />
             <Route
-              exact
-              path="/captains/profile/:id"
-              render={() => (
-                <div>
-                  <Sidebar />
-                  <Navbar />
-                  <Viewcaptain />
-                </div>
-              )}
-            />
-
-            <Route
-              exact
-              path="/customers/profile/:id"
-              render={() => (
-                <div>
-                  <Sidebar />
-                  <Navbar />
-                  <Profile />
-                </div>
-              )}
-            />
-            {/* <Route
               exact
               path="/customers"
               render={() => (<Customers />)}
-            /> */}
-            
+            />
+            <Route
+              exact
+              path="/captains"
+              render={() => (<Captains />)}
+            />
+            <Route
+              exact
+              path="/captains/profile/:id"
+              render={() => (<SingleCaptain />)}
+            />
+            <Route
+              exact
+              path="/customers/profile/:id"
+              render={() => (<SingleCastomer />)}
+            />
           </Switch>
         </Router>
       </div>
@@ -62,3 +52,4 @@ class App extends Component {
 }
 
 export default App;
+
