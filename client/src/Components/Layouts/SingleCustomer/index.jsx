@@ -6,7 +6,7 @@ import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
-import View from './Popups/viewPopUp';
+import View from "./Popups/viewPopUp";
 
 import "./style.css";
 
@@ -22,7 +22,14 @@ class Profile extends Component {
     },
     visible: false,
     error: "",
-    tableInfo: []
+    tableInfo: [],
+    singleCustomer: {
+      editVisibilty: false,
+      deleteVisibility: false,
+      viewVisibility: false,
+      id: "",
+      information: null
+    }
   };
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -61,12 +68,12 @@ class Profile extends Component {
             avatar: stringChar
           }
         });
-        return fetch (`/api/v1/getCustomerOrders/${id}`)
+        return fetch(`/api/v1/getCustomerOrders/${id}`);
       })
       .then(res => res.json())
       .then(res => {
-        const {error} = res;
-        if(error) this.setState({error});
+        const { error } = res;
+        if (error) this.setState({ error });
         else {
           this.convertToObjectForTable(res.result);
         }
@@ -76,32 +83,46 @@ class Profile extends Component {
       });
   }
 
-  convertToObjectForTable = (results) => {
+  convertToObjectForTable = results => {
     const table = results.map(result => {
       const obj = {};
       const key = Object.keys(result)[0];
       obj.key = key;
-      obj.date= result[key][0].date.split('T')[0];
-      obj.status= result[key][0].status;
-      obj.captain= result[key][0].name;
-      obj.price= result[key][0].total + '$';
+      obj.date = result[key][0].date.split("T")[0];
+      obj.status = result[key][0].status;
+      obj.captain = result[key][0].name;
+      obj.price = result[key][0].total + "$";
       obj.place = result[key][0].place_name;
-      obj.items= result[key][0].items_names;
+      obj.items = result[key][0].items_names;
       return obj;
     });
-    this.setState({tableInfo: table});
-  }
-  handleClick = () => {
-    this.setState({ visible: true });
+    this.setState({ tableInfo: table });
+  };
+  deleteRow = id => {
+    this.setState(prev => {
+      return { tableInfo: prev.tableInfo.filter(data => data.key !== id) };
+    });
+  };
+  handleClick = (value1, value2, id, information) => e => {
+    this.setState(prev => {
+      return {
+        [value1]: {
+          [value2]: !prev[value1][value2],
+          id,
+          information
+        }
+      };
+    });
   };
   render() {
     const {
       personalInformation: { name, phone, status, email, address, avatar },
-      tableInfo
+      tableInfo,
+      singleCustomer: {id, information}
     } = this.state;
     return (
       <>
-        <Header Icon={<img src={avatar} className="avatar"/>} title={name} />
+        <Header Icon={<img src={avatar} className="avatar" />} title={name} />
         <div className="profile">
           <div className="profile__info">
             <h3 className="profile__info__title">المعلومات الشخصية</h3>
@@ -130,9 +151,19 @@ class Profile extends Component {
             <Table
               pageName="singleCustomer"
               columns={tableInfo}
-              ViewPopup={View}
-              EditPopup={Popup}
-              DeletePopup={DeletePopup}
+              viewValues={this.handleClick}
+            />
+            <DeletePopup
+              visible={this.state.singleCustomer.deleteVisibility}
+              visibleFun={this.handleClick}
+              id={id}
+              updateState={this.deleteRow}
+            />
+            <View
+              visible={this.state.singleCustomer.viewVisibility}
+              visibleFun={this.handleClick}
+              id={id}
+              information={information}
             />
           </div>
         </div>
