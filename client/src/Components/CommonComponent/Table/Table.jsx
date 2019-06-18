@@ -14,9 +14,9 @@ class TableCmponent extends Component {
     stores: []
   };
 
-  componentWillReceiveProps(props) {
-    this.setState({ tableData: props.columns });
-  }
+  // componentWillReceiveProps(props) {
+  //   this.setState({ tableData: props.columns });
+  // }
 
   paginationSize = pageSize => {
     this.setState({ pageSize });
@@ -27,10 +27,10 @@ class TableCmponent extends Component {
       viewPopup,
       EditPopup,
       deletePopup,
-      // columns,
+      columns,
     } = this.props;
     const { Column } = Table;
-    const { tableData: columns} = this.state;
+    // const { tableData: columns} = this.state;
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
