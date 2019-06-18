@@ -2,9 +2,7 @@ import React from "react";
 import swal from "sweetalert2";
 import axios from "axios";
 import "./style.css";
-import { Button, Select, Modal } from "antd";
-
-import { Form, Input, Cascader, Icon } from "antd";
+import { Button, Select, Modal, Form, Input, Cascader, Icon } from "antd";
 
 const { Option } = Select;
 class EditForm extends React.Component {
