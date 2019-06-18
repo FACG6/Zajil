@@ -206,7 +206,7 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                  <Icon onClick={this.props.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -263,7 +263,7 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={event => viewPopup(record.key, record, viewHtml)}
+                  <Icon onClick={this.props.viewValues("singleCustomer", "viewVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -271,37 +271,23 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={this.handleClick(
-                      "singleCustomer",
-                      "editVisibilty"
-                    )}
+                  <Icon onClick={this.props.viewValues("singleCustomer",
+                    "editVisibilty",
+                    record.key,
+                    record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="edit"
                   />
-                  <EditPopup
-                    visible={this.state.singleCustomer.editVisibilty}
-                    visibleFun={this.handleClick}
-                    id={record.key}
-                    information={record}
-                  />
                   <Divider type="vertical" />
-                  <Icon onClick={this.handleClick("singleCustomer", "deleteVisibility", record.key)}
+                  <Icon onClick={this.props.viewValues("singleCustomer", "deleteVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                    className={record.key}
-                  />
-                  <DeletePopup
-                    visible={this.state.singleCustomer.deleteVisibility}
-                    visibleFun={this.handleClick}
-                    id={id}
-                    updateState={this.deleteRow}
                   />
                 </span>
               )}
