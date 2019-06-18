@@ -10,6 +10,7 @@ import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./addcustomer";
 import Deletepopup from "./deletecustomer"
+import EditCustomer from "./editcustomer"
 
 
 const { RangePicker } = DatePicker;
@@ -31,14 +32,22 @@ export default class Customers extends Component {
         visible: false,
         loading: true,
         customersPage: {
-            deleteVisibility: false,
-            id: ''
+            delete: {
+                deleteVisibility: false,
+                information: [],
+                id: ''
+            },
+            edit: {
+                editVisibility: false,
+                id: '',
+                information: [],
+            }
+
         },
     }
     componentDidMount() {
         fetch('api/v1/customers').then(res => res.json())
             .then(result => {
-                console.log(result)
                 this.setState({
                     customers: result.result,
                     allData: result.result
@@ -155,27 +164,46 @@ export default class Customers extends Component {
             }
         });
     };
-    handleClick = (value1, value2, id, information) => (e) => {
+    handleClick = (value1, value2, value3, information, id) => (e) => {
+        const { customersPage } = this.state;
         this.setState(
             prev => {
                 return {
                     [value1]: {
-                        [value2]: !prev[value1][value2],
-                        id,
-                        information
+                        ...customersPage
+                        ,
+                        [value2]: {
+                            [value3]: !prev[value1][value2][value3],
+                            information,
+                            id
+                        }
                     }
                 };
             });
+
     };
-    deleteRowCustomer = (id) => {
+    deleteRowCustomer = (id,data) => {
         this.setState((prev) => {
             return {
                 customers: prev.customers.filter((data) => data.pk_i_id !== id)
             }
         });
     }
+    updateState =(id,editedCustomer)=>{
+       let editcustomer= this.state.customers.map(customer=>{
+            if(customer.pk_i_id===id){
+                return editedCustomer[0]
+            } return customer
+        })
+        this.setState({
+            customers:editcustomer
+        })
+    }
     saveFormRef = formRef => {
         this.formRef = formRef;
+    };
+    editFormRef = formEdit => {
+        this.formEdit= formEdit;
     };
     render() {
         if (this.state.customers) {
@@ -195,11 +223,20 @@ export default class Customers extends Component {
                                 onchange={this.onchange}
                             />
                             < Deletepopup
-                                visible={this.state.customersPage.deleteVisibility}
+                                visible={this.state.customersPage.delete.deleteVisibility}
                                 changevisibility={this.handleClick}
-                                id={this.state.customersPage.id}
+                                id={this.state.customersPage.delete.id}
                                 updateState={this.deleteRowCustomer}
                             />
+
+                              <EditCustomer
+                                visible={this.state.customersPage.edit.editVisibility}
+                                information={this.state.customersPage.edit.information}
+                                changevisibility={this.handleClick}
+                                 wrappedComponentRef={this.editFormRef}
+                                id={this.state.customersPage.edit.id}
+                                updateState={this.updateState}
+                            /> 
                             <div className="filtercontainer">
                                 <div classNam="filtercontainer__orderdate">
                                     <RangePicker
