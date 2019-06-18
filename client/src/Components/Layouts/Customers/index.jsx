@@ -44,16 +44,25 @@ export default class Customers extends Component {
             }
 
         },
+        error:''
     }
     componentDidMount() {
-        fetch('api/v1/customers').then(res => res.json())
+        fetch('/api/v1/customers').then(res => {
+            console.log(res)
+            if(res.status===200){
+           return res.json()}else{
+               console.log(res)
+               this.setState({error:res})
+           }
+        }
+            )
             .then(result => {
                 this.setState({
-                    customers: result.result,
-                    allData: result.result
+                    customers: result ? result.result : [] ,
+                    allData: result ? result.result : []
                 })
             }
-            )
+            ).catch((e)=> this.setState({error:e}))
     }
     filterfunction = (date, name, check) => {
         if (check === 'date') {
@@ -206,7 +215,7 @@ export default class Customers extends Component {
         this.formEdit= formEdit;
     };
     render() {
-        if (this.state.customers) {
+        if (this.state.customers && ! this.state.error) {
             return (
                 <div className="containercustomers">
                     <div className="conatinercustomers__customer">
@@ -253,7 +262,7 @@ export default class Customers extends Component {
                     </div>
                 </div>
             )
-        } else {
+        } else if(! this.state.error) {
             return (
                 <div className='sweet-loading'>
                     <ClipLoader
@@ -261,10 +270,13 @@ export default class Customers extends Component {
                         sizeUnit={"px"}
                         size={150}
                         color={'#123abc'}
-
+                        
                         loading={this.state.loading}
                     />
                 </div>)
+        }else {
+           return <h1 className="customer-error">{this.state.error.status} {this.state.error.statusText}</h1>
+           
         }
     }
 }
