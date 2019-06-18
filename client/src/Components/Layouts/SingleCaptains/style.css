@@ -16,7 +16,7 @@
  flex-direction: row-reverse;
  text-align: end;
 }
-.paragraph{
+.view-captain .paragraph{
   width: 25%;
   font-weight: lighter;
 }
@@ -31,9 +31,9 @@
   font-weight: bold;
   font-size: 1.2rem;
 }
-.order-table{
+.view-captain .order-table{
   margin-left: -4rem;
 }
-span{
+.view-captain span{
   margin-left: 1rem;
 }
