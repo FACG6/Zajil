@@ -11,12 +11,7 @@ import "./style.css";
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
-    stores: []
   };
-
-  // componentWillReceiveProps(props) {
-  //   this.setState({ tableData: props.columns });
-  // }
 
   paginationSize = pageSize => {
     this.setState({ pageSize });

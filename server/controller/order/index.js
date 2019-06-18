@@ -9,6 +9,6 @@ router.route('/deleteOrder/:id');
 // .delete(deleteOrder);
 
 router.get('/viewOrders', getOrders);
-router.put('/editOrder/:id', updateOrder);
+// router.put('/editOrder/:id', updateOrder);
 
 module.exports = router;
