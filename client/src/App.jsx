@@ -6,7 +6,6 @@ import Sidebar from "./Components/CommonComponent/Sidebar";
 import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
-
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
 import Captains from "./Components/Layouts/Captains"
@@ -19,6 +18,8 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+          <Sidebar />
+          <Navbar />
           <Switch>
             <Route path="/login" component={Login} exact />
             <Route
