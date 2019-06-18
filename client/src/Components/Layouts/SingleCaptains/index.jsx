@@ -13,7 +13,6 @@ import { notification, Icon } from 'antd';
 
 export default class Viewcaptain extends Component {
   state = {
-
     columns:
       [],
     name: '',

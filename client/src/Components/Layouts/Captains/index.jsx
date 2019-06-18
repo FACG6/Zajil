@@ -74,9 +74,7 @@ class Captains extends Component {
   render() {
     return (
       <div className="containercustomers">
-        <Sidebar />
         <div className="conatinercustomers__customer">
-          <Navbar />
           <Header title="إدارة الكابتن" Icon={<Icon type="team" />} />
           <div className="addcustomer">
             <Button
