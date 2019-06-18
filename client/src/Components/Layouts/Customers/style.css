@@ -249,3 +249,7 @@
   font-size: 10px !important;
   width: 163px !important;
 }
+.customer-error{
+  margin:100px auto;
+  text-align: center;
+}
