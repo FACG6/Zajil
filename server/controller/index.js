@@ -15,7 +15,7 @@ const { getStores } = require('./stores/index');
 
 const router = express.Router();
 // router.use(check);
-// router.use(checkAuth);
+router.use(checkAuth);
 // the all routes start from here
 router.use(customerHandler);
 
