@@ -266,11 +266,10 @@ class CollectionsPage extends React.Component {
             })
           }
           )
-        form.resetFields();
-        this.setState({ visible: false });
       }
     });
-
+    form.resetFields();
+    this.setState({ visible: false });
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
