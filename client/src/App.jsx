@@ -49,8 +49,6 @@ class App extends Component {
               )}
             />
             <Route
-              exact
-              path="/notFound"
               render={() => (<NotFound />)}
             />
             
