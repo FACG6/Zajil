@@ -87,17 +87,17 @@ class TableCmponent extends Component {
                 <span>
                   <Tag
                     color={
-                      b_status === false
+                      b_status === 0
                         ? "volcano"
-                        : b_status === true
+                        : b_status === 1
                         ? "green"
                         : "blue"
                     }
                     key={b_status}
                   >
-                    {b_status === true
+                    {b_status === 1
                       ? "تم"
-                      : b_status === false
+                      : b_status === 0
                       ? "قيد التنفيذ"
                       : b_status}
                   </Tag>

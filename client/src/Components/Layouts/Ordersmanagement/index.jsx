@@ -272,7 +272,7 @@ class OrdersManagement extends Component {
       return (
         <div className="ordersManagement_error-class">
           <h1>
-          {this.state.error.response ? this.state.error.response.status : 'Error' } {this.state.error.response ? 'Error' : '' }, 
+          {this.state.error.response ? this.state.error.response.status : 'Error' } {this.state.error.response ? this.state.error.response.statusText : '' }, 
             {this.state.error.response.data ? this.state.error.response.data : 'try again later' }{" "}
           </h1>
         </div>

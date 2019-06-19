@@ -7,9 +7,13 @@ import Header from "./Components/CommonComponent/Header";
 import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
 import Login from "./Components/Layouts/Login";
-import Ordersmanagement from "./Components/Layouts/Ordersmanagement/index";
+import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
-import Captains from "./Components/Layouts/Captains"
+import Captains from "./Components/Layouts/Captains";
+import NotFound from "./Components/Layouts/NotFound";
+import Ordersmanagement from "./Components/Layouts/Ordersmanagement/index";
+import "./App.css";
+
 import Viewcaptain from "./Components/Layouts/SingleCaptains";
 import "./App.css";
 
@@ -20,8 +24,14 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/" component={Ordersmanagement} exact />
-            {/* <Route path="/login" component={Login} exact /> */}
+            <Route path="/" render={() => (
+              <>
+              <Sidebar />
+              <Navbar />
+              <Home />
+              </>
+            )} exact/>
+            <Route path="/login" component={Login} exact />
 
             <Route
               exact
@@ -45,12 +55,18 @@ class App extends Component {
                   <Profile />
                 </div>
               )}
+              />
+              <Route exact path="/orders" render = {() => (
+                <div>
+                <Sidebar />
+                <Navbar />
+                <Order />
+              </div>
+              )} />
+          
+            <Route
+              render={() => (<NotFound />)}
             />
-              {/* <Route
-              exact
-              path="/customers"
-              render={() => (<Customers />)}
-            /> */}
             
           </Switch>
         </Router>
