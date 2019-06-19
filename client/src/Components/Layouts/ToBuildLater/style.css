@@ -12,14 +12,18 @@
 }
 
 .onProgressTitle{
-    color: #54190b;
+    color: #000000;
     font-size: 3rem;
     margin-left: 1.2rem;
     letter-spacing: 0.1rem;
     display: flex;
     justify-content: center;
     margin-top: 7rem;
-    font-weight: 6.onProgress{
+    font-family: cairo;
+    font-weight: 600;
+    
+}
+.onProgress{
         line-height: 5rem;
         padding-top: 25vh;
     }
