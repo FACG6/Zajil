@@ -4,11 +4,13 @@ import Customers from "./Components/Layouts/Customers/index";
 import Sidebar from "./Components/CommonComponent/Sidebar";
 import Navbar from "./Components/CommonComponent/Navbar";
 import Login from "./Components/Layouts/Login";
+import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
 import OrdersManagement from "./Components/Layouts/Ordersmanagement";
 import SingleCaptain from "./Components/Layouts/SingleCaptains";
 import SingleCastomer from "./Components/Layouts/SingleCustomer";
 import Captains from "./Components/Layouts/Captains";
+import NotFound from "./Components/Layouts/NotFound";
 
 import "./App.css";
 
@@ -85,7 +87,11 @@ class App extends Component {
                   <SingleCastomer />
                 </>
               )}
+              />
+            <Route
+              render={() => (<NotFound />)}
             />
+            
           </Switch>
         </Router>
       </div>
