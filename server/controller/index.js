@@ -22,13 +22,8 @@ router.use(customerHandler);
 router.use(captainHandler);
 
 
-<<<<<<< HEAD
-// router.use(adminHandler);
-=======
 router.use(adminHandler);
-router.use(orderHandler);
 
->>>>>>> 0781a5928a844b7e10d2cf892237a318ebd64ed1
 
 // router.use(protectRoutes);
 // the protected route start from here

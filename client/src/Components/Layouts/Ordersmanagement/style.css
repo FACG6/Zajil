@@ -35,7 +35,7 @@
 .ordersManagement-bars-container .ant-calendar-range-picker-separator {
   padding-right: 1vw;
 }
-.ordersManagement-bars-container .ant-calendar-range-middle {
+.ant-calendar-range-middle {
   left: 69% !important;
 }
 .ordersManagement-bars-container .ordersManagement_error-class {
@@ -44,7 +44,7 @@
   padding: 2vh !important;
   margin-top: 44px;
 }
- .ant-calendar {
+.ant-calendar {
   direction: rtl !important;
 }
 .ant-calendar-picker {
@@ -87,8 +87,8 @@
   background: var(--main-component-color, #212a63) !important;
 }
 .ordersManagement-bars-container input[type="text"],
- input[type="password"],
- input[type="number"],
+input[type="password"],
+input[type="number"],
 textarea {
   -webkit-appearance: none;
   direction: rtl;
@@ -155,16 +155,16 @@ textarea {
   .ordersManagement_sub-container {
     margin-right: 22vw;
   }
-    .ordersManagement_addOrder-button {
+  .ordersManagement_addOrder-button {
     font-size: 77%;
     left: 4vw;
   }
-    .ordersManagement_addOrder-button {
+  .ordersManagement_addOrder-button {
     font-size: 77%;
     left: 4vw;
     padding: 1vw;
   }
-    .ordersManagement_filter-button {
+  .ordersManagement_filter-button {
     width: 15vw;
     left: 4vw;
     font-size: 77%;

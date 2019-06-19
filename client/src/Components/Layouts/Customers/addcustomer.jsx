@@ -46,8 +46,8 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
           onCancel={onCancel}
           onOk={onCreate}
           className="modalcontainer"
-        >modalform
-          <Form className=''>
+        >
+          <Form className='modalform'>
             <div className='modalform__right-container'>
               <Form.Item label="الاسم" layout="horizontal" className='modalform_formitem'>
                 {getFieldDecorator('name', {

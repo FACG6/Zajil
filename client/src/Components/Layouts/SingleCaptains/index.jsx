@@ -5,7 +5,7 @@ import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
 import {
-  viewPopup,
+  // viewPopup,
 
 } from "../../CommonComponent/Table/Popups";
 
@@ -148,7 +148,7 @@ export default class Viewcaptain extends Component {
             <div className="order-table">
               <Table pageName="singleCaptain"
 
-                viewPopup={viewPopup}
+                // // viewPopup={viewPopup}
                 EditPopup={Popup}
                 DeletePopup={DeletePopup}
 

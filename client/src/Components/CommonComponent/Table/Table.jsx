@@ -4,6 +4,7 @@ import { Table, Divider, Tag, Icon } from "antd";
 import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
 import "./style.css";
+import DeletePopup from '../../Layouts/SingleCaptains/Popups/deletePopup'
 
 // the passed input to this component has to be in the following form:
 // (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup).
@@ -25,7 +26,6 @@ class TableCmponent extends Component {
     }
     ,
     tableData: this.props.columns
-
   };
 
   handleClick = (value1, value2, id) => (e) => {
@@ -57,7 +57,7 @@ class TableCmponent extends Component {
       columns,
     } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id } } = this.state;
+    const { tableData: columns1, singleCustomer: { id } } = this.state;
     const { singleCaptain } = this.state;
     if (this.props.pageName === "orders") {
       return (
@@ -98,7 +98,7 @@ class TableCmponent extends Component {
                     {b_status === true
                       ? "تم"
                       : b_status === false
-                      ? "لم يتم"
+                      ? "قيد التنفيذ"
                       : b_status}
                   </Tag>
                 </span>
@@ -232,7 +232,7 @@ class TableCmponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={columns}
+            dataSource={columns1}
             pagination={{
               pageSize: isNaN(this.state.pageSize)
                 ? columns.length

@@ -88,7 +88,7 @@ class OrdersManagement extends Component {
       if (status) {
         let filtered = [];
         const regex1 = new RegExp(/^[(ت)]/);
-        const regex2 = new RegExp(/^[(ل)]/);
+        const regex2 = new RegExp(/^[(ق)]/);
         filtered = object.filter(order => {
           if (
             (order.b_status === true &&
@@ -96,7 +96,7 @@ class OrdersManagement extends Component {
               "تم".indexOf(status) != -1) ||
             (order.b_status === false &&
               regex2.test(status) &&
-              "لم يتم".indexOf(status) != -1)
+              "قيد التنفيذ".indexOf(status) != -1)
           ) {
             return true;
           } else if (order.b_status == status) {
@@ -233,14 +233,14 @@ class OrdersManagement extends Component {
                     id="statusInput"
                     onChange={e => this.filter("status", e.target.value)}
                     className="ordersManagement_status-filter-input"
-                    placeholder="الفلترة حسب الحالة :"
+                    placeholder="البحث حسب الحالة :"
                     value={this.state.status}
                   />
                   <Input
                     value={this.state.name}
                     onChange={e => this.filter("name", e.target.value)}
                     className="ordersManagement_status-filter-input"
-                    placeholder="الفلترة حسب اسم الكابتن :"
+                    placeholder="البحث حسب اسم الكابتن :"
                   />
                   <Button
                     className="ordersManagement_filter-button"
