@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Icon } from "antd";
 
 import CountBox from "../../CommonComponent/CountBox";
+import Header from '../../CommonComponent/Header';
 
 import "./style.css";
 
@@ -36,6 +37,8 @@ class Home extends Component {
   render() {
     const {error, counts: {captains, customers, orders}} = this.state;
     return (
+      <>
+      <Header title = "الصفحة الرئيسية" Icon = {<Icon type="home" />} />
       <div className="box">
         <div className="box__container">
           <CountBox
@@ -63,6 +66,7 @@ class Home extends Component {
         </div>
         <div className="box__error">{error}</div>
       </div>
+      </>
     );
   }
 }
