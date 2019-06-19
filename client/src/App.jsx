@@ -9,8 +9,8 @@ import Profile from "./Components/Layouts/SingleCustomer";
 
 import Login from "./Components/Layouts/Login";
 import Home from "./Components/Layouts/Home";
-import Captains from "./Components/Layouts/Captains"
-
+import Captains from "./Components/Layouts/Captains";
+import NotFound from "./Components/Layouts/NotFound";
 import "./App.css";
 
 import Viewcaptain from "./Components/Layouts/SingleCaptains";
@@ -48,11 +48,11 @@ class App extends Component {
                 </div>
               )}
             />
-            {/* <Route
+            <Route
               exact
-              path="/customers"
-              render={() => (<Customers />)}
-            /> */}
+              path="/notFound"
+              render={() => (<NotFound />)}
+            />
             
           </Switch>
         </Router>
