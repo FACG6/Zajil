@@ -10,6 +10,7 @@ import SingleCaptain from "./Components/Layouts/SingleCaptains";
 import SingleCastomer from "./Components/Layouts/SingleCustomer";
 import Captains from "./Components/Layouts/Captains";
 import NotFound from "./Components/Layouts/NotFound";
+import InProgress from './Components/Layouts/ToBuildLater';
 
 import "./App.css";
 
@@ -94,6 +95,7 @@ class App extends Component {
                 <>
                   <Sidebar />
                   <Navbar />
+                  <InProgress />
                 </>
               )}
             />
