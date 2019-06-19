@@ -23,19 +23,21 @@
     text-align: center;
     height: 2.7rem;
     width: 2.7rem;
-    line-height: 3.1rem;
+    line-height: 2.5rem;
     margin-left: 4rem;
     font-weight: 600;
     background-color: #88B0D6;
-     display: inline;
+    display: inline;
+    margin-top: 0.29rem;
+    font-size: 2.5rem;
 }
 
 .logout{
-    margin-top: .7rem;
+    margin-top: 1rem;
     color: #ecdfdf;
     margin-left: 1.5rem;
+    cursor: pointer;
 }
 .navbar__container{
-    display: flex;
-    
+    display: flex;  
 }
