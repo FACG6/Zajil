@@ -63,8 +63,7 @@ class App extends Component {
                 <Order />
               </div>
               )} />
-             <Route
-            />
+          
             <Route
               render={() => (<NotFound />)}
             />
