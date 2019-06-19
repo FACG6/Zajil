@@ -29,9 +29,10 @@ class Captains extends Component {
   };
 
   componentDidMount() {
-    fetch("api/v1/captains")
+    fetch("/api/v1/captains")
       .then(res => res.json())
       .then(result => {
+        console.log(result.result)
         this.setState({
           captains: result.result,
           allData: result.result
