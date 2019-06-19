@@ -1,10 +1,11 @@
-const { getCaptains } = require('../../../database/queries/captain/getCaptains');
+const {
+  getCaptains,
+} = require('../../../database/queries/captain/getCaptains');
 
 const getCaptain = (request, response) => {
   getCaptains()
     .then((res) => {
       if (res.rows) {
-        console.log(res.rows);
         response.status(200).send({ result: res.rows });
       }
     })
