@@ -381,7 +381,7 @@ export default class CollectionsPage extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
-      const { address, items, phone, phone1, username } = values;
+      const { address, items, phone, phone1, userName } = values;
       const { selectedCaptain, selectedPlaces } = this.state;
       if (err || !items || !selectedCaptain || !selectedPlaces) {
         openNotificationWithIcon("warning", "يرجى ملىء جميع الحقول");
@@ -390,7 +390,7 @@ export default class CollectionsPage extends React.Component {
           address,
           items,
           phone: `+${phone1}${phone}`,
-          customerName: username,
+          customerName: userName,
           placeId: selectedPlaces,
           captainId: selectedCaptain
         };
