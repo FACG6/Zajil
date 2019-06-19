@@ -8,6 +8,7 @@ import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
 
 import Login from "./Components/Layouts/Login";
+import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
 import Captains from "./Components/Layouts/Captains"
 
@@ -23,7 +24,14 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            {/* <Route path="/login" component={Login} exact /> */}
+            <Route path="/" render={() => (
+              <>
+              <Sidebar />
+              <Navbar />
+              <Home />
+              </>
+            )} exact/>
+            <Route path="/login" component={Login} exact />
 
             <Route
               exact
@@ -47,6 +55,15 @@ class App extends Component {
                   <Profile />
                 </div>
               )}
+              />
+              <Route exact path="/orders" render = {() => (
+                <div>
+                <Sidebar />
+                <Navbar />
+                <Order />
+              </div>
+              )} />
+             <Route
             />
             {/* <Route
               exact
