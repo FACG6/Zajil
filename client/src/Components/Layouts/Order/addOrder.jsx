@@ -213,8 +213,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               اضافة طلب{" "}
             </div>
           }
-          okText="أنشئ"
-          cancelText="إالغاء"
+          okText="اضافة"
+          cancelText="إلغاء"
           onCancel={onCancel}
           onOk={onCreate}
           className="modalcontainer"
