@@ -8,9 +8,11 @@ import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
 
 import Login from "./Components/Layouts/Login";
+import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
-import Captains from "./Components/Layouts/Captains"
 import Customers  from "./Components/Layouts/Customers/index"
+import Captains from "./Components/Layouts/Captains";
+import NotFound from "./Components/Layouts/NotFound";
 import "./App.css";
 
 import Viewcaptain from "./Components/Layouts/SingleCaptains";
@@ -23,7 +25,14 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            {/* <Route path="/login" component={Login} exact /> */}
+            <Route path="/" render={() => (
+              <>
+              <Sidebar />
+              <Navbar />
+              <Home />
+              </>
+            )} exact/>
+            <Route path="/login" component={Login} exact />
 
             <Route
               exact
@@ -47,17 +56,28 @@ class App extends Component {
                   <Profile />
                 </div>
               )}
-            />
-            <Route
-              exact
-              path="/customers"
-              render={() => (<Customers />)}
-            />
+              />
+              <Route exact path="/orders" render = {() => (
+                <div>
+                <Sidebar />
+                <Navbar />
+                <Order />
+              </div>
+              )} />
+          
+          <Route
+            exact
+            path="/customers"
+            render={() => (<Customers />)}
+          />
 
-             <Route
-              exact
-              path="/captains"
-              render={() => (<Captains />)}
+           <Route
+            exact
+            path="/captains"
+            render={() => (<Captains />)}
+          />
+            <Route
+              render={() => (<NotFound />)}
             />
           </Switch>
         </Router>
