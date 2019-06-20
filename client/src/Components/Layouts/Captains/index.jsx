@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Icon, notification } from "antd";
 
 import Button from "../../CommonComponent/Button";
-import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 import "./style.css";
 
@@ -95,4 +94,4 @@ class Captains extends Component {
   }
 }
 
-export default Captains;
+export default WrappedComponent(Captains);
