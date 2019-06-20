@@ -228,6 +228,11 @@ class Captains extends Component {
                 id={this.state.captainsPage.delete.id}
                 updateState={this.deleteRowCustomer}
               />
+               {/* <Editcaptain
+               visible={this.state.captainsPage.edit.editVisibility}
+                id={this.state.captainsPage.delete.id}
+              /> */}
+            
               <div className="filtercontainer">
                 <div classNam="filtercontainer__orderdate">
                   <RangePicker

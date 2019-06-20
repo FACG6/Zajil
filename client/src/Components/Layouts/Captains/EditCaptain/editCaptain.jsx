@@ -193,7 +193,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   }
 );
 
-class CollectionsPage extends React.Component {
+class Editcaptain extends React.Component {
   state = {
     visible: false,
   };
@@ -279,12 +279,12 @@ class CollectionsPage extends React.Component {
   render() {
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
+        {/* <Button type="primary" onClick={this.showModal}>
           New Collection
-        </Button>
+        </Button> */}
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
+          visible={this.props.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
         />
@@ -293,4 +293,4 @@ class CollectionsPage extends React.Component {
   }
 }
 
-export default CollectionsPage;
+export default Editcaptain;
