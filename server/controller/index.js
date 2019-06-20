@@ -12,6 +12,7 @@ const orderHandler = require('./order');
 const { getImage } = require('./getImage');
 const placeHandler = require('./place');
 
+
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
@@ -21,13 +22,12 @@ router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
-router.use(captainHandler);
 
 router.use(customerHandler);
 router.use(orderHandler);
 router.use(placeHandler);
 router.route('/image/:name')
   .get(getImage);
-router.use(orderHandler);
+router.use(captainHandler);
 
 module.exports = router;
