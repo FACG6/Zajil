@@ -10,7 +10,7 @@ exports.getImage = (req, res) => {
         res.status(500).send({ error: 'Internal Server Error' });
       } else {
         let base64 = Buffer.from(buffer).toString('base64');
-        base64 = `data:image/png;base64,${base64}`;
+        base64 = `data:image/${extName};base64,${base64}`;
         res.send(base64);
       }
     });

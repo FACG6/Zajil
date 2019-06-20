@@ -22,13 +22,12 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       if (value) {
 
         if (!value.match(/^[0-9]{9}$/)) {
-          cb(' رقم الهاتف يجب ان يكون ارقام فقط وعددها 9 خانات')
+          cb(' رقم الهاتف يجب ان يكون 9 ارقام فقط ')
         }
         else cb()
       } else cb('يرجى ادخال رقم الهاتف')
     }
-    render()
-     {
+    render() {
       const { visible, onCancel, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
@@ -54,16 +53,16 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   rules: [{ required: true, validator: this.handelName }],
                 })(
                   <Input />
-                
+
                 )}
               </Form.Item>
-              <div className='modalform'>
-                <Form.Item label="الهاتف" layout="horizontal" className='modalform_formitem'>
+              <div className='modalform phone-container'>
+                <Form.Item label="الهاتف" layout="horizontal" className='modalform_phone'>
                   {getFieldDecorator('phone', {
                     rules: [
                       {
                         required: true,
-
+                        message: '',
                         validator: this.handlePhone
                       }],
                   })(
@@ -71,7 +70,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   )}
                 </Form.Item>
                 <Form.Item layout="horizontal"
-                 className='modalform_formitem'
+                  className='modalform_formitem'
                 >
                   {getFieldDecorator('prefixPhone', { initialValue: '970' })(
                     <Select
@@ -95,22 +94,22 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
               <Form.Item label="البريدالالكتروني" layout="horizontal" className='modalform_formitem'>
                 {getFieldDecorator('email', {
                   rules: [{ required: true, message: '', validator: this.handelEmail }],
-                })(<Input className='emailinput'/>)}
+                })(<Input className='emailinput-add' />)}
               </Form.Item>
-              <Form.Item
+              <Form.Item className="addressInput"
                 label="العنوان"
               >
                 {getFieldDecorator('address', {
                   rules: [{ required: true, message: 'يرجى ادخال العنوان' }],
-                })(<Input className='addressinput'/>)}
+                })(<Input className='addressinput-add' />)}
               </Form.Item>
               <Form.Item
-                label={<span>كلمة المرور</span> }
+                label={<span>كلمة المرور</span>}
               >
                 {getFieldDecorator('password', {
                   rules: [{ required: true, message: 'يرجى ادخال كلمة المرور' }],
                 })(
-                <Input className='passwordinput' type='password'/>)}
+                  <Input className='passwordinput' type='password' />)}
               </Form.Item>
             </div>
           </Form>

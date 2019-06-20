@@ -29,6 +29,6 @@ router.use(orderHandler);
 router.use(placeHandler);
 router.route('/image/:name')
   .get(getImage);
-router.use(orderHandler);
+router.use(captainHandler);
 
 module.exports = router;

@@ -12,8 +12,9 @@ BEGIN;
         ('منور عماد نور', '+970599999999', 'test3@hotmail.com', true, 'rafah', 'test.png', 2, '123'),
         ('فنور عماد نور', '+970599999999', 'test4@hotmail.com', false, 'gaza', 'test.png', 2, '123'),
         ('سنور عماد نور', '+970599999999', 'test5@hotmail.com', true, 'dear albalah', 'test.png', 2, '123'),
-        ('احمد محمد محمود', '+970599999999', 'test6@hotmail.com', true, 'gaza', 'test.png', 1, '123');
-
+        ('احمد محمد محمود', '+970599999999', 'test6@hotmail.com', true, 'gaza', 'test.png', 1, '123'),
+        ('احمد محمد محمود', '+970599999999', 'test8@hotmail.com', true, 'gaza', 'test.png', 1, '123'),
+        ('محمد محمد محمد', '+970599999999', 'test7@hotmail.com', true, 'gaza', 'test.png', 1, '123');
     INSERT INTO places
         (s_name)
     VALUES
