@@ -14,14 +14,11 @@ router.route('/getCaptainOrders/:id')
 
 router.route('/getCaptainDetails/:id')
   .get(getDetails);
-
-
 router.route('/putCaptain/:id')
   .put(updateCaptain);
-
 router.route('/addCaptain')
   .post(addCaptain);
-
+router.route('/deleteCaptain/:id').delete(deleteCaptain);
 router.route('/getCaptainsNames')
   .get(getCaptainsNames);
 router.route('/captains').get(getCaptain);
