@@ -20,6 +20,7 @@ class TableCmponent extends Component {
   render() {
     const {
       viewPopup,
+      ViewPopup,
       editPopup,
       columns,
       EditPopup,
@@ -74,17 +75,16 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon
-                    onClick={event => viewPopup(record.key, record)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="profile"
+                  <ViewPopup 
+                   customerName={record.customer}
+                   phoneNumber={record.phone ? record.phone : ""}
+                   customerAddress={record.address}
+                   itemsArray={record.items}
+                   storeId={record.storeId}
+                   stores={this.props.stores}
+                   orderId={record.key}
                   />
-
                   <Divider type="vertical" />
-
                   <EditPopup
                     customerName={record.customer}
                     phoneNumber={record.phone ? record.phone : ""}
