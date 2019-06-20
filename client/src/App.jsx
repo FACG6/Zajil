@@ -24,15 +24,14 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route path="/" render={() => (
-              <>
+            <Route exact path="/" render={() => (
+              <React.Fragment>
               <Sidebar />
               <Navbar />
-              <Home />
-              </>
-            )} exact/>
+              <Ordersmanagement />
+              </React.Fragment>
+            )} />
             <Route path="/login" component={Login} exact />
-
             <Route
               exact
               path="/captains/profile/:id"
