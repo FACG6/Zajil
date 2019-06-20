@@ -9,7 +9,10 @@ const getOrders = (req, res) => {
         res.status(204).send('No orders yet');
       }
     })
-    .catch(() => res.status(500).send('Internal server error.'));
+    .catch((e) => {
+      console.log(e);
+      res.status(500).send('Internal server error.') 
+;});
 };
 
 module.exports = { getOrders };
