@@ -55,24 +55,21 @@ class TableCmponent extends Component {
 
   render() {
 
-    const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const { viewPopup, editPopup, pageSize, tableData: columns, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
-    const { tableData: columns} = this.state;
-    // const { singleCaptain } = this.state;
-
     if (this.props.pageName === "orders") {
       return (
         <div className="table-container">
           <DropdownMenu
-            pageSize={this.state.pageSize}
+            pageSize={pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(this.state.pageSize)
+              pageSize: isNaN(pageSize)
                 ? columns.length
-                : parseInt(this.state.pageSize)
+                : parseInt(pageSize)
             }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
@@ -145,15 +142,15 @@ class TableCmponent extends Component {
       return (
         <div className='tablecustomer-container'>
           <DropdownMenu
-            pageSize={this.state.pageSize}
+            pageSize={pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(this.state.pageSize)
+              pageSize: isNaN(pageSize)
                 ? columns.length
-                : parseInt(this.state.pageSize)
+                : parseInt(pageSize)
             }}
           >
             <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
@@ -223,15 +220,15 @@ class TableCmponent extends Component {
       return (
         <div className="table-container">
           <DropdownMenu
-            pageSize={this.state.pageSize}
+            pageSize={pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(this.state.pageSize)
+              pageSize: isNaN(pageSize)
                 ? columns.length
-                : parseInt(this.state.pageSize)
+                : parseInt(pageSize)
             }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
@@ -299,15 +296,15 @@ class TableCmponent extends Component {
       return (
         <div className="table-container">
           <DropdownMenu
-            pageSize={this.state.pageSize}
+            pageSize={pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(this.state.pageSize)
+              pageSize: isNaN(pageSize)
                 ? columns.length
-                : parseInt(this.state.pageSize)
+                : parseInt(pageSize)
             }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
@@ -381,15 +378,15 @@ class TableCmponent extends Component {
       return (
         <div className="table-container">
           <DropdownMenu
-            pageSize={this.state.pageSize}
+            pageSize={pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(this.state.pageSize)
+              pageSize: isNaN(pageSize)
                 ? columns.length
-                : parseInt(this.state.pageSize)
+                : parseInt(pageSize)
             }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
@@ -425,7 +422,7 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon  onClick={this.props.viewValues("singleCaptain", " viewVisibility", record.key, record)}
+                  <Icon  onClick={this.props.viewValues("singleCaptain", "viewVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
