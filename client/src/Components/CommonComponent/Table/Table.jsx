@@ -442,18 +442,14 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={this.props.viewValues(
-                      "singleCaptain",
-                      "editVisibilty",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
+                  <EditPopup
+                    customerName={record.customer}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
                   />
                   <Divider type="vertical" />
                   <Icon
