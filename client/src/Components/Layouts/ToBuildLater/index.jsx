@@ -2,9 +2,11 @@ import React from 'react';
 import './style.css';
 import { Spin, Icon } from 'antd';
 
+import WrappedComponent from '../../HOC/WithNavSide';
 
 
-export default function index() {
+
+const InProgress = () => {
     const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
     return (
       <section className="onProgress">
@@ -15,3 +17,5 @@ export default function index() {
       </section>
     );
 }
+
+export default WrappedComponent(InProgress);

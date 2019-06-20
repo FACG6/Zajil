@@ -6,6 +6,7 @@ import {
   editPopup,
   deletePopup
 } from "../../CommonComponent/Table/Popups";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 class OrdersManagement extends Component {
   state = {
@@ -39,7 +40,7 @@ class OrdersManagement extends Component {
 }
 }
 
-export default OrdersManagement;
+export default WrappedComponent(OrdersManagement);
 
 // columns={[
 //   {

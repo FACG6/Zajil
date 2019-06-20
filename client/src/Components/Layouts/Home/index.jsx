@@ -5,6 +5,7 @@ import { Icon } from "antd";
 
 import CountBox from "../../CommonComponent/CountBox";
 import Header from '../../CommonComponent/Header';
+import WrappedComponent from '../../HOC/WithNavSide';
 
 import "./style.css";
 
@@ -71,4 +72,4 @@ class Home extends Component {
   }
 }
 
-export default withRouter(Home);
+export default WrappedComponent(withRouter(Home));
