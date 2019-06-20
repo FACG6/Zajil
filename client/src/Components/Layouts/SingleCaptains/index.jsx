@@ -27,8 +27,15 @@ class Viewcaptain extends Component {
 
   }
 
+  openNotification (message, description) {
+    notification.open({
+      message: message,
+      description,
+      icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+    });
+  }
   componentDidMount() {
-    const { id } = this.props.id;
+    const { id } = this.props.match.params;
     fetch(`/api/v1/getCaptainDetails/${id}`, {
       method: 'GET'
     })
@@ -64,16 +71,9 @@ class Viewcaptain extends Component {
             })
         }
         else {
-          notification.open({
-            message: 'يتعذر',
-            description:
-              res.error,
-            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-          });
+          this.openNotification('يتعذر', res.error)
         }
       })
-
-
     fetch(`/api/v1/getCaptainOrders/${id}`, {
       method: 'GET'
     })
@@ -87,23 +87,13 @@ class Viewcaptain extends Component {
 
         }
         else {
-          notification.open({
-            message: 'يتعذر',
-            description:
-              res.error,
-            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-          });
+          this.openNotification('يتعذر', res.error)
         }
 
       })
 
       .catch(err => {
-        notification.open({
-          message: 'يتعذر',
-          description:
-            err,
-          icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-        })
+        this.openNotification('يتعذر', 'هناك خطأ ما الرجاء اعادة المحاولة');
       });
 
   }
@@ -124,34 +114,54 @@ class Viewcaptain extends Component {
     this.setState({ columns: table });
   }
   render() {
-
+    const { name, email, address, id_number, licience_number, phone_number, status} = this.state;
     return (
       <div>
         <Header Icon={<img src={this.state.avatar} className="avatar" />} title={this.state.name} />
 
         <div className='view-captain'>
-          <div className='view-captain-personal-information'>
-            <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
-            <div className='view-captain-personal-information-box'>
-
-              <p className='paragraph'><span>الاسم:</span>{this.state.name}</p>
-              <p className='paragraph'>{this.state.email}<span>:البريد الالكتروني</span></p>
-              <p className='paragraph'><span>رقم الهوية:</span> {this.state.id_number}</p>
-              <p className='paragraph'><span>الهاتف المحمول:</span>{this.state.phone_number}</p>
-              <p className='paragraph'><span>الحالة:</span>{this.state.status}</p>
-              <p className='paragraph'><span>العنوان:</span>{this.state.address}</p>
-              <p className='paragraph'><span>رقم الرخصة:</span>{this.state.licience_number}</p>
+          <div className="profile">
+          <div className="profile__info">
+            <h3 className="profile__info__title">المعلومات الشخصية</h3>
+            <div className="profile__box">
+              <p className="profile__box__title">الاسم</p>
+              <p className="profile__value">{name}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">الهاتف المحمول</p>
+              <p className="profile__value">{phone_number}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">الحالة</p>
+              <p className="profile__value">{status}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">البريد الالكتروني</p>
+              <p className="profile__value">{email}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">العنوان</p>
+              <p className="profile__value">{address}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">رقم الرخصة</p>
+              <p className="profile__value">{licience_number}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">رقم الهوية</p>
+              <p className="profile__value">{id_number}</p>
             </div>
           </div>
+          </div>
+
           <div className='view-captain-orders'>
-            <h2 className='view-captain-orders-title'>الطلبات الخاصة بالمستخدم</h2>
+            <h2 className='view-captain-orders-title'>الطلبات الخاصة بالكابتن</h2>
             <div className="order-table">
               <Table pageName="singleCaptain"
 
                 viewPopup={viewPopup}
                 EditPopup={Popup}
                 DeletePopup={DeletePopup}
-
                 columns={this.state.columns}
 
               />
