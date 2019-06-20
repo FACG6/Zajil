@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { css } from "@emotion/core";
-import { ClipLoader } from "react-spinners";
-import "./style.css";
-import { Input, notification, Icon, DatePicker } from "antd";
-import Table from "../../CommonComponent/Table/Table";
-import Button from "../../CommonComponent/Button";
-import Sidebar from "../../CommonComponent/Sidebar/index";
+import React, { Component } from 'react';
+import { css } from '@emotion/core';
+import { ClipLoader } from 'react-spinners';
+import './style.css';
+import { Input, notification, Icon, DatePicker } from 'antd';
+import Table from '../../CommonComponent/Table/Table';
+import Button from '../../CommonComponent/Button';
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./addcustomer";
 import Deletepopup from "./deletecustomer";
 import EditCustomer from "./editcustomer";
+import WrappedComponent from '../../HOC/WithNavSide';
+
 
 const { RangePicker } = DatePicker;
 const override = css`
@@ -18,8 +18,7 @@ const override = css`
   margin: 0 auto;
   border-color: red;
 `;
-
-export default class Customers extends Component {
+ class Customers extends Component {
   state = {
     customers: [],
     title: " إدارةالمستخدمين ",
@@ -305,3 +304,5 @@ export default class Customers extends Component {
     }
   }
 }
+
+export default WrappedComponent(Customers);

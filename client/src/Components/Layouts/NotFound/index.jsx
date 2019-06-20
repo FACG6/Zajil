@@ -1,7 +1,10 @@
 import React from 'react';
+
+import WrappedComponent from '../../HOC/WithNavSide';
+
 import './style.css';
 
-export default function index() {
+const NotFound = () => {
     return (
       <section className="pageNotFoundMain">
         <div>
@@ -11,3 +14,5 @@ export default function index() {
       </section>
     );
 }
+
+export default WrappedComponent(NotFound);

@@ -171,21 +171,21 @@ export default class Sidebar extends Component {
 
             </div>
             <div className={`sidebar__dropdowncontainer ${reports.display}`}>
-              <Link to="" className="sidebar__links ">
+              <Link to="/in-progress" className="sidebar__links ">
                 <span>
                   تقارير الكابتن
               <Icon type="profile" className='icon-style' />
                 </span>
 
               </Link>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   تقارير المستخدم
               <Icon type="profile" className='icon-style' />
                 </span>
 
               </Link>
-              <Link to="" className="sidebar__links ">
+              <Link to="/in-progress" className="sidebar__links ">
                 <span>
                   تقارير عامة
               {' '}
@@ -202,7 +202,7 @@ export default class Sidebar extends Component {
               <Icon type={msg.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
             </div>
             <div className={`sidebar__dropdowncontainer ${msg.display}`}>
-              <Link to="" className="sidebar__links ">
+              <Link to="/in-progress" className="sidebar__links ">
                 <span>
                   رسائل قصيرة
               {' '}
@@ -210,7 +210,7 @@ export default class Sidebar extends Component {
                 </span>
 
               </Link>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   اشعارات
               {' '}
@@ -221,7 +221,7 @@ export default class Sidebar extends Component {
             </div>
             <div className='home'>
 
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   إدارة الاستفسارات
             {' '}
@@ -231,7 +231,7 @@ export default class Sidebar extends Component {
               </Link>
             </div>
             <div className='home'>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   إدارة البروموكود
             {' '}
@@ -250,7 +250,7 @@ export default class Sidebar extends Component {
               <Icon type={settings.arrow} style={{ marginLeft: '1.3rem', fontSize: '15px' }} />
             </div>
             <div className={`sidebar__dropdowncontainer ${settings.display}`}>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   ثوابت النظام
               {' '}
@@ -259,7 +259,7 @@ export default class Sidebar extends Component {
                 </span>
 
               </Link>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   ثوابت لوحة التحكم
               {' '}
@@ -268,7 +268,7 @@ export default class Sidebar extends Component {
                 </span>
 
               </Link>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   إدارة الاماكن العامة
               {' '}
@@ -279,7 +279,7 @@ export default class Sidebar extends Component {
               </Link>
             </div>
             <div className='home'>
-              <Link to="" className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   إتصل بنا
             {' '}

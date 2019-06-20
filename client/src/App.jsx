@@ -1,19 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {Icon}from 'antd';
-import Customers from './Components/Layouts/Customers/index';
-import Sidebar from "./Components/CommonComponent/Sidebar";
-import Navbar from "./Components/CommonComponent/Navbar";
-import Profile from "./Components/Layouts/SingleCustomer";
+import Customers from "./Components/Layouts/Customers/index";
 import Login from "./Components/Layouts/Login";
-import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
+import OrdersManagement from "./Components/Layouts/Ordersmanagement";
+import SingleCaptain from "./Components/Layouts/SingleCaptains";
+import SingleCastomer from "./Components/Layouts/SingleCustomer";
 import Captains from "./Components/Layouts/Captains";
 import NotFound from "./Components/Layouts/NotFound";
-import "./App.css";
+import InProgress from './Components/Layouts/ToBuildLater';
 
-import Viewcaptain from "./Components/Layouts/SingleCaptains";
-// import Captains from "./Components/Layouts/Captains/index"
+import "./App.css";
 
 class App extends Component {
   state = {};
@@ -21,61 +18,45 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-            <Route path="/login" component={Login} exact />
-          <Sidebar />
-          <Navbar />
+          <Route path="/login" component={Login} exact />
           <Switch>
-            <Route path="/" render={() => (
-              <>
-              <Sidebar />
-              <Navbar />
-              <Home />
-              </>
-            )} exact/>
-            <Route path="/login" component={Login} exact />
-
             <Route
+              path="/"
+              component = {Home}
               exact
-              path="/captains/profile/:id"
-              render={() => (
-                <div>
-                  <Sidebar />
-                  <Navbar />
-                  <Viewcaptain />
-                </div>
-              )}
             />
-
             <Route
+              path="/orders"
+              component={OrdersManagement}
               exact
-              path="/customers/profile/:id"
-              render={() => (
-                <div>
-                  <Profile />
-                </div>
-              )}
-              />
-              <Route exact path="/orders" render = {() => (
-                <div>
-                <Sidebar />
-                <Navbar />
-                <Order />
-              </div>
-              )} />
-          
+            />
             <Route
               exact
               path="/customers"
-              render={() => (<Customers />)}
-            />
-             <Route
-              exact
-              path="/captains"
-              render={() => (<Captains />)}
+              component={Customers}
             />
             <Route
-              render={() => (<NotFound />)}
+              exact
+              path="/captains"
+              component={Captains}
             />
+            <Route
+              exact
+              path="/captains/profile/:id"
+              component={SingleCaptain}
+            />
+            <Route
+              exact
+              path="/customers/profile/:id"
+              component={SingleCastomer}
+            />
+            <Route
+              exact
+              path="/in-progress"
+              component={InProgress}
+            />
+
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </div>
