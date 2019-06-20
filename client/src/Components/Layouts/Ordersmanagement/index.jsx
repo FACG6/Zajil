@@ -10,7 +10,7 @@ import { EditPopup } from "../../CommonComponent/Table/Popups";
 import {
   //   viewPopup,
 } from "../../CommonComponent/Table/Popups";
-import DeletePopup from '../../CommonComponent/Table/Popups';
+import { DeletePopup } from '../../CommonComponent/Table/Popups';
 import "./style.css";
 import WrappedComponent from '../../HOC/WithNavSide';
 
@@ -207,7 +207,6 @@ class OrdersManagement extends Component {
   };
 
   render() {
-  console.log(22222,this.state.orders)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
@@ -266,7 +265,6 @@ class OrdersManagement extends Component {
                   //   viewPopup={viewPopup}
                   EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
-                  editHtml="<input type='text' placeholder='name' id='name'>"
                   columns={
                     this.state.filter === true
                       ? this.state.filteredOrders
@@ -290,4 +288,4 @@ class OrdersManagement extends Component {
   }
 }
 
-export default OrdersManagement;
+export default WrappedComponent(OrdersManagement);

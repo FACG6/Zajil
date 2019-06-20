@@ -19,7 +19,6 @@ const getOrdersQuery = () => connection
           e.items = e.items.map(item => ({ itemId: item[0], name: item[1], price: item[2] }));
         }
       });
-      console.log(87546541, res.rows);
       return res.rows;
     }));
 

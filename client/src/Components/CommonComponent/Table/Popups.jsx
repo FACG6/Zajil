@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import swal from "sweetalert2";
 import axios from "axios";
 import "./style.css";
 import { Button, Select, Modal, Form, Input, Cascader, Icon, notification  } from "antd";
@@ -514,7 +513,6 @@ class DeletePopup extends Component {
       })
       .catch(() => {
         this.openNotificationWithIcon('warning', 'Error, please try again');
-        this.props.visibleFun("singleCustomer", "deleteVisibility")(e);
       });
   };
   handleCancel = e => {
@@ -548,13 +546,6 @@ class DeletePopup extends Component {
     );
   }
 }
-
-export default DeletePopup;
-
-
-
-
-
 
 export { EditPopup, DeletePopup };
 

@@ -42,7 +42,6 @@ class NavBar extends Component {
         this.openNotificationWithIcon('error', 'هناك خطأ الرجاء المحاولة مرة اخرى')
       }
     }).catch((error) => {
-      console.log(error);
       this.openNotificationWithIcon('error', 'هناك خطأ الرجاء المحاولة مرة اخرى')
     })
   }

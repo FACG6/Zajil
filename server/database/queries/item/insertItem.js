@@ -8,6 +8,6 @@ const insertItemQuery = (items, orderId) => {
     v += 2;
   }
   sql += `($1, $${v}, $${v + 1})`;
-  return connection.query(sql, [orderId, ...Object.values(items[0])]).then(res => console.log(1111111115454654, res));
+  return connection.query(sql, [orderId, ...Object.values(items[0])]);
 };
 module.exports = insertItemQuery;

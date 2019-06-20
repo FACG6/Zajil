@@ -23,7 +23,6 @@ const queriesPromise = (items, orderId) => new Promise((resolve, reject) => {
 });
 
 const updateOrder = (req, res) => {
-  console.log(465453);
   const {
     phone, address, items, storeID,
   } = req.body;
@@ -33,7 +32,6 @@ const updateOrder = (req, res) => {
       res.status(200).send('updated successfully');
     })
     .catch((e) => {
-      console.log(e);
       res.status(500).send('Internal server error');
     });
 };
