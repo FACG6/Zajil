@@ -16,7 +16,6 @@ class TableCmponent extends Component {
   };
 
   componentWillReceiveProps(props) {
-    console.log(props);
     this.setState({ tableData: props.columns });
   }
 
