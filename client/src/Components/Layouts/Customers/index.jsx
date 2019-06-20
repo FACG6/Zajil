@@ -5,11 +5,10 @@ import './style.css';
 import { Input, notification, Icon, DatePicker } from 'antd';
 import Table from '../../CommonComponent/Table/Table';
 import Button from '../../CommonComponent/Button';
-import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./addcustomer";
-import Deletepopup from "./deletecustomer"
+import Deletepopup from "./deletecustomer";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 
 const { RangePicker } = DatePicker;
@@ -19,7 +18,7 @@ const override = css`
     border-color: red;
 `;
 
-export default class Customers extends Component {
+class Customers extends Component {
     state = {
         customers: [],
         title: ' إدارةالمستخدمين ',
@@ -181,9 +180,9 @@ export default class Customers extends Component {
         if (this.state.customers) {
             return (
                 <div className="containercustomers">
-                    <Sidebar />
+                    
                     <div className="conatinercustomers__customer">
-                        <Navbar />
+                        
                         <Header title='إدارة المستخدمين' Icon={<Icon type="team" />} />
                         <div className='addcustomer'>
                             <Button name='إضافة مستخدم' icon={<Icon type="user" />} onClick={this.showModal} />
@@ -233,3 +232,5 @@ export default class Customers extends Component {
         }
     }
 }
+
+export default WrappedComponent(Customers);

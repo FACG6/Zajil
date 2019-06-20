@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Icon, notification } from "antd";
 
 import Button from "../../CommonComponent/Button";
-import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 import "./style.css";
 
@@ -74,9 +73,7 @@ class Captains extends Component {
   render() {
     return (
       <div className="containercustomers">
-        <Sidebar />
         <div className="conatinercustomers__customer">
-          <Navbar />
           <Header title="إدارة الكابتن" Icon={<Icon type="team" />} />
           <div className="addcustomer">
             <Button
@@ -97,4 +94,4 @@ class Captains extends Component {
   }
 }
 
-export default Captains;
+export default WrappedComponent(Captains);
