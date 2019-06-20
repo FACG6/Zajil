@@ -290,7 +290,7 @@ class TableCmponent extends Component {
                           ? "green"
                           : "blue"
                     }
-                    key={b_status}
+                    key={status}
                   >
                     {status === true ? "فعال" : status === false ? "غير فعال" : status}
                   </Tag>
