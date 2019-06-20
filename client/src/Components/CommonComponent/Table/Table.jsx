@@ -90,7 +90,7 @@ class TableCmponent extends Component {
                   />
 
                   <Divider type="vertical" />
-                  
+
                   <DeletePopup deleteRow={this.props.deleteRow} id={record.key} />
 
                 </span>
@@ -320,7 +320,7 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  {/* <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
+                  <Icon onClick={this.props.handleClick("captainsPage","delete","deleteVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
