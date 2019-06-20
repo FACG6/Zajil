@@ -6,12 +6,10 @@ import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
-import { EditPopup, DeletePopup } from "../../CommonComponent/Table/Popups";
-import {
-  //   viewPopup,
-} from "../../CommonComponent/Table/Popups";
+import { EditPopup, DeletePopup, ViewPopup } from "../../CommonComponent/Table/Popups";
+import CollectionsPage from '../Order/addOrder';
+// import { viewPopup } from "../../CommonComponent/Table/Popups";
 import "./style.css";
-import WrappedComponent from '../../HOC/WithNavSide';
 
 class OrdersManagement extends Component {
   state = {
@@ -35,6 +33,7 @@ class OrdersManagement extends Component {
           error.response.data = "Error, No orders yet.";
           this.setState({ error });
         } else {
+          console.log(res.data)
           this.setState({ orders: res.data });
         }
       })
@@ -50,15 +49,8 @@ class OrdersManagement extends Component {
           this.setState({ stores: res.data });
         }
       })
-      .catch(error => {
-        this.setState({ error })});
+      .catch(error => this.setState({ error }));
   }
-
-  deleteRow = id => {
-    this.setState(prev => {
-      return { orders: prev.orders.filter(data => data.key !== id) };
-    });
-  };
 
   dateFilter = object => {
     if (object) {
@@ -83,9 +75,8 @@ class OrdersManagement extends Component {
             return filtered;
           }
         }
-      } else {
-        return object;
       }
+        return object;
     }
   };
 
@@ -98,10 +89,10 @@ class OrdersManagement extends Component {
         const regex2 = new RegExp(/^[(ق)]/);
         filtered = object.filter(order => {
           if (
-            (order.b_status === true &&
+            (order.b_status === 1 &&
               regex1.test(status) &&
               "تم".indexOf(status) != -1) ||
-            (order.b_status === false &&
+            (order.b_status === 0 &&
               regex2.test(status) &&
               "قيد التنفيذ".indexOf(status) != -1)
           ) {
@@ -161,6 +152,7 @@ class OrdersManagement extends Component {
       if (date) {
         filtered = this.dateFilter(orders);
         if (name) {
+          filtered = this.nameFilter(filtered);
         }
         filtered = this.statusFilter(filtered);
         this.setState({ filteredOrders: filtered, filter: true });
@@ -205,22 +197,37 @@ class OrdersManagement extends Component {
     });
   };
 
+  deleteRow = id => {
+    this.setState(prev => {
+      return { orders: prev.orders.filter(data => data.key !== id) };
+    });
+  };
+
+  updateOrdersStateVariable = (order) => {
+    console.log(order)
+  }
+
   render() {
+    console.log(this.state.order)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
       return (
         <div className="ordersManagement-bars-container">
+          <Sidebar />
           <div className="ordersManagement-main-container">
+            <Navbar />
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                <Button
+                {/* <Button
                   className="ordersManagement_addOrder-button"
                   type="primary"
+                  ///////////////
                 >
                   إضافة طلب
-                </Button>
+                </Button> */}
+                <CollectionsPage updateOrdersStateVariable={this.updateOrdersStateVariable} />
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
@@ -240,14 +247,14 @@ class OrdersManagement extends Component {
                     id="statusInput"
                     onChange={e => this.filter("status", e.target.value)}
                     className="ordersManagement_status-filter-input"
-                    placeholder="البحث حسب الحالة :"
+                    placeholder="الفلترة حسب الحالة :"
                     value={this.state.status}
                   />
                   <Input
                     value={this.state.name}
                     onChange={e => this.filter("name", e.target.value)}
                     className="ordersManagement_status-filter-input"
-                    placeholder="البحث حسب اسم الكابتن :"
+                    placeholder="الفلترة حسب اسم الكابتن :"
                   />
                   <Button
                     className="ordersManagement_filter-button"
@@ -258,12 +265,12 @@ class OrdersManagement extends Component {
                   </Button>
                 </div>
                 <TableComponent
-                  deleteRow = {this.deleteRow} 
                   stores={this.state.stores}
                   pageName="orders"
-                  //   viewPopup={viewPopup}
+                  ViewPopup={ViewPopup}
                   EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
+                  deleteRow={this.deleteRow}
                   columns={
                     this.state.filter === true
                       ? this.state.filteredOrders
@@ -279,7 +286,8 @@ class OrdersManagement extends Component {
       return (
         <div className="ordersManagement_error-class">
           <h1>
-          {this.state.error.response ? this.state.error.response.status : 'Error' } {this.state.error.response ? this.state.error.response.statusText : '' }
+          {this.state.error.response ? this.state.error.response.status : 'Error' } {this.state.error.response ? 'Error' : '' }, 
+            {this.state.error.response.data ? this.state.error.response.data : 'try again later' }{" "}
           </h1>
         </div>
       );
@@ -287,4 +295,4 @@ class OrdersManagement extends Component {
   }
 }
 
-export default WrappedComponent(OrdersManagement);
+export default OrdersManagement;

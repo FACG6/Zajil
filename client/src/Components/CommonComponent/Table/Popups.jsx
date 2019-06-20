@@ -1,7 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./style.css";
-import { Button, Select, Modal, Form, Input, Cascader, Icon, notification  } from "antd";
+import {
+  Button,
+  Select,
+  Modal,
+  Form,
+  Input,
+  Cascader,
+  Icon,
+  notification
+} from "antd";
 
 const { Option } = Select;
 class EditForm extends React.Component {
@@ -17,8 +26,12 @@ class EditForm extends React.Component {
 
   componentDidMount() {
     this.setState({
-      itemsInputs: this.props.itemsArray ?  JSON.parse(JSON.stringify(this.props.itemsArray)) : [],
-      originalItems: this.props.itemsArray ? JSON.parse(JSON.stringify(this.props.itemsArray)) : []
+      itemsInputs: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : [],
+      originalItems: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : []
     });
   }
 
@@ -34,10 +47,13 @@ class EditForm extends React.Component {
       }
       let deletedItems = [],
         newItems = [];
-      for (let i =0; i < this.state.originalItems.length; i++) {
+      for (let i = 0; i < this.state.originalItems.length; i++) {
         let exist = false;
         for (let j = 0; j < this.state.itemsInputs.length; j++) {
-          if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
+          if (
+            JSON.stringify(this.state.originalItems[i]) ===
+            JSON.stringify(this.state.itemsInputs[j])
+          ) {
             exist = true;
           }
         }
@@ -48,7 +64,10 @@ class EditForm extends React.Component {
       for (let j in this.state.itemsInputs) {
         let edited = true;
         for (let i in this.state.originalItems) {
-          if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
+          if (
+            JSON.stringify(this.state.originalItems[i]) ===
+            JSON.stringify(this.state.itemsInputs[j])
+          ) {
             edited = false;
           }
         }
@@ -66,7 +85,7 @@ class EditForm extends React.Component {
               "-" +
               values.phone,
             address: values.address,
-            items: { deleted:deletedItems, edited:newItems },
+            items: { deleted: deletedItems, edited: newItems },
             storeID: storeId
           })
           .then(res => {
@@ -176,8 +195,8 @@ class EditForm extends React.Component {
   };
   resetEverything = () => {
     this.props.form.resetFields();
-    this.setState({itemsInputs: this.state.originalItems})
-  }
+    this.setState({ itemsInputs: this.state.originalItems });
+  };
   render() {
     const { customerName, phoneNumber, customerAddress } = this.props;
     const { getFieldDecorator } = this.props.form;
@@ -252,7 +271,7 @@ class EditForm extends React.Component {
                 <div className="popupModal_form-items-container">
                   <Form.Item label="رقم الهاتف">
                     {getFieldDecorator("phone", {
-                      initialValue: phoneNumber,
+                      initialValue: phoneNumber ? phoneNumber.substring(4) : "",
                       rules: [
                         { required: true, message: "يرجى إدخال رقم الهاتف !" }
                       ]
@@ -465,7 +484,7 @@ class EditForm extends React.Component {
           >
             <div className="popupModal_error-class">
               <h1>
-              {this.state.error.response
+                {this.state.error.response
                   ? this.state.error.response.status
                   : "Error"}{" "}
                 {this.state.error.response
@@ -486,26 +505,38 @@ class ViewForm extends React.Component {
     visible: false,
     storeNameArray: [],
     itemsInputs: [],
-    key: 0
+    key: 0,
+    storeName:''
   };
 
   componentDidMount() {
     this.setState({
-      itemsInputs: this.props.itemsArray ?  JSON.parse(JSON.stringify(this.props.itemsArray)) : [],
+      itemsInputs: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : []
     });
   }
 
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
   };
 
   handleCancel = () => {
     this.setState({
-      visible: false,
+      visible: false
     });
   };
+getStoreName = () => {
+  let storeName = "";
+  for (let i = 0; i < this.props.stores.length; i++) {
+    if (this.props.stores[i].id == this.props.storeID) {
+      storeName = this.props.stores[i].label;
+    }
+  }
+  this.setState({storeName});
+}
 
   render() {
     const { customerName, phoneNumber, customerAddress } = this.props;
@@ -535,285 +566,154 @@ class ViewForm extends React.Component {
     };
 
     const prefixSelector = getFieldDecorator("prefix", {
-      initialValue: "970"
-    })(
-      <Select style={{ width: 70 }}>
-        <Option value="970">+970</Option>
-        <Option value="972">+972</Option>
-      </Select>
-    );
-    if (!this.state.error) {
-      return (
-        <React.Fragment>
-          <Icon
-            type="edit"
-            style={{
-              fontSize: "1.2rem",
-              color: "rgba(0, 0, 0, 0.65)"
-            }}
-            onClick={this.showModal}
-          />
-          <Modal
-            className="popupModal"
-            visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            destroyOnClose={true}
-          >
-            <div className="modalHeader">
-              <Icon type="down-square" />
-              <h2>تعديل الطلب</h2>
-            </div>
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-              <div style={{ display: "block" }}>
-                <div className="popupModal_form-items-container">
-                  <Form.Item
-                    label={
-                      <span>
-                        <span className="popupModal_storeName-label">*</span>إسم
-                        الزبون
-                      </span>
-                    }
-                  >
-                    <Input readOnly defaultValue={customerName} />
-                  </Form.Item>
-                </div>
-                <div className="popupModal_form-items-container">
-                  <Form.Item label="رقم الهاتف">
-                    {getFieldDecorator("phone", {
-                      initialValue: phoneNumber,
-                      rules: [
-                        { required: true, message: "يرجى إدخال رقم الهاتف !" }
-                      ]
-                    })(
-                      <Input
-                        addonBefore={prefixSelector}
-                        style={{ width: "100%" }}
-                      />
-                    )}
-                  </Form.Item>
-                </div>
-                <div className="popupModal_form-items-container">
-                  <Form.Item label="العنوان">
-                    {getFieldDecorator("address", {
-                      initialValue: customerAddress,
-                      rules: [
-                        {
-                          required: true,
-                          message: "يرجى إدخال العنوان !"
-                        }
-                      ]
-                    })(<Input />)}
-                  </Form.Item>
-                </div>
-                <div className="popupModal_form-items-container">
-                  <Form.Item
-                    className="popupModal_formItem-item-price-container"
-                    label="إضافة عنصر"
-                  >
-                    {getFieldDecorator("item", {
-                      initialValue: this.state.itemsInputs[0]
-                        ? this.state.itemsInputs[0].name
-                        : "",
-                      rules: [
-                        {
-                          required: true,
-                          message: " "
-                        },
-                        {
-                          validator: this.validateItem
-                        }
-                      ]
-                    })(
-                      <Input
-                        onChange={e => this.setNewItem("name", e, 0)}
-                        placeholder="أدخل العنصر"
-                      />
-                    )}
-                    <Form.Item>
-                      {getFieldDecorator("itemPrice", {
-                        initialValue: this.state.itemsInputs[0]
-                          ? this.state.itemsInputs[0].price
-                          : "",
-                        rules: [
-                          {
-                            required: true,
-                            message: " "
-                          },
-                          {
-                            validator: this.validateItemPrice
-                          }
-                        ]
-                      })(
-                        <Input
-                          onChange={e => this.setNewItem("price", e, 0)}
-                          className="popupModal_item-price-input"
-                          placeholder="$"
-                        />
-                      )}
-                    </Form.Item>
-                  </Form.Item>
-                  <div className="popupModal_form-extra-items-container">
-                    <div style={{ "margin-bottom": "24px" }}>
-                      {this.state.itemsInputs.slice(1).map((field, index) => {
-                        return (
-                          <React.Fragment>
-                            <Form.Item>
-                              <Form.Item>
-                                {getFieldDecorator(index.toString(), {
-                                  initialValue: field.name,
-                                  rules: [
-                                    {
-                                      required: true,
-                                      message: " "
-                                    },
-                                    {
-                                      validator: this.validateItem
-                                    }
-                                  ]
-                                })(
-                                  <Input
-                                    className="popupModal_item-extra-input"
-                                    placeholder="أدخل العنصر"
-                                    onChange={e =>
-                                      this.setNewItem("name", e, index + 1)
-                                    }
-                                  />
-                                )}
-                              </Form.Item>
-                              <Form.Item>
-                                {getFieldDecorator(index.toString() + "*", {
-                                  initialValue: field.price,
-                                  rules: [
-                                    {
-                                      required: true,
-                                      message: " "
-                                    },
-                                    {
-                                      validator: this.validateItemPrice
-                                    }
-                                  ]
-                                })(
-                                  <Input
-                                    className="popupModal_item-price-input"
-                                    placeholder="$"
-                                    onChange={e =>
-                                      this.setNewItem("price", e, index + 1)
-                                    }
-                                  />
-                                )}
-                              </Form.Item>
-                            </Form.Item>
-                            <Icon
-                              onClick={() => this.removeInput(index + 1)}
-                              className="popupModal_remove-item-icon"
-                              type="minus-circle"
-                            />
-                          </React.Fragment>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <Icon
-                    onClick={this.appendInput}
-                    className="popupModal_add-item-icon"
-                    type="plus-circle"
-                  />
-                </div>
-              </div>
-              <div className="marketAndButtonsDiv">
+      initialValue: phoneNumber.substring(0, 4)
+    });
+    return (
+      <React.Fragment>
+        <Icon
+          type="profile"
+          style={{
+            fontSize: "1.2rem",
+            color: "rgba(0, 0, 0, 0.65)"
+          }}
+          onClick={this.showModal}
+        />
+        <Modal
+          className="popupModal ViewPopup"
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          destroyOnClose={true}
+        >
+          <div className="modalHeader">
+            <Icon type="down-square" />
+            <h2>عرض الطلب</h2>
+          </div>
+          <Form className="ViewPopup" ViewPopup {...formItemLayout} onSubmit={this.handleSubmit}>
+            <div style={{ display: "block" }}>
+              <div className="popupModal_form-items-container">
                 <Form.Item
                   label={
                     <span>
-                      <span className="popupModal_storeName-label">*</span> إختر
-                      المتجر
+                      <span className="popupModal_storeName-label" />إسم الزبون
                     </span>
                   }
                 >
-                  {getFieldDecorator("storeName", {
-                    rules: [
-                      {
-                        type: "array"
-                      },
-                      {
-                        validator: this.validateStoreName
-                      }
-                    ]
-                  })(<Cascader options={this.props.stores} />)}
-                </Form.Item>
-                <p className="popupModal_storeName-manualInput">
-                  أو أدخل إسم المتجر
-                </p>
-                <Form.Item>
-                  {getFieldDecorator("storeNameManual", {
-                    rules: [
-                      {
-                        // required: true,
-                        message: " "
-                      },
-                      {
-                        validator: this.validateStoreNameManual
-                      }
-                    ]
-                  })(<Input readOnly onChange={this.storeNameInput} />)}
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                  <Button type="primary" htmlType="submit">
-                    حفظ
-                  </Button>
-                  <Button
-                    className="cancelButton"
-                    type="default"
-                    onClick={this.handleCancel}
-                  >
-                    إلغاء
-                  </Button>
+                  <Input readOnly defaultValue={customerName} />
                 </Form.Item>
               </div>
-            </Form>
-          </Modal>
-        </React.Fragment>
-      );
-    } else {
-      return (
-        <React.Fragment>
-          <Icon
-            type="edit"
-            style={{
-              fontSize: "1.2rem",
-              color: "rgba(0, 0, 0, 0.65)"
-            }}
-            onClick={this.showModal}
-          />
-          <Modal
-            className="ErrorPopupModal popupModal"
-            visible={this.state.visible}
-            onOk={this.handleOk}
-            onCancel={this.handleCancel}
-            destroyOnClose={{ disabled: false }}
-          >
-            <div className="popupModal_error-class">
-              <h1>
-              {this.state.error.response
-                  ? this.state.error.response.status
-                  : "Error"}{" "}
-                {this.state.error.response
-                  ? this.state.error.response.data
-                  : "try again later"}{" "}
-              </h1>
+              <div className="popupModal_form-items-container">
+                <Form.Item label="رقم الهاتف">
+                  {getFieldDecorator("phone", {
+                    initialValue: phoneNumber ? phoneNumber.substring(4) : ""
+                  })(
+                    <Input
+                      readOnly
+                      addonBefore={prefixSelector}
+                      style={{ width: "100%" }}
+                    />
+                  )}
+                </Form.Item>
+              </div>
+              <div className="popupModal_form-items-container">
+                <Form.Item label="العنوان">
+                  {getFieldDecorator("address", {
+                    initialValue: customerAddress
+                  })(<Input readOnly />)}
+                </Form.Item>
+              </div>
+              <div className="popupModal_form-items-container">
+                <Form.Item
+                  className="popupModal_formItem-item-price-container"
+                  label="العناصر"
+                >
+                  {getFieldDecorator("item", {
+                    initialValue: this.state.itemsInputs[0]
+                      ? this.state.itemsInputs[0].name
+                      : ""
+                  })(<Input readOnly placeholder="أدخل العنصر" />)}
+                  <Form.Item>
+                    {getFieldDecorator("itemPrice", {
+                      initialValue: this.state.itemsInputs[0]
+                        ? this.state.itemsInputs[0].price
+                        : ""
+                    })(
+                      <Input
+                        readOnly
+                        className="popupModal_item-price-input"
+                        placeholder="$"
+                      />
+                    )}
+                  </Form.Item>
+                </Form.Item>
+                <div className="popupModal_form-extra-items-container">
+                  <div style={{ "margin-bottom": "24px" }}>
+                    {this.state.itemsInputs.slice(1).map((field, index) => {
+                      return (
+                        <React.Fragment>
+                          <Form.Item>
+                            <Form.Item>
+                              {getFieldDecorator(index.toString(), {
+                                initialValue: field.name
+                              })(
+                                <Input
+                                  readOnly
+                                  className="popupModal_item-extra-input"
+                                />
+                              )}
+                            </Form.Item>
+                            <Form.Item>
+                              {getFieldDecorator(index.toString() + "*", {
+                                initialValue: field.price
+                              })(
+                                <Input
+                                  readOnly
+                                  className="popupModal_item-price-input"
+                                  placeholder="$"
+                                />
+                              )}
+                            </Form.Item>
+                          </Form.Item>
+                        </React.Fragment>
+                      );
+                    })}
+                  </div>
+                </div>
+                <Icon
+                  onClick={this.appendInput}
+                  className="popupModal_add-item-icon"
+                  type="plus-circle"
+                />
+              </div>
             </div>
-            {this.resetEverything}
-          </Modal>
-        </React.Fragment>
-      );
-    }
+            <div className="marketAndButtonsDiv">
+              <Form.Item
+                label={
+                  <span>
+                    <span className="popupModal_storeName-label">*</span> المتجر
+                  </span>
+                }
+              >
+                <Input readOnly defaultValue={this.state.storeName} />
+              </Form.Item>
+              <Form.Item {...tailFormItemLayout}>
+                <Button
+                  className="cancelButton"
+                  type="default"
+                  onClick={this.handleCancel}
+                >
+                  إغلاق
+                </Button>
+              </Form.Item>
+            </div>
+          </Form>
+        </Modal>
+      </React.Fragment>
+    );
   }
 }
 
-
-
-
 const EditPopup = Form.create()(EditForm);
+const ViewPopup = Form.create()(ViewForm);
 
 class DeletePopup extends Component {
   state = {
@@ -828,7 +728,7 @@ class DeletePopup extends Component {
   };
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
   };
   handleOk = e => {
@@ -844,42 +744,42 @@ class DeletePopup extends Component {
         }
       })
       .catch(() => {
-        this.openNotificationWithIcon('warning', 'Error, please try again');
+        this.openNotificationWithIcon("warning", "Error, please try again");
       });
   };
   handleCancel = e => {
-    this.setState({visible:false})
+    this.setState({ visible: false });
   };
 
   render() {
     return (
       <React.Fragment>
-      <Icon
-      type="delete"
-      style={{
-        fontSize: "1.2rem",
-        color: "rgba(0, 0, 0, 0.65)"
-      }}
-      onClick={this.showModal}
-    />
-      <Modal
-        title="حذف الطلب"
-        visible={this.state.visible}
-        onOk={this.handleOk}
-        cancelText="الغاء"
-        okText="حذف"
-        onCancel={this.handleCancel}
-        style={{ direction: "rtl", }}
-        className="deleteModal"
-      >
-        <p>هل تريد بالتأكيد حذف الطلب ؟</p>
-      </Modal>
-     </React.Fragment>
+        <Icon
+          type="delete"
+          style={{
+            fontSize: "1.2rem",
+            color: "rgba(0, 0, 0, 0.65)"
+          }}
+          onClick={this.showModal}
+        />
+        <Modal
+          title="حذف الطلب"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          cancelText="الغاء"
+          okText="حذف"
+          onCancel={this.handleCancel}
+          style={{ direction: "rtl" }}
+          className="deleteModal"
+        >
+          <p>هل تريد بالتأكيد حذف الطلب ؟</p>
+        </Modal>
+      </React.Fragment>
     );
   }
 }
 
-export { EditPopup, DeletePopup, ViewForm };
+export { EditPopup, DeletePopup, ViewPopup };
 
 // const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
 //   const span = document.createElement('span');
