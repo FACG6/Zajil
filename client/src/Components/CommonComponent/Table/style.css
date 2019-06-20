@@ -332,6 +332,8 @@ textarea {
 }
 .popupModal .popupModal_formItem-item-price-container .ant-form-item-control .ant-form-item-children .ant-form-item-with-help .ant-col .ant-form-item-control .ant-form-explain {
   margin-top: 0px;
+  width: 39px;
+  font-size: 10px !important;
 }
 .popupModal .ant-form-horizontal > div:first-child {
   height: 262px;
