@@ -19,10 +19,10 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-          <Route path="/login" component={Login} exact />
+            <Route path="/login" component={Login} exact />
             <Route
               path="/"
-              component = {Home}
+              component={Home}
               exact
             />
             <Route
