@@ -6,11 +6,10 @@ import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
-import { EditPopup } from "../../CommonComponent/Table/Popups";
+import { EditPopup, DeletePopup } from "../../CommonComponent/Table/Popups";
 import {
   //   viewPopup,
 } from "../../CommonComponent/Table/Popups";
-import { DeletePopup } from '../../CommonComponent/Table/Popups';
 import "./style.css";
 import WrappedComponent from '../../HOC/WithNavSide';
 
