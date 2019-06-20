@@ -11,41 +11,12 @@ import "./style.css";
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
-    // singleCustomer: {
-    //   editVisibilty: false,
-    //   deleteVisibility: false,
-    //   viewVisibility: false,
-    //   id: ''
-    // },
-    // singleCaptain: {
-    //   editVisibilty: false,
-    //   deleteVisibility: false,
-    //   viewVisibility: false,
-    //   id: ''
-    // }
-    // ,
     tableData: this.props.columns
 
   };
 
-  // handleClick = (value1, value2, id) => (e) => {
-  //   this.setState(
-  //     prev => {
-  //       return {
-  //         [value1]: {
-  //           [value2]: !prev[value1][value2],
-  //           id
-  //         }
-  //       };
-  //     });
-  // };
-  // deleteRow = (id) => {
-  //   this.setState((prev) => {
-  //     return { tableData: prev.tableData.filter((data) => data.key !== id) }
-  //   });
-  // }
-
   componentWillReceiveProps(props) {
+    console.log(props);
     this.setState({ tableData: props.columns });
   }
 
@@ -55,7 +26,8 @@ class TableCmponent extends Component {
 
   render() {
 
-    const { viewPopup, editPopup, pageSize, tableData: columns, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const { tableData: columns, pageSize } = this.state;
     const { Column } = Table;
     if (this.props.pageName === "orders") {
       return (
@@ -307,27 +279,27 @@ class TableCmponent extends Component {
                 : parseInt(pageSize)
             }}
           >
-            <Column title="إسم الكابتن" dataIndex="s_name" key="captain" />
-            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
-            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
-            <Column title="العنوان" dataIndex="s_address" key="address" />
+            <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
+            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
+            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
+            <Column title="العنوان" dataIndex="address" key="address" />
             <Column
               title="الحالة"
-              dataIndex="b_status"
+              dataIndex="status"
               key="status"
               render={status => (
                 <span>
                   <Tag
                     color={
-                      status === false
+                      status === "غير فعال"
                         ? "volcano"
-                        : status === true
+                        : status === "فعال"
                           ? "green"
                           : "blue"
                     }
                     key={status}
                   >
-                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
+                    {status}
                   </Tag>
                 </span>
               )}
@@ -340,10 +312,9 @@ class TableCmponent extends Component {
                   <Icon
                     onClick={() => {
                       this.props.history.push(
-                        `/captains/profile/${record.pk_i_id}`
+                        `/getCaptainDetails/${record.key}`
                       );
                     }}
-                    
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
