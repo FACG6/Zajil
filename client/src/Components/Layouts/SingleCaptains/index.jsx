@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {withRouter}from 'react-router-dom'
 import './style.css';
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
+import WrappedComponent from '../../HOC/WithNavSide';
 import {
   // viewPopup,
 
@@ -11,9 +13,8 @@ import {
 
 import { notification, Icon } from 'antd';
 
-export default class Viewcaptain extends Component {
+ class Viewcaptain extends Component {
   state = {
-
     columns:
       [],
     name: '',
@@ -28,8 +29,8 @@ export default class Viewcaptain extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.id;
-    fetch(`/api/v1/getCaptainDetails/${id}`, {
+    const { pk_i_id } = this.props.match.params;
+    fetch(`/api/v1/getCaptainDetails/${pk_i_id}`, {
       method: 'GET'
     })
       .then(res => res.json())
@@ -74,7 +75,7 @@ export default class Viewcaptain extends Component {
       })
 
 
-    fetch(`/api/v1/getCaptainOrders/${id}`, {
+    fetch(`/api/v1/getCaptainOrders/${pk_i_id}`, {
       method: 'GET'
     })
 
@@ -163,4 +164,4 @@ export default class Viewcaptain extends Component {
   }
 
 }
-
+export default WrappedComponent(Viewcaptain);

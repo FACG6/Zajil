@@ -12,6 +12,7 @@ import {
   deletePopup
 } from "../../CommonComponent/Table/Popups";
 import "./style.css";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 class OrdersManagement extends Component {
   state = {

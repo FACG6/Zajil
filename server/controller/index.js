@@ -17,13 +17,7 @@ const router = express.Router();
 // router.use(check);
 // router.use(checkAuth);
 // the all routes start from here
-// router.use(customerHandler);
-
-// router.use(captainHandler);
-
-
-// router.use(adminHandler);
-
+router.use(adminHandler);
 
 // router.use(protectRoutes);
 // the protected route start from here
@@ -36,5 +30,6 @@ router.use(customerHandler);
 router.use(orderHandler);
 router.route('/image/:name')
   .get(getImage);
+router.use(orderHandler);
 
 module.exports = router;
