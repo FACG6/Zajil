@@ -24,83 +24,41 @@ class App extends Component {
           <Switch>
             <Route
               path="/"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <Home />
-                </>
-              )}
+              component = {Home}
               exact
             />
             <Route
               path="/orders"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <OrdersManagement />
-                </>
-              )}
+              component={OrdersManagement}
               exact
             />
             <Route
               exact
               path="/customers"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <Customers />
-                </>
-              )}
+              component={Customers}
             />
             <Route
               exact
               path="/captains"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <Captains />
-                </>
-              )}
+              component={Captains}
             />
             <Route
               exact
               path="/captains/profile/:id"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <SingleCaptain />
-                </>
-              )}
+              component={SingleCaptain}
             />
             <Route
               exact
               path="/customers/profile/:id"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <SingleCastomer />
-                </>
-              )}
+              component={SingleCastomer}
             />
             <Route
               exact
               path="/in-progress"
-              render={() => (
-                <>
-                  <Sidebar />
-                  <Navbar />
-                  <InProgress />
-                </>
-              )}
+              component={InProgress}
             />
 
-            <Route render={() => <NotFound />} />
+            <Route component={NotFound} />
           </Switch>
         </Router>
       </div>
