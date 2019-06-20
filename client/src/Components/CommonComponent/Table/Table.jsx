@@ -17,15 +17,7 @@ class TableCmponent extends Component {
       viewVisibility: false,
       id: ''
     },
-    singleCaptain: {
-      editVisibilty: false,
-      deleteVisibility: false,
-      viewVisibility: false,
-      id: ''
-    }
-    ,
-    tableData: this.props.columns
-
+     tableData: this.props.columns
   };
 
   handleClick = (value1, value2, id) => (e) => {
@@ -57,7 +49,10 @@ class TableCmponent extends Component {
 
     const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id } } = this.state;
+    const { 
+      tableData: columns,
+      //  singleCustomer: { id, information } 
+    } = this.state;
     const { singleCaptain } = this.state;
 
     if (this.props.pageName === "orders") {
@@ -198,7 +193,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                  <Icon onClick={this.props.handleClick("customersPage","edit","editVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -206,7 +201,7 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
+                  <Icon onClick={this.props.handleClick("customersPage","delete", "deleteVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
