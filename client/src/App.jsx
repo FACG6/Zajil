@@ -64,9 +64,6 @@ class App extends Component {
               )} />
           
             <Route
-              render={() => (<NotFound />)}
-            />
-            <Route
               exact
               path="/customers"
               render={() => (<Customers />)}
@@ -75,6 +72,9 @@ class App extends Component {
               exact
               path="/captains"
               render={() => (<Captains />)}
+            />
+            <Route
+              render={() => (<NotFound />)}
             />
           </Switch>
         </Router>
