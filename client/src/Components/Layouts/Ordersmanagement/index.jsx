@@ -10,7 +10,7 @@ import { EditPopup } from "../../CommonComponent/Table/Popups";
 import {
   //   viewPopup,
 } from "../../CommonComponent/Table/Popups";
-import DeletePopup from '../SingleCustomer/Popups/deletePopup';
+import DeletePopup from '../../CommonComponent/Table/Popups';
 import "./style.css";
 import WrappedComponent from '../../HOC/WithNavSide';
 
@@ -207,6 +207,7 @@ class OrdersManagement extends Component {
   };
 
   render() {
+  console.log(22222,this.state.orders)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
