@@ -136,7 +136,6 @@ import { notification, Icon } from 'antd';
   };
   render() {
     const { columns, avatar, name, email, address, id_number, licience_number, phone_number, status, singleCaptain} = this.state;
-    console.log(columns);
     return (
       <div>
         <Header Icon={<img src={avatar} className="avatar" />} title={name} />

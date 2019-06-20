@@ -6,7 +6,7 @@ import DropdownMenu from "./dropdownMenu";
 import "./style.css";
 
 // the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup).
 
 class TableCmponent extends Component {
   state = {
@@ -19,7 +19,7 @@ class TableCmponent extends Component {
 
   render() {
 
-    const { viewPopup, editPopup, columns, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const { viewPopup, editPopup, columns, EditPopup, DeletePopup } = this.props;
     const {  pageSize } = this.state;
     const { Column } = Table;
     if (this.props.pageName === "orders") {
@@ -42,21 +42,21 @@ class TableCmponent extends Component {
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
             <Column
               title="الحالة"
-              dataIndex="status"
-              key="status"
-              render={status => (
+              dataIndex="b_status"
+              key="b_status"
+              render={b_status => (
                 <span>
                   <Tag
                     color={
-                      status === "تم إلغاؤه"
+                      b_status == 0
                         ? "volcano"
-                        : status === "تم"
-                          ? "green"
-                          : "blue"
+                        : b_status == 1
+                        ? "green"
+                        : "blue"
                     }
-                    key={status}
+                    key={b_status}
                   >
-                    {status}
+                    {b_status == 1 ? 'تم' : b_status == 0 ? 'قيد التنفيذ' : b_status}
                   </Tag>
                 </span>
               )}
@@ -69,7 +69,7 @@ class TableCmponent extends Component {
                 <span>
 
                   <Icon
-                    onClick={event => viewPopup(record.key, record, viewHtml)}
+                    onClick={event => viewPopup(record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -78,24 +78,20 @@ class TableCmponent extends Component {
                   />
 
                   <Divider type="vertical" />
-
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
+                  
+                  <EditPopup
+                    customerName={record.customer}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
                   />
 
                   <Divider type="vertical" />
 
-                  <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                  />
+                  <DeletePopup deleteRow={this.props.deleteRow} id={record.key} />
 
                 </span>
               )}
@@ -316,7 +312,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                  <Icon onClick={event => editPopup(record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -330,7 +326,7 @@ class TableCmponent extends Component {
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                  />
+                  /> */}
                 </span>
               )}
             />
@@ -338,9 +334,6 @@ class TableCmponent extends Component {
         </div>
       );
     } else if (this.props.pageName === "singleCaptain") {
-
-
-
       return (
         <div className="table-container">
           <DropdownMenu
@@ -378,9 +371,6 @@ class TableCmponent extends Component {
                 </span>
               )}
             />
-
-
-
             <Column title="السعر" dataIndex="price" key="price" />
 
             <Column
@@ -432,9 +422,6 @@ TableCmponent.propTypes = {
   viewPopup: PropTypes.func.isRequired,
   editPopup: PropTypes.func.isRequired,
   deletePopup: PropTypes.func.isRequired,
-  viewHtml: PropTypes.string.isRequired,
-  editHtml: PropTypes.string.isRequired,
-  deleteHtml: PropTypes.string.isRequired,
 };
 
 const TableComponent = withRouter(TableCmponent);

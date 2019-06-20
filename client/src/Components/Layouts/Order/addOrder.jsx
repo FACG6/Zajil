@@ -406,7 +406,6 @@ export default class CollectionsPage extends React.Component {
             } else{
               openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
               // here make function to update table of orders
-              console.log(res.result);
             }
             this.handleVisible();
           })
