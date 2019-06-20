@@ -164,4 +164,4 @@ import { notification, Icon } from 'antd';
   }
 
 }
-export default withRouter(Viewcaptain)
+export default WrappedComponent(Viewcaptain);
