@@ -4,10 +4,9 @@ import { Table, Divider, Tag, Icon } from "antd";
 import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
 import "./style.css";
-import DeletePopup from '../../Layouts/SingleCaptains/Popups/deletePopup'
 
 // the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", b_status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup).
+// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup, viewHtml, editHtml, deleteHtml).
 
 class TableCmponent extends Component {
   state = {
@@ -20,7 +19,7 @@ class TableCmponent extends Component {
 
   render() {
 
-    const { viewPopup, editPopup, columns, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
+    const { viewPopup, editPopup, columns, EditPopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const {  pageSize } = this.state;
     const { Column } = Table;
     if (this.props.pageName === "orders") {
@@ -49,19 +48,15 @@ class TableCmponent extends Component {
                 <span>
                   <Tag
                     color={
-                      b_status === 0
+                      b_status == 0
                         ? "volcano"
-                        : b_status === 1
+                        : b_status == 1
                         ? "green"
                         : "blue"
                     }
                     key={b_status}
                   >
-                    {b_status === 1
-                      ? "تم"
-                      : b_status === 0
-                      ? "قيد التنفيذ"
-                      : b_status}
+                    {b_status == 1 ? 'تم' : b_status == 0 ? 'قيد التنفيذ' : b_status}
                   </Tag>
                 </span>
               )}
@@ -72,8 +67,9 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
+
                   <Icon
-                    onClick={event => viewPopup(record.key, record)}
+                    onClick={event => viewPopup(record.key, record, viewHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -82,7 +78,7 @@ class TableCmponent extends Component {
                   />
 
                   <Divider type="vertical" />
-
+                  
                   <EditPopup
                     customerName={record.customer}
                     phoneNumber={record.phone ? record.phone : ""}
@@ -94,8 +90,9 @@ class TableCmponent extends Component {
                   />
 
                   <Divider type="vertical" />
+                  
+                  <DeletePopup deleteRow={this.props.deleteRow} id={record.key} />
 
-                    <DeletePopup deleteRow={this.props.deleteRow} id={record.key} />
                 </span>
               )}
             />
@@ -104,7 +101,7 @@ class TableCmponent extends Component {
       );
     } else if (this.props.pageName === "customers") {
       return (
-        <div className="table-container">
+        <div className='tablecustomer-container'>
           <DropdownMenu
             pageSize={pageSize}
             paginationSize={this.paginationSize}
@@ -117,26 +114,26 @@ class TableCmponent extends Component {
                 : parseInt(pageSize)
             }}
           >
-            <Column title="إسم الزبوون" dataIndex="customer" key="customer" />
-            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
-            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
+            <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
+            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
+            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
             <Column
               title="الحالة"
               dataIndex="b_status"
-              key="b_status"
-              render={b_status => (
+              key="status"
+              render={status => (
                 <span>
                   <Tag
                     color={
-                      b_status === "غير فعال"
+                      status === false
                         ? "volcano"
-                        : b_status === "فعال"
-                        ? "green"
-                        : "blue"
+                        : status === true
+                          ? "green"
+                          : "blue"
                     }
-                    key={b_status}
+                    key={status}
                   >
-                    {b_status}
+                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
                   </Tag>
                 </span>
               )}
@@ -149,7 +146,7 @@ class TableCmponent extends Component {
                   <Icon
                     onClick={() => {
                       this.props.history.push(
-                        `/getCustomerDetails/${record.key}`
+                        `/customers/profile/${record.pk_i_id}`
                       );
                     }}
                     style={{
@@ -180,8 +177,7 @@ class TableCmponent extends Component {
           </Table>
         </div>
       );
-    } 
-    else if (this.props.pageName === "singleCustomer") {
+    } else if (this.props.pageName === "singleCustomer") {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -200,21 +196,21 @@ class TableCmponent extends Component {
             <Column title="التاريخ" dataIndex="date" key="date" />
             <Column
               title="الحالة"
-              dataIndex="b_status"
-              key="b_status"
-              render={b_status => (
+              dataIndex="status"
+              key="status"
+              render={status => (
                 <span>
                   <Tag
                     color={
-                      b_status === "جاري التنفيذ"
+                      status === "جاري التنفيذ"
                         ? "#FFC700"
-                        : b_status === "تم"
-                        ? "green"
-                        : "blue"
+                        : status === "تم"
+                          ? "green"
+                          : "blue"
                     }
-                    key={b_status}
+                    key={status}
                   >
-                    {b_status}
+                    {status}
                   </Tag>
                 </span>
               )}
@@ -316,18 +312,21 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <EditPopup />
+                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "rgba(0, 0, 0, 0.65)"
+                    }}
+                    type="edit"
+                  />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event =>
-                      deletePopup(record.key, record)
-                    }
+                  {/* <Icon onClick={event => deletePopup(record.key, record, deleteHtml)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                  />
+                  /> */}
                 </span>
               )}
             />
@@ -353,21 +352,21 @@ class TableCmponent extends Component {
             <Column title="التاريخ" dataIndex="date" key="date" />
             <Column
               title="الحالة"
-              dataIndex="b_status"
-              key="b_status"
-              render={b_status => (
+              dataIndex="status"
+              key="status"
+              render={status => (
                 <span>
                   <Tag
                     color={
-                      b_status === "جاري التنفيذ"
+                      status === "جاري التنفيذ"
                         ? "#FFC700"
-                        : b_status === "تم"
-                        ? "green"
-                        : "blue"
+                        : status === "تم"
+                          ? "green"
+                          : "blue"
                     }
-                    key={b_status}
+                    key={status}
                   >
-                    {b_status}
+                    {status}
                   </Tag>
                 </span>
               )}
@@ -421,7 +420,11 @@ class TableCmponent extends Component {
 TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
+  editPopup: PropTypes.func.isRequired,
   deletePopup: PropTypes.func.isRequired,
+  viewHtml: PropTypes.string.isRequired,
+  editHtml: PropTypes.string.isRequired,
+  deleteHtml: PropTypes.string.isRequired,
 };
 
 const TableComponent = withRouter(TableCmponent);
