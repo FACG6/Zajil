@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter}from 'react-router-dom'
 import './style.css';
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
@@ -6,14 +7,10 @@ import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
 import WrappedComponent from '../../HOC/WithNavSide';
-import {
-  viewPopup,
-
-} from "../../CommonComponent/Table/Popups";
 
 import { notification, Icon } from 'antd';
 
-class Viewcaptain extends Component {
+ class Viewcaptain extends Component {
   state = {
     columns: [],
     name: '',
@@ -88,11 +85,9 @@ class Viewcaptain extends Component {
 
       .then(res => res.json())
       .then(res => {
-
         if (res.result) {
           const rows = res.result;
           this.convertToObjectForTable(rows);
-
         }
         else {
           this.openNotification('يتعذر', res.error)
@@ -121,11 +116,13 @@ class Viewcaptain extends Component {
     });
     this.setState({ columns: table });
   }
+
   deleteRow = id => {
     this.setState(prev => {
       return { columns: prev.columns.filter(data => data.key !== id) };
     });
   };
+
   handleClick = (value1, value2, id, information) => e => {
     this.setState(prev => {
       return {
@@ -139,6 +136,7 @@ class Viewcaptain extends Component {
   };
   render() {
     const { columns, avatar, name, email, address, id_number, licience_number, phone_number, status, singleCaptain} = this.state;
+    console.log(columns);
     return (
       <div>
         <Header Icon={<img src={avatar} className="avatar" />} title={name} />
@@ -205,6 +203,4 @@ class Viewcaptain extends Component {
   }
 
 }
-
 export default WrappedComponent(Viewcaptain);
-
