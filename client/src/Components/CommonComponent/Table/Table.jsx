@@ -10,7 +10,7 @@ import "./style.css";
 
 class TableCmponent extends Component {
   state = {
-    pageSize: "10",
+    pageSize: "10"
   };
 
   paginationSize = pageSize => {
@@ -18,9 +18,14 @@ class TableCmponent extends Component {
   };
 
   render() {
-
-    const { viewPopup, editPopup, columns, EditPopup, DeletePopup } = this.props;
-    const {  pageSize } = this.state;
+    const {
+      viewPopup,
+      editPopup,
+      columns,
+      EditPopup,
+      DeletePopup
+    } = this.props;
+    const { pageSize } = this.state;
     const { Column } = Table;
     if (this.props.pageName === "orders") {
       return (
@@ -32,9 +37,7 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize)
-                ? columns.length
-                : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
             }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
@@ -56,7 +59,11 @@ class TableCmponent extends Component {
                     }
                     key={b_status}
                   >
-                    {b_status == 1 ? 'تم' : b_status == 0 ? 'قيد التنفيذ' : b_status}
+                    {b_status == 1
+                      ? "تم"
+                      : b_status == 0
+                      ? "قيد التنفيذ"
+                      : b_status}
                   </Tag>
                 </span>
               )}
@@ -67,7 +74,6 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-
                   <Icon
                     onClick={event => viewPopup(record.key, record)}
                     style={{
@@ -78,7 +84,7 @@ class TableCmponent extends Component {
                   />
 
                   <Divider type="vertical" />
-                  
+
                   <EditPopup
                     customerName={record.customer}
                     phoneNumber={record.phone ? record.phone : ""}
@@ -91,8 +97,10 @@ class TableCmponent extends Component {
 
                   <Divider type="vertical" />
 
-                  <DeletePopup deleteRow={this.props.deleteRow} id={record.key} />
-
+                  <DeletePopup
+                    deleteRow={this.props.deleteRow}
+                    id={record.key}
+                  />
                 </span>
               )}
             />
@@ -101,7 +109,7 @@ class TableCmponent extends Component {
       );
     } else if (this.props.pageName === "customers") {
       return (
-        <div className='tablecustomer-container'>
+        <div className="tablecustomer-container">
           <DropdownMenu
             pageSize={pageSize}
             paginationSize={this.paginationSize}
@@ -109,14 +117,16 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize)
-                ? columns.length
-                : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
             }}
           >
             <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
             <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
-            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
+            <Column
+              title="رقم الجوال"
+              dataIndex="s_mobile_number"
+              key="mobileNo"
+            />
             <Column
               title="الحالة"
               dataIndex="b_status"
@@ -128,12 +138,16 @@ class TableCmponent extends Component {
                       status === false
                         ? "volcano"
                         : status === true
-                          ? "green"
-                          : "blue"
+                        ? "green"
+                        : "blue"
                     }
                     key={status}
                   >
-                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
+                    {status === true
+                      ? "فعال"
+                      : status === false
+                      ? "غير فعال"
+                      : status}
                   </Tag>
                 </span>
               )}
@@ -156,7 +170,14 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("customersPage","edit","editVisibility",record,record.pk_i_id)}
+                  <Icon
+                    onClick={this.props.handleClick(
+                      "customersPage",
+                      "edit",
+                      "editVisibility",
+                      record,
+                      record.pk_i_id
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -164,7 +185,14 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("customersPage","delete", "deleteVisibility",record,record.pk_i_id)}
+                  <Icon
+                    onClick={this.props.handleClick(
+                      "customersPage",
+                      "delete",
+                      "deleteVisibility",
+                      record,
+                      record.pk_i_id
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -187,9 +215,7 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize)
-                ? columns.length
-                : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
             }}
           >
             <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
@@ -205,8 +231,8 @@ class TableCmponent extends Component {
                       status === "جاري التنفيذ"
                         ? "#FFC700"
                         : status === "تم"
-                          ? "green"
-                          : "blue"
+                        ? "green"
+                        : "blue"
                     }
                     key={status}
                   >
@@ -221,7 +247,13 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={this.props.viewValues("singleCustomer", "viewVisibility", record.key, record)}
+                  <Icon
+                    onClick={this.props.viewValues(
+                      "singleCustomer",
+                      "viewVisibility",
+                      record.key,
+                      record
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -229,10 +261,13 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.viewValues("singleCustomer",
-                    "editVisibilty",
-                    record.key,
-                    record)}
+                  <Icon
+                    onClick={this.props.viewValues(
+                      "singleCustomer",
+                      "editVisibilty",
+                      record.key,
+                      record
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -240,7 +275,13 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.viewValues("singleCustomer", "deleteVisibility", record.key, record)}
+                  <Icon
+                    onClick={this.props.viewValues(
+                      "singleCustomer",
+                      "deleteVisibility",
+                      record.key,
+                      record
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -253,7 +294,7 @@ class TableCmponent extends Component {
           </Table>
         </div>
       );
-    }else if (this.props.pageName === "captains") {
+    } else if (this.props.pageName === "captains") {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -270,7 +311,11 @@ class TableCmponent extends Component {
           >
             <Column title="إسم الكابتن" dataIndex="s_name" key="captain" />
             <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
-            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
+            <Column
+              title="رقم الجوال"
+              dataIndex="s_mobile_number"
+              key="mobileNo"
+            />
             <Column title="العنوان" dataIndex="s_address" key="address" />
             <Column
               title="الحالة"
@@ -283,12 +328,16 @@ class TableCmponent extends Component {
                       status === false
                         ? "volcano"
                         : status === true
-                          ? "green"
-                          : "blue"
+                        ? "green"
+                        : "blue"
                     }
                     key={status}
                   >
-                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
+                    {status === true
+                      ? "فعال"
+                      : status === false
+                      ? "غير فعال"
+                      : status}
                   </Tag>
                 </span>
               )}
@@ -304,7 +353,6 @@ class TableCmponent extends Component {
                         `/captains/profile/${record.pk_i_id}`
                       );
                     }}
-                    
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -312,7 +360,8 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record)}
+                  <Icon
+                    onClick={event => editPopup(record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -320,13 +369,20 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("captainsPage","delete","deleteVisibility",record,record.pk_i_id)}
+                  <Icon
+                    onClick={this.props.handleClick(
+                      "captainsPage",
+                      "delete",
+                      "deleteVisibility",
+                      record,
+                      record.pk_i_id
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                  /> */}
+                  />{" "}
                 </span>
               )}
             />
@@ -343,9 +399,7 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize)
-                ? columns.length
-                : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
             }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
@@ -361,8 +415,8 @@ class TableCmponent extends Component {
                       status === "جاري التنفيذ"
                         ? "#FFC700"
                         : status === "تم"
-                          ? "green"
-                          : "blue"
+                        ? "green"
+                        : "blue"
                     }
                     key={status}
                   >
@@ -378,7 +432,13 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon  onClick={this.props.viewValues("singleCaptain", "viewVisibility", record.key, record)}
+                  <Icon
+                    onClick={this.props.viewValues(
+                      "singleCaptain",
+                      "viewVisibility",
+                      record.key,
+                      record
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -386,11 +446,13 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.viewValues(
-                    "singleCaptain",
-                    "editVisibilty",
-                    record.key, record)}
-                  
+                  <Icon
+                    onClick={this.props.viewValues(
+                      "singleCaptain",
+                      "editVisibilty",
+                      record.key,
+                      record
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -398,7 +460,13 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon  onClick={this.props.viewValues("singleCaptain", "deleteVisibility", record.key, record)}
+                  <Icon
+                    onClick={this.props.viewValues(
+                      "singleCaptain",
+                      "deleteVisibility",
+                      record.key,
+                      record
+                    )}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -406,7 +474,6 @@ class TableCmponent extends Component {
                     type="delete"
                     className={record.key}
                   />
-
                 </span>
               )}
             />
@@ -421,7 +488,7 @@ TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
   editPopup: PropTypes.func.isRequired,
-  deletePopup: PropTypes.func.isRequired,
+  deletePopup: PropTypes.func.isRequired
 };
 
 const TableComponent = withRouter(TableCmponent);
