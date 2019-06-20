@@ -6,9 +6,10 @@ import Sidebar from "./Components/CommonComponent/Sidebar";
 import Navbar from "./Components/CommonComponent/Navbar";
 import Profile from "./Components/Layouts/SingleCustomer";
 import Login from "./Components/Layouts/Login";
+import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
-import Captains from "./Components/Layouts/Captains"
-
+import Captains from "./Components/Layouts/Captains";
+import NotFound from "./Components/Layouts/NotFound";
 import "./App.css";
 
 import Viewcaptain from "./Components/Layouts/SingleCaptains";
@@ -24,7 +25,14 @@ class App extends Component {
           <Sidebar />
           <Navbar />
           <Switch>
-          <Route exact path="/" component={Home} exact />
+            <Route path="/" render={() => (
+              <>
+              <Sidebar />
+              <Navbar />
+              <Home />
+              </>
+            )} exact/>
+            <Route path="/login" component={Login} exact />
 
             <Route
               exact
@@ -46,6 +54,17 @@ class App extends Component {
                   <Profile />
                 </div>
               )}
+              />
+              <Route exact path="/orders" render = {() => (
+                <div>
+                <Sidebar />
+                <Navbar />
+                <Order />
+              </div>
+              )} />
+          
+            <Route
+              render={() => (<NotFound />)}
             />
             <Route
               exact
