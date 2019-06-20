@@ -167,7 +167,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={event => editPopup(record.key, record, editHtml)}
+                  <Icon onClick={this.props.handleClick("customersPage","edit","editVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -175,7 +175,7 @@ class TableCmponent extends Component {
                     type="edit"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("customersPage", "deleteVisibility", record.pk_i_id)}
+                  <Icon onClick={this.props.handleClick("customersPage","delete", "deleteVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
