@@ -263,42 +263,42 @@ class TableCmponent extends Component {
           </Table>
         </div>
       );
-    } else if (this.props.pageName === "captains") {
+    }else if (this.props.pageName === "captains") {
       return (
         <div className="table-container">
           <DropdownMenu
-            pageSize={pageSize}
+            pageSize={this.state.pageSize}
             paginationSize={this.paginationSize}
           />
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize)
+              pageSize: isNaN(this.state.pageSize)
                 ? columns.length
-                : parseInt(pageSize)
+                : parseInt(this.state.pageSize)
             }}
           >
-            <Column title="إسم الكابتن" dataIndex="captain" key="captain" />
-            <Column title="البريد الإلكتروني" dataIndex="email" key="email" />
-            <Column title="رقم الجوال" dataIndex="mobileNo" key="mobileNo" />
-            <Column title="العنوان" dataIndex="address" key="address" />
+            <Column title="إسم الكابتن" dataIndex="s_name" key="captain" />
+            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
+            <Column title="رقم الجوال" dataIndex="s_mobile_number" key="mobileNo" />
+            <Column title="العنوان" dataIndex="s_address" key="address" />
             <Column
               title="الحالة"
-              dataIndex="status"
+              dataIndex="b_status"
               key="status"
               render={status => (
                 <span>
                   <Tag
                     color={
-                      status === "غير فعال"
+                      status === false
                         ? "volcano"
-                        : status === "فعال"
+                        : status === true
                           ? "green"
                           : "blue"
                     }
                     key={status}
                   >
-                    {status}
+                    {status === true ? "فعال" : status === false ? "غير فعال" : status}
                   </Tag>
                 </span>
               )}
@@ -311,9 +311,10 @@ class TableCmponent extends Component {
                   <Icon
                     onClick={() => {
                       this.props.history.push(
-                        `/getCaptainDetails/${record.key}`
+                        `/captains/profile/${record.pk_i_id}`
                       );
                     }}
+                    
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
