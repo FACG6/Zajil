@@ -1,19 +1,20 @@
 import React, { Component } from "react";
-import { css } from '@emotion/core';
-import { ClipLoader } from 'react-spinners';
+import { css } from "@emotion/core";
+import { ClipLoader } from "react-spinners";
 import { Icon, notification, Input, DatePicker } from "antd";
 import Table from "../../CommonComponent/Table/Table";
 import Button from "../../CommonComponent/Button";
 import Header from "../../CommonComponent/Header/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
-import WrappedComponent from '../../HOC/WithNavSide';
+import WrappedComponent from "../../HOC/WithNavSide";
+import Deletepopup from "./Popups/DeleteCaptain";
 
 import "./style.css";
 const { RangePicker } = DatePicker;
 const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
+  display: block;
+  margin: 0 auto;
+  border-color: red;
 `;
 class Captains extends Component {
   state = {
@@ -24,14 +25,25 @@ class Captains extends Component {
     name: "",
     date: "",
     filteredcaptainsDate: [],
-    filteredcaptainsName: []
+    filteredcaptainsName: [],
+    captainsPage: {
+      delete: {
+        deleteVisibility: false,
+        information: [],
+        id: ""
+      },
+      edit: {
+        editVisibility: false,
+        id: "",
+        information: []
+      }
+    }
   };
 
   componentDidMount() {
     fetch("/api/v1/captains")
       .then(res => res.json())
       .then(result => {
-        console.log(result.result)
         this.setState({
           captains: result.result,
           allData: result.result
@@ -142,7 +154,6 @@ class Captains extends Component {
             if (error) {
               this.openNotificationWithIcon("error", error);
             } else {
-              console.log(res.result);
               this.openNotificationWithIcon("success", "تمت الاضافة بنجاح");
               this.setState(prev => {
                 return {
@@ -168,72 +179,101 @@ class Captains extends Component {
       duration: 1.5
     });
   };
-
+  deleteRowCustomer = (id, data) => {
+    this.setState(prev => {
+      return {
+        captains: prev.captains.filter(data => data.pk_i_id !== id)
+      };
+    });
+  };
+  handleClick = (value1, value2, value3, information, id) => e => {
+    const { captainsPage } = this.state;
+    this.setState(prev => {
+      return {
+        [value1]: {
+          ...captainsPage,
+          [value2]: {
+            [value3]: !prev[value1][value2][value3],
+            information,
+            id
+          }
+        }
+      };
+    });
+  };
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
   render() {
-    if(this.state.captains)
-  {  return (
-      <div className="containercustomers">
-        <div className="conatinercustomers__customer">
-          <Header title="إدارة الكابتن" Icon={<Icon type="team" />} />
-          <div className="addcustomer">
-            <Button
-              name="إضافة كابتن"
-              icon={<Icon type="user" />}
-              onClick={this.handleVisible}
-            />
-            <CollectionCreateForm
-              wrappedComponentRef={this.saveFormRef}
-              visible={this.state.visible}
-              onCancel={this.handleVisible}
-              onCreate={this.handleCreate}
-            />
-            <div className="filtercontainer">
-              <div classNam="filtercontainer__orderdate">
-                <RangePicker
-                  showTime={{ format: "HH:mm" }}
-                  format="YYYY-MM-DD HH:mm"
-                  placeholder={["من", "الى"]}
-                  onChange={e => this.filterfunction(e, "", "date")}
-                  className="containercustomers__customer-rangpicker"
-                />
-                <span className="filtercontainer__orderdate-date">
-                  فلترة حسب الوقت
-                </span>
-              </div>
-              <Input
-                size="defaul"
-                placeholder="فلترة حسب الاسم"
-                className="filtercontainer__ordername"
-                onChange={e => this.filterfunction("", e.target.value, "name")}
+    if (this.state.captains) {
+      return (
+        <div className="containercustomers">
+          <div className="conatinercustomers__customer">
+            <Header title="إدارة الكابتن" Icon={<Icon type="team" />} />
+            <div className="addcustomer">
+              <Button
+                name="إضافة كابتن"
+                icon={<Icon type="user" />}
+                onClick={this.handleVisible}
               />
+              <CollectionCreateForm
+                wrappedComponentRef={this.saveFormRef}
+                visible={this.state.visible}
+                onCancel={this.handleVisible}
+                onCreate={this.handleCreate}
+              />
+              <Deletepopup
+                visible={this.state.captainsPage.delete.deleteVisibility}
+                changevisibility={this.handleClick}
+                id={this.state.captainsPage.delete.id}
+                updateState={this.deleteRowCustomer}
+              />
+              <div className="filtercontainer">
+                <div classNam="filtercontainer__orderdate">
+                  <RangePicker
+                    showTime={{ format: "HH:mm" }}
+                    format="YYYY-MM-DD HH:mm"
+                    placeholder={["من", "الى"]}
+                    onChange={e => this.filterfunction(e, "", "date")}
+                    className="containercustomers__customer-rangpicker"
+                  />
+                  <span className="filtercontainer__orderdate-date">
+                    فلترة حسب الوقت
+                  </span>
+                </div>
+                <Input
+                  size="defaul"
+                  placeholder="فلترة حسب الاسم"
+                  className="filtercontainer__ordername"
+                  onChange={e =>
+                    this.filterfunction("", e.target.value, "name")
+                  }
+                />
+              </div>
             </div>
+            <Table
+              pageName="captains"
+              columns={this.state.captains}
+              classname="tablecustomer-container"
+              className="table"
+              handleClick={this.handleClick}
+            />
           </div>
-          <Table
-            pageName="captains"
-            columns={this.state.captains}
-            classname="tablecustomer-container"
-            className="table"
-            handleClick={this.handleClick}
+        </div>
+      );
+    } else {
+      return (
+        <div className="sweet-loading">
+          <ClipLoader
+            css={override}
+            sizeUnit={"px"}
+            size={150}
+            color={"#123abc"}
+            loading={this.state.loading}
           />
         </div>
-      </div>
-    );}
-    else {
-      return (
-          <div className='sweet-loading'>
-              <ClipLoader
-                  css={override}
-                  sizeUnit={"px"}
-                  size={150}
-                  color={'#123abc'}
-
-                  loading={this.state.loading}
-              />
-          </div>)
-  }
+      );
+    }
   }
 }
 
