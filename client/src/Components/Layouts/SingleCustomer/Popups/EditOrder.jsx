@@ -58,10 +58,13 @@ class EditForm extends Component {
       }
       let deletedItems = [],
         newItems = [];
-      for (let i =0; i < this.state.originalItems.length; i++) {
+      for (let i = 0; i < this.state.originalItems.length; i++) {
         let exist = false;
         for (let j = 0; j < this.state.itemsInputs.length; j++) {
-          if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
+          if (
+            JSON.stringify(this.state.originalItems[i]) ===
+            JSON.stringify(this.state.itemsInputs[j])
+          ) {
             exist = true;
           }
         }
@@ -72,7 +75,10 @@ class EditForm extends Component {
       for (let j in this.state.itemsInputs) {
         let edited = true;
         for (let i in this.state.originalItems) {
-          if (JSON.stringify(this.state.originalItems[i]) === JSON.stringify(this.state.itemsInputs[j])) {
+          if (
+            JSON.stringify(this.state.originalItems[i]) ===
+            JSON.stringify(this.state.itemsInputs[j])
+          ) {
             edited = false;
           }
         }
@@ -90,7 +96,7 @@ class EditForm extends Component {
               "-" +
               values.phone,
             address: values.address,
-            items: { deleted:deletedItems, edited:newItems },
+            items: { deleted: deletedItems, edited: newItems },
             storeID: storeId
           })
           .then(res => {
