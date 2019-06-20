@@ -9,13 +9,6 @@ const { Option } = Select;
 const EditCustomer = Form.create({ name: 'form_in_modal' })(
 
     class extends React.Component {
-        state =
-            {
-                visible: null,
-                id: null,
-                customerinformation: []
-            }
-
         openNotificationWithIcon = (type, message) => {
             notification[type]({
                 message: message,
@@ -34,7 +27,7 @@ const EditCustomer = Form.create({ name: 'form_in_modal' })(
                 }
                 else {
                     let editCustomer = {
-                        id: this.state.id,
+                        id: this.props.id,
                         name: values.name,
                         email: values.email,
                         phone: parseInt(values.prefixPhone + values.phone),
@@ -51,7 +44,7 @@ const EditCustomer = Form.create({ name: 'form_in_modal' })(
                         }).then(res => res.json()).then(result => {
                             if (result.result) {
                                 this.openNotificationWithIcon('success', 'تم التعديل بنجاح');
-                                this.props.updateState(this.state.id,result.result)
+                                this.props.updateState(this.props.id,result.result)
                                 this.props.changevisibility("customersPage", "edit", "editVisibility", [], '')(e);
                             } else {
                                 this.openNotificationWithIcon('error', result.error);
@@ -84,20 +77,10 @@ const EditCustomer = Form.create({ name: 'form_in_modal' })(
             if (value === true) return "true"
             else return "false"
         }
-        componentWillReceiveProps(props) {
-            const { visible, id, information } = props;
-            this.setState({
-                visible,
-                id,
-                customerinformation: information
-            })
-        }
-
-
         render() {
             const { getFieldDecorator } = this.props.form;
             const { visible, information } = this.props
-            if (this.state.customerinformation.length !== 0) {
+            if (this.props.information.length !== 0) {
                 return (
                     <Modal className="editModal"
                         visible={visible}
