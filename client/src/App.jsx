@@ -18,8 +18,8 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Route path="/login" component={Login} exact />
           <Switch>
+          <Route path="/login" component={Login} exact />
             <Route
               path="/"
               component = {Home}
@@ -55,7 +55,6 @@ class App extends Component {
               path="/in-progress"
               component={InProgress}
             />
-
             <Route component={NotFound} />
           </Switch>
         </Router>
