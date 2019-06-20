@@ -252,7 +252,7 @@ class EditForm extends React.Component {
                 <div className="popupModal_form-items-container">
                   <Form.Item label="رقم الهاتف">
                     {getFieldDecorator("phone", {
-                      initialValue: phoneNumber.substring(4),
+                      initialValue: phoneNumber ? phoneNumber.substring(4) : '',
                       rules: [
                         { required: true, message: "يرجى إدخال رقم الهاتف !" }
                       ]
@@ -581,7 +581,7 @@ class ViewForm extends React.Component {
                 <div className="popupModal_form-items-container">
                   <Form.Item label="رقم الهاتف">
                     {getFieldDecorator("phone", {
-                      initialValue: phoneNumber,
+                      initialValue: phoneNumber ? phoneNumber.substring(4) : '',
                       rules: [
                         { required: true, message: "يرجى إدخال رقم الهاتف !" }
                       ]
