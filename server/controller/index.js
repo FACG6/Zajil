@@ -13,6 +13,7 @@ const orderHandler = require('./order');
 const { getImage } = require('./getImage');
 const { getStores } = require('./stores/index');
 
+
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
@@ -29,6 +30,6 @@ router.use(customerHandler);
 router.use(orderHandler);
 router.route('/image/:name')
   .get(getImage);
-router.use(orderHandler);
+router.use(captainHandler);
 
 module.exports = router;
