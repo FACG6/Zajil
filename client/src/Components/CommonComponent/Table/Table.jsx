@@ -11,39 +11,39 @@ import "./style.css";
 class TableCmponent extends Component {
   state = {
     pageSize: "10",
-    singleCustomer: {
-      editVisibilty: false,
-      deleteVisibility: false,
-      viewVisibility: false,
-      id: ''
-    },
-    singleCaptain: {
-      editVisibilty: false,
-      deleteVisibility: false,
-      viewVisibility: false,
-      id: ''
-    }
-    ,
+    // singleCustomer: {
+    //   editVisibilty: false,
+    //   deleteVisibility: false,
+    //   viewVisibility: false,
+    //   id: ''
+    // },
+    // singleCaptain: {
+    //   editVisibilty: false,
+    //   deleteVisibility: false,
+    //   viewVisibility: false,
+    //   id: ''
+    // }
+    // ,
     tableData: this.props.columns
 
   };
 
-  handleClick = (value1, value2, id) => (e) => {
-    this.setState(
-      prev => {
-        return {
-          [value1]: {
-            [value2]: !prev[value1][value2],
-            id
-          }
-        };
-      });
-  };
-  deleteRow = (id) => {
-    this.setState((prev) => {
-      return { tableData: prev.tableData.filter((data) => data.key !== id) }
-    });
-  }
+  // handleClick = (value1, value2, id) => (e) => {
+  //   this.setState(
+  //     prev => {
+  //       return {
+  //         [value1]: {
+  //           [value2]: !prev[value1][value2],
+  //           id
+  //         }
+  //       };
+  //     });
+  // };
+  // deleteRow = (id) => {
+  //   this.setState((prev) => {
+  //     return { tableData: prev.tableData.filter((data) => data.key !== id) }
+  //   });
+  // }
 
   componentWillReceiveProps(props) {
     this.setState({ tableData: props.columns });
@@ -57,8 +57,8 @@ class TableCmponent extends Component {
 
     const { viewPopup, editPopup, EditPopup, deletePopup, DeletePopup, viewHtml, editHtml, deleteHtml } = this.props;
     const { Column } = Table;
-    const { tableData: columns, singleCustomer: { id } } = this.state;
-    const { singleCaptain } = this.state;
+    const { tableData: columns} = this.state;
+    // const { singleCaptain } = this.state;
 
     if (this.props.pageName === "orders") {
       return (
@@ -425,7 +425,7 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-                  <Icon onClick={event => viewPopup(record.key, record, viewHtml)}
+                  <Icon  onClick={this.props.viewValues("singleCaptain", " viewVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -433,37 +433,25 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.handleClick(
+                  <Icon onClick={this.props.viewValues(
                     "singleCaptain",
-                    "editVisibilty"
-                  )}
+                    "editVisibilty",
+                    record.key, record)}
+                  
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="edit"
                   />
-
-                  <EditPopup
-                    visible={this.state.singleCaptain.editVisibilty}
-                    visibleFun={this.handleClick}
-                    id={record.key}
-                    information={record}
-                  />
                   <Divider type="vertical" />
-                  <Icon onClick={this.handleClick("singleCaptain", "deleteVisibility", record.key)}
+                  <Icon  onClick={this.props.viewValues("singleCaptain", "deleteVisibility", record.key, record)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
                     className={record.key}
-                  />
-                  <DeletePopup
-                    visible={this.state.singleCaptain.deleteVisibility}
-                    visibleFun={this.handleClick}
-                    id={singleCaptain.id}
-                    updateState={this.deleteRow}
                   />
 
                 </span>
