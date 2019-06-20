@@ -21,6 +21,7 @@ class TableCmponent extends Component {
 
     const { viewPopup, editPopup, columns, EditPopup, DeletePopup } = this.props;
     const {  pageSize } = this.state;
+    console.log(columns);
     const { Column } = Table;
     if (this.props.pageName === "orders") {
       return (
@@ -229,15 +230,14 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon onClick={this.props.viewValues("singleCustomer",
-                    "editVisibilty",
-                    record.key,
-                    record)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
+                  <EditPopup
+                    customerName={record.captain}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
                   />
                   <Divider type="vertical" />
                   <Icon onClick={this.props.viewValues("singleCustomer", "deleteVisibility", record.key, record)}
@@ -326,7 +326,7 @@ class TableCmponent extends Component {
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                  /> */}
+                  />
                 </span>
               )}
             />
