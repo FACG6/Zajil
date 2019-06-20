@@ -26,7 +26,6 @@ class TableCmponent extends Component {
     }
     ,
     tableData: this.props.columns
-     tableData: this.props.columns
   };
 
   handleClick = (value1, value2, id) => (e) => {
@@ -54,14 +53,14 @@ class TableCmponent extends Component {
     const {
       viewPopup,
       EditPopup,
-      deletePopup,
+      DeletePopup,
       columns,
     } = this.props;
     const { Column } = Table;
-    const { 
-      tableData: columns,
+    // const { 
+      // tableData: columns,
       //  singleCustomer: { id, information } 
-    } = this.state;
+    // } = this.state;
     const { singleCaptain } = this.state;
     if (this.props.pageName === "orders") {
       return (
@@ -137,16 +136,7 @@ class TableCmponent extends Component {
 
                   <Divider type="vertical" />
 
-                  <Icon
-                    onClick={event =>
-                      deletePopup(record.key, record)
-                    }
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                  />
+                    <DeletePopup deleteRow={this.props.deleteRow} id={record.key} />
                 </span>
               )}
             />
@@ -231,7 +221,8 @@ class TableCmponent extends Component {
           </Table>
         </div>
       );
-    } else if (this.props.pageName === "singleCustomer") {
+    } 
+    else if (this.props.pageName === "singleCustomer") {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -239,7 +230,7 @@ class TableCmponent extends Component {
             paginationSize={this.paginationSize}
           />
           <Table
-            dataSource={columns1}
+            dataSource={columns}
             pagination={{
               pageSize: isNaN(this.state.pageSize)
                 ? columns.length

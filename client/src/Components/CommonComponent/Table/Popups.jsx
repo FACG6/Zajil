@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import swal from "sweetalert2";
 import axios from "axios";
 import "./style.css";
-import { Button, Select, Modal, Form, Input, Cascader, Icon } from "antd";
+import { Button, Select, Modal, Form, Input, Cascader, Icon, notification  } from "antd";
 
 const { Option } = Select;
 class EditForm extends React.Component {
@@ -484,25 +484,77 @@ class EditForm extends React.Component {
 
 const EditPopup = Form.create()(EditForm);
 
-const deletePopup = (id, DataToBeDisplayedObject, deletePopupHtmlString) => {
-  const span = document.createElement("span");
-  const details = deletePopupHtmlString;
-  span.innerHTML = `${details}`;
-  swal.fire({
-    title: "Are you sure?",
-    showCancelButton: true,
-    showConfirmButton: true,
-    confirmButtonColor: "#ff4343",
-    confirmButtonText: "حذف",
-    cancelButtonText: "إغلاق",
-    cancelButtonColor: "#2b2a37",
-    closeOnConfirm: true,
-    reverseButtons: true,
-    html: span
-  });
-};
+class DeletePopup extends Component {
+  state = {
+    visible: false,
+    id: this.props.id
+  };
 
-export { EditPopup, deletePopup };
+  openNotificationWithIcon = (type, message) => {
+    notification[type]({
+      message: message,
+      duration: 1.5
+    });
+  };
+
+  handleOk = e => {
+    fetch(`/api/v1/deleteOrder/${this.props.id}`, { method: "DELETE" })
+      .then(res => res.json())
+      .then(res => {
+        const { error } = res;
+        if (error) {
+          this.openNotificationWithIcon("error", error);
+        } else {
+          this.props.deleteRow(this.props.id);
+          this.openNotificationWithIcon("success", "Delete Done");
+        }
+      })
+      .catch(() => {
+        this.openNotificationWithIcon('warning', 'Something error please try again');
+        this.props.visibleFun("singleCustomer", "deleteVisibility")(e);
+      });
+  };
+
+  handleCancel = e => {
+    this.setState({visible:false})
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+      <Icon
+      type="delete"
+      style={{
+        fontSize: "1.2rem",
+        color: "rgba(0, 0, 0, 0.65)"
+      }}
+      onClick={this.showModal}
+    />
+      <Modal
+        title="حذف الطلب"
+        visible={this.state.visible}
+        onOk={this.handleOk}
+        cancelText="الغاء"
+        okText="حذف"
+        onCancel={this.handleCancel}
+        style={{ direction: "rtl", }}
+        className="deleteModal"
+      >
+        <p>هل تريد بالتأكيد حذف الطلب ؟</p>
+      </Modal>
+      </React.Fragment>
+    );
+  }
+}
+
+export default DeletePopup;
+
+
+
+
+
+
+export { EditPopup, DeletePopup };
 
 // const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
 //   const span = document.createElement('span');

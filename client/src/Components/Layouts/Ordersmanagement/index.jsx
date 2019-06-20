@@ -9,8 +9,8 @@ import TableComponent from "../../CommonComponent/Table/Table";
 import { EditPopup } from "../../CommonComponent/Table/Popups";
 import {
   //   viewPopup,
-  deletePopup
 } from "../../CommonComponent/Table/Popups";
+import DeletePopup from '../SingleCustomer/Popups/deletePopup';
 import "./style.css";
 import WrappedComponent from '../../HOC/WithNavSide';
 
@@ -54,6 +54,12 @@ class OrdersManagement extends Component {
       .catch(error => {
         this.setState({ error })});
   }
+
+  deleteRow = id => {
+    this.setState(prev => {
+      return { orders: prev.orders.filter(data => data.key !== id) };
+    });
+  };
 
   dateFilter = object => {
     if (object) {
@@ -253,11 +259,12 @@ class OrdersManagement extends Component {
                   </Button>
                 </div>
                 <TableComponent
+                  deleteRow = {this.deleteRow} 
                   stores={this.state.stores}
                   pageName="orders"
                   //   viewPopup={viewPopup}
                   EditPopup={EditPopup}
-                  deletePopup={deletePopup}
+                  DeletePopup={DeletePopup}
                   editHtml="<input type='text' placeholder='name' id='name'>"
                   columns={
                     this.state.filter === true
