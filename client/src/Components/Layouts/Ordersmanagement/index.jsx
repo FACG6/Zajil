@@ -6,7 +6,8 @@ import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
-import { EditPopup, DeletePopup } from "../../CommonComponent/Table/Popups";
+import { EditPopup, DeletePopup, ViewPopup } from "../../CommonComponent/Table/Popups";
+import CollectionsPage from '../Order/addOrder';
 // import { viewPopup } from "../../CommonComponent/Table/Popups";
 import "./style.css";
 
@@ -202,7 +203,12 @@ class OrdersManagement extends Component {
     });
   };
 
+  updateOrdersStateVariable = (order) => {
+    console.log(order)
+  }
+
   render() {
+    console.log(this.state.order)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
@@ -214,12 +220,14 @@ class OrdersManagement extends Component {
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                <Button
+                {/* <Button
                   className="ordersManagement_addOrder-button"
                   type="primary"
+                  ///////////////
                 >
                   إضافة طلب
-                </Button>
+                </Button> */}
+                <CollectionsPage updateOrdersStateVariable={this.updateOrdersStateVariable} />
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
@@ -259,7 +267,7 @@ class OrdersManagement extends Component {
                 <TableComponent
                   stores={this.state.stores}
                   pageName="orders"
-                  //   viewPopup={viewPopup}
+                  ViewPopup={ViewPopup}
                   EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
                   deleteRow={this.deleteRow}
