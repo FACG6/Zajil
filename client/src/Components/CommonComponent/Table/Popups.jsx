@@ -80,7 +80,8 @@ class EditForm extends React.Component {
           })
           .catch(err => {
             this.setState({
-              error: err
+              error: err,
+              itemsInputs: JSON.parse(JSON.stringify(this.state.originalItems))
             });
           });
       }
@@ -140,7 +141,7 @@ class EditForm extends React.Component {
     }
   };
   validateItemPrice = (rule, value, callback) => {
-    if (value && value.length >= 1) {
+    if (value) {
       callback();
     } else {
       callback("يرجى إدخال السعر !");
@@ -161,6 +162,7 @@ class EditForm extends React.Component {
   };
   setNewItem = async (key, val, index) => {
     let newItem = [...this.state.itemsInputs];
+    delete newItem[index].itemId;
     if (key == "name") {
       newItem[index].name = val.target.value;
       this.setState({
@@ -178,7 +180,7 @@ class EditForm extends React.Component {
     this.setState({itemsInputs: this.state.originalItems})
   }
   render() {
-    const { customerName, phoneNumber, customerAddress, storeId } = this.props;
+    const { customerName, phoneNumber, customerAddress } = this.props;
     const { getFieldDecorator } = this.props.form;
 
     const formItemLayout = {
@@ -464,7 +466,7 @@ class EditForm extends React.Component {
           >
             <div className="popupModal_error-class">
               <h1>
-                {this.state.error.response
+              {this.state.error.response
                   ? this.state.error.response.status
                   : "Error"}{" "}
                 {this.state.error.response
