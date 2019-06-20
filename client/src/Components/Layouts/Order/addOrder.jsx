@@ -1,15 +1,10 @@
-import antd, { Icon } from "antd";
 import React from "react";
 import validator from "validator";
 import "./style.css";
-const { Button, Modal, Form, Input, Select, AutoComplete, notification } = antd;
+import { Button, Modal, Form, Input, Select, AutoComplete, notification, Icon } from 'antd';
 const { Option } = Select;
 let id = 0;
-const openNotificationWithIcon = (type, message) => {
-  notification[type]({
-    message
-  });
-};
+
 const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   // eslint-disable-next-line
   class extends React.Component {
@@ -21,6 +16,12 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         errPalce: ""
       }
     };
+   openNotificationWithIcon = (type, message) => {
+
+      // notification[type]({
+      //   message
+      // });
+    };
 
     loadCaptainsNames = () => {
       fetch("/api/v1/getCaptainsNames")
@@ -28,13 +29,13 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         .then(res => {
           const { error } = res;
           if (error) {
-            openNotificationWithIcon("error", error);
+            this.openNotificationWithIcon("error", error);
           } else {
             this.setState({ dataSourceCaptains: res.result });
           }
         })
         .catch(() => {
-          openNotificationWithIcon(
+          this.openNotificationWithIcon(
             "erro",
             "Something error please refersh the page"
           );
@@ -46,13 +47,13 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         .then(res => {
           const { error } = res;
           if (error) {
-            openNotificationWithIcon("error", error);
+            this.openNotificationWithIcon("error", error);
           } else {
             this.setState({ dataSourcePlaces: res.result });
           }
         })
         .catch(() => {
-          openNotificationWithIcon(
+          this.openNotificationWithIcon(
             "erro",
             "Something error please refersh the page"
           );
@@ -365,6 +366,14 @@ export default class CollectionsPage extends React.Component {
     selectedCaptain: "",
     selectedPlaces: ""
   };
+
+  openNotificationWithIcon = (type, message) => {
+
+    // notification[type]({
+    //   message
+    // });
+  };
+
   handleVisible = () => {
     this.setState(prev => {
       return { visible: !prev.visible };
@@ -384,7 +393,7 @@ export default class CollectionsPage extends React.Component {
       const { address, items, phone, phone1, userName } = values;
       const { selectedCaptain, selectedPlaces } = this.state;
       if (err || !items || !selectedCaptain || !selectedPlaces) {
-        openNotificationWithIcon("warning", "يرجى ملىء جميع الحقول");
+        this.openNotificationWithIcon("warning", "يرجى ملىء جميع الحقول");
       } else {
         const orderData = {
           address,
@@ -402,15 +411,17 @@ export default class CollectionsPage extends React.Component {
           .then(res => res.json())
           .then(res => {
             if (res.error) {
-              openNotificationWithIcon("error", "لم تتم عملية الاضافة");
+              this.openNotificationWithIcon("error", "لم تتم عملية الاضافة");
             } else{
-              openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
+              this.openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
               // here make function to update table of orders
+              const newOrder = {address, phone: `+${phone1}${phone}`, storeid:selectedPlaces, captain:selectedCaptain,date: new Date(Date.now()), customer:userName, b_status:1, items};
+              this.props.updateOrdersStateVariable(newOrder)
             }
             this.handleVisible();
           })
           .catch(() => {
-            openNotificationWithIcon(
+            this.openNotificationWithIcon(
               "warning",
               "هناك خطأ ما الرجاء اعادة المحاولة"
             );
@@ -425,9 +436,16 @@ export default class CollectionsPage extends React.Component {
   render() {
     return (
       <div>
-        <Button type="primary" onClick={this.handleVisible}>
+        {/* <Button type="primary" onClick={this.handleVisible}>
           إضافة طلب <Icon type="plus-circle" />
-        </Button>
+        </Button> */}
+                       <Button
+                  className="ordersManagement_addOrder-button"
+                  type="primary"
+                  onClick={this.handleVisible}
+                >
+                  إضافة طلب
+                </Button>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
