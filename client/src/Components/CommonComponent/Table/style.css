@@ -354,3 +354,7 @@ textarea {
   font-size: 12px;
   float: right !important;
 }
+.ViewPopup .ant-col-xs-24.ant-form-item-label {
+  display: flex;
+  width: 86px !important;
+}
