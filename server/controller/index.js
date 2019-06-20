@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
-const orders = require('./order/index');
+
 
 const { checkAuth } = require('./middleware/authentication');
 const { protectRoutes } = require('./middleware/protectRoute');
@@ -18,7 +18,7 @@ router.use(checkAuth);
 // the all routes start from here
 router.use(adminHandler);
 
-// router.use(protectRoutes);
+router.use(protectRoutes);
 // the protected route start from here
 router.route('/counts')
   .get(getCounts);
