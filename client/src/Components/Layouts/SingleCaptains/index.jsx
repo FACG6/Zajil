@@ -5,6 +5,7 @@ import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
+import WrappedComponent from '../../HOC/WithNavSide';
 import {
   viewPopup,
 
@@ -14,7 +15,6 @@ import { notification, Icon } from 'antd';
 
  class Viewcaptain extends Component {
   state = {
-
     columns:
       [],
     name: '',

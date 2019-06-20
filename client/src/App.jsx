@@ -1,22 +1,20 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {Icon}from 'antd';
-// import Customers from './Components/Layouts/Customers/index';
-import Sidebar from "./Components/CommonComponent/Sidebar";
-import Header from "./Components/CommonComponent/Header";
-import Navbar from "./Components/CommonComponent/Navbar";
-import Profile from "./Components/Layouts/SingleCustomer";
-
+import Customers from "./Components/Layouts/Customers/index";
 import Login from "./Components/Layouts/Login";
-import Order from './Components/Layouts/Order/index'
 import Home from "./Components/Layouts/Home";
+<<<<<<< HEAD
 import Customers  from "./Components/Layouts/Customers/index"
+=======
+import OrdersManagement from "./Components/Layouts/Ordersmanagement";
+import SingleCaptain from "./Components/Layouts/SingleCaptains";
+import SingleCastomer from "./Components/Layouts/SingleCustomer";
+>>>>>>> 125b00ae44cbf8eb7d6948030c9caec7f8357a1c
 import Captains from "./Components/Layouts/Captains";
 import NotFound from "./Components/Layouts/NotFound";
-import "./App.css";
+import InProgress from './Components/Layouts/ToBuildLater';
 
-import Viewcaptain from "./Components/Layouts/SingleCaptains";
-// import Captains from "./Components/Layouts/Captains/index"
+import "./App.css";
 
 class App extends Component {
   state = {};
@@ -24,28 +22,33 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
+          <Route path="/login" component={Login} exact />
           <Switch>
-            <Route path="/" render={() => (
-              <>
-              <Sidebar />
-              <Navbar />
-              <Home />
-              </>
-            )} exact/>
-            <Route path="/login" component={Login} exact />
-
+            <Route
+              path="/"
+              component = {Home}
+              exact
+            />
+            <Route
+              path="/orders"
+              component={OrdersManagement}
+              exact
+            />
+            <Route
+              exact
+              path="/customers"
+              component={Customers}
+            />
+            <Route
+              exact
+              path="/captains"
+              component={Captains}
+            />
             <Route
               exact
               path="/captains/profile/:id"
-              render={() => (
-                <div>
-                  <Sidebar />
-                  <Navbar />
-                  <Viewcaptain />
-                </div>
-              )}
+              component={SingleCaptain}
             />
-
             <Route
               exact
               path="/customers/profile/:id"
@@ -77,8 +80,15 @@ class App extends Component {
             render={() => (<Captains />)}
           />
             <Route
-              render={() => (<NotFound />)}
+              exact
+              path="/in-progress"
+              component={InProgress}
             />
+<<<<<<< HEAD
+=======
+
+            <Route component={NotFound} />
+>>>>>>> 125b00ae44cbf8eb7d6948030c9caec7f8357a1c
           </Switch>
         </Router>
       </div>

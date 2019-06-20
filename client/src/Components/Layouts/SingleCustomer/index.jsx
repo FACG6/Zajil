@@ -7,6 +7,7 @@ import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 import "./style.css";
 
@@ -172,4 +173,4 @@ class Profile extends Component {
   }
 }
 
-export default withRouter(Profile);
+export default WrappedComponent(withRouter(Profile));

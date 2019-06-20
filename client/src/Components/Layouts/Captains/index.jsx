@@ -4,10 +4,9 @@ import { ClipLoader } from 'react-spinners';
 import { Icon, notification, Input, DatePicker } from "antd";
 import Table from "../../CommonComponent/Table/Table";
 import Button from "../../CommonComponent/Button";
-import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
+import WrappedComponent from '../../HOC/WithNavSide';
 
 import "./style.css";
 const { RangePicker } = DatePicker;
@@ -177,9 +176,7 @@ class Captains extends Component {
     if(this.state.captains)
   {  return (
       <div className="containercustomers">
-        <Sidebar />
         <div className="conatinercustomers__customer">
-          <Navbar />
           <Header title="إدارة الكابتن" Icon={<Icon type="team" />} />
           <div className="addcustomer">
             <Button
@@ -240,4 +237,4 @@ class Captains extends Component {
   }
 }
 
-export default Captains;
+export default WrappedComponent(Captains);
