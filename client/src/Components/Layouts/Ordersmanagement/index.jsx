@@ -7,10 +7,7 @@ import Header from "../../CommonComponent/Header/index";
 import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
 import { EditPopup, DeletePopup } from "../../CommonComponent/Table/Popups";
-import {
-  //   viewPopup,
-  deletePopup
-} from "../../CommonComponent/Table/Popups";
+// import { viewPopup } from "../../CommonComponent/Table/Popups";
 import "./style.css";
 
 class OrdersManagement extends Component {
