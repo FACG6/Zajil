@@ -56,8 +56,8 @@ class App extends Component {
               component={InProgress}
             />
 
-            <Route component={NotFound} />
           </Switch>
+            {/* <Route component={NotFound} /> */}
         </Router>
       </div>
     );
