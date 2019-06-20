@@ -14,8 +14,7 @@ import { notification, Icon } from 'antd';
 
 class Viewcaptain extends Component {
   state = {
-    columns:
-      [],
+    columns: [],
     name: '',
     email: '',
     id_number: '',
@@ -23,7 +22,15 @@ class Viewcaptain extends Component {
     status: '',
     address: '',
     licience_number: '',
-    avatar: ""
+    avatar: "",
+    visible: false,
+    singleCaptain: {
+      editVisibilty: false,
+      deleteVisibility: false,
+      viewVisibility: false,
+      id: "",
+      information: null
+    }
 
   }
 
@@ -113,11 +120,27 @@ class Viewcaptain extends Component {
     });
     this.setState({ columns: table });
   }
+  deleteRow = id => {
+    this.setState(prev => {
+      return { columns: prev.columns.filter(data => data.key !== id) };
+    });
+  };
+  handleClick = (value1, value2, id, information) => e => {
+    this.setState(prev => {
+      return {
+        [value1]: {
+          [value2]: !prev[value1][value2],
+          id,
+          information
+        }
+      };
+    });
+  };
   render() {
-    const { name, email, address, id_number, licience_number, phone_number, status} = this.state;
+    const { columns, avatar, name, email, address, id_number, licience_number, phone_number, status, singleCaptain} = this.state;
     return (
       <div>
-        <Header Icon={<img src={this.state.avatar} className="avatar" />} title={this.state.name} />
+        <Header Icon={<img src={avatar} className="avatar" />} title={name} />
 
         <div className='view-captain'>
           <div className="profile">
@@ -158,13 +181,15 @@ class Viewcaptain extends Component {
             <h2 className='view-captain-orders-title'>الطلبات الخاصة بالكابتن</h2>
             <div className="order-table">
               <Table pageName="singleCaptain"
-
-                viewPopup={viewPopup}
-                EditPopup={Popup}
-                DeletePopup={DeletePopup}
-                columns={this.state.columns}
-
+                columns={columns}
+                viewValues={this.handleClick}
               />
+              <DeletePopup
+              visible={singleCaptain.deleteVisibility}
+              visibleFun={this.handleClick}
+              id={singleCaptain.id}
+              updateState={this.deleteRow}
+            />
             </div>
           </div>
         </div>
