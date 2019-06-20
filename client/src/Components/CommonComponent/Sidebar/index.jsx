@@ -153,7 +153,7 @@ export default class Sidebar extends Component {
                 </span>
 
               </Link>
-              <Link className="sidebar__links">
+              <Link to="/in-progress" className="sidebar__links">
                 <span>
                   المشرفين
               <Icon type="star" className='icon-style' />

@@ -5,18 +5,14 @@ import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import Popup from "./Popups/Popup";
 import DeletePopup from "./Popups/deletePopup";
+import View from "./Popups/viewPopUp";
 import WrappedComponent from '../../HOC/WithNavSide';
-import {
-  viewPopup,
-
-} from "../../CommonComponent/Table/Popups";
 
 import { notification, Icon } from 'antd';
 
  class Viewcaptain extends Component {
   state = {
-    columns:
-      [],
+    columns: [],
     name: '',
     email: '',
     id_number: '',
@@ -24,13 +20,28 @@ import { notification, Icon } from 'antd';
     status: '',
     address: '',
     licience_number: '',
-    avatar: ""
+    avatar: "",
+    visible: false,
+    singleCaptain: {
+      editVisibilty: false,
+      deleteVisibility: false,
+      viewVisibility: false,
+      id: "",
+      information: null
+    }
 
   }
 
+  openNotification (message, description) {
+    notification.open({
+      message: message,
+      description,
+      icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+    });
+  }
   componentDidMount() {
-    const { pk_i_id } = this.props.match.params;
-    fetch(`/api/v1/getCaptainDetails/${pk_i_id}`, {
+    const { id } = this.props.match.params;
+    fetch(`/api/v1/getCaptainDetails/${id}`, {
       method: 'GET'
     })
       .then(res => res.json())
@@ -65,46 +76,27 @@ import { notification, Icon } from 'antd';
             })
         }
         else {
-          notification.open({
-            message: 'يتعذر',
-            description:
-              res.error,
-            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-          });
+          this.openNotification('يتعذر', res.error)
         }
       })
-
-
-    fetch(`/api/v1/getCaptainOrders/${pk_i_id}`, {
+    fetch(`/api/v1/getCaptainOrders/${id}`, {
       method: 'GET'
     })
 
       .then(res => res.json())
       .then(res => {
-
         if (res.result) {
           const rows = res.result;
           this.convertToObjectForTable(rows);
-
         }
         else {
-          notification.open({
-            message: 'يتعذر',
-            description:
-              res.error,
-            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-          });
+          this.openNotification('يتعذر', res.error)
         }
 
       })
 
       .catch(err => {
-        notification.open({
-          message: 'يتعذر',
-          description:
-            err,
-          icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-        })
+        this.openNotification('يتعذر', 'هناك خطأ ما الرجاء اعادة المحاولة');
       });
 
   }
@@ -118,44 +110,91 @@ import { notification, Icon } from 'antd';
       obj.status = result[key][0].status;
       obj.customer = result[key][0].name;
       obj.price = result[key][0].total + '$';
-      obj.place = result[key][0].place;
+      obj.place = result[key][0].place_name;
       obj.items = result[key][0].items_names;
       return obj;
     });
     this.setState({ columns: table });
   }
-  render() {
 
+  deleteRow = id => {
+    this.setState(prev => {
+      return { columns: prev.columns.filter(data => data.key !== id) };
+    });
+  };
+
+  handleClick = (value1, value2, id, information) => e => {
+    this.setState(prev => {
+      return {
+        [value1]: {
+          [value2]: !prev[value1][value2],
+          id,
+          information
+        }
+      };
+    });
+  };
+  render() {
+    const { columns, avatar, name, email, address, id_number, licience_number, phone_number, status, singleCaptain} = this.state;
+    console.log(columns);
     return (
       <div>
-        <Header Icon={<img src={this.state.avatar} className="avatar" />} title={this.state.name} />
+        <Header Icon={<img src={avatar} className="avatar" />} title={name} />
 
         <div className='view-captain'>
-          <div className='view-captain-personal-information'>
-            <h2 className='view-captain-personal-information-title'>المعلومات الشخصية</h2>
-            <div className='view-captain-personal-information-box'>
-
-              <p className='paragraph'><span>الاسم:</span>{this.state.name}</p>
-              <p className='paragraph'>{this.state.email}<span>:البريد الالكتروني</span></p>
-              <p className='paragraph'><span>رقم الهوية:</span> {this.state.id_number}</p>
-              <p className='paragraph'><span>الهاتف المحمول:</span>{this.state.phone_number}</p>
-              <p className='paragraph'><span>الحالة:</span>{this.state.status}</p>
-              <p className='paragraph'><span>العنوان:</span>{this.state.address}</p>
-              <p className='paragraph'><span>رقم الرخصة:</span>{this.state.licience_number}</p>
+          <div className="profile">
+          <div className="profile__info">
+            <h3 className="profile__info__title">المعلومات الشخصية</h3>
+            <div className="profile__box">
+              <p className="profile__box__title">الاسم</p>
+              <p className="profile__value">{name}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">الهاتف المحمول</p>
+              <p className="profile__value">{phone_number}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">الحالة</p>
+              <p className="profile__value">{status}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">البريد الالكتروني</p>
+              <p className="profile__value">{email}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">العنوان</p>
+              <p className="profile__value">{address}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">رقم الرخصة</p>
+              <p className="profile__value">{licience_number}</p>
+            </div>
+            <div className="profile__box">
+              <p className="profile__box__title">رقم الهوية</p>
+              <p className="profile__value">{id_number}</p>
             </div>
           </div>
+          </div>
+
           <div className='view-captain-orders'>
-            <h2 className='view-captain-orders-title'>الطلبات الخاصة بالمستخدم</h2>
+            <h2 className='view-captain-orders-title'>الطلبات الخاصة بالكابتن</h2>
             <div className="order-table">
               <Table pageName="singleCaptain"
-
-                viewPopup={viewPopup}
-                EditPopup={Popup}
-                DeletePopup={DeletePopup}
-
-                columns={this.state.columns}
-
+                columns={columns}
+                viewValues={this.handleClick}
               />
+              <DeletePopup
+              visible={singleCaptain.deleteVisibility}
+              visibleFun={this.handleClick}
+              id={singleCaptain.id}
+              updateState={this.deleteRow}
+            />
+            <View
+              visible={singleCaptain.viewVisibility}
+              visibleFun={this.handleClick}
+              id={singleCaptain.id}
+              information={singleCaptain.information}
+            />
             </div>
           </div>
         </div>
