@@ -489,14 +489,17 @@ class DeletePopup extends Component {
     visible: false,
     id: this.props.id
   };
-
   openNotificationWithIcon = (type, message) => {
     notification[type]({
       message: message,
       duration: 1.5
     });
   };
-
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
   handleOk = e => {
     fetch(`/api/v1/deleteOrder/${this.props.id}`, { method: "DELETE" })
       .then(res => res.json())
@@ -510,11 +513,10 @@ class DeletePopup extends Component {
         }
       })
       .catch(() => {
-        this.openNotificationWithIcon('warning', 'Something error please try again');
+        this.openNotificationWithIcon('warning', 'Error, please try again');
         this.props.visibleFun("singleCustomer", "deleteVisibility")(e);
       });
   };
-
   handleCancel = e => {
     this.setState({visible:false})
   };
@@ -542,7 +544,7 @@ class DeletePopup extends Component {
       >
         <p>هل تريد بالتأكيد حذف الطلب ؟</p>
       </Modal>
-      </React.Fragment>
+     </React.Fragment>
     );
   }
 }
