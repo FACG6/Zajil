@@ -358,3 +358,10 @@ textarea {
   display: flex;
   width: 86px !important;
 }
+.ViewPopup .marketAndButtonsDiv {
+  align-items: center;
+} 
+.ViewPopup .marketAndButtonsDiv .cancelButton {
+  width: 24vw !important;
+  margin-right: 2vw !important;
+}
