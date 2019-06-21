@@ -33,7 +33,6 @@ class OrdersManagement extends Component {
           error.response.data = "Error, No orders yet.";
           this.setState({ error });
         } else {
-          console.log(res.data)
           this.setState({ orders: res.data });
         }
       })
@@ -208,7 +207,6 @@ class OrdersManagement extends Component {
   }
 
   render() {
-    console.log(this.state.order)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
@@ -220,13 +218,6 @@ class OrdersManagement extends Component {
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                {/* <Button
-                  className="ordersManagement_addOrder-button"
-                  type="primary"
-                  ///////////////
-                >
-                  إضافة طلب
-                </Button> */}
                 <CollectionsPage updateOrdersStateVariable={this.updateOrdersStateVariable} />
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
