@@ -208,6 +208,16 @@ class Captains extends Component {
       };
     });
   };
+  updateCaptain = (column) => {
+    const {pk_i_id: id} = column;
+    this.setState(prev => {
+      return {captains: prev.captains.map(captain => {
+        if(captain.pk_i_id == id) {
+          return column;}
+        return captain;
+      })}
+    })
+  }
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
@@ -240,6 +250,7 @@ class Captains extends Component {
                 id={this.state.captainsPage.edit.id}
                 changevisibility = {this.handleClick}
                 information = {this.state.captainsPage.edit.information}
+                updateCaptain = {this.updateCaptain}
               />
             
               <div className="filtercontainer">

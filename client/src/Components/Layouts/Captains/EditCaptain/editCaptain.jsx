@@ -43,7 +43,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       }
     }
     handleVisible = (e) => {
-      console.log(this.props);
         this.props.onCancel(
           "captainsPage",
           "edit",
@@ -53,7 +52,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         )(e);
     }
     render() {
-      console.log(this.props);
       const uploadButton = (
         <Button className="btn--upload">
           <Icon type={this.state.loading ? "check-circle" : "upload"} />
@@ -217,10 +215,9 @@ class Editcaptain extends React.Component {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
-        notification.open({
+        notification.error({
           message: "هناك خطأ في ادخال البيانات",
-          description: err,
-          icon: <Icon type="meh" style={{ color: "#108ee9" }} />
+          duration: 1.5,
         });
       } else {
         const {
@@ -248,8 +245,7 @@ class Editcaptain extends React.Component {
         formData.append("password", password);
         formData.append("phone", phone);
         formData.append("status", status);
-        // const { id } = this.parmas.match.id;
-        const id = 6;
+        const id = this.props.id;
         fetch(`/api/v1/putCaptain/${id}`, {
           method: "PUT",
           body: formData
@@ -257,34 +253,40 @@ class Editcaptain extends React.Component {
           .then(res => res.json())
           .then(res => {
             if (res.result) {
-              notification.open({
-                message: "نجح",
-                description: "تم التعديل بنجاح",
-                icon: <Icon type="smile" style={{ color: "#108ee9" }} />
+              this.props.updateCaptain(res.result[0]);
+              notification.success({
+                message: "تم التعديل بنجاح",
+                duration: 1.5,
               });
             } else {
               notification.open({
-                message: "يتعذر",
-                description: res.error,
-                icon: <Icon type="meh" style={{ color: "#108ee9" }} />
+                message: res.error,
+                duration: 1.5,
               });
             }
           })
           .catch(err => {
-            notification.open({
-              message: "يتعذر",
-              description: "هناك خطأ ما الرجاء اعادة ارسال البيانات",
-              icon: <Icon type="meh" style={{ color: "#108ee9" }} />
+            notification.error({
+              message: "هناك خطأ اعد المحاولة مرة اخرى",
+              duration: 1.5,
             });
           });
       }
     });
-    form.resetFields();
-    this.setState({ visible: false });
+    this.props.handleVisible();
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
+  handleVisible = (e) => {
+    this.props.onCancel(
+      "captainsPage",
+      "edit",
+      "editVisibility",
+      [],
+      ""
+    )(e);
+}
 
   render() {
     const { id, information, changevisibility } = this.props;
