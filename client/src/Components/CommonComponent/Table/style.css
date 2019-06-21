@@ -362,6 +362,12 @@ textarea {
   align-items: center;
 } 
 .ViewPopup .marketAndButtonsDiv .cancelButton {
-  width: 24vw !important;
-  margin-right: 2vw !important;
+  width: 260px !important;
+  margin-right: 5.5px !important;
+  background-color: #28a745 !important;
+}
+.ViewPopup .marketAndButtonsDiv .cancelButton:hover {
+  width: 260px !important;
+  margin-right: 5.5px !important;
+  background-color: #178c31 !important;
 }
