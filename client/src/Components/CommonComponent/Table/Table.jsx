@@ -356,8 +356,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event => editPopup(record.key, record)}
+                  <Icon onClick={this.props.handleClick("captainsPage","edit","editVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
