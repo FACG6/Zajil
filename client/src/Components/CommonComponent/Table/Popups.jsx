@@ -567,7 +567,11 @@ getStoreName = () => {
 
     const prefixSelector = getFieldDecorator("prefix", {
       initialValue: phoneNumber.substring(0, 4)
-    });
+    })(
+      <Select style={{ width: 70 }}>
+        <Option value="970">{phoneNumber.substring(0, 4)}</Option>
+      </Select>
+    );
     return (
       <React.Fragment>
         <Icon
