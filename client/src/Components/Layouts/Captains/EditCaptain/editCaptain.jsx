@@ -273,13 +273,13 @@ class Editcaptain extends React.Component {
           });
       }
     });
-    this.props.handleVisible();
+    this.handleVisible();
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
   handleVisible = (e) => {
-    this.props.onCancel(
+    this.props.changevisibility(
       "captainsPage",
       "edit",
       "editVisibility",
