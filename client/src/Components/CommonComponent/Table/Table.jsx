@@ -80,7 +80,7 @@ class TableCmponent extends Component {
                    phoneNumber={record.phone ? record.phone : ""}
                    customerAddress={record.address}
                    itemsArray={record.items}
-                   storeId={record.storeId}
+                   storeId={record.storeid}
                    stores={this.props.stores}
                    orderId={record.key}
                   />
@@ -90,7 +90,7 @@ class TableCmponent extends Component {
                     phoneNumber={record.phone ? record.phone : ""}
                     customerAddress={record.address}
                     itemsArray={record.items}
-                    storeId={record.storeId}
+                    storeId={record.storeid}
                     stores={this.props.stores}
                     orderId={record.key}
                   />
