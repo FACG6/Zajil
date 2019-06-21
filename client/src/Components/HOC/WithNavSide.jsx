@@ -1,17 +1,46 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import Sidebar from '../CommonComponent/Sidebar';
 import Navbar from '../CommonComponent/Navbar';
+import { notification, Spin } from 'antd'
+import Login from '../Layouts/Login';
+
+import './style.css';
 
 export default WrappedComponent =>
-  class extends Component {
+  class WrappedComponentWithNavSide extends Component {
+    state = {
+      login: false,
+      fetch : false
+    }
+    componentDidMount(){
+      fetch ('/api/v1/checkCookie')
+      .then(res => res.json())
+      .then(({result}) => {
+        this.setState({login: result, fetch: true});
+      })
+      .catch(() => {
+        notification.error({message: 'هناك خطأ ما الرجاء المحاولة مرة اخرى'});
+      })
+    }
+
     render() {
-      return (
-        <>
-          <Sidebar />
-          <Navbar />
-          <WrappedComponent {...this.props} />
-        </>
-      );
+      const { login, fetch } = this.state;
+      if(fetch && login){
+        return (
+          <>
+            <Sidebar />
+            <Navbar />
+            <WrappedComponent {...this.props} />
+          </>
+        );
+      } 
+      if( fetch && !login) {
+        return <Redirect to='/login' />
+      }
+      return <div className="loader__hoc">
+      <Spin size="large" tip="Loading..."/>
+      </div>
     }
   };

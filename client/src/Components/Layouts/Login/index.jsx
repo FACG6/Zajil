@@ -16,6 +16,7 @@ export default class Login extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
+    console.log(e);
     const { userName, password } = this.state;
     if(!userName || !password){
       return this.setState({error: 'الرجاء ملىء جميع الحقول'});
@@ -27,14 +28,17 @@ export default class Login extends Component {
     })
     .then(res => res.json())
     .then(res => {
+      console.log(res);
       const { error } = res;
       if (error) {
         this.setState({error});
       } else {
+        console.log('push');
         this.props.history.push('/');
       }
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log(e)
       this.setState({error: 'هناك خطأ جرب مرة أخرى'});
     });
 
