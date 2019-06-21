@@ -8,7 +8,7 @@ import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
 import { EditPopup, DeletePopup, ViewPopup } from "../../CommonComponent/Table/Popups";
 import CollectionsPage from '../Order/addOrder';
-// import { viewPopup } from "../../CommonComponent/Table/Popups";
+import WrappedComponent from '../../HOC/WithNavSide';
 import "./style.css";
 
 class OrdersManagement extends Component {
@@ -212,9 +212,7 @@ class OrdersManagement extends Component {
     if (!this.state.error) {
       return (
         <div className="ordersManagement-bars-container">
-          <Sidebar />
           <div className="ordersManagement-main-container">
-            <Navbar />
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
@@ -286,4 +284,4 @@ class OrdersManagement extends Component {
   }
 }
 
-export default OrdersManagement;
+export default WrappedComponent(OrdersManagement);
