@@ -43,7 +43,7 @@ const updateCaptain = (req, res) => {
                       });
                     } else {
                       res.status(202).send({
-                        result: 'true',
+                        result: captain,
                       });
                     }
                   })
@@ -90,7 +90,7 @@ const updateCaptain = (req, res) => {
                 });
               } else {
                 res.status(202).send({
-                  result: 'true',
+                  result: captain,
                 });
               }
             })
