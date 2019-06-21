@@ -1,104 +1,50 @@
-.edit-captain-container-left{
-  width: 42%;
+.edit-captain-container-left {
+  width: 40%;
 }
-.edit-captain-container-right{
-  width: 42%;
+
+.edit-captain-container-right {
+  width: 47%;
 }
-.edit-captain-container-center{
-  margin: 0.2rem 2.2rem;
+
+.edit-captain-container-center {
+  margin: 0.1rem 1.2rem;
   background-color: #e0e0e0;
   height: 30.5rem;
 }
-.edit-captain__form{
+
+.edit-captain__form {
   width: 100%;
   display: flex;
   margin-left: 0rem;
- }
- .edit-captain__popup .anticon svg{
-   display: none;
- }
+}
+
 .edit-captain__popup .ant-modal-content {
-  width: 130%;
- right: calc(50% - 166px);
+  width: 147%;
+  left: 5rem;
 }
-.edit-captain__popup .ant-modal-header{
-  width: 96%;
-  direction: rtl;
-  margin-bottom: -4px;
-}
-.edit-captain__popup .ant-modal-title{
+
+.edit-captain__popup .ant-modal-title {
   font-size: 20px;
   font-family: cairo;
   font-weight: bold;
 }
-.edit-captain__popup .ant-modal-body{
-  padding-bottom: 0px;
-}
-.edit-captain__popup .ant-form-item{
-  margin-bottom: 9px;
-}
-.edit-captain__popup .ant-form-item-label{
-  display: block;
-}
-.edit-captain__popup .ant-select{
-  margin: -0.5rem 84px;
-  border: 0.1rem solid #ccc;
-  border-radius: 0.4rem;
-  box-sizing: border-box;
-}
-.edit-captain__popup form .ant-upload{
-  margin-left: 90px;
-  margin-top: -21px;
-}
-.edit-captain__popup .ant-modal-footer{
-  text-align: unset;
-  margin: 1em auto 0;
-}
-.edit-captain__popup .ant-form-item-required::before {
-  display: inline-block;
-  margin-right: 4px;
-  color: black;
-  font-size: 14px;
-  font-family: SimSun, sans-serif;
-  line-height: 1;
-  content: ':';
 
- }
- .edit-captain__popup .ant-form-item-label > label::after {
-  content: '*';
-  position: relative;
-  color: #f5222d;
-  top: -0.5px;
-  margin: 0 8px 0 2px;
+.edit-captain__popup .ant-modal-body {
+  height: 28rem;
 }
-.edit-captain__popup .ant-select, .edit-captain__popup .ant-cascader-picker{
+
+.edit-captain__popup form .ant-upload {
   position: absolute;
-  bottom: 0.8rem;
-}
-.edit-captain__popup .ant-form-item label{
-  font-weight: bold;
-  font-family: cairo;
-  font-size: 13px;
-
-}
-.edit-captain__popup .ant-input{
-  direction: rtl;
 }
 
-.edit-captain__popup .ant-modal-footer{
-margin-top: -52px;
-}
-.btn--upload {
+.edit-captain__popup .image__name {
   position: absolute;
-  bottom: 2rem;
-  right: 1.5rem;
-}  
+  top: 4rem;
+  right: 2rem;
+  width: 8rem;
+}
 
- .image__name{
-  position: absolute;
-  width: fit-content;
-} 
-.upload-photo{
+.upload-photo {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 7px;

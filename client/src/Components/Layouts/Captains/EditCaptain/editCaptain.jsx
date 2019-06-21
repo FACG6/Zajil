@@ -18,7 +18,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       this.setState({ imageUrl: e.file });
     };
     componentDidMount() {
-      const { id } = this.parmas.match.id;
+      // const { id } = this.parmas.match.id;
+      const id = 6;
       fetch(`/api/v1/getCaptainDetails/${id}`)
         .then(res => res.json())
         .then(res => {
@@ -84,8 +85,58 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           onOk={onCreate}
           cancelText="إلغاء"
           className="edit-captain__popup"
+          style={{direction: 'rtl'}}
         >
           <Form className='edit-captain__form'>
+          <div className='edit-captain-container-right'>
+              <Form.Item label="الاسم">
+                {getFieldDecorator("name", {
+                  rules: [
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-يa-z]|\s)+$/ }
+                  ]
+                })(<Input type="text" id="name"
+                />)}
+              </Form.Item>
+              <Form.Item label="البريد">
+                {getFieldDecorator("email", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "يرجى ملئ الحقل بريد الكتروني",
+                      pattern: /.+\@.+\..+/
+                    }
+                  ]
+                })(<Input type="email" id="email" />)}
+              </Form.Item>
+              <Form.Item label="كلمة المرورالجديدة">
+                {getFieldDecorator("password", {
+                  rules: [
+                    {
+                    }
+                  ]
+                })(<Input type="password" id="password" />)}
+              </Form.Item>
+              <Form.Item label="الهاتف">
+                {getFieldDecorator("phone", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "الرجاء ملئ الحقل بارقام",
+                      pattern: /^\+?[0-9.-\s]{10,16}$/
+                    }
+                  ]
+                })(<Input type="text" id="phone" />)}
+              </Form.Item>
+
+              <Form.Item label="العنوان" dir="ltr">
+                {getFieldDecorator("address", {
+                  rules: [
+                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يA-Za-z0-9.-_\s]*$/ }
+                  ]
+                })(<Input type="text" id="address" />)}
+              </Form.Item>
+            </div>
+            <div className='edit-captain-container-center'></div>
             <div className="edit-captain-container-left">
               <Form.Item label="رقم الهوية" >
                 {getFieldDecorator("IDNumber", {
@@ -137,55 +188,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               </Form.Item>
 
             </div>
-            <div className='edit-captain-container-center'></div>
-            <div className='edit-captain-container-right'>
-              <Form.Item label="الاسم">
-                {getFieldDecorator("name", {
-                  rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-يa-z]|\s)+$/ }
-                  ]
-                })(<Input type="text" id="name"
-                />)}
-              </Form.Item>
-              <Form.Item label="البريد">
-                {getFieldDecorator("email", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "يرجى ملئ الحقل بريد الكتروني",
-                      pattern: /.+\@.+\..+/
-                    }
-                  ]
-                })(<Input type="email" id="email" />)}
-              </Form.Item>
-              <Form.Item label="كلمة المرورالجديدة">
-                {getFieldDecorator("password", {
-                  rules: [
-                    {
-                    }
-                  ]
-                })(<Input type="password" id="password" />)}
-              </Form.Item>
-              <Form.Item label="الهاتف">
-                {getFieldDecorator("phone", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "الرجاء ملئ الحقل بارقام",
-                      pattern: /^\+?[0-9.-\s]{10,16}$/
-                    }
-                  ]
-                })(<Input type="text" id="phone" />)}
-              </Form.Item>
-
-              <Form.Item label="العنوان" dir="ltr">
-                {getFieldDecorator("address", {
-                  rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يA-Za-z0-9.-_\s]*$/ }
-                  ]
-                })(<Input type="text" id="address" />)}
-              </Form.Item>
-            </div>
           </Form>
         </Modal>
       );
@@ -234,7 +236,8 @@ class Editcaptain extends React.Component {
         formData.append('password', password);
         formData.append('phone', phone);
         formData.append('status', status);
-        const { id } = this.parmas.match.id;
+        // const { id } = this.parmas.match.id;
+        const id = 6;
         fetch(`/api/v1/putCaptain/${id}`, {
           method: 'PUT',
           body: formData,

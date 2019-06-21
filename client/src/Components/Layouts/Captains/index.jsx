@@ -8,6 +8,7 @@ import Header from "../../CommonComponent/Header/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
 import WrappedComponent from "../../HOC/WithNavSide";
 import Deletepopup from "./Popups/DeleteCaptain";
+import Editcaptain from './EditCaptain/editCaptain';
 
 import "./style.css";
 const { RangePicker } = DatePicker;
@@ -228,10 +229,10 @@ class Captains extends Component {
                 id={this.state.captainsPage.delete.id}
                 updateState={this.deleteRowCustomer}
               />
-               {/* <Editcaptain
+               <Editcaptain
                visible={this.state.captainsPage.edit.editVisibility}
-                id={this.state.captainsPage.delete.id}
-              /> */}
+                id={this.state.captainsPage.edit.id}
+              />
             
               <div className="filtercontainer">
                 <div classNam="filtercontainer__orderdate">
