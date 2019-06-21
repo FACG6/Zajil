@@ -13,11 +13,15 @@ const orderHandler = require('./order');
 const { getImage } = require('./getImage');
 const PlaceHandler = require('./place');
 const { getStores } = require('./stores/index');
+const { checkCookie } = require('./checkCookie');
 
 
 const router = express.Router();
 router.use(checkAuth);
 // the all routes start from here
+router.route('/checkCookie')
+  .get(checkCookie);
+
 router.use(adminHandler);
 
 router.use(protectRoutes);
