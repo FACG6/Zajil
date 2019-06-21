@@ -232,6 +232,7 @@ class Captains extends Component {
                <Editcaptain
                visible={this.state.captainsPage.edit.editVisibility}
                 id={this.state.captainsPage.edit.id}
+                information = {this.state.captainsPage.edit.information}
               />
             
               <div className="filtercontainer">
