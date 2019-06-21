@@ -682,11 +682,6 @@ getStoreName = () => {
                     })}
                   </div>
                 </div>
-                <Icon
-                  onClick={this.appendInput}
-                  className="popupModal_add-item-icon"
-                  type="plus-circle"
-                />
               </div>
             </div>
             <div className="marketAndButtonsDiv">
