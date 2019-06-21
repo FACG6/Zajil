@@ -20,6 +20,7 @@ const override = css`
 class Captains extends Component {
   state = {
     visible: false,
+    visibleEdit: false,
     tableData: [],
     captains: [],
     allData: [],
@@ -115,6 +116,11 @@ class Captains extends Component {
   handleVisible = () => {
     this.setState(prev => {
       return { visible: !prev.visible };
+    });
+  };
+  handleVisibleEdit = () => {
+    this.setState(prev => {
+      return {visibleEdit: !prev.visibleEdit}
     });
   };
 
@@ -232,6 +238,7 @@ class Captains extends Component {
                <Editcaptain
                visible={this.state.captainsPage.edit.editVisibility}
                 id={this.state.captainsPage.edit.id}
+                changevisibility = {this.handleClick}
                 information = {this.state.captainsPage.edit.information}
               />
             

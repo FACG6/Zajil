@@ -17,7 +17,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       this.setState({ imageUrl: e.file });
     };
     componentDidUpdate(prevProps, prevState) {
-      if (prevProps.id !== this.props.id) {
+      if (prevProps.id == '' && /^[0-9]+$/.test(this.props.id)) {
         const { information: rows } = this.props;
         const status = rows.b_status ? "true" : "false";
         this.props.form.setFieldsValue({
@@ -42,6 +42,16 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           });
       }
     }
+    handleVisible = (e) => {
+      console.log(this.props);
+        this.props.onCancel(
+          "captainsPage",
+          "edit",
+          "editVisibility",
+          [],
+          ""
+        )(e);
+    }
     render() {
       console.log(this.props);
       const uploadButton = (
@@ -51,14 +61,14 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         </Button>
       );
       const { photoUrl, imageUrl } = this.state;
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
         <Modal
           visible={visible}
           title="تعديل كابتن"
           okText="حفظ"
-          onCancel={onCancel}
+          onCancel={this.handleVisible}
           onOk={onCreate}
           cancelText="إلغاء"
           className="edit-captain__popup"
@@ -200,14 +210,9 @@ class Editcaptain extends React.Component {
     visible: false
   };
 
-  showModal = () => {
-    this.setState({ visible: true });
-  };
-
   handleCancel = () => {
     this.setState({ visible: false });
   };
-
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
@@ -282,13 +287,13 @@ class Editcaptain extends React.Component {
   };
 
   render() {
-    const { id, information } = this.props;
+    const { id, information, changevisibility } = this.props;
     return (
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           visible={this.props.visible}
-          onCancel={this.handleCancel}
+          onCancel={changevisibility}
           onCreate={this.handleCreate}
           id={id}
           information={information}
