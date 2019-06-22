@@ -371,7 +371,7 @@ class EditForm extends React.Component {
                                   />
                                 )}
                               </Form.Item>
-                              <Form.Item>
+                              <Form.Item className="extra-item-price" >
                                 {getFieldDecorator(index.toString() + "*", {
                                   initialValue: field.price,
                                   rules: [
@@ -772,21 +772,3 @@ class DeletePopup extends Component {
 }
 
 export { EditPopup, DeletePopup, ViewPopup };
-
-// const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
-//   const span = document.createElement('span');
-//   const details = viewPopupHtmlString;
-//   span.innerHTML = `${details}`;
-//   swal.fire({
-//     title: 'Are you sure?',
-//     showCancelButton: true,
-//     showConfirmButton: true,
-//     confirmButtonColor: '#28a745',
-//     confirmButtonText: 'تعديل',
-//     cancelButtonText: 'إغلاق',
-//     cancelButtonColor: '#2b2a37',
-//     closeOnConfirm: true,
-//     reverseButtons: true,
-//     html: span,
-//   });
-// };
