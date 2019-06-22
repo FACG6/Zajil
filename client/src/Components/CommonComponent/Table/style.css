@@ -312,9 +312,10 @@ textarea {
 .popupModal .popupModal_add-item-icon {
   font-size: 20px;
   float: right;
-  margin-top: -15px;
+  margin-top: -10px;
   margin-right: 37px;
   color: #28a745;
+  position: relative;
 }
 .popupModal_remove-item-icon {
   font-size: 20px;
@@ -325,10 +326,12 @@ textarea {
   position: relative;
 }
 .popupModal .ant-form-item-with-help {
-  height: 48px;
+
 }
 .popupModal_formItem-item-price-container .ant-form-item-control .ant-form-explain {
-  margin-top: -24.7px;
+  top: 33.3px;
+  position: absolute;
+  right: 0;
 }
 .popupModal .popupModal_formItem-item-price-container .ant-form-item-control .ant-form-item-children .ant-form-item-with-help .ant-col .ant-form-item-control .ant-form-explain {
   margin-top: 0px;
@@ -378,4 +381,10 @@ textarea {
 }
 .popupModal .extra-item-price .ant-form-explain {
   width: 47px !important;
+}
+.popupModal .main-extra-items-wrapper {
+  margin-top: 33px;
+}
+.popupModal_form-items-container-and-add-icon {
+
 }

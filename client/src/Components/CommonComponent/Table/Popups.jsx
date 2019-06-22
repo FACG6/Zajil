@@ -348,7 +348,7 @@ class EditForm extends React.Component {
                       {this.state.itemsInputs.slice(1).map((field, index) => {
                         return (
                           <React.Fragment>
-                            <Form.Item>
+                            <Form.Item className="main-extra-items-wrapper">
                               <Form.Item>
                                 {getFieldDecorator(index.toString(), {
                                   initialValue: field.name,
