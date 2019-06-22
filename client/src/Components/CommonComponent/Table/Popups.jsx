@@ -404,13 +404,13 @@ class EditForm extends React.Component {
                       })}
                     </div>
                   </div>
+                </div>
+              </div>
                   <Icon
                     onClick={this.appendInput}
                     className="popupModal_add-item-icon"
                     type="plus-circle"
                   />
-                </div>
-              </div>
               <div className="marketAndButtonsDiv">
                 <Form.Item
                   label={
