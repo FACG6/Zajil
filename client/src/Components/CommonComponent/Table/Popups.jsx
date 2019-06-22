@@ -616,13 +616,6 @@ getStoreName = () => {
                 </Form.Item>
               </div>
               <div className="popupModal_form-items-container">
-                <Form.Item label="العنوان">
-                  {getFieldDecorator("address", {
-                    initialValue: customerAddress
-                  })(<Input readOnly />)}
-                </Form.Item>
-              </div>
-              <div className="popupModal_form-items-container">
                 <Form.Item
                   className="popupModal_formItem-item-price-container"
                   label="العناصر"
@@ -682,6 +675,13 @@ getStoreName = () => {
               </div>
             </div>
             <div className="marketAndButtonsDiv">
+            <div className="popupModal_form-items-container">
+                <Form.Item label="العنوان">
+                  {getFieldDecorator("address", {
+                    initialValue: customerAddress
+                  })(<Input readOnly />)}
+                </Form.Item>
+              </div>
               <Form.Item
                 label="المتجر"
               >

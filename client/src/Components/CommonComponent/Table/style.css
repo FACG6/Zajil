@@ -16,7 +16,7 @@ input[type="text"]:-ms-input-placeholder {
   right: calc(50% - 128px) !important ;
   top: calc(50% - 216px) !important;
 }
-.ErrorPopupModal .ant-modal-content{
+.ErrorPopupModal .ant-modal-content {
   height: 347px;
   text-align: center;
   padding-top: 80px;
@@ -100,8 +100,7 @@ input[type="text"]:-ms-input-placeholder {
   justify-content: space-evenly;
   height: 257px;
 }
-.popupModal .ant-form-item-control { 
-  
+.popupModal .ant-form-item-control {
 }
 .popupModal .ant-col-sm-8 {
   direction: rtl;
@@ -150,7 +149,7 @@ input[type="text"]:-ms-input-placeholder {
 }
 .popupModal .ant-form > div {
   overflow: overlay;
-} 
+}
 .ant-cascader-menus > div {
   position: fixed;
   background: #fff;
@@ -267,7 +266,7 @@ textarea {
 .popupModal .modalHeader h2 {
   margin-right: 15px;
 }
-.popupModal_form-items-container{
+.popupModal_form-items-container {
   /* height: 56px; */
 }
 .popupModal .ant-col-sm-8 {
@@ -302,14 +301,14 @@ textarea {
   margin-bottom: 7px;
   margin-right: 16px;
 }
-  .ant-col-xs-24.ant-form-item-label {
-    display: flex;
-    width: 220px;
-  }
-  .ant-col-sm-offset-8 {
-    margin-left: 0% !important;
-    width: 220px;
-  }
+.ant-col-xs-24.ant-form-item-label {
+  display: flex;
+  width: 220px;
+}
+.ant-col-sm-offset-8 {
+  margin-left: 0% !important;
+  width: 220px;
+}
 .popupModal .popupModal_add-item-icon {
   font-size: 20px;
   float: right;
@@ -327,14 +326,22 @@ textarea {
   position: relative;
 }
 .popupModal .ant-form-item-with-help {
-
 }
-.popupModal_formItem-item-price-container .ant-form-item-control .ant-form-explain {
+.popupModal_formItem-item-price-container
+  .ant-form-item-control
+  .ant-form-explain {
   top: 33.3px;
   position: absolute;
   right: 0;
 }
-.popupModal .popupModal_formItem-item-price-container .ant-form-item-control .ant-form-item-children .ant-form-item-with-help .ant-col .ant-form-item-control .ant-form-explain {
+.popupModal
+  .popupModal_formItem-item-price-container
+  .ant-form-item-control
+  .ant-form-item-children
+  .ant-form-item-with-help
+  .ant-col
+  .ant-form-item-control
+  .ant-form-explain {
   margin-top: 0px;
   width: 47px;
   font-size: 10px !important;
@@ -354,7 +361,8 @@ textarea {
   padding: 2vh !important;
   margin-top: 44px;
 }
-.popupModal .has-error .ant-form-explain, .has-error .ant-form-split { 
+.popupModal .has-error .ant-form-explain,
+.has-error .ant-form-split {
   font-size: 10px !important;
   float: right !important;
 }
@@ -364,11 +372,13 @@ textarea {
 }
 .ViewPopup .marketAndButtonsDiv {
   align-items: center;
-} 
+  justify-content: space-evenly !important;
+}
 .ViewPopup .marketAndButtonsDiv .cancelButton {
   width: 260px !important;
   margin-right: 5.5px !important;
   background-color: #28a745 !important;
+  margin-top: 0px !important;
 }
 .ViewPopup .marketAndButtonsDiv .cancelButton:hover {
   width: 260px !important;
@@ -386,6 +396,10 @@ textarea {
 .popupModal .main-extra-items-wrapper {
   margin-top: 33px;
 }
-.popupModal_form-items-container-and-add-icon {
-
+.ViewPopup .ant-modal-content {
+  height: 322px;
+}
+.ViewPopup .ant-form-horizontal > div:first-child {
+  height: 238px;
+  padding-top: 21px;
 }
