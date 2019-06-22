@@ -1,7 +1,16 @@
 import React from "react";
 import validator from "validator";
 import "./style.css";
-import { Button, Modal, Form, Input, Select, AutoComplete, notification, Icon } from 'antd';
+import {
+  Button,
+  Modal,
+  Form,
+  Input,
+  Select,
+  AutoComplete,
+  notification,
+  Icon
+} from "antd";
 const { Option } = Select;
 let id = 0;
 
@@ -16,11 +25,14 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         errPalce: ""
       }
     };
-   openNotificationWithIcon = (type, message) => {
-
-      // notification[type]({
-      //   message
-      // });
+    openNotificationWithIcon = (type, message) => {
+      try {
+        notification[type]({
+          message
+        });
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     loadCaptainsNames = () => {
@@ -335,7 +347,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 {errPalce && <p className="auto-complete-error">{errPalce}</p>}
               </Form.Item>
               <div className="addOrder">
-              {formItems}
+                {formItems}
                 <Form.Item
                   label="اضف طلب"
                   layout="horizontal"
@@ -349,7 +361,6 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   >
                     <Icon type="plus" /> اضافة طلب
                   </Button>
-                  
                 </Form.Item>
                 <Form.Item {...formItemLayoutWithOutLabel} />
               </div>
@@ -368,10 +379,13 @@ export default class CollectionsPage extends React.Component {
   };
 
   openNotificationWithIcon = (type, message) => {
-
-    // notification[type]({
-    //   message
-    // });
+    try {
+      notification[type]({
+        message
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleVisible = () => {
@@ -412,11 +426,23 @@ export default class CollectionsPage extends React.Component {
           .then(res => {
             if (res.error) {
               this.openNotificationWithIcon("error", "لم تتم عملية الاضافة");
-            } else{
-              this.openNotificationWithIcon("success", "تمت عملية الاضافة بنجاح");
+            } else {
+              this.openNotificationWithIcon(
+                "success",
+                "تمت عملية الاضافة بنجاح"
+              );
               // here make function to update table of orders
-              const newOrder = {address, phone: `+${phone1}${phone}`, storeid:selectedPlaces, captain:selectedCaptain,date: new Date(Date.now()), customer:userName, b_status:1, items};
-              this.props.updateOrdersStateVariable(newOrder)
+              const newOrder = {
+                address,
+                phone: `+${phone1}${phone}`,
+                storeid: selectedPlaces,
+                captain: selectedCaptain,
+                date: new Date(Date.now()),
+                customer: userName,
+                b_status: 1,
+                items
+              };
+              this.props.updateOrdersStateVariable(newOrder);
             }
             this.handleVisible();
           })
@@ -439,13 +465,13 @@ export default class CollectionsPage extends React.Component {
         {/* <Button type="primary" onClick={this.handleVisible}>
           إضافة طلب <Icon type="plus-circle" />
         </Button> */}
-                       <Button
-                  className="ordersManagement_addOrder-button"
-                  type="primary"
-                  onClick={this.handleVisible}
-                >
-                  إضافة طلب
-                </Button>
+        <Button
+          className="ordersManagement_addOrder-button"
+          type="primary"
+          onClick={this.handleVisible}
+        >
+          إضافة طلب
+        </Button>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}

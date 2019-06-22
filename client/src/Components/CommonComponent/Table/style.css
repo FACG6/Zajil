@@ -342,7 +342,7 @@ textarea {
   width: 48.77px;
 }
 .popupModal .popupModal_item-extra-input {
-  width: 203.9px;
+  width: 190px !important;
 }
 .popupModal_error-class {
   text-align: center !important;
@@ -357,4 +357,11 @@ textarea {
 .ViewPopup .ant-col-xs-24.ant-form-item-label {
   display: flex;
   width: 86px !important;
+}
+.ViewPopup .marketAndButtonsDiv {
+  align-items: center;
+} 
+.ViewPopup .marketAndButtonsDiv .cancelButton {
+  width: 24vw !important;
+  margin-right: 2vw !important;
 }

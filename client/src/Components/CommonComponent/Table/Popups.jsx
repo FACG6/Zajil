@@ -521,6 +521,7 @@ class ViewForm extends React.Component {
     this.setState({
       visible: true
     });
+    this.getStoreName();
   };
 
   handleCancel = () => {
@@ -531,8 +532,8 @@ class ViewForm extends React.Component {
 getStoreName = () => {
   let storeName = "";
   for (let i = 0; i < this.props.stores.length; i++) {
-    if (this.props.stores[i].id == this.props.storeID) {
-      storeName = this.props.stores[i].label;
+    if (this.props.stores[i].id == this.props.storeId) {
+      storeName = this.props.stores[i].value;
     }
   }
   this.setState({storeName});
@@ -567,7 +568,11 @@ getStoreName = () => {
 
     const prefixSelector = getFieldDecorator("prefix", {
       initialValue: phoneNumber.substring(0, 4)
-    });
+    })(
+      <Select style={{ width: 70 }}>
+        <Option value="970">{phoneNumber.substring(0, 4)}</Option>
+      </Select>
+    );
     return (
       <React.Fragment>
         <Icon
@@ -592,11 +597,7 @@ getStoreName = () => {
             <div style={{ display: "block" }}>
               <div className="popupModal_form-items-container">
                 <Form.Item
-                  label={
-                    <span>
-                      <span className="popupModal_storeName-label" />إسم الزبون
-                    </span>
-                  }
+                  label="إسم الزبون"
                 >
                   <Input readOnly defaultValue={customerName} />
                 </Form.Item>
@@ -678,20 +679,11 @@ getStoreName = () => {
                     })}
                   </div>
                 </div>
-                <Icon
-                  onClick={this.appendInput}
-                  className="popupModal_add-item-icon"
-                  type="plus-circle"
-                />
               </div>
             </div>
             <div className="marketAndButtonsDiv">
               <Form.Item
-                label={
-                  <span>
-                    <span className="popupModal_storeName-label">*</span> المتجر
-                  </span>
-                }
+                label="المتجر"
               >
                 <Input readOnly defaultValue={this.state.storeName} />
               </Form.Item>

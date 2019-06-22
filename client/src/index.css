@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lateef&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Cairo&display=swap');
 .html {
   font-size: 62.5%;
+  --antd-wave-shadow-color: #212a63 !important;
+  direction: rtl;
+  overflow: scroll;
+  overflow-x: hidden;
+  font-family: Cairo;
 }
 
 body {
@@ -33,7 +39,7 @@ code {
 p {
   font-family: Cairo;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 300;
   font-size: 1.6 rem;
   color: #000000;
 }
@@ -43,4 +49,12 @@ h3 {
   font-style: normal;
   font-weight: bold;
   font-size: 1.6 rem
+}
+::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  width: 50px;
+  background: rgb(67, 65, 93);
 }
