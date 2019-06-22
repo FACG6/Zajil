@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { DatePicker, Input, Button, Icon } from "antd";
 import moment, { isValid } from "moment";
-import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
 import { EditPopup, DeletePopup, ViewPopup } from "../../CommonComponent/Table/Popups";
 import CollectionsPage from '../Order/addOrder';
@@ -203,7 +201,7 @@ class OrdersManagement extends Component {
   };
 
   updateOrdersStateVariable = (order) => {
-    console.log(order)
+    console.log(55555564444,order)
   }
 
   render() {
