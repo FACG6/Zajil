@@ -37,7 +37,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
 
     loadCaptainsNames = () => {
       fetch("/api/v1/getCaptainsNames")
-        .then(res => res.json())
+        .then(res => {
+         return res.json()})
         .then(res => {
           const { error } = res;
           if (error) {
@@ -462,9 +463,6 @@ export default class CollectionsPage extends React.Component {
   render() {
     return (
       <div>
-        {/* <Button type="primary" onClick={this.handleVisible}>
-          إضافة طلب <Icon type="plus-circle" />
-        </Button> */}
         <Button
           className="ordersManagement_addOrder-button"
           type="primary"
