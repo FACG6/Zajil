@@ -22,7 +22,7 @@ class NavBar extends Component {
       }
     })
     .catch(() => {
-      this.setState({error: 'هناكخطأ ما اعد تحميل الصفحة'});
+      this.setState({error: 'هناك خطأ'});
     }) 
   }
   openNotificationWithIcon = (type, message) => {
@@ -42,7 +42,6 @@ class NavBar extends Component {
         this.openNotificationWithIcon('error', 'هناك خطأ الرجاء المحاولة مرة اخرى')
       }
     }).catch((error) => {
-      console.log(error);
       this.openNotificationWithIcon('error', 'هناك خطأ الرجاء المحاولة مرة اخرى')
     })
   }

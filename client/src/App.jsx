@@ -55,6 +55,7 @@ class App extends Component {
               path="/in-progress"
               component={InProgress}
             />
+
             <Route component={NotFound} />
           </Switch>
         </Router>

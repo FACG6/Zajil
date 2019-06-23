@@ -86,9 +86,9 @@
     display: flex !important;
 }
 
-.ant-form-item-control-wrapper {
+/* .ant-form-item-control-wrapper {
     width: 75% !important
-}
+} */
 
 .modalcontainer {
     width: 783px !important;
