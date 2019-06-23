@@ -543,7 +543,7 @@ getStoreName = () => {
   render() 
   {
     console.log(this.props)
-    const { customerName, phoneNumber, customerAddress ,orderStatus, orderPrice} = this.props;
+    const { customerName, phoneNumber, customerAddress ,orderStatus, captainName, orderPrice} = this.props;
     const { getFieldDecorator } = this.props.form;
     const columns = [{title: 'اسم الطلبية', dataIndex: 'name'},
       {title: 'السعر', dataIndex: 'price'}]
@@ -592,29 +592,34 @@ getStoreName = () => {
           className="viewModal"
           visible={this.state.visible}
           onCancel={this.handleCancel}
+          cancelText="إالغاء"
           destroyOnClose={true}
           style={{ direction: "rtl", width: '575' }}
+          closable={false}
         >
           <div className="view__captain">
             <div className="view__captain-box">
-              <p>اسم الزبون : </p>
+              <p className="view__captain__paragraph">اسم الزبون : </p>
               <p className="view__captain-value">{customerName}</p>
             </div>
             <div className="view__captain-box">
-              <p>تاريخ الطلبية : </p>
+              <p className="view__captain__paragraph">تاريخ الطلبية : </p>
               <p className="view__captain-value">{this.props.orderDate}</p>
             </div>
            
             <div className="view__captain-box">
-              <p>اسم المكان : </p>
+              <p className="view__captain__paragraph">اسم المكان : </p>
               <p className="view__captain-value">{ customerAddress}</p>
             </div>
              
             <div className="view__captain-box">
-              <p>حالة الطلب : </p>
+              <p className="view__captain__paragraph">حالة الطلب : </p>
               <p className="view__captain-value">{this.props.orderStatus?"تم" :"قيد التنفيذ"}</p>
             </div>
-             
+            <div className="view__captain-box">
+              <p className="view__captain__paragraph">اسم الكابتن : </p>
+              <p className="view__captain-value">{ captainName}</p>
+            </div>
             <Table 
             dataSource={this.state.itemsInputs}
              columns={columns}
