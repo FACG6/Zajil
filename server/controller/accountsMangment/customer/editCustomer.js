@@ -45,13 +45,11 @@ const editCustomer = (req, res) => {
             newpassword,
           )
             .then((resultEdit) => {
-              console.log(resultEdit.rows);
               res.status(200).send({
                 result: resultEdit.rows,
               });
             })
-            .catch((error) => {
-              console.log(error);
+            .catch(() => {
               res.status(500).send({
                 error: 'internal server error',
               });
