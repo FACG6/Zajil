@@ -8,6 +8,7 @@ import Header from "../../CommonComponent/Header/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
 import WrappedComponent from "../../HOC/WithNavSide";
 import Deletepopup from "./Popups/DeleteCaptain";
+import Editcaptain from './EditCaptain/editCaptain';
 
 import "./style.css";
 const { RangePicker } = DatePicker;
@@ -19,6 +20,7 @@ const override = css`
 class Captains extends Component {
   state = {
     visible: false,
+    visibleEdit: false,
     tableData: [],
     captains: [],
     allData: [],
@@ -116,6 +118,11 @@ class Captains extends Component {
       return { visible: !prev.visible };
     });
   };
+  handleVisibleEdit = () => {
+    this.setState(prev => {
+      return {visibleEdit: !prev.visibleEdit}
+    });
+  };
 
   handleCreate = () => {
     const form = this.formRef.props.form;
@@ -201,6 +208,16 @@ class Captains extends Component {
       };
     });
   };
+  updateCaptain = (column) => {
+    const {pk_i_id: id} = column;
+    this.setState(prev => {
+      return {captains: prev.captains.map(captain => {
+        if(captain.pk_i_id == id) {
+          return column;}
+        return captain;
+      })}
+    })
+  }
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
@@ -228,6 +245,14 @@ class Captains extends Component {
                 id={this.state.captainsPage.delete.id}
                 updateState={this.deleteRowCustomer}
               />
+               <Editcaptain
+               visible={this.state.captainsPage.edit.editVisibility}
+                id={this.state.captainsPage.edit.id}
+                changevisibility = {this.handleClick}
+                information = {this.state.captainsPage.edit.information}
+                updateCaptain = {this.updateCaptain}
+              />
+            
               <div className="filtercontainer">
                 <div classNam="filtercontainer__orderdate">
                   <RangePicker

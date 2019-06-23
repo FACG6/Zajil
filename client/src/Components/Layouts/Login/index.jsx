@@ -34,7 +34,7 @@ export default class Login extends Component {
         this.props.history.push('/');
       }
     })
-    .catch(() => {
+    .catch((e) => {
       this.setState({error: 'هناك خطأ جرب مرة أخرى'});
     });
 

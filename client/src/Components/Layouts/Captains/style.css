@@ -7,6 +7,7 @@
   flex-direction: column;
   width: 100vw;
 }
+
 .containercustomers__customer-rangpicker {
   direction: rtl;
 }
@@ -19,6 +20,7 @@
   margin-bottom: 2rem;
   width: 75%
 }
+
 .addcustomer {
   margin-top: 1rem;
   margin-left: 3.5rem;
@@ -34,115 +36,139 @@
   width: 15rem;
   direction: rtl;
 }
+
 .table {
   margin-right: 10px;
 }
-.tablecustomer-container{
+
+.tablecustomer-container {
   width: 75vw;
   margin-left: 2vw;
 }
+
 .filtercontainer__orderdate-date {
   margin-left: 2rem;
 }
+
 .table-container {
   width: 75vw;
   margin-left: 2vw;
 }
+
 .ant-modal-close {
   left: 0;
 }
 
-.add-captain-container-left{
-    width: 42%;
-    
-  }
-  .add-captain-container-right{
-    width: 42%;
-    margin-left: 5rem;
-  }
-  .add-captain-container-center{
-    margin: 0.2rem 2.2rem;
-    width: 1.5px;
-  }
-  .add-captain__form{
-    width: 100%;
-    display: flex;
-    margin-left: 0rem;
-   }
- .add-captain__popup .ant-modal-content {
-    width: 130%;
-  }
- .add-captain__popup .ant-modal-header{
-    direction: rtl;
-  }
- .add-captain__popup .ant-modal-body{
-    padding-bottom: 0px;
-  }
- .add-captain__popup .ant-select{
-    margin: 0 84px;
-    border: 0.1rem solid #ccc;
-    border-radius: 0.4rem;
-    box-sizing: border-box;
-  }
-  .add-captain__popup .ant-upload{
-    margin-left: 90px;
-    margin-top: -21px;
-  }
- .add-captain__popup .ant-modal-footer{
-    text-align: unset;
-    margin: 1em auto 0;
-  }
-  
-  .add-captain__popup .ant-form-item-required::before {
-    display: inline-block;
-    margin-right: 4px;
-    color: black;
-    font-size: 14px;
-    font-family: SimSun, sans-serif;
-    line-height: 1;
-    content: ':';
-  
-  }
-  
-  .add-captain__popup .ant-form-item-label > label::after {
-    content: '*';
-    position: relative;
-    color: #f5222d;
-    top: -0.5px;
-  }
-  .add-captain__popup .ant-select, .add-captain__popup .ant-cascader-picker{
-    position: absolute;   
-  }
-  .add-captain__popup .ant-input{
-    direction: rtl;
-  }
-  .btn--upload {
-    position: absolute;
-    right: 1.5rem;
-  }  
+.add-captain-container-left {
+  width: 42%;
 
-  .image__name{
-    position: absolute;
-    width: fit-content;
-  }
+}
 
-  .add-captain-container-right .ant-row {
-    display: flex !important;
-    flex-direction: row-reverse !important;
-} 
+.add-captain-container-right {
+  width: 42%;
+  margin-left: 5rem;
+}
+
+.add-captain-container-center {
+  margin: 0.2rem 2.2rem;
+  width: 1.5px;
+}
+
+.add-captain__form {
+  width: 100%;
+  display: flex;
+  margin-left: 0rem;
+}
+
+.add-captain__popup .ant-modal-content {
+  width: 130%;
+}
+
+.add-captain__popup .ant-modal-header {
+  direction: rtl;
+}
+
+.add-captain__popup .ant-modal-body {
+  padding-bottom: 0px;
+}
+
+.add-captain__popup .ant-select {
+  right: 0.1rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+}
+
+.add-captain__popup .ant-upload {
+  margin-left: 90px;
+  margin-top: -21px;
+}
+
+.add-captain__popup .ant-modal-footer {
+  text-align: unset;
+  margin: 1em auto 0;
+}
+
+.add-captain__popup .ant-form-item-required::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: black;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: ':';
+
+}
+
+.add-captain__popup .ant-form-item-label>label::after {
+  content: '*';
+  position: relative;
+  color: #f5222d;
+  top: -0.5px;
+}
+
+.add-captain__popup .ant-select,
+.add-captain__popup .ant-cascader-picker {
+  position: absolute;
+}
+
+.add-captain__popup .ant-input {
+  direction: rtl;
+}
+
+.btn--upload {
+  position: absolute;
+  right: 1.5rem;
+}
+
+.add-captain__popup .image__name {
+  position: absolute;
+  top: 2.5rem;
+  width: fit-content;
+  right: 1.5rem;
+}
+
+.add-captain-container-right .ant-row {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+}
+
 .add-captain-container-left .ant-row {
   display: flex !important;
   flex-direction: row-reverse !important;
-} 
+}
+
 .add-captain-container-left .ant-input {
   width: 170px !important;
 }
+
 .add-captain-container-right .ant-input {
   width: 170px !important;
 }
-.add-captain__form .ant-modal{
-  margin:0 19%;
-} 
+
+.add-captain__form .ant-modal {
+  margin: 0 19%;
+}
 
 .ant-calendar-footer-btn {
   display: none;
@@ -197,7 +223,9 @@
   border-color: var(--main-component-color, #212a63);
 }
 
-.ant-calendar-selected-date .ant-calendar-date:hover, .ant-calendar-selected-start-date .ant-calendar-date:hover, .ant-calendar-selected-end-date .ant-calendar-date:hover {
+.ant-calendar-selected-date .ant-calendar-date:hover,
+.ant-calendar-selected-start-date .ant-calendar-date:hover,
+.ant-calendar-selected-end-date .ant-calendar-date:hover {
   background: var(--main-component-color, #212a63) !important;
 }
 
@@ -206,6 +234,7 @@
   display: flex;
   align-items: center;
 }
-.ant-modal-mask{
+
+.ant-modal-mask {
   background-color: rgba(0, 0, 0, 0.3) !important;
 }

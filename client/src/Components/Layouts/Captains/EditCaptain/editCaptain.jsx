@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Modal, Form, Select, Input } from "antd";
-import { Upload, Icon } from 'antd';
-import { notification } from 'antd';
-import './style.css';
+import { Upload, Icon } from "antd";
+import { notification } from "antd";
+import "./style.css";
 
 const { Option } = Select;
 
@@ -11,141 +11,79 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
     state = {
       loading: false,
       imageUrl: null,
-      photoUrl: null,
-
+      photoUrl: null
     };
     handleReuest = e => {
       this.setState({ imageUrl: e.file });
     };
-    componentDidMount() {
-      const { id } = this.parmas.match.id;
-      fetch(`/api/v1/getCaptainDetails/${id}`)
-        .then(res => res.json())
-        .then(res => {
-          if (res.result) {
-            const rows = res.result[0];
-            const status = rows.b_status ? "true" : "false";
-            this.props.form.setFieldsValue({
-              name: rows.s_name, email: rows.s_email, phone: rows.s_mobile_number,
-              address: rows.s_address, IDNumber: rows.s_id_number, licenceNumber: rows.s_driver_licence_number,
-              status, file: rows.s_image,
+    componentDidUpdate(prevProps, prevState) {
+      if (prevProps.id == '' && /^[0-9]+$/.test(this.props.id)) {
+        const { information: rows } = this.props;
+        const status = rows.b_status ? "true" : "false";
+        this.props.form.setFieldsValue({
+          name: rows.s_name,
+          email: rows.s_email,
+          phone: rows.s_mobile_number,
+          address: rows.s_address,
+          IDNumber: rows.s_id_number,
+          licenceNumber: rows.s_driver_licence_number,
+          status,
+          file: rows.s_image
+        });
+        fetch(`/api/v1/image/${rows.s_image}`)
+          .then(res => res.arrayBuffer())
+          .then(response => {
+            let typeArray = new Uint8Array(response);
+            const stringChar = String.fromCharCode.apply(null, typeArray);
+
+            this.setState({
+              photoUrl: stringChar
             });
-            fetch(`/api/v1/image/${rows.s_image}`)
-              .then(res => res.arrayBuffer())
-              .then(response => {
-                let typeArray = new Uint8Array(response);
-                const stringChar = String.fromCharCode.apply(null, typeArray);
-
-                this.setState({
-                  photoUrl: stringChar
-                });
-              })
-          }
-          else {
-            notification.open({
-              message: 'فشل',
-              description:
-                res.error,
-              icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-            });
-          }
-
-        })
-
-        .catch(err => {
-          notification.open({
-            message: 'فشل',
-            description: 'هناك خطأ ما الرجاء اعادة ارسال البيانات',
-            icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-          })
-        }
-        );
-
-
+          });
+      }
+    }
+    handleVisible = (e) => {
+        this.props.onCancel(
+          "captainsPage",
+          "edit",
+          "editVisibility",
+          [],
+          ""
+        )(e);
     }
     render() {
       const uploadButton = (
         <Button className="btn--upload">
-
-          <Icon type={this.state.loading ? 'check-circle' : 'upload'} />
+          <Icon type={this.state.loading ? "check-circle" : "upload"} />
           أرفق صورة
         </Button>
-
       );
       const { photoUrl, imageUrl } = this.state;
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, onCreate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
         <Modal
           visible={visible}
           title="تعديل كابتن"
           okText="حفظ"
-          onCancel={onCancel}
+          onCancel={this.handleVisible}
           onOk={onCreate}
           cancelText="إلغاء"
           className="edit-captain__popup"
+          style={{ direction: "rtl" }}
         >
-          <Form className='edit-captain__form'>
-            <div className="edit-captain-container-left">
-              <Form.Item label="رقم الهوية" >
-                {getFieldDecorator("IDNumber", {
-                  rules: [
-                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{9}$/ }
-                  ]
-                })(<Input type="text" id="IDNumber" />)}
-              </Form.Item>
-              <Form.Item label="رقم الرخصة">
-                {getFieldDecorator("licenceNumber", {
-                  rules: [
-                    { required: true, message: "يرجى ملئ الحقل بارقام ", pattern: /^[0-9]{7}$/ }
-                  ]
-                })(<Input type="text" id="licenceNumber" />)}
-              </Form.Item>
-              <Form.Item label="الحالة">
-                {getFieldDecorator("status", {
-                  rules: [
-                    { required: true, message: "يرجى اختيار حالة" }
-                  ]
-                })(
-                  <Select style={{ width: 80 }} id='status'>
-                    <Option value="true">فعال </Option>
-                    <Option value="false">غير فعال</Option>
-                  </Select>
-                )}
-              </Form.Item>
-              <Form.Item label="صورة الهوية">
-                {getFieldDecorator("file", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "يرجى رفع صورة الكابتن"
-                    }
-                  ]
-                })(<Upload
-                  accept=".jpg , .png, .jpeg"
-                  name="file"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                  customRequest={this.handleReuest}
-                  multiple={false}
-                >
-                  {uploadButton}
-                  <div className="image__name">
-                    {(imageUrl) ? imageUrl && <><Icon type="check-circle" />{imageUrl.name}</> : photoUrl && <><Icon /><img src={photoUrl} className="upload-photo" /></>}
-                  </div>
-                </Upload>)}
-              </Form.Item>
-
-            </div>
-            <div className='edit-captain-container-center'></div>
-            <div className='edit-captain-container-right'>
+          <Form className="edit-captain__form">
+            <div className="edit-captain-container-right">
               <Form.Item label="الاسم">
                 {getFieldDecorator("name", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^([أ-يa-z]|\s)+$/ }
+                    {
+                      required: true,
+                      message: "يرجى ملئ الحقل بحروف ",
+                      pattern: /^([أ-يa-z]|\s)+$/
+                    }
                   ]
-                })(<Input type="text" id="name"
-                />)}
+                })(<Input type="text" id="name" />)}
               </Form.Item>
               <Form.Item label="البريد">
                 {getFieldDecorator("email", {
@@ -160,10 +98,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               </Form.Item>
               <Form.Item label="كلمة المرورالجديدة">
                 {getFieldDecorator("password", {
-                  rules: [
-                    {
-                    }
-                  ]
+                  rules: [{}]
                 })(<Input type="password" id="password" />)}
               </Form.Item>
               <Form.Item label="الهاتف">
@@ -181,9 +116,84 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               <Form.Item label="العنوان" dir="ltr">
                 {getFieldDecorator("address", {
                   rules: [
-                    { required: true, message: "يرجى ملئ الحقل بحروف ", pattern: /^[أ-يA-Za-z0-9.-_\s]*$/ }
+                    {
+                      required: true,
+                      message: "يرجى ملئ الحقل بحروف ",
+                      pattern: /^[أ-يA-Za-z0-9.-_\s]*$/
+                    }
                   ]
                 })(<Input type="text" id="address" />)}
+              </Form.Item>
+            </div>
+            <div className="edit-captain-container-center" />
+            <div className="edit-captain-container-left">
+              <Form.Item label="رقم الهوية">
+                {getFieldDecorator("IDNumber", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "يرجى ملئ الحقل بارقام ",
+                      pattern: /^[0-9]{9}$/
+                    }
+                  ]
+                })(<Input type="text" id="IDNumber" />)}
+              </Form.Item>
+              <Form.Item label="رقم الرخصة">
+                {getFieldDecorator("licenceNumber", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "يرجى ملئ الحقل بارقام ",
+                      pattern: /^[0-9]{7}$/
+                    }
+                  ]
+                })(<Input type="text" id="licenceNumber" />)}
+              </Form.Item>
+              <Form.Item label="الحالة">
+                {getFieldDecorator("status", {
+                  rules: [{ required: true, message: "يرجى اختيار حالة" }]
+                })(
+                  <Select style={{ width: 80 }} id="status">
+                    <Option value="true">فعال </Option>
+                    <Option value="false">غير فعال</Option>
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item label="صورة الهوية">
+                {getFieldDecorator("file", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "يرجى رفع صورة الكابتن"
+                    }
+                  ]
+                })(
+                  <Upload
+                    accept=".jpg , .png, .jpeg"
+                    name="file"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    customRequest={this.handleReuest}
+                    multiple={false}
+                  >
+                    {uploadButton}
+                    <div className="image__name">
+                      {imageUrl
+                        ? imageUrl && (
+                            <>
+                              <Icon type="check-circle" />
+                              {imageUrl.name}
+                            </>
+                          )
+                        : photoUrl && (
+                            <>
+                              <Icon />
+                              <img src={photoUrl} className="upload-photo" />
+                            </>
+                          )}
+                    </div>
+                  </Upload>
+                )}
               </Form.Item>
             </div>
           </Form>
@@ -193,104 +203,106 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
   }
 );
 
-class CollectionsPage extends React.Component {
+class Editcaptain extends React.Component {
   state = {
-    visible: false,
-  };
-
-  showModal = () => {
-    this.setState({ visible: true });
+    visible: false
   };
 
   handleCancel = () => {
     this.setState({ visible: false });
   };
-
-
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
       if (err) {
-        notification.open({
-          message: 'هناك خطأ في ادخال البيانات',
-          description:
-            err,
-          icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+        notification.error({
+          message: "هناك خطأ في ادخال البيانات",
+          duration: 1.5,
         });
-      }
-      else {
-        const { IDNumber, address, email, licenceNumber, name, password, phone, status, file } = values;
+      } else {
+        const {
+          IDNumber,
+          address,
+          email,
+          licenceNumber,
+          name,
+          password,
+          phone,
+          status,
+          file
+        } = values;
         const formData = new FormData();
         if (!file.fileList) {
-          formData.append('file', file);
+          formData.append("file", file);
         } else {
-          formData.append('file', file.fileList[0].originFileObj);
+          formData.append("file", file.fileList[0].originFileObj);
         }
-        formData.append('IDNumber', IDNumber);
-        formData.append('address', address);
-        formData.append('email', email);
-        formData.append('licenceNumber', licenceNumber);
-        formData.append('name', name);
-        formData.append('password', password);
-        formData.append('phone', phone);
-        formData.append('status', status);
-        const { id } = this.parmas.match.id;
+        formData.append("IDNumber", IDNumber);
+        formData.append("address", address);
+        formData.append("email", email);
+        formData.append("licenceNumber", licenceNumber);
+        formData.append("name", name);
+        formData.append("password", password);
+        formData.append("phone", phone);
+        formData.append("status", status);
+        const id = this.props.id;
         fetch(`/api/v1/putCaptain/${id}`, {
-          method: 'PUT',
-          body: formData,
+          method: "PUT",
+          body: formData
         })
           .then(res => res.json())
           .then(res => {
             if (res.result) {
-              notification.open({
-                message: 'نجح',
-                description:
-                  'تم التعديل بنجاح',
-                icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+              this.props.updateCaptain(res.result[0]);
+              notification.success({
+                message: "تم التعديل بنجاح",
+                duration: 1.5,
               });
-            }
-            else {
-
+            } else {
               notification.open({
-                message: 'يتعذر',
-                description: res.error,
-                icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
+                message: res.error,
+                duration: 1.5,
               });
             }
           })
           .catch(err => {
-            notification.open({
-              message: 'يتعذر',
-              description: 'هناك خطأ ما الرجاء اعادة ارسال البيانات',
-              icon: <Icon type="meh" style={{ color: '#108ee9' }} />,
-            })
-          }
-          )
+            notification.error({
+              message: "هناك خطأ اعد المحاولة مرة اخرى",
+              duration: 1.5,
+            });
+          });
       }
     });
-    form.resetFields();
-    this.setState({ visible: false });
+    this.handleVisible();
   };
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
-
+  handleVisible = (e) => {
+    this.props.changevisibility(
+      "captainsPage",
+      "edit",
+      "editVisibility",
+      [],
+      ""
+    )(e);
+}
 
   render() {
+    const { id, information, changevisibility } = this.props;
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
-          New Collection
-        </Button>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
+          visible={this.props.visible}
+          onCancel={changevisibility}
           onCreate={this.handleCreate}
+          id={id}
+          information={information}
         />
       </div>
     );
   }
 }
 
-export default CollectionsPage;
+export default Editcaptain;
