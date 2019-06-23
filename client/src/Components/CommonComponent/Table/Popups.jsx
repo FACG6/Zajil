@@ -542,7 +542,6 @@ getStoreName = () => {
 
   render() 
   {
-    console.log(this.props)
     const { customerName, phoneNumber, customerAddress ,orderStatus, captainName, orderPrice} = this.props;
     const { getFieldDecorator } = this.props.form;
     const columns = [{title: 'اسم الطلبية', dataIndex: 'name'},
