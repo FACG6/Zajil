@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
 import "./style.css";
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
