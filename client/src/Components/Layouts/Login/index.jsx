@@ -47,10 +47,12 @@ export default class Login extends Component {
         <h2 className='login__title'>زاجل</h2>
         <div className='login__box'>
         <h3 className="login__box__title">تسجيل الدخول</h3>
+        <form onSubmit={this.handleClick}>
           <input type="text" name="userName" id="userName" placeholder="إسم المستخدم" onChange={this.handleChange} className='login__box__input' />
           <input type="password" name="password" id="password" placeholder="كلمة المرور" onChange={this.handleChange} className='login__box__input' />
           <input type="submit" value="تسجيل الدخول" onClick={this.handleClick} className='login__box__button' />
           {error && <p className="login__box__error">{error}</p>}
+          </form>
         </div>
       </div>
     );
