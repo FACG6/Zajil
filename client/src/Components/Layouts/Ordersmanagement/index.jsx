@@ -18,7 +18,8 @@ class OrdersManagement extends Component {
     name: "",
     error: "",
     filter: false,
-    stores: []
+    stores: [],
+    refresh:true
   };
 
   componentDidMount() {
@@ -203,8 +204,22 @@ class OrdersManagement extends Component {
   updateOrdersStateVariable = (order) => {
     console.log(55555564444,order)
   }
-
+  updateItemsStateVariable = async (items,orderId) => {
+    await this.setState(prev => {
+      prev.orders.forEach(element => {
+        if(element.key === orderId){
+          let x = element;
+          x.items = items;
+        return  {element : x};
+        }
+      });
+      this.setState({refresh:!this.state.refresh});
+    })
+  }
+  
   render() {
+    console.log('ordersManagement')
+    console.log(66666,this.state.orders)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
@@ -257,6 +272,7 @@ class OrdersManagement extends Component {
                   ViewPopup={ViewPopup}
                   EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
+                  updateItemsStateVariable={this.updateItemsStateVariable}
                   deleteRow={this.deleteRow}
                   columns={
                     this.state.filter === true

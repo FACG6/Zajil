@@ -82,7 +82,6 @@ class EditForm extends React.Component {
               document.querySelector(
                 ".popupModal .ant-select-selection-selected-value"
               ).title +
-              "-" +
               values.phone,
             address: values.address,
             items: { deleted: deletedItems, edited: newItems },
@@ -92,6 +91,7 @@ class EditForm extends React.Component {
             if (res.status == 200) {
               this.props.form.resetFields();
               this.setState({ visible: false });
+              this.props.updateItemsStateVariable(this.state.itemsInputs,this.props.orderId)
             } else {
               this.setState({ error: "Try again please" });
             }
@@ -109,7 +109,13 @@ class EditForm extends React.Component {
   showModal = () => {
     this.setState({
       visible: true,
-      error: ""
+      error: "",
+      itemsInputs: this.props.itemsArray
+      ? JSON.parse(JSON.stringify(this.props.itemsArray))
+      : [],
+    originalItems: this.props.itemsArray
+      ? JSON.parse(JSON.stringify(this.props.itemsArray))
+      : []
     });
   };
 
@@ -117,7 +123,6 @@ class EditForm extends React.Component {
     this.props.form.resetFields();
     this.setState({
       visible: false,
-      itemsInputs: JSON.parse(JSON.stringify(this.state.originalItems))
     });
   };
 
@@ -519,7 +524,10 @@ class ViewForm extends React.Component {
 
   showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
+      itemsInputs: this.props.itemsArray
+      ? JSON.parse(JSON.stringify(this.props.itemsArray))
+      : []
     });
     this.getStoreName();
   };
