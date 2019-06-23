@@ -14,3 +14,19 @@
   margin-left: 1rem;
   font-weight: bold;
 }
+.view__captain__paragraph{
+  font-weight: bold;
+}
+.viewModal span{
+  font-weight: bold;
+  font-family: cairo;
+}
+.viewModal button{
+  background-color: #f44;
+  font-weight: bold;
+  color: aliceblue;
+  font-family: cairo;
+}
+.viewModal .ant-table table{
+border: 1px solid #eee;
+}
