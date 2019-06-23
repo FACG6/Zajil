@@ -1,9 +1,9 @@
 .title {
     margin: '0px 10px';
-    /* font-size: 1.5rem;
-    font-family: cairo; */
 }
-
+.ant-form-item-label{
+    font-family: cairo;
+}
 .ant-modal-title {
     font-size: 1.5rem;
     font-family: cairo;
