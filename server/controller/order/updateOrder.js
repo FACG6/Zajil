@@ -31,7 +31,7 @@ const updateOrder = (req, res) => {
     .then(() => {
       res.status(200).send('updated successfully');
     })
-    .catch((e) => {
+    .catch(() => {
       res.status(500).send('Internal server error');
     });
 };

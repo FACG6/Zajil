@@ -8,6 +8,10 @@ const insertItemQuery = (items, orderId) => {
     v += 2;
   }
   sql += `($1, $${v}, $${v + 1})`;
-  return connection.query(sql, [orderId, ...Object.values(items[0])]);
+  const destructuredItems = [];
+  items.forEach((element) => {
+    destructuredItems.push(...Object.values(element));
+  });
+  return connection.query(sql, [orderId, ...destructuredItems]);
 };
 module.exports = insertItemQuery;
