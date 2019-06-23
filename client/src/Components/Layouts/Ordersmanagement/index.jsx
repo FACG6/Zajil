@@ -202,7 +202,6 @@ class OrdersManagement extends Component {
   };
 
   updateOrdersStateVariable = (order) => {
-    console.log(55555564444,order)
   }
   updateItemsStateVariable = async (items,orderId) => {
     await this.setState(prev => {
@@ -218,8 +217,6 @@ class OrdersManagement extends Component {
   }
   
   render() {
-    console.log('ordersManagement')
-    console.log(66666,this.state.orders)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {

@@ -18,7 +18,6 @@ class TableCmponent extends Component {
   };
 
   render() {
-console.log(1111177777,this.props.columns)
     const {
       viewPopup,
       ViewPopup,
