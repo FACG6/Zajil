@@ -18,6 +18,7 @@ class TableCmponent extends Component {
   };
 
   render() {
+console.log(1111177777,this.props.columns)
     const {
       viewPopup,
       ViewPopup,
@@ -93,6 +94,7 @@ class TableCmponent extends Component {
                     storeId={record.storeid}
                     stores={this.props.stores}
                     orderId={record.key}
+                    updateItemsStateVariable={this.props.updateItemsStateVariable}
                   />
 
                   <Divider type="vertical" />
