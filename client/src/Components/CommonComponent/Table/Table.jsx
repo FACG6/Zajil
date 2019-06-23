@@ -86,6 +86,7 @@ class TableCmponent extends Component {
                    orderDate={record.date}
                    orderStatus={record.b_status}
                    orderPrice={record.price}
+                   captainName={record.captain}
                   />
                   <Divider type="vertical" />
                   <EditPopup
