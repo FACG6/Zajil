@@ -9,7 +9,8 @@ import {
   Input,
   Cascader,
   Icon,
-  notification
+  notification,
+  Table
 } from "antd";
 
 const { Option } = Select;
@@ -539,10 +540,13 @@ getStoreName = () => {
   this.setState({storeName});
 }
 
-  render() {
-    const { customerName, phoneNumber, customerAddress } = this.props;
+  render() 
+  {
+    console.log(this.props)
+    const { customerName, phoneNumber, customerAddress ,orderStatus, orderPrice} = this.props;
     const { getFieldDecorator } = this.props.form;
-
+    const columns = [{title: 'اسم الطلبية', dataIndex: 'name'},
+      {title: 'السعر', dataIndex: 'price'}]
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -584,120 +588,42 @@ getStoreName = () => {
           onClick={this.showModal}
         />
         <Modal
-          className="popupModal ViewPopup"
+        title= " عرض الطلب"
+          className="viewModal"
           visible={this.state.visible}
           onCancel={this.handleCancel}
           destroyOnClose={true}
+          style={{ direction: "rtl", width: '575' }}
         >
-          <div className="modalHeader">
-            <Icon type="down-square" />
-            <h2>عرض الطلب</h2>
+          <div className="view__captain">
+            <div className="view__captain-box">
+              <p>اسم الزبون : </p>
+              <p className="view__captain-value">{customerName}</p>
+            </div>
+            <div className="view__captain-box">
+              <p>تاريخ الطلبية : </p>
+              <p className="view__captain-value">{this.props.orderDate}</p>
+            </div>
+           
+            <div className="view__captain-box">
+              <p>اسم المكان : </p>
+              <p className="view__captain-value">{ customerAddress}</p>
+            </div>
+             
+            <div className="view__captain-box">
+              <p>حالة الطلب : </p>
+              <p className="view__captain-value">{this.props.orderStatus?"تم" :"قيد التنفيذ"}</p>
+            </div>
+             
+            <Table 
+            dataSource={this.state.itemsInputs}
+             columns={columns}
+              className="view__captain-table"/>
+            <div className="view__captain-box">
+              <p>السعر الكلي : </p>
+              <p className="view__captain-value">{ orderPrice} $</p>
+            </div> 
           </div>
-          <Form className="ViewPopup" ViewPopup {...formItemLayout} onSubmit={this.handleSubmit}>
-            <div style={{ display: "block" }}>
-              <div className="popupModal_form-items-container">
-                <Form.Item
-                  label="إسم الزبون"
-                >
-                  <Input readOnly defaultValue={customerName} />
-                </Form.Item>
-              </div>
-              <div className="popupModal_form-items-container">
-                <Form.Item label="رقم الهاتف">
-                  {getFieldDecorator("phone", {
-                    initialValue: phoneNumber ? phoneNumber.substring(4) : ""
-                  })(
-                    <Input
-                      readOnly
-                      addonBefore={prefixSelector}
-                      style={{ width: "100%" }}
-                    />
-                  )}
-                </Form.Item>
-              </div>
-              <div className="popupModal_form-items-container">
-                <Form.Item label="العنوان">
-                  {getFieldDecorator("address", {
-                    initialValue: customerAddress
-                  })(<Input readOnly />)}
-                </Form.Item>
-              </div>
-              <div className="popupModal_form-items-container">
-                <Form.Item
-                  className="popupModal_formItem-item-price-container"
-                  label="العناصر"
-                >
-                  {getFieldDecorator("item", {
-                    initialValue: this.state.itemsInputs[0]
-                      ? this.state.itemsInputs[0].name
-                      : ""
-                  })(<Input readOnly placeholder="أدخل العنصر" />)}
-                  <Form.Item>
-                    {getFieldDecorator("itemPrice", {
-                      initialValue: this.state.itemsInputs[0]
-                        ? this.state.itemsInputs[0].price
-                        : ""
-                    })(
-                      <Input
-                        readOnly
-                        className="popupModal_item-price-input"
-                        placeholder="$"
-                      />
-                    )}
-                  </Form.Item>
-                </Form.Item>
-                <div className="popupModal_form-extra-items-container">
-                  <div style={{ "margin-bottom": "24px" }}>
-                    {this.state.itemsInputs.slice(1).map((field, index) => {
-                      return (
-                        <React.Fragment>
-                          <Form.Item>
-                            <Form.Item>
-                              {getFieldDecorator(index.toString(), {
-                                initialValue: field.name
-                              })(
-                                <Input
-                                  readOnly
-                                  className="popupModal_item-extra-input"
-                                />
-                              )}
-                            </Form.Item>
-                            <Form.Item>
-                              {getFieldDecorator(index.toString() + "*", {
-                                initialValue: field.price
-                              })(
-                                <Input
-                                  readOnly
-                                  className="popupModal_item-price-input"
-                                  placeholder="$"
-                                />
-                              )}
-                            </Form.Item>
-                          </Form.Item>
-                        </React.Fragment>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="marketAndButtonsDiv">
-              <Form.Item
-                label="المتجر"
-              >
-                <Input readOnly defaultValue={this.state.storeName} />
-              </Form.Item>
-              <Form.Item {...tailFormItemLayout}>
-                <Button
-                  className="cancelButton"
-                  type="default"
-                  onClick={this.handleCancel}
-                >
-                  إغلاق
-                </Button>
-              </Form.Item>
-            </div>
-          </Form>
         </Modal>
       </React.Fragment>
     );
