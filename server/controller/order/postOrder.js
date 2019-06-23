@@ -1,6 +1,6 @@
 const { insertOrder } = require('../../database/queries/order/addOrder');
 const { insertTuserOrder } = require('../../database/queries/captain/insertTuserOrder');
-const { insertItem } = require('../../database/queries/item/insertItem');
+const { insertItem } = require('../../database/queries/item/insertItemOrder');
 
 exports.postOrder = (req, res) => {
   const {
