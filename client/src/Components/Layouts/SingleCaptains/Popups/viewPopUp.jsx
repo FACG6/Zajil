@@ -21,6 +21,7 @@ class View extends Component {
     { title: 'السعر', dataIndex: 'f2' }]
     if (this.state.information) {
       const { information } = this.state;
+      console.log(information);
       return (
         <Modal
           title="عرض الطلب"
@@ -34,7 +35,7 @@ class View extends Component {
           <div className="view__captain">
             <div className="view__captain-box">
               <p className="view__captain__paragraph">اسم الزبون : </p>
-              <p className="view__captain-value">{information.captain}</p>
+              <p className="view__captain-value">{information.customer}</p>
             </div>
             <div className="view__captain-box">
               <p className="view__captain__paragraph">تاريخ الطلبية : </p>
