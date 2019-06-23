@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
+import axios from 'axios';
 import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
-import Popup from "./Popups/Popup";
+import EditOrder from "./Popups/EditOrder";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
 import WrappedComponent from '../../HOC/WithNavSide';
@@ -22,6 +23,7 @@ class Profile extends Component {
       avatar: ""
     },
     visible: false,
+    stores: [],
     error: "",
     tableInfo: [],
     singleCustomer: {
@@ -82,6 +84,16 @@ class Profile extends Component {
       .catch(() => {
         this.setState({ error: "Something error please try again" });
       });
+
+      axios
+      .get("/api/v1/getStores")
+      .then(res => {
+        if (res) {
+          this.setState({ stores: res.data });
+        }
+      })
+      .catch(error => {
+        this.setState({ error })});
   }
 
   convertToObjectForTable = results => {
@@ -95,6 +107,8 @@ class Profile extends Component {
       obj.price = result[key][0].total + "$";
       obj.place = result[key][0].place_name;
       obj.items = result[key][0].items_names;
+      obj.phone = result[key][0].phone;
+      obj.address = result[key][0].address;
       return obj;
     });
     this.setState({ tableInfo: table });
@@ -153,6 +167,8 @@ class Profile extends Component {
               pageName="singleCustomer"
               columns={tableInfo}
               viewValues={this.handleClick}
+              EditPopup = {EditOrder}
+              stores = {this.state.stores}
             />
             <DeletePopup
               visible={this.state.singleCustomer.deleteVisibility}

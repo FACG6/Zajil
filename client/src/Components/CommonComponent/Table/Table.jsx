@@ -261,18 +261,14 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={this.props.viewValues(
-                      "singleCustomer",
-                      "editVisibilty",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
+                  <EditPopup
+                    customerName={record.captain}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
                   />
                   <Divider type="vertical" />
                   <Icon
@@ -360,8 +356,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={event => editPopup(record.key, record)}
+                  <Icon onClick={this.props.handleClick("captainsPage","edit","editVisibility",record,record.pk_i_id)}
                     style={{
                       fontSize: "1.2rem",
                       color: "rgba(0, 0, 0, 0.65)"
@@ -382,7 +377,7 @@ class TableCmponent extends Component {
                       color: "rgba(0, 0, 0, 0.65)"
                     }}
                     type="delete"
-                  />{" "}
+                  />
                 </span>
               )}
             />
@@ -446,18 +441,14 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  <Icon
-                    onClick={this.props.viewValues(
-                      "singleCaptain",
-                      "editVisibilty",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
+                  <EditPopup
+                    customerName={record.customer}
+                    phoneNumber={record.phone ? record.phone : ""}
+                    customerAddress={record.address}
+                    itemsArray={record.items}
+                    storeId={record.storeId}
+                    stores={this.props.stores}
+                    orderId={record.key}
                   />
                   <Divider type="vertical" />
                   <Icon

@@ -5,7 +5,7 @@ exports.checkAuth = (req, res, next) => {
   if (jwt) {
     verify(jwt, process.env.SECRET, (error, payload) => {
       if (error) {
-        res.clearCookie(jwt);
+        res.clearCookie('jwt');
       } else {
         req.payload = payload;
       }
