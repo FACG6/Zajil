@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { css } from '@emotion/core';
 import { ClipLoader } from 'react-spinners';
 import './style.css';
-import { Input, notification, Icon, DatePicker } from 'antd';
+import { Input, notification, Icon, DatePicker,Button } from 'antd';
 import Table from '../../CommonComponent/Table/Table';
-import Button from '../../CommonComponent/Button';
+import Buttoncomponent from '../../CommonComponent/Button';
 import Header from "../../CommonComponent/Header/index";
 import CollectionCreateForm from "./addcustomer";
 import Deletepopup from "./deletecustomer";
@@ -61,6 +61,7 @@ const override = css`
       .catch(e => this.setState({ error: e }));
   }
   filterfunction = (date, name, check) => {
+    // console.log(e.target)
     if (check === "date") {
       if (date.length !== 0) {
         if (this.state.name)
@@ -88,7 +89,13 @@ const override = css`
           this.setState({ name, filterCustomerName: [] });
         } else this.setState({ customers: this.state.allData, name });
       }
-    } else this.setState({ customers: this.state.allData });
+    } else {
+      
+      this.setState(
+        { customers: this.state.allData ,
+          name:'',
+          date:''
+        });}
   };
   dateFilter = (value, customers) => {
     if (value.length !== 0) {
@@ -223,7 +230,7 @@ const override = css`
           <div className="conatinercustomers__customer">
             <Header title="إدارة المستخدمين" Icon={<Icon type="team" />} />
             <div className="addcustomer">
-              <Button
+              <Buttoncomponent
                 name="إضافة مستخدم"
                 icon={<Icon type="user" />}
                 onClick={this.showModal}
@@ -251,6 +258,7 @@ const override = css`
                 updateState={this.updateState}
               />
               <div className="filtercontainer">
+              <Button onClick={e=>this.filterfunction(e,"","empty")}>إفراغ الحقول</Button>
                 <div classNam="filtercontainer__orderdate">
                   <RangePicker
                     showTime={{ format: "HH:mm" }}
@@ -258,6 +266,7 @@ const override = css`
                     placeholder={["من", "الى"]}
                     onChange={e => this.filterfunction(e, "", "date")}
                     className="containercustomers__customer-rangpicker"
+                    value={this.state.date}
                   />
                   <span className="filtercontainer__orderdate-date">
                     فلترة حسب الوقت
@@ -270,6 +279,7 @@ const override = css`
                   onChange={e =>
                     this.filterfunction("", e.target.value, "name")
                   }
+                  value={this.state.name}
                 />
               </div>
             </div>
