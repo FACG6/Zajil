@@ -29,7 +29,7 @@ const addCaptain = (req, res) => {
               })
               .catch((errorInsert) => {
                 if (errorInsert.constraint === 'tuser_s_email_key') {
-                  res.status(400).send({ error: 'الايميل مستخدم' });
+                  res.status(409).send({ error: 'الايميل مستخدم' });
                 } else { res.status(500).send({ error: 'Internal Server Error' }); }
               });
           }
