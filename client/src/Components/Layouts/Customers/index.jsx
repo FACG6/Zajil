@@ -151,8 +151,8 @@ const override = css`
         let addCustomer = {
           name: values.name,
           email: values.email,
-          phone: parseInt(values.prefixPhone + values.phone),
-          status: values.status,
+          phone: values.prefixPhone + values.phone,
+          status: values.status ==="true" ? true:false,
           address: values.address,
           password: values.password
         };
