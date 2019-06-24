@@ -136,7 +136,7 @@ class Profile extends Component {
       singleCustomer: { id, information }
     } = this.state;
     return (
-      <>
+      <div>
         <Header Icon={<img src={avatar} className="avatar" />} title={name} />
         <div className="profile">
           <div className="profile__info">
@@ -184,7 +184,7 @@ class Profile extends Component {
             />
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

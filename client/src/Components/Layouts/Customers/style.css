@@ -255,3 +255,10 @@
   margin:100px auto;
   text-align: center;
 }
+
+.filtercontainer .ant-btn{
+  width: 118px;
+  background: #ff4343;
+  border: none;
+  color: white
+}
