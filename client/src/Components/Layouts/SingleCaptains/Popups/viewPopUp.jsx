@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Table} from "antd";
+import { Modal, Table } from "antd";
 
 class View extends Component {
   state = {
@@ -17,10 +17,11 @@ class View extends Component {
   }
 
   render() {
-      const columns = [{title: 'اسم الطلبية', dataIndex: 'f1'},
-      {title: 'السعر', dataIndex: 'f2'}]
+    const columns = [{ title: 'اسم الطلبية', dataIndex: 'f1' },
+    { title: 'السعر', dataIndex: 'f2' }]
     if (this.state.information) {
       const { information } = this.state;
+      console.log(information);
       return (
         <Modal
           title="عرض الطلب"
@@ -33,24 +34,24 @@ class View extends Component {
         >
           <div className="view__captain">
             <div className="view__captain-box">
-              <p>اسم الزبون : </p>
-              <p className="view__captain-value">{information.captain}</p>
+              <p className="view__captain__paragraph">اسم الزبون : </p>
+              <p className="view__captain-value">{information.customer}</p>
             </div>
             <div className="view__captain-box">
-              <p>تاريخ الطلبية : </p>
+              <p className="view__captain__paragraph">تاريخ الطلبية : </p>
               <p className="view__captain-value">{information.date}</p>
             </div>
             <div className="view__captain-box">
-              <p>اسم المكان : </p>
+              <p className="view__captain__paragraph">اسم المكان : </p>
               <p className="view__captain-value">{information.place}</p>
             </div>
             <div className="view__captain-box">
-              <p>حالة الطلب : </p>
+              <p className="view__captain__paragraph">حالة الطلب : </p>
               <p className="view__captain-value">{information.status}</p>
             </div>
-            <Table dataSource={information.items} columns={columns} className="view__captain-table"/>
+            <Table dataSource={information.items} columns={columns} className="view__captain-table" />
             <div className="view__captain-box">
-              <p>السعر الكلي : </p>
+              <p className="view__captain__paragraph">السعر الكلي : </p>
               <p className="view__captain-value">{information.price}</p>
             </div>
           </div>

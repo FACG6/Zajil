@@ -234,6 +234,7 @@ class OrdersManagement extends Component {
   };
 
   render() {
+    console.log(this.state.orders)
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
