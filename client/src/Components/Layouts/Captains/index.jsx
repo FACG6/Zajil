@@ -286,8 +286,7 @@ class Captains extends Component {
             <Table
               pageName="captains"
               columns={this.state.captains}
-              classname="tablecustomer-container"
-              className="table"
+              className="tablecustomer-container"
               handleClick={this.handleClick}
             />
           </div>
