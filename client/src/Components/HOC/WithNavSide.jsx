@@ -29,11 +29,13 @@ export default WrappedComponent =>
       const { login, fetch } = this.state;
       if(fetch && login){
         return (
-          <>
+          <div className="app-side-and-nav">
             <Sidebar />
+            <div className="app-nav-and-components">
             <Navbar />
             <WrappedComponent {...this.props} />
-          </>
+            </div>
+          </div>
         );
       } 
       if( fetch && !login) {

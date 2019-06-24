@@ -2,3 +2,11 @@
     text-align: center;
     padding: 40vh 0;
 }
+.app-side-and-nav{
+    display: flex;
+}
+.app-nav-and-components {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
