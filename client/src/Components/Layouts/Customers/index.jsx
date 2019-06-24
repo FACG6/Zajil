@@ -257,7 +257,7 @@ const override = css`
                 updateState={this.updateState}
               />
               <div className="filtercontainer">
-              <Button onClick={e=>this.filterfunction(e,"","empty")}>إفراغ الحقول</Button>
+              <Button onClick={e=>this.filterfunction("","","empty")}>إفراغ الحقول</Button>
                 <div classNam="filtercontainer__orderdate">
                   <RangePicker
                     showTime={{ format: "HH:mm" }}
