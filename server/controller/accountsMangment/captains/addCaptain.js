@@ -1,21 +1,14 @@
 const path = require('path');
 const { hash } = require('bcryptjs');
+const Joi = require('@hapi/joi');
 
 const { insertCaptain } = require('../../../database/queries/captain/addCaptain');
-
-const validation = (incomingObject) => {
-  const {
-    name, email, phone, address, IDNumber, licenceNumber, status, password,
-  } = incomingObject;
-  if (![name, email, phone, address, IDNumber, licenceNumber, status, password].every(ele => ele)) return false;
-  if (!(/^([أ-يa-z]|\s)+$/.test(name) && /.+\@.+\..+/.test(email) && /^\+?[0-9]{10,12}$/.test(phone) && /^[0-9]{7}$/.test(licenceNumber))) return false;
-  if (!(/^[0-9]{9}$/.test(IDNumber) && (status === 'true' || status === 'false'))) return false;
-  return true;
-};
+const { schema } = require('../../utils/addCaptainSchema');
 
 const addCaptain = (req, res) => {
   const { file } = req.files;
-  if (!validation(req.body)) {
+  const { error: validationError } = Joi.validate(req.body, schema);
+  if (validationError !== null) {
     return res.status(400).send({ error: 'Bad Request' });
   }
   const {
