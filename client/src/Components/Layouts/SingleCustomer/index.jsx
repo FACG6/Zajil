@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
-import axios from 'axios';
+import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
@@ -8,7 +8,7 @@ import Table from "../../CommonComponent/Table/Table";
 import EditOrder from "./Popups/EditOrder";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
-import WrappedComponent from '../../HOC/WithNavSide';
+import WrappedComponent from "../../HOC/WithNavSide";
 
 import "./style.css";
 
@@ -85,7 +85,7 @@ class Profile extends Component {
         this.setState({ error: "Something error please try again" });
       });
 
-      axios
+    axios
       .get("/api/v1/getStores")
       .then(res => {
         if (res) {
@@ -93,7 +93,8 @@ class Profile extends Component {
         }
       })
       .catch(error => {
-        this.setState({ error })});
+        this.setState({ error });
+      });
   }
 
   convertToObjectForTable = results => {
@@ -138,28 +139,30 @@ class Profile extends Component {
     return (
       <div>
         <Header Icon={<img src={avatar} className="avatar" />} title={name} />
-        <div className="profile">
-          <div className="profile__info">
-            <h3 className="profile__info__title">المعلومات الشخصية</h3>
-            <div className="profile__box">
-              <p className="profile__box__title">الاسم</p>
-              <p className="profile__value">{name}</p>
-            </div>
-            <div className="profile__box">
-              <p className="profile__box__title">الهاتف المحمول</p>
-              <p className="profile__value">{phone}</p>
-            </div>
-            <div className="profile__box">
-              <p className="profile__box__title">الحالة</p>
-              <p className="profile__value">{status}</p>
-            </div>
-            <div className="profile__box">
-              <p className="profile__box__title">البريد الالكتروني</p>
-              <p className="profile__value">{email}</p>
-            </div>
-            <div className="profile__box">
-              <p className="profile__box__title">العنوان</p>
-              <p className="profile__value">{address}</p>
+        <div className="view-captain">
+          <div className="profile">
+            <div className="profile__info">
+              <h3 className="profile__info__title">المعلومات الشخصية</h3>
+              <div className="profile__box">
+                <p className="profile__box__title">الاسم</p>
+                <p className="profile__value">{name}</p>
+              </div>
+              <div className="profile__box">
+                <p className="profile__box__title">الهاتف المحمول</p>
+                <p className="profile__value">{phone}</p>
+              </div>
+              <div className="profile__box">
+                <p className="profile__box__title">الحالة</p>
+                <p className="profile__value">{status}</p>
+              </div>
+              <div className="profile__box">
+                <p className="profile__box__title">البريد الالكتروني</p>
+                <p className="profile__value">{email}</p>
+              </div>
+              <div className="profile__box">
+                <p className="profile__box__title">العنوان</p>
+                <p className="profile__value">{address}</p>
+              </div>
             </div>
           </div>
           <div className="profile__orders">
@@ -167,8 +170,8 @@ class Profile extends Component {
               pageName="singleCustomer"
               columns={tableInfo}
               viewValues={this.handleClick}
-              EditPopup = {EditOrder}
-              stores = {this.state.stores}
+              EditPopup={EditOrder}
+              stores={this.state.stores}
             />
             <DeletePopup
               visible={this.state.singleCustomer.deleteVisibility}
