@@ -18,7 +18,7 @@
   justify-content: space-between;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  width: 75%
+  width: 75%;
 }
 
 .addcustomer {
@@ -29,16 +29,12 @@
 .filtercontainer__orderdate {
   display: flex;
   flex-direction: row;
-  width: 50%
+  width: 50%;
 }
 
 .filtercontainer__ordername {
   width: 15rem;
   direction: rtl;
-}
-
-.table {
-  margin-right: 10px;
 }
 
 .tablecustomer-container {
@@ -61,7 +57,6 @@
 
 .add-captain-container-left {
   width: 42%;
-
 }
 
 .add-captain-container-right {
@@ -116,12 +111,11 @@
   font-size: 14px;
   font-family: SimSun, sans-serif;
   line-height: 1;
-  content: ':';
-
+  content: ":";
 }
 
-.add-captain__popup .ant-form-item-label>label::after {
-  content: '*';
+.add-captain__popup .ant-form-item-label > label::after {
+  content: "*";
   position: relative;
   color: #f5222d;
   top: -0.5px;
