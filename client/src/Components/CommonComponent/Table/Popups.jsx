@@ -181,6 +181,14 @@ class EditForm extends React.Component {
       callback("يرجى إدخال السعر !");
     }
   };
+  validatePhone = (rule, value, callback) => {
+    console.log(/^[-+]?\d*$/.test(value));
+    if(/^[-+]?\d*$/.test(value) && value.length === 9){
+      callback();
+    }else{
+      callback('يرجى إدخال رقم الهاتف');
+    }
+  } 
   appendInput = () => {
     this.setState({
       itemsInputs: this.state.itemsInputs.concat([{ name: "", price: "" }])
@@ -289,7 +297,11 @@ class EditForm extends React.Component {
                     {getFieldDecorator("phone", {
                       initialValue: phoneNumber ? phoneNumber.substring(4) : "",
                       rules: [
-                        { required: true, message: "يرجى إدخال رقم الهاتف !" }
+                        { required: true, 
+                          message: " " 
+                        },{
+                          validator: this.validatePhone
+                        }
                       ]
                     })(
                       <Input

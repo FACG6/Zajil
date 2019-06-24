@@ -319,6 +319,9 @@ textarea {
   color: #ff00008a;
   position: relative;
 }
+.popupModal_form-items-container {
+  height: 55px;
+}
 .popupModal_formItem-item-price-container
   .ant-form-item-control
   .ant-form-explain {

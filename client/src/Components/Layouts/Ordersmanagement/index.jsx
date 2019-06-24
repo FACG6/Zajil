@@ -219,18 +219,19 @@ class OrdersManagement extends Component {
       this.setState({ refresh: !this.state.refresh });
     });
   };
-  updateItemsStateVariable = async (items, orderId) => {
-    await this.setState(prev => {
+  updateItemsStateVariable =  (items, orderId) => {
+    let x = []; 
+    this.setState( prev => {
       prev.orders.forEach(element => {
         if (element.key === orderId) {
           let x = element;
           x.items = items;
-          x.price = items.reduce((acc,nxt) => parseInt(acc.price)+parseInt(nxt.price));
+          x.price = items.reduce((acc,nxt) => parseInt(acc.price) + parseInt(nxt.price));
           return { element: x };
         }
       });
-      this.setState({ refresh: !this.state.refresh });
     });
+     this.setState({ refresh: !this.state.refresh });
   };
 
   render() {
