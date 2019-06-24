@@ -81,17 +81,27 @@ class EditForm extends React.Component {
             phone:
               document.querySelector(
                 ".popupModal .ant-select-selection-selected-value"
-              ).title +
-              values.phone,
+              ).title + values.phone,
             address: values.address,
             items: { deleted: deletedItems, edited: newItems },
             storeID: storeId
           })
           .then(res => {
             if (res.status == 200) {
-              this.props.form.resetFields();
               this.setState({ visible: false });
-              this.props.updateItemsStateVariable(this.state.itemsInputs,this.props.orderId)
+              this.props.updateItemsStateVariable(
+                this.state.itemsInputs,
+                this.props.orderId
+              );
+              this.props.updateOrdersStateVariable(
+                storeId,
+                document.querySelector(
+                  ".popupModal .ant-select-selection-selected-value"
+                ).title + values.phone,
+                values.address,
+                this.props.orderId
+              );
+              this.props.form.resetFields();
             } else {
               this.setState({ error: "Try again please" });
             }
@@ -111,18 +121,18 @@ class EditForm extends React.Component {
       visible: true,
       error: "",
       itemsInputs: this.props.itemsArray
-      ? JSON.parse(JSON.stringify(this.props.itemsArray))
-      : [],
-    originalItems: this.props.itemsArray
-      ? JSON.parse(JSON.stringify(this.props.itemsArray))
-      : []
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : [],
+      originalItems: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : []
     });
   };
 
   handleCancel = () => {
     this.props.form.resetFields();
     this.setState({
-      visible: false,
+      visible: false
     });
   };
 
@@ -376,7 +386,7 @@ class EditForm extends React.Component {
                                   />
                                 )}
                               </Form.Item>
-                              <Form.Item className="extra-item-price" >
+                              <Form.Item className="extra-item-price">
                                 {getFieldDecorator(index.toString() + "*", {
                                   initialValue: field.price,
                                   rules: [
@@ -411,11 +421,11 @@ class EditForm extends React.Component {
                   </div>
                 </div>
               </div>
-                  <Icon
-                    onClick={this.appendInput}
-                    className="popupModal_add-item-icon"
-                    type="plus-circle"
-                  />
+              <Icon
+                onClick={this.appendInput}
+                className="popupModal_add-item-icon"
+                type="plus-circle"
+              />
               <div className="marketAndButtonsDiv">
                 <Form.Item
                   label={
@@ -443,7 +453,6 @@ class EditForm extends React.Component {
                   {getFieldDecorator("storeNameManual", {
                     rules: [
                       {
-                        // required: true,
                         message: " "
                       },
                       {
@@ -511,7 +520,7 @@ class ViewForm extends React.Component {
     storeNameArray: [],
     itemsInputs: [],
     key: 0,
-    storeName:''
+    storeName: ""
   };
 
   componentDidMount() {
@@ -526,8 +535,8 @@ class ViewForm extends React.Component {
     this.setState({
       visible: true,
       itemsInputs: this.props.itemsArray
-      ? JSON.parse(JSON.stringify(this.props.itemsArray))
-      : []
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : []
     });
     this.getStoreName();
   };
@@ -537,15 +546,15 @@ class ViewForm extends React.Component {
       visible: false
     });
   };
-getStoreName = () => {
-  let storeName = "";
-  for (let i = 0; i < this.props.stores.length; i++) {
-    if (this.props.stores[i].id == this.props.storeId) {
-      storeName = this.props.stores[i].value;
+  getStoreName = () => {
+    let storeName = "";
+    for (let i = 0; i < this.props.stores.length; i++) {
+      if (this.props.stores[i].id == this.props.storeId) {
+        storeName = this.props.stores[i].value;
+      }
     }
-  }
-  this.setState({storeName});
-}
+    this.setState({ storeName });
+  };
 
   render() {
     const { customerName, phoneNumber, customerAddress } = this.props;
@@ -601,12 +610,15 @@ getStoreName = () => {
             <Icon type="down-square" />
             <h2>عرض الطلب</h2>
           </div>
-          <Form className="ViewPopup" ViewPopup {...formItemLayout} onSubmit={this.handleSubmit}>
+          <Form
+            className="ViewPopup"
+            ViewPopup
+            {...formItemLayout}
+            onSubmit={this.handleSubmit}
+          >
             <div style={{ display: "block" }}>
               <div className="popupModal_form-items-container">
-                <Form.Item
-                  label="إسم الزبون"
-                >
+                <Form.Item label="إسم الزبون">
                   <Input readOnly defaultValue={customerName} />
                 </Form.Item>
               </div>
@@ -683,16 +695,14 @@ getStoreName = () => {
               </div>
             </div>
             <div className="marketAndButtonsDiv">
-            <div className="popupModal_form-items-container">
+              <div className="popupModal_form-items-container">
                 <Form.Item label="العنوان">
                   {getFieldDecorator("address", {
                     initialValue: customerAddress
                   })(<Input readOnly />)}
                 </Form.Item>
               </div>
-              <Form.Item
-                label="المتجر"
-              >
+              <Form.Item label="المتجر">
                 <Input readOnly defaultValue={this.state.storeName} />
               </Form.Item>
               <Form.Item {...tailFormItemLayout}>

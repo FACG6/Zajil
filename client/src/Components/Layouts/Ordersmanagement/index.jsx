@@ -4,9 +4,13 @@ import { DatePicker, Input, Button, Icon } from "antd";
 import moment, { isValid } from "moment";
 import Header from "../../CommonComponent/Header/index";
 import TableComponent from "../../CommonComponent/Table/Table";
-import { EditPopup, DeletePopup, ViewPopup } from "../../CommonComponent/Table/Popups";
-import CollectionsPage from '../Order/addOrder';
-import WrappedComponent from '../../HOC/WithNavSide';
+import {
+  EditPopup,
+  DeletePopup,
+  ViewPopup
+} from "../../CommonComponent/Table/Popups";
+import CollectionsPage from "../Order/addOrder";
+import WrappedComponent from "../../HOC/WithNavSide";
 import "./style.css";
 
 class OrdersManagement extends Component {
@@ -19,7 +23,7 @@ class OrdersManagement extends Component {
     error: "",
     filter: false,
     stores: [],
-    refresh:true
+    refresh: true
   };
 
   componentDidMount() {
@@ -35,7 +39,7 @@ class OrdersManagement extends Component {
           this.setState({ orders: res.data });
         }
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({
           error
         });
@@ -74,7 +78,7 @@ class OrdersManagement extends Component {
           }
         }
       }
-        return object;
+      return object;
     }
   };
 
@@ -201,21 +205,34 @@ class OrdersManagement extends Component {
     });
   };
 
-  updateOrdersStateVariable = (order) => {
-  }
-  updateItemsStateVariable = async (items,orderId) => {
-    await this.setState(prev => {
+  updateOrdersStateVariable = (storeId, phone, address, orderId) => {
+    this.setState(prev => {
       prev.orders.forEach(element => {
-        if(element.key === orderId){
+        if (element.key === orderId) {
           let x = element;
-          x.items = items;
-        return  {element : x};
+          x.storeId = storeId;
+          x.address = address;
+          x.phone = phone;
+          return { element: x };
         }
       });
-      this.setState({refresh:!this.state.refresh});
-    })
-  }
-  
+      this.setState({ refresh: !this.state.refresh });
+    });
+  };
+  updateItemsStateVariable = async (items, orderId) => {
+    await this.setState(prev => {
+      prev.orders.forEach(element => {
+        if (element.key === orderId) {
+          let x = element;
+          x.items = items;
+          x.price = items.reduce((acc,nxt) => parseInt(acc.price)+parseInt(nxt.price));
+          return { element: x };
+        }
+      });
+      this.setState({ refresh: !this.state.refresh });
+    });
+  };
+
   render() {
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
@@ -226,7 +243,9 @@ class OrdersManagement extends Component {
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                <CollectionsPage updateOrdersStateVariable={this.updateOrdersStateVariable} />
+                <CollectionsPage
+                  updateOrdersStateVariable={this.updateOrdersStateVariable}
+                />
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
@@ -269,6 +288,7 @@ class OrdersManagement extends Component {
                   ViewPopup={ViewPopup}
                   EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
+                  updateOrdersStateVariable={this.updateOrdersStateVariable}
                   updateItemsStateVariable={this.updateItemsStateVariable}
                   deleteRow={this.deleteRow}
                   columns={
@@ -282,12 +302,17 @@ class OrdersManagement extends Component {
           </div>
         </div>
       );
-    }else {
+    } else {
       return (
         <div className="ordersManagement_error-class">
           <h1>
-          {this.state.error.response ? this.state.error.response.status : 'Error' } {this.state.error.response ? 'Error' : '' }, 
-            {this.state.error.response.data ? this.state.error.response.data : 'try again later' }{" "}
+            {this.state.error.response
+              ? this.state.error.response.status
+              : "Error"}{" "}
+            {this.state.error.response ? "Error" : ""},
+            {this.state.error.response.data
+              ? this.state.error.response.data
+              : "try again later"}{" "}
           </h1>
         </div>
       );
