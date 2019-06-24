@@ -1,13 +1,13 @@
 .navbar{
     background-color: #201F2B;
     height: 3.5rem;
-    width: 86.8vw;
+    width: 85vw;
     z-index: 2;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     position: relative;
-    margin-right: 13vw;
+    margin-right: 15vw;
 }
 
 .control-board{
