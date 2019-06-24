@@ -61,7 +61,6 @@ const override = css`
       .catch(e => this.setState({ error: e }));
   }
   filterfunction = (date, name, check) => {
-    // console.log(e.target)
     if (check === "date") {
       if (date.length !== 0) {
         if (this.state.name)
