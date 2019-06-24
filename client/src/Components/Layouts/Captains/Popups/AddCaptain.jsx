@@ -45,7 +45,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     {
                       required: true,
                       message: "يرجى ملئ الحقل بحروف ",
-                      pattern: /^[أ-يa-z]*$/
+                      pattern: /^[أ-يA-Za-z0-9.-_\s]*$/
                     }
                   ]
                 })(<Input type="text" id="address" />)}
