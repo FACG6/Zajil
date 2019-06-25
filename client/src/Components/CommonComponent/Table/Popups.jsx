@@ -89,19 +89,28 @@ class EditForm extends React.Component {
           })
           .then(res => {
             if (res.status == 200) {
-              this.setState({ visible: false });
-              this.props.updateItemsStateVariable(
-                this.state.itemsInputs,
-                this.props.orderId
-              );
+              console.log(2222333, res.data);
+              let x = [...this.state.itemsInputs.filter(e => e.itemid), ...res.data]
+              // res.data.forEach(item => {
+              //   x.forEach(element => {
+              //     if (
+              //       element.name === res.data.s_name &&
+              //       element.price === res.data.f_price
+              //     ) {
+              //       x.itemId = item.pk_i_id;
+              //     }
+              //   });
+              // });
               this.props.updateOrdersStateVariable(
                 storeId,
                 document.querySelector(
                   ".popupModal .ant-select-selection-selected-value"
                 ).title + values.phone,
                 values.address,
+                x,
                 this.props.orderId
               );
+              this.setState({ visible: false });
               this.props.form.resetFields();
             } else {
               this.setState({ error: "Try again please" });
@@ -183,12 +192,12 @@ class EditForm extends React.Component {
   };
   validatePhone = (rule, value, callback) => {
     console.log(/^[-+]?\d*$/.test(value));
-    if(/^[-+]?\d*$/.test(value) && value.length === 9){
+    if (/^[-+]?\d*$/.test(value) && value.length === 9) {
       callback();
-    }else{
-      callback('يرجى إدخال رقم الهاتف');
+    } else {
+      callback("يرجى إدخال رقم الهاتف");
     }
-  } 
+  };
   appendInput = () => {
     this.setState({
       itemsInputs: this.state.itemsInputs.concat([{ name: "", price: "" }])
@@ -297,9 +306,8 @@ class EditForm extends React.Component {
                     {getFieldDecorator("phone", {
                       initialValue: phoneNumber ? phoneNumber.substring(4) : "",
                       rules: [
-                        { required: true, 
-                          message: " " 
-                        },{
+                        { required: true, message: " " },
+                        {
                           validator: this.validatePhone
                         }
                       ]
@@ -569,12 +577,20 @@ class ViewForm extends React.Component {
     this.setState({ storeName });
   };
 
-  render() 
-  {
-    const { customerName, phoneNumber, customerAddress ,orderStatus, captainName, orderPrice} = this.props;
+  render() {
+    const {
+      customerName,
+      phoneNumber,
+      customerAddress,
+      orderStatus,
+      captainName,
+      orderPrice
+    } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const columns = [{title: 'اسم الطلبية', dataIndex: 'name'},
-      {title: 'السعر', dataIndex: 'price'}]
+    const columns = [
+      { title: "اسم الطلبية", dataIndex: "name" },
+      { title: "السعر", dataIndex: "price" }
+    ];
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -616,13 +632,13 @@ class ViewForm extends React.Component {
           onClick={this.showModal}
         />
         <Modal
-        title= " عرض الطلب"
+          title=" عرض الطلب"
           className="viewModal"
           visible={this.state.visible}
           onCancel={this.handleCancel}
           cancelText="إالغاء"
           destroyOnClose={true}
-          style={{ direction: "rtl", width: '575' }}
+          style={{ direction: "rtl", width: "575" }}
           closable={false}
         >
           <div className="view__captain">
@@ -634,28 +650,31 @@ class ViewForm extends React.Component {
               <p className="view__captain__paragraph">تاريخ الطلبية : </p>
               <p className="view__captain-value">{this.props.orderDate}</p>
             </div>
-           
+
             <div className="view__captain-box">
               <p className="view__captain__paragraph">اسم المكان : </p>
-              <p className="view__captain-value">{ customerAddress}</p>
+              <p className="view__captain-value">{customerAddress}</p>
             </div>
-             
+
             <div className="view__captain-box">
               <p className="view__captain__paragraph">حالة الطلب : </p>
-              <p className="view__captain-value">{this.props.orderStatus?"تم" :"قيد التنفيذ"}</p>
+              <p className="view__captain-value">
+                {this.props.orderStatus ? "تم" : "قيد التنفيذ"}
+              </p>
             </div>
             <div className="view__captain-box">
               <p className="view__captain__paragraph">اسم الكابتن : </p>
-              <p className="view__captain-value">{ captainName}</p>
+              <p className="view__captain-value">{captainName}</p>
             </div>
-            <Table 
-            dataSource={this.state.itemsInputs}
-             columns={columns}
-              className="view__captain-table"/>
+            <Table
+              dataSource={this.state.itemsInputs}
+              columns={columns}
+              className="view__captain-table"
+            />
             <div className="view__captain-box">
               <p>السعر الكلي : </p>
-              <p className="view__captain-value">{ orderPrice} $</p>
-            </div> 
+              <p className="view__captain-value">{orderPrice} $</p>
+            </div>
           </div>
         </Modal>
       </React.Fragment>

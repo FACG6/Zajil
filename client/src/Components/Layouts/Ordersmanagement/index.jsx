@@ -205,7 +205,7 @@ class OrdersManagement extends Component {
     });
   };
 
-  updateOrdersStateVariable = (storeId, phone, address, orderId) => {
+  updateOrdersStateVariable = (storeId, phone, address, itms, orderId) => {
     this.setState(prev => {
       prev.orders.forEach(element => {
         if (element.key === orderId) {
@@ -213,29 +213,42 @@ class OrdersManagement extends Component {
           x.storeId = storeId;
           x.address = address;
           x.phone = phone;
+          x.items = itms;
+          if (itms.length > 1) {
+            x.price = itms.reduce((acc, nxt) => {
+              console.log(98987, acc, Number(nxt.price));
+              return acc + Number(nxt.price);
+            }, 0);
+          } else {
+            console.log(32323, parseInt(itms[0].price));
+            x.price = parseInt(itms[0].price);
+          }
           return { element: x };
         }
       });
       this.setState({ refresh: !this.state.refresh });
     });
   };
-  updateItemsStateVariable =  (items, orderId) => {
-    let x = []; 
-    this.setState( prev => {
-      prev.orders.forEach(element => {
-        if (element.key === orderId) {
-          let x = element;
-          x.items = items;
-          x.price = items.reduce((acc,nxt) => parseInt(acc.price) + parseInt(nxt.price));
-          return { element: x };
+  updateItemsStateVariable = (itms, orderId) => {
+    let x = this.state.orders;
+    x.forEach(element => {
+      if (element.key === orderId) {
+        console.log("if");
+        element.items = itms;
+        if (itms.length > 1) {
+          element.price = itms.reduce((acc, nxt) => {
+            return parseInt(acc.price) + parseInt(nxt.price);
+          });
+        } else {
+          element.price = itms[0].price;
         }
-      });
+      }
     });
-     this.setState({ refresh: !this.state.refresh });
+    this.setState({ orders: x });
   };
 
   render() {
-    console.log(this.state.orders)
+    console.log(13213, this.state.orders);
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
