@@ -17,7 +17,7 @@ const getOrdersQuery = () => connection
           }
         });
         if (e.items[0][0]) {
-          e.items = e.items.map(item => ({ itemId: item[0], name: item[1], price: item[2] }));
+          e.items = e.items.map(item => ({ itemid: item[0], name: item[1], price: item[2] }));
         }
       });
       return res.rows;

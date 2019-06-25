@@ -7,11 +7,11 @@ const insertItemQuery = (items, orderId) => {
     sql += `($1, $${v}, $${v + 1}),`;
     v += 2;
   }
-  sql += `($1, $${v}, $${v + 1})`;
+  sql += `($1, $${v}, $${v + 1}) RETURNING pk_i_id as itemId, s_name as name, f_price as price`;
   const destructuredItems = [];
   items.forEach((element) => {
     destructuredItems.push(...Object.values(element));
   });
-  return connection.query(sql, [orderId, ...destructuredItems]);
+  return connection.query(sql, [orderId, ...destructuredItems]).then(res => res.rows);
 };
 module.exports = insertItemQuery;
