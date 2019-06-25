@@ -201,7 +201,7 @@ class EditForm extends React.Component {
   };
   setNewItem = async (key, val, index) => {
     let newItem = [...this.state.itemsInputs];
-    delete newItem[index].itemId;
+    delete newItem[index].itemid;
     if (key == "name") {
       newItem[index].name = val.target.value;
       this.setState({
