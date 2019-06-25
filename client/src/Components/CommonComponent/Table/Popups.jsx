@@ -89,18 +89,7 @@ class EditForm extends React.Component {
           })
           .then(res => {
             if (res.status == 200) {
-              console.log(2222333, res.data);
               let x = [...this.state.itemsInputs.filter(e => e.itemid), ...res.data]
-              // res.data.forEach(item => {
-              //   x.forEach(element => {
-              //     if (
-              //       element.name === res.data.s_name &&
-              //       element.price === res.data.f_price
-              //     ) {
-              //       x.itemId = item.pk_i_id;
-              //     }
-              //   });
-              // });
               this.props.updateOrdersStateVariable(
                 storeId,
                 document.querySelector(
@@ -184,14 +173,13 @@ class EditForm extends React.Component {
     }
   };
   validateItemPrice = (rule, value, callback) => {
-    if (value) {
+    if (value && /^[-+]?\d*$/.test(value)) {
       callback();
     } else {
       callback("يرجى إدخال السعر !");
     }
   };
   validatePhone = (rule, value, callback) => {
-    console.log(/^[-+]?\d*$/.test(value));
     if (/^[-+]?\d*$/.test(value) && value.length === 9) {
       callback();
     } else {

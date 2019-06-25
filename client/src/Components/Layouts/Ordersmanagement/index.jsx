@@ -216,11 +216,9 @@ class OrdersManagement extends Component {
           x.items = itms;
           if (itms.length > 1) {
             x.price = itms.reduce((acc, nxt) => {
-              console.log(98987, acc, Number(nxt.price));
               return acc + Number(nxt.price);
             }, 0);
           } else {
-            console.log(32323, parseInt(itms[0].price));
             x.price = parseInt(itms[0].price);
           }
           return { element: x };
@@ -233,7 +231,6 @@ class OrdersManagement extends Component {
     let x = this.state.orders;
     x.forEach(element => {
       if (element.key === orderId) {
-        console.log("if");
         element.items = itms;
         if (itms.length > 1) {
           element.price = itms.reduce((acc, nxt) => {
@@ -248,7 +245,6 @@ class OrdersManagement extends Component {
   };
 
   render() {
-    console.log(13213, this.state.orders);
     const { RangePicker } = DatePicker;
     const dateFormat = "DD-MM-YYYY";
     if (!this.state.error) {
