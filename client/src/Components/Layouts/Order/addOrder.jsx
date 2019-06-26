@@ -15,7 +15,6 @@ const { Option } = Select;
 let id = 0;
 
 const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
-  // eslint-disable-next-line
   class extends React.Component {
     state = {
       dataSourceCaptains: [],
@@ -34,6 +33,12 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         console.log(error);
       }
     };
+
+    componentDidUpdate(prevProp){
+      if(!prevProp.visible) {
+        this.loadCaptainsNames(); 
+      }
+    }
 
     loadCaptainsNames = () => {
       fetch("/api/v1/getCaptainsNames")
@@ -235,11 +240,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         >
           <Form style={{ display: "flex" }}>
             <div className="right-container">
-              <Form.Item
-                label="اسم الزبون"
-                layout="horizontal"
-                className="userName"
-              >
+              <Form.Item label="اسم الزبون" className="userName">
                 {getFieldDecorator("userName", {
                   rules: [
                     {
@@ -248,11 +249,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                       pattern: /^([أ-يa-z0-9]|\s)*$/
                     }
                   ]
-                })(
-                  <div>
-                    <Input />
-                  </div>
-                )}
+                })(<Input />)}
               </Form.Item>
               <Form.Item label="عنوان الزبون" className="address">
                 {getFieldDecorator("address", {
@@ -300,23 +297,28 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 layout="horizontal"
                 className="captainName"
               >
-                <AutoComplete
-                  className="certain-category-search"
-                  dropdownClassName="certain-category-search-dropdown"
-                  dropdownMatchSelectWidth={false}
-                  dropdownStyle={{ width: 300 }}
-                  size="large"
-                  style={{ width: "100%" }}
-                  dataSource={optionsCaptains}
-                  placeholder="اختر الكابتن"
-                  optionLabelProp="value"
-                  onBlur={this.handleBlureCaptain}
-                  filterOption={(inputValue, option) =>
-                    option.props.children
-                      .toUpperCase()
-                      .indexOf(inputValue.trim().toUpperCase()) !== -1
-                  }
-                />
+                {getFieldDecorator("captain", {
+                  rules: [{ required: true }]
+                })(
+                  <AutoComplete
+                    className="certain-category-search"
+                    dropdownClassName="certain-category-search-dropdown"
+                    dropdownMatchSelectWidth={false}
+                    dropdownStyle={{ width: 300 }}
+                    size="large"
+                    style={{ width: "100%" }}
+                    dataSource={optionsCaptains}
+                    placeholder="اختر الكابتن"
+                    optionLabelProp="value"
+                    onBlur={this.handleBlureCaptain}
+                    filterOption={(inputValue, option) =>
+                      option.props.children
+                        .toUpperCase()
+                        .indexOf(inputValue.trim().toUpperCase()) !== -1
+                    }
+                  />
+                )}
+
                 {errCaptain && (
                   <p className="auto-complete-error">{errCaptain}</p>
                 )}
@@ -328,23 +330,27 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                 layout="horizontal"
                 className="markit"
               >
-                <AutoComplete
-                  className="certain-category-search"
-                  dropdownClassName="certain-category-search-dropdown"
-                  dropdownMatchSelectWidth={false}
-                  dropdownStyle={{ width: 300 }}
-                  size="large"
-                  style={{ width: "100%" }}
-                  dataSource={optionsPlaces}
-                  placeholder="اختر المتجر"
-                  optionLabelProp="value"
-                  onBlur={this.handleBlurePlace}
-                  filterOption={(inputValue, option) =>
-                    option.props.children
-                      .toUpperCase()
-                      .indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
+                {getFieldDecorator("place", {
+                  rules: [{ required: true }]
+                })(
+                  <AutoComplete
+                    className="certain-category-search"
+                    dropdownClassName="certain-category-search-dropdown"
+                    dropdownMatchSelectWidth={false}
+                    dropdownStyle={{ width: 300 }}
+                    size="large"
+                    style={{ width: "100%" }}
+                    dataSource={optionsPlaces}
+                    placeholder="اختر المتجر"
+                    optionLabelProp="value"
+                    onBlur={this.handleBlurePlace}
+                    filterOption={(inputValue, option) =>
+                      option.props.children
+                        .toUpperCase()
+                        .indexOf(inputValue.toUpperCase()) !== -1
+                    }
+                  />
+                )}
                 {errPalce && <p className="auto-complete-error">{errPalce}</p>}
               </Form.Item>
               <div className="addOrder">
@@ -428,6 +434,7 @@ export default class CollectionsPage extends React.Component {
             if (res.error) {
               this.openNotificationWithIcon("error", "لم تتم عملية الاضافة");
             } else {
+              console.log(this.state);
               this.openNotificationWithIcon(
                 "success",
                 "تمت عملية الاضافة بنجاح"
