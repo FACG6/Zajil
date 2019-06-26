@@ -1,7 +1,7 @@
 .navbar{
     background-color: #201F2B;
     height: 3.5rem;
-    width: 84.7vw;
+    width: 85vw;
     z-index: 2;
     display: flex;
     flex-direction: row-reverse;
