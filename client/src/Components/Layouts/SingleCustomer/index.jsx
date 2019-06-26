@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon } from "antd";
-import axios from 'axios';
+import axios from "axios";
 import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
@@ -8,7 +8,7 @@ import Table from "../../CommonComponent/Table/Table";
 import EditOrder from "./Popups/EditOrder";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
-import WrappedComponent from '../../HOC/WithNavSide';
+import WrappedComponent from "../../HOC/WithNavSide";
 
 import "./style.css";
 
@@ -41,7 +41,9 @@ class Profile extends Component {
       .then(res => res.json())
       .then(res => {
         const { error, result } = res;
-        if (error === "unauthorized") {
+        if (res.notFound) {
+          this.props.history.push("/not-found");
+        } else if (error === "unauthorized") {
           this.props.history.push("/login");
         } else if (result) {
           customerInformation = result[0];
@@ -85,7 +87,7 @@ class Profile extends Component {
         this.setState({ error: "Something error please try again" });
       });
 
-      axios
+    axios
       .get("/api/v1/getStores")
       .then(res => {
         if (res) {
@@ -93,7 +95,8 @@ class Profile extends Component {
         }
       })
       .catch(error => {
-        this.setState({ error })});
+        this.setState({ error });
+      });
   }
 
   convertToObjectForTable = results => {
@@ -167,8 +170,8 @@ class Profile extends Component {
               pageName="singleCustomer"
               columns={tableInfo}
               viewValues={this.handleClick}
-              EditPopup = {EditOrder}
-              stores = {this.state.stores}
+              EditPopup={EditOrder}
+              stores={this.state.stores}
             />
             <DeletePopup
               visible={this.state.singleCustomer.deleteVisibility}

@@ -17,6 +17,9 @@ class TableCmponent extends Component {
     this.setState({ pageSize });
   };
 
+  componentWillReceiveProps(props){
+    this.setState({pageSize: props.columns.length})
+  }
   render() {
     const {
       viewPopup,

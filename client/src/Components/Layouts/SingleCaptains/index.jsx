@@ -47,7 +47,9 @@ class Viewcaptain extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.result) {
+        if(res.notFound) {
+          this.props.history.push('/not-found');
+        } else if (res.result) {
           const rows = res.result[0];
           fetch(`/api/v1/image/${rows.s_image}`)
             .then(res => res.arrayBuffer())
