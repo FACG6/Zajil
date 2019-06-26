@@ -82,17 +82,25 @@ class EditForm extends React.Component {
             phone:
               document.querySelector(
                 ".popupModal .ant-select-selection-selected-value"
-              ).title +
-              "-" +
-              values.phone,
+              ).title + values.phone,
             address: values.address,
             items: { deleted: deletedItems, edited: newItems },
             storeID: storeId
           })
           .then(res => {
             if (res.status == 200) {
-              this.props.form.resetFields();
+              let x = [...this.state.itemsInputs.filter(e => e.itemid), ...res.data]
+              this.props.updateOrdersStateVariable(
+                storeId,
+                document.querySelector(
+                  ".popupModal .ant-select-selection-selected-value"
+                ).title + values.phone,
+                values.address,
+                x,
+                this.props.orderId
+              );
               this.setState({ visible: false });
+              this.props.form.resetFields();
             } else {
               this.setState({ error: "Try again please" });
             }
@@ -110,15 +118,20 @@ class EditForm extends React.Component {
   showModal = () => {
     this.setState({
       visible: true,
-      error: ""
+      error: "",
+      itemsInputs: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : [],
+      originalItems: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : []
     });
   };
 
   handleCancel = () => {
     this.props.form.resetFields();
     this.setState({
-      visible: false,
-      itemsInputs: JSON.parse(JSON.stringify(this.state.originalItems))
+      visible: false
     });
   };
 
@@ -160,10 +173,17 @@ class EditForm extends React.Component {
     }
   };
   validateItemPrice = (rule, value, callback) => {
-    if (value) {
+    if (value && /^[-+]?\d*$/.test(value)) {
       callback();
     } else {
       callback("يرجى إدخال السعر !");
+    }
+  };
+  validatePhone = (rule, value, callback) => {
+    if (/^[-+]?\d*$/.test(value) && value.length === 9) {
+      callback();
+    } else {
+      callback("يرجى إدخال رقم الهاتف");
     }
   };
   appendInput = () => {
@@ -181,7 +201,7 @@ class EditForm extends React.Component {
   };
   setNewItem = async (key, val, index) => {
     let newItem = [...this.state.itemsInputs];
-    delete newItem[index].itemId;
+    delete newItem[index].itemid;
     if (key == "name") {
       newItem[index].name = val.target.value;
       this.setState({
@@ -274,7 +294,10 @@ class EditForm extends React.Component {
                     {getFieldDecorator("phone", {
                       initialValue: phoneNumber ? phoneNumber.substring(4) : "",
                       rules: [
-                        { required: true, message: "يرجى إدخال رقم الهاتف !" }
+                        { required: true, message: " " },
+                        {
+                          validator: this.validatePhone
+                        }
                       ]
                     })(
                       <Input
@@ -349,7 +372,7 @@ class EditForm extends React.Component {
                       {this.state.itemsInputs.slice(1).map((field, index) => {
                         return (
                           <React.Fragment>
-                            <Form.Item>
+                            <Form.Item className="main-extra-items-wrapper">
                               <Form.Item>
                                 {getFieldDecorator(index.toString(), {
                                   initialValue: field.name,
@@ -372,7 +395,7 @@ class EditForm extends React.Component {
                                   />
                                 )}
                               </Form.Item>
-                              <Form.Item>
+                              <Form.Item className="extra-item-price">
                                 {getFieldDecorator(index.toString() + "*", {
                                   initialValue: field.price,
                                   rules: [
@@ -405,13 +428,13 @@ class EditForm extends React.Component {
                       })}
                     </div>
                   </div>
-                  <Icon
-                    onClick={this.appendInput}
-                    className="popupModal_add-item-icon"
-                    type="plus-circle"
-                  />
                 </div>
               </div>
+              <Icon
+                onClick={this.appendInput}
+                className="popupModal_add-item-icon"
+                type="plus-circle"
+              />
               <div className="marketAndButtonsDiv">
                 <Form.Item
                   label={
@@ -439,7 +462,6 @@ class EditForm extends React.Component {
                   {getFieldDecorator("storeNameManual", {
                     rules: [
                       {
-                        // required: true,
                         message: " "
                       },
                       {
@@ -507,7 +529,7 @@ class ViewForm extends React.Component {
     storeNameArray: [],
     itemsInputs: [],
     key: 0,
-    storeName:''
+    storeName: ""
   };
 
   componentDidMount() {
@@ -520,7 +542,10 @@ class ViewForm extends React.Component {
 
   showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
+      itemsInputs: this.props.itemsArray
+        ? JSON.parse(JSON.stringify(this.props.itemsArray))
+        : []
     });
     this.getStoreName();
   };
@@ -530,22 +555,30 @@ class ViewForm extends React.Component {
       visible: false
     });
   };
-getStoreName = () => {
-  let storeName = "";
-  for (let i = 0; i < this.props.stores.length; i++) {
-    if (this.props.stores[i].id == this.props.storeId) {
-      storeName = this.props.stores[i].value;
+  getStoreName = () => {
+    let storeName = "";
+    for (let i = 0; i < this.props.stores.length; i++) {
+      if (this.props.stores[i].id == this.props.storeId) {
+        storeName = this.props.stores[i].value;
+      }
     }
-  }
-  this.setState({storeName});
-}
+    this.setState({ storeName });
+  };
 
-  render() 
-  {
-    const { customerName, phoneNumber, customerAddress ,orderStatus, captainName, orderPrice} = this.props;
+  render() {
+    const {
+      customerName,
+      phoneNumber,
+      customerAddress,
+      orderStatus,
+      captainName,
+      orderPrice
+    } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const columns = [{title: 'اسم الطلبية', dataIndex: 'name'},
-      {title: 'السعر', dataIndex: 'price'}]
+    const columns = [
+      { title: "اسم الطلبية", dataIndex: "name" },
+      { title: "السعر", dataIndex: "price" }
+    ];
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -587,13 +620,13 @@ getStoreName = () => {
           onClick={this.showModal}
         />
         <Modal
-        title= " عرض الطلب"
+          title=" عرض الطلب"
           className="viewModal"
           visible={this.state.visible}
           onCancel={this.handleCancel}
           cancelText="إالغاء"
           destroyOnClose={true}
-          style={{ direction: "rtl", width: '575' }}
+          style={{ direction: "rtl", width: "575" }}
           closable={false}
         >
           <div className="view__captain">
@@ -605,28 +638,31 @@ getStoreName = () => {
               <p className="view__captain__paragraph">تاريخ الطلبية : </p>
               <p className="view__captain-value">{this.props.orderDate}</p>
             </div>
-           
+
             <div className="view__captain-box">
               <p className="view__captain__paragraph">اسم المكان : </p>
-              <p className="view__captain-value">{ customerAddress}</p>
+              <p className="view__captain-value">{customerAddress}</p>
             </div>
-             
+
             <div className="view__captain-box">
               <p className="view__captain__paragraph">حالة الطلب : </p>
-              <p className="view__captain-value">{this.props.orderStatus?"تم" :"قيد التنفيذ"}</p>
+              <p className="view__captain-value">
+                {this.props.orderStatus ? "تم" : "قيد التنفيذ"}
+              </p>
             </div>
             <div className="view__captain-box">
               <p className="view__captain__paragraph">اسم الكابتن : </p>
-              <p className="view__captain-value">{ captainName}</p>
+              <p className="view__captain-value">{captainName}</p>
             </div>
-            <Table 
-            dataSource={this.state.itemsInputs}
-             columns={columns}
-              className="view__captain-table"/>
+            <Table
+              dataSource={this.state.itemsInputs}
+              columns={columns}
+              className="view__captain-table"
+            />
             <div className="view__captain-box">
               <p>السعر الكلي : </p>
-              <p className="view__captain-value">{ orderPrice} $</p>
-            </div> 
+              <p className="view__captain-value">{orderPrice} $</p>
+            </div>
           </div>
         </Modal>
       </React.Fragment>
@@ -702,21 +738,3 @@ class DeletePopup extends Component {
 }
 
 export { EditPopup, DeletePopup, ViewPopup };
-
-// const viewPopup = (id, DataToBeDisplayedObject ,viewPopupHtmlString) => {
-//   const span = document.createElement('span');
-//   const details = viewPopupHtmlString;
-//   span.innerHTML = `${details}`;
-//   swal.fire({
-//     title: 'Are you sure?',
-//     showCancelButton: true,
-//     showConfirmButton: true,
-//     confirmButtonColor: '#28a745',
-//     confirmButtonText: 'تعديل',
-//     cancelButtonText: 'إغلاق',
-//     cancelButtonColor: '#2b2a37',
-//     closeOnConfirm: true,
-//     reverseButtons: true,
-//     html: span,
-//   });
-// };

@@ -41,8 +41,8 @@ class EditForm extends Component {
   componentDidMount() {
 
     this.setState({
-      itemsInputs: this.props.itemsArray ?  JSON.parse(JSON.stringify(this.props.itemsArray.map(item => {return {itemId: item.f1, name: item.f2, price: item.f3}}))) : [],
-      originalItems: this.props.itemsArray ? JSON.parse(JSON.stringify(this.props.itemsArray.map(item => {return {itemId: item.f1, name: item.f2, price: item.f3}}))) : []
+      itemsInputs: this.props.itemsArray ?  JSON.parse(JSON.stringify(this.props.itemsArray.map(item => {return {itemid: item.f1, name: item.f2, price: item.f3}}))) : [],
+      originalItems: this.props.itemsArray ? JSON.parse(JSON.stringify(this.props.itemsArray.map(item => {return {itemid: item.f1, name: item.f2, price: item.f3}}))) : []
     });
   }
 
@@ -191,7 +191,7 @@ class EditForm extends Component {
   };
   setNewItem = async (key, val, index) => {
     let newItem = [...this.state.itemsInputs];
-    delete newItem[index].itemId;
+    delete newItem[index].itemid;
     if (key == "name") {
       newItem[index].name = val.target.value;
       this.setState({

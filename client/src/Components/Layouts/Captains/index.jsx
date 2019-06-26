@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { css } from "@emotion/core";
 import { ClipLoader } from "react-spinners";
-import { Icon, notification, Input, DatePicker } from "antd";
+import { Icon, notification, Input, DatePicker,Button } from "antd";
 import Table from "../../CommonComponent/Table/Table";
-import Button from "../../CommonComponent/Button";
+import Buttoncomponent from "../../CommonComponent/Button";
 import Header from "../../CommonComponent/Header/index";
 import CollectionCreateForm from "./Popups/AddCaptain";
 import WrappedComponent from "../../HOC/WithNavSide";
@@ -80,7 +80,11 @@ class Captains extends Component {
           this.setState({ name, filterCaptainName: [] });
         } else this.setState({ captains: this.state.allData, name });
       }
-    } else this.setState({ captains: this.state.allData });
+    } else this.setState({
+       captains: this.state.allData ,
+      name:'',
+      date:''
+      });
   };
   dateFilter = (value, captains) => {
     if (value.length !== 0) {
@@ -228,7 +232,7 @@ class Captains extends Component {
           <div className="conatinercustomers__customer">
             <Header title="إدارة الكابتن" Icon={<Icon type="team" />} />
             <div className="addcustomer">
-              <Button
+              <Buttoncomponent
                 name="إضافة كابتن"
                 icon={<Icon type="user" />}
                 onClick={this.handleVisible}
@@ -254,6 +258,7 @@ class Captains extends Component {
               />
             
               <div className="filtercontainer">
+              <Button onClick={e=>this.filterfunction("","","empty")}>إفراغ الحقول</Button>
                 <div classNam="filtercontainer__orderdate">
                   <RangePicker
                     showTime={{ format: "HH:mm" }}
@@ -261,6 +266,7 @@ class Captains extends Component {
                     placeholder={["من", "الى"]}
                     onChange={e => this.filterfunction(e, "", "date")}
                     className="containercustomers__customer-rangpicker"
+                    value={this.state.date}
                   />
                   <span className="filtercontainer__orderdate-date">
                     فلترة حسب الوقت
@@ -273,14 +279,14 @@ class Captains extends Component {
                   onChange={e =>
                     this.filterfunction("", e.target.value, "name")
                   }
+                  value={this.state.name}
                 />
               </div>
             </div>
             <Table
               pageName="captains"
               columns={this.state.captains}
-              classname="tablecustomer-container"
-              className="table"
+              className="tablecustomer-container"
               handleClick={this.handleClick}
             />
           </div>
