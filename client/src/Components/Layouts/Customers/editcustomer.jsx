@@ -33,10 +33,10 @@ const EditCustomer = Form.create({ name: "form_in_modal" })(
             id: this.props.id,
             name: values.name,
             email: values.email,
-            phone: parseInt(values.prefixPhone + values.phone),
+            phone:values.prefixPhone + values.phone,
             status: values.status === "true" ? true : false,
             address: values.address,
-            newpassword: values.newpassword
+            password: values.newpassword
           };
           fetch(`api/v1/editCustomer/${this.props.id}`, {
             method: "PUT",
@@ -133,7 +133,6 @@ const EditCustomer = Form.create({ name: "form_in_modal" })(
                       rules: [
                         {
                           required: true,
-
                           validator: this.handlePhone
                         }
                       ]
