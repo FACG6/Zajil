@@ -2,6 +2,7 @@
   font-family: Cairo;
   display: flex;
   flex-direction: row-reverse;
+  overflow-x: hidden;
 }
 .ordersManagement-main-container {
   display: flex;
