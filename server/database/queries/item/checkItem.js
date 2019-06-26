@@ -16,7 +16,7 @@ const checkIfItemExistQuery = (items, OrderId) => new Promise((resolve, reject) 
             if (
               res.rows[j].s_name === items.deleted[i].name
                 && res.rows[j].f_price === items.deleted[i].price
-                && res.rows[j].pk_i_id === items.deleted[i].itemId
+                && res.rows[j].pk_i_id === parseInt(items.deleted[i].itemid, 10)
             ) {
               deleted = true;
             }
