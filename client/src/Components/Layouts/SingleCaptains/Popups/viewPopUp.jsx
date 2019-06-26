@@ -21,7 +21,6 @@ class View extends Component {
     { title: 'السعر', dataIndex: 'f2' }]
     if (this.state.information) {
       const { information } = this.state;
-      console.log(information);
       return (
         <Modal
           title="عرض الطلب"
