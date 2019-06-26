@@ -14,10 +14,11 @@ exports.getOrdersDetails = (req, res) => {
         const result = [];
         rows.forEach(async (row) => {
           try {
-            const data = await getOrderDetails(row.pk_i_id, 2);
+            const data = await getOrderDetails(row.pk_i_id, 2, 'captain');
 
             result.push({ [row.pk_i_id]: data.rows });
           } catch (e) {
+            console.log(e);
             res.status(500).send({ error: 'Internal Server Error' });
           }
 
