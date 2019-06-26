@@ -18,7 +18,6 @@ exports.getOrdersDetails = (req, res) => {
 
             result.push({ [row.pk_i_id]: data.rows });
           } catch (e) {
-            console.log(e);
             res.status(500).send({ error: 'Internal Server Error' });
           }
 
