@@ -9,7 +9,7 @@ import {
   Select,
   AutoComplete,
   notification,
-  Icon
+  Icon,
 } from "antd";
 const { Option } = Select;
 let id = 0;
@@ -21,7 +21,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       dataSourcePlaces: [],
       error: {
         errCaptain: "",
-        errPalce: ""
+        errPalce: "",
+        selectedCaptainName:""
       }
     };
     openNotificationWithIcon = (type, message) => {
@@ -207,7 +208,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
         <AutoComplete.Option
           key={group.pk_i_id}
           value={group.s_name}
-          onClick={() => this.props.selectedCaptain(group.pk_i_id)}
+          onClick={() => this.props.selectedCaptain(group.pk_i_id, group.s_name)}
         >
           {group.s_name}
         </AutoComplete.Option>
@@ -264,7 +265,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
               </Form.Item>
               <div style={{ display: "flex" }}>
                 <Form.Item label="الهاتف" layout="horizontal" className="phone">
-                  {getFieldDecorator("phone", {
+                  {getFieldDecorator("phone2", {
                     rules: [
                       {
                         required: true,
@@ -401,8 +402,8 @@ export default class CollectionsPage extends React.Component {
     });
     this.formRef.props.form.resetFields();
   };
-  handleSlectedCaptain = id => {
-    this.setState({ selectedCaptain: id });
+  handleSlectedCaptain = (id, name) => {
+    this.setState({ selectedCaptain: id, selectedCaptainName: name  });
   };
   handleSelectedPlaces = id => {
     this.setState({ selectedPlaces: id });
@@ -411,7 +412,7 @@ export default class CollectionsPage extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form;
     form.validateFields((err, values) => {
-      const { address, items, phone, phone1, userName } = values;
+      const { address, items, phone2, phone1, userName } = values;
       const { selectedCaptain, selectedPlaces } = this.state;
       if (err || !items || !selectedCaptain || !selectedPlaces) {
         this.openNotificationWithIcon("warning", "يرجى ملىء جميع الحقول");
@@ -419,7 +420,7 @@ export default class CollectionsPage extends React.Component {
         const orderData = {
           address,
           items,
-          phone: `+${phone1}${phone}`,
+          phone: `+${phone1}${phone2}`,
           customerName: userName,
           placeId: selectedPlaces,
           captainId: selectedCaptain
@@ -434,27 +435,19 @@ export default class CollectionsPage extends React.Component {
             if (res.error) {
               this.openNotificationWithIcon("error", "لم تتم عملية الاضافة");
             } else {
-              console.log(this.state);
               this.openNotificationWithIcon(
                 "success",
                 "تمت عملية الاضافة بنجاح"
               );
-              // here make function to update table of orders
-              const newOrder = {
-                address,
-                phone: `+${phone1}${phone}`,
-                storeid: selectedPlaces,
-                captain: selectedCaptain,
-                date: new Date(Date.now()),
-                customer: userName,
-                b_status: 1,
-                items
-              };
-              this.props.updateOrdersStateVariable(newOrder);
+              const phone = `+${phone1}${phone2}`;
+              const { id } = res.result;
+              const itms = [];
+              items.forEach(itm => itms.push({name:itm[0], price:0}));
+              this.props.updateNewOrdersStateVariable(selectedPlaces, phone, address, itms, id, userName, this.state.selectedCaptainName);
             }
             this.handleVisible();
           })
-          .catch(() => {
+          .catch((e) => {
             this.openNotificationWithIcon(
               "warning",
               "هناك خطأ ما الرجاء اعادة المحاولة"
