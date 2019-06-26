@@ -52,9 +52,9 @@ h3 {
 }
 ::-webkit-scrollbar {
   width: 5px;
-  background: transparent;
+  background: #201F2B;
 }
 ::-webkit-scrollbar-thumb {
   width: 50px;
-  background: rgb(67, 65, 93);
+  background: #c4c4c4b1
 }
