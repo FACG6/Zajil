@@ -433,7 +433,6 @@ export default class CollectionsPage extends React.Component {
             if (res.error) {
               this.openNotificationWithIcon("error", "لم تتم عملية الاضافة");
             } else {
-              console.log(this.state);
               this.openNotificationWithIcon(
                 "success",
                 "تمت عملية الاضافة بنجاح"
