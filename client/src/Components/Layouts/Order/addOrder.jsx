@@ -34,6 +34,12 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
       }
     };
 
+    componentDidUpdate(prevProp){
+      if(!prevProp.visible) {
+        this.loadCaptainsNames(); 
+      }
+    }
+
     loadCaptainsNames = () => {
       fetch("/api/v1/getCaptainsNames")
         .then(res => res.json())
