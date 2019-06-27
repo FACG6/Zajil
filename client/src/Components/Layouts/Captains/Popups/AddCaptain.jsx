@@ -138,7 +138,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   ]
                 })(
                   <Upload
-                    accept=".jpg , .png, .jpeg"
+                    accept=".jpg , .png, .jpeg, .JPG , .PNG, .JPEG"
                     name="file"
                     className="avatar-uploader"
                     showUploadList={false}
