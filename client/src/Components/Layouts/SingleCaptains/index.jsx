@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import "./style.css";
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
 import WrappedComponent from "../../HOC/WithNavSide";
-import EditOrder from './Popups/EditOrder'
+import EditOrder from "./Popups/EditOrder";
 
 import { notification, Icon } from "antd";
 
@@ -47,8 +47,8 @@ class Viewcaptain extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if(res.notFound) {
-          this.props.history.push('/not-found');
+        if (res.notFound) {
+          this.props.history.push("/not-found");
         } else if (res.result) {
           const rows = res.result[0];
           fetch(`/api/v1/image/${rows.s_image}`)
@@ -144,6 +144,31 @@ class Viewcaptain extends Component {
       };
     });
   };
+  updateOrdersStateVariable = (
+    storeId,
+    storeName,
+    phone,
+    address,
+    itms,
+    orderId
+  ) => {
+    this.setState(prev => {
+      const columns = prev.columns.map(column => {
+        if (column.key === orderId) {
+          column.address = address;
+          column.items = itms.map(itm => {
+            return { f1: itm.itemid, f2: itm.name, f3: itm.price };
+          });
+          column.phone = phone;
+          column.place = storeName;
+          column.price = itms.reduce((acc, ele) => (acc += ele.price), 0);
+        }
+        return column;
+      });
+      return {columns}
+    });
+  };
+
   render() {
     const {
       columns,
@@ -207,6 +232,7 @@ class Viewcaptain extends Component {
                 viewValues={this.handleClick}
                 EditPopup={EditOrder}
                 stores={this.state.stores}
+                updateOrdersStateVariable={this.updateOrdersStateVariable}
               />
               <DeletePopup
                 visible={singleCaptain.deleteVisibility}

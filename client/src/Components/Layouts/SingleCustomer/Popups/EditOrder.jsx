@@ -51,9 +51,11 @@ class EditForm extends Component {
     this.props.form.validateFields(async (error, values) => {
       await this.setState({ storeNameArray: values.storeName });
       let storeId = "";
+      let storeName = "";
       for (let i = 0; i < this.props.stores.length; i++) {
         if (this.props.stores[i].value == values.storeName) {
           storeId = this.props.stores[i].id;
+          storeName = this.props.stores[i].value;
         }
       }
       let deletedItems = [],
@@ -100,12 +102,19 @@ class EditForm extends Component {
             storeID: storeId
           })
           .then(res => {
-            if (res.status == 200) {
-              this.props.form.resetFields();
+            let x = [...this.state.itemsInputs.filter(e => e.itemid), ...res.data]
+              this.props.updateOrdersStateVariable(
+                storeId,
+                storeName,
+                document.querySelector(
+                  ".popupModal .ant-select-selection-selected-value"
+                ).title + values.phone,
+                values.address,
+                x,
+                this.props.orderId
+              );
               this.setState({ visible: false });
-            } else {
-              this.setState({ error: "Try again please" });
-            }
+              this.props.form.resetFields();
           })
           .catch(err => {
             this.setState({
@@ -272,7 +281,7 @@ class EditForm extends Component {
                     label={
                       <span>
                         <span className="popupModal_storeName-label">*</span>إسم
-                        الزبون
+                        الكابتن
                       </span>
                     }
                   >
