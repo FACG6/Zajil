@@ -39,7 +39,7 @@ BEGIN;
             ('هدايانا');
 
     INSERT INTO orders
-        (fk_i_place_id, customer_name, s_customer_address, customer_name, s_customer_phone, i_status)
+        (fk_i_place_id, customer_name, s_customer_address, s_customer_phone, i_status)
     VALUES
         (1, 'رنا صلاح عبيد', 'الشمال','+970599999999', 0),
         (2, 'زكية عرفات ابو جراد', 'بيت لاهيا','+970599999', 1),
