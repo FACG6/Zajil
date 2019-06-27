@@ -118,13 +118,13 @@
 
 .auto-complete-error {
     color: #f5222d;
-    font-size: 9px;
+    font-size: 10px;
 }
 
 .items .ant-form-item-control-wrapper {
     position: absolute;
-    right: 24%;
-    width: 338px;
+    right: 25%;
+    width: 342px;
 }
 .singleItem{
     margin-right: 5rem;
@@ -168,4 +168,17 @@
 }
 .modalcontainer .ant-input {
     margin-left: 4px;
+}
+.modalcontainer #form_in_modal_phone2 {
+    width: 129px;
+    margin-right: -4px;
+}
+.phone-lable-and-input {
+    display: flex;
+}
+.phone   {
+    width: 209px;
+}
+.phone .ant-form-item-control-wrapper {
+    width: 126px;
 }
