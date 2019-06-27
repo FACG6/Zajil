@@ -1,5 +1,5 @@
 .profile {
-    width: 66rem;
+    width: 85%;
     font-size: 13px;
     border: 1px solid white;
 }
@@ -7,7 +7,7 @@
 .profile__info {
     display: flex;
     flex-wrap: wrap;
-    width: 65rem;
+    width: 92%;
     flex-direction: row-reverse;
     padding: 1rem;
     margin-right: 2rem;
