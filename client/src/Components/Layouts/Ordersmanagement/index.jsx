@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import { DatePicker, Input, Button, Icon } from "antd";
 import moment, { isValid } from "moment";
-import Sidebar from "../../CommonComponent/Sidebar/index";
 import Header from "../../CommonComponent/Header/index";
-import Navbar from "../../CommonComponent/Navbar/index";
 import TableComponent from "../../CommonComponent/Table/Table";
-import { EditPopup, DeletePopup, ViewPopup } from "../../CommonComponent/Table/Popups";
-import CollectionsPage from '../Order/addOrder';
-// import { viewPopup } from "../../CommonComponent/Table/Popups";
+import {
+  EditPopup,
+  DeletePopup,
+  ViewPopup
+} from "../../CommonComponent/Table/Popups";
+import CollectionsPage from "../Order/addOrder";
+import WrappedComponent from "../../HOC/WithNavSide";
 import "./style.css";
 
 class OrdersManagement extends Component {
@@ -20,7 +22,8 @@ class OrdersManagement extends Component {
     name: "",
     error: "",
     filter: false,
-    stores: []
+    stores: [],
+    refresh: true
   };
 
   componentDidMount() {
@@ -36,7 +39,7 @@ class OrdersManagement extends Component {
           this.setState({ orders: res.data });
         }
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({
           error
         });
@@ -75,7 +78,7 @@ class OrdersManagement extends Component {
           }
         }
       }
-        return object;
+      return object;
     }
   };
 
@@ -202,9 +205,44 @@ class OrdersManagement extends Component {
     });
   };
 
-  updateOrdersStateVariable = (order) => {
-    console.log(order)
-  }
+  updateOrdersStateVariable = (storeId, phone, address, itms, orderId) => {
+    this.setState(prev => {
+      prev.orders.forEach(element => {
+        if (element.key === orderId) {
+          let x = element;
+          x.storeId = storeId;
+          x.address = address;
+          x.phone = phone;
+          x.items = itms;
+          if (itms.length > 1) {
+            x.price = itms.reduce((acc, nxt) => {
+              return acc + Number(nxt.price);
+            }, 0);
+          } else {
+            x.price = parseInt(itms[0].price);
+          }
+          return { element: x };
+        }
+      });
+      this.setState({ refresh: !this.state.refresh });
+    });
+  };
+  updateItemsStateVariable = (itms, orderId) => {
+    let x = this.state.orders;
+    x.forEach(element => {
+      if (element.key === orderId) {
+        element.items = itms;
+        if (itms.length > 1) {
+          element.price = itms.reduce((acc, nxt) => {
+            return parseInt(acc.price) + parseInt(nxt.price);
+          });
+        } else {
+          element.price = itms[0].price;
+        }
+      }
+    });
+    this.setState({ orders: x });
+  };
 
   render() {
     const { RangePicker } = DatePicker;
@@ -212,13 +250,13 @@ class OrdersManagement extends Component {
     if (!this.state.error) {
       return (
         <div className="ordersManagement-bars-container">
-          <Sidebar />
           <div className="ordersManagement-main-container">
-            <Navbar />
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                <CollectionsPage updateOrdersStateVariable={this.updateOrdersStateVariable} />
+                <CollectionsPage
+                  updateOrdersStateVariable={this.updateOrdersStateVariable}
+                />
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
@@ -261,6 +299,8 @@ class OrdersManagement extends Component {
                   ViewPopup={ViewPopup}
                   EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
+                  updateOrdersStateVariable={this.updateOrdersStateVariable}
+                  updateItemsStateVariable={this.updateItemsStateVariable}
                   deleteRow={this.deleteRow}
                   columns={
                     this.state.filter === true
@@ -273,12 +313,17 @@ class OrdersManagement extends Component {
           </div>
         </div>
       );
-    }else {
+    } else {
       return (
         <div className="ordersManagement_error-class">
           <h1>
-          {this.state.error.response ? this.state.error.response.status : 'Error' } {this.state.error.response ? 'Error' : '' }, 
-            {this.state.error.response.data ? this.state.error.response.data : 'try again later' }{" "}
+            {this.state.error.response
+              ? this.state.error.response.status
+              : "Error"}{" "}
+            {this.state.error.response ? "Error" : ""},
+            {this.state.error.response.data
+              ? this.state.error.response.data
+              : "try again later"}{" "}
           </h1>
         </div>
       );
@@ -286,4 +331,4 @@ class OrdersManagement extends Component {
   }
 }
 
-export default OrdersManagement;
+export default WrappedComponent(OrdersManagement);

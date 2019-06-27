@@ -11,7 +11,8 @@ const DropdownMenu = ({ pageSize, paginationSize }) => {
     let total = 0;
     let number = [];
     while (Math.floor(size / 10)) {
-      number.push(total + 10);
+      total += 10;
+      number.push(total);
       size -= 10;
     }
     return number;
