@@ -75,6 +75,9 @@
 .right-container {
     margin-left: 15px;
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .left-container {
@@ -110,7 +113,7 @@
 }
 
 .phone input {
-    width: 120%;
+    width: 126px;
 }
 
 .auto-complete-error {
@@ -120,13 +123,49 @@
 
 .items .ant-form-item-control-wrapper {
     position: absolute;
-    right: 31%;
+    right: 24%;
+    width: 338px;
 }
 .singleItem{
-    margin-right: 7rem;
-    width: 22rem;
+    margin-right: 5rem;
+    width: 25.7rem;
 }
 .items label::before, .markit label::before, .captainName label::before{
     content: '*';
     color: #f5222d;
+}
+.modalcontainer .ant-form-item-label {
+    margin-left: 10px;
+}
+.modalcontainer .ant-row ant-form-item {
+    width: 284px;
+}
+.modalcontainer .ant-col .ant-form-item-control-wrapper {
+    margin-right: -33px;
+    width: 339px;
+}
+.modalcontainer .ant-btn .ant-btn-dashed {
+    width: 87%;
+}
+.modalcontainer .items label::before, .markit label::before, .captainName label::before {
+    content: '*';
+    color: #f5222d;
+    margin-left: 3px;
+}
+.modalcontainer .ant-form-item-required::before {
+    display: inline-block;
+    margin-right: 4px;
+    color: #f5222d;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: '*';
+    margin-left: 3px;
+}
+.modalcontainer .ant-row .ant-form-item {
+    margin-right: 79px;
+    width: 406px;
+}
+.modalcontainer .ant-input {
+    margin-left: 4px;
 }
