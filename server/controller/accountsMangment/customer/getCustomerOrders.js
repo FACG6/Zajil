@@ -19,8 +19,7 @@ exports.getOrdersDetails = (req, res) => {
           if (rowCount === result.length)res.send({ result });
         });
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
         res.status(500).send({ error: 'Internal Server Error' });
       });
   }

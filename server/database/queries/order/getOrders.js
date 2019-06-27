@@ -10,7 +10,7 @@ const getOrdersQuery = () => connection
     )
     .then((result) => {
       res.rows.forEach((e) => {
-        e.date = `${e.date.getFullYear()}-${e.date.getMonth()}-${e.date.getDate()}`;
+        e.date = `${e.date.getFullYear()}-${e.date.getMonth() + 1}-${e.date.getDate()}`;
         result.rows.forEach((element) => {
           if (element.orderid === e.key) {
             e.customer = element.customer;

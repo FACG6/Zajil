@@ -449,7 +449,6 @@ class EditForm extends Component {
                   {getFieldDecorator("storeNameManual", {
                     rules: [
                       {
-                        // required: true,
                         message: " "
                       },
                       {

@@ -1,7 +1,7 @@
 .navbar{
     background-color: #201F2B;
     height: 3.5rem;
-    width: 85vw;
+    width: 86vw;
     z-index: 2;
     display: flex;
     flex-direction: row-reverse;
@@ -17,7 +17,7 @@
     color: #fdeeee;
     font-size: 1.6rem;
     direction: rtl;
-    margin-right: 28px;
+    margin-right: 45px;
 }
 
 .circle{

@@ -204,7 +204,28 @@ class OrdersManagement extends Component {
       return { orders: prev.orders.filter(data => data.key !== id) };
     });
   };
-
+  updateNewOrdersStateVariable = (storeId, phone, address, itms, orderId, customer, captain) => {
+          let x = {};
+          x.key = orderId;
+          x.customer = customer;
+          x.captain = captain;
+          x.storeid = storeId;
+          x.address = address;
+          x.phone = phone;
+          x.items = itms;
+          x.b_status = 1;
+          x.date = new Date(Date.now()).toLocaleString('br-BR').split(' ')[0];
+          if (itms.length > 1) {
+            x.price = itms.reduce((acc, nxt) => {
+              return acc + Number(nxt.price);
+            }, 0);
+          } else if(itms[0].price) {
+            x.price = parseInt(itms[0].price);
+          }else {
+            x.price = 0;
+          }
+      this.setState({ orders: this.state.orders.concat([x]) });
+  }
   updateOrdersStateVariable = (storeId, phone, address, itms, orderId) => {
     this.setState(prev => {
       prev.orders.forEach(element => {
@@ -255,7 +276,7 @@ class OrdersManagement extends Component {
             <div className="ordersManagement_sub-container">
               <div>
                 <CollectionsPage
-                  updateOrdersStateVariable={this.updateOrdersStateVariable}
+                  updateNewOrdersStateVariable={this.updateNewOrdersStateVariable}
                 />
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
