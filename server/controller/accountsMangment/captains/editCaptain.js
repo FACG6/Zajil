@@ -33,7 +33,7 @@ const updateCaptain = (req, res) => {
     res.status(404).send({
       error: 'captain dose not edit',
     });
-  } else if (['png', 'jpg', 'jpeg'].some(ext => ext === extName)) {
+  } else if (['png', 'jpg', 'jpeg'].some(ext => ext === extName.toLowerCase())) {
     checkEmail(email)
       .then((result) => {
         if (!result.rows.length || result.rows[0].pk_i_id == id) {
