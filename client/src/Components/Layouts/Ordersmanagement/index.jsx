@@ -205,7 +205,6 @@ class OrdersManagement extends Component {
     });
   };
   updateNewOrdersStateVariable = (storeId, phone, address, itms, orderId, customer, captain) => {
-    console.log('llllllllll', storeId, phone, address, itms, orderId, customer, captain);
           let x = {};
           x.key = orderId;
           x.customer = customer;
