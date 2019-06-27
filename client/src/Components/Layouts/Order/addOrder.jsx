@@ -247,7 +247,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     {
                       required: true,
                       message: "يرجى ملئ الحقل ",
-                      pattern: /^([أ-يa-z0-9]|\s)*$/
+                      pattern: /^([أ-يa-zA-Z0-9]|\s)*$/
                     }
                   ]
                 })(<Input />)}
@@ -258,7 +258,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                     {
                       required: true,
                       message: "يرجى ملئ الحقل ",
-                      pattern: /^([أ-يa-z0-9-]|\s)*$/
+                      pattern: /^([أ-يa-zA-Z0-9-]|\s)*$/
                     }
                   ]
                 })(<Input />)}

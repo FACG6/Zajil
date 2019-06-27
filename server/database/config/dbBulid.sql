@@ -49,8 +49,8 @@ CREATE TABLE orders
 (
     pk_i_id SERIAL PRIMARY KEY,
     fk_i_place_id INTEGER REFERENCES places(pk_i_id) on delete cascade,
-    s_customer_address TEXT NOT NULL,
-    s_customer_phone TEXT NOT NULL,
+    s_customer_address TEXT,
+    s_customer_phone TEXT,
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
     customer_name TEXT,
