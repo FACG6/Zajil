@@ -10,5 +10,3 @@ exports.editCaptainSchema = joi.object().keys({
   status: joi.string().regex(/^(false|true)$/).required(),
   password: joi.string(),
 });
-
-

@@ -18,14 +18,14 @@ const { checkCookie } = require('./checkCookie');
 
 const router = express.Router();
 router.use(checkAuth);
-// the all routes start from here
+// all routes start from here
 router.route('/checkCookie')
   .get(checkCookie);
 
 router.use(adminHandler);
 
 router.use(protectRoutes);
-// the protected route start from here
+// protected routes start from here
 router.route('/counts')
   .get(getCounts);
 router.get('/getStores', getStores);

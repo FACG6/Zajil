@@ -661,7 +661,7 @@ class ViewForm extends React.Component {
             />
             <div className="view__captain-box">
               <p>السعر الكلي : </p>
-              <p className="view__captain-value">{orderPrice} $</p>
+              <p className="view__captain-value">{orderPrice} NIS</p>
             </div>
           </div>
         </Modal>

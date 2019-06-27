@@ -4,9 +4,11 @@
 }
 .app-side-and-nav{
     display: flex;
+    overflow-x: hidden;
 }
 .app-nav-and-components {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
