@@ -191,6 +191,9 @@ class Profile extends Component {
             </div>
           </div>
           <div className="profile__orders">
+          <h2 className="view-captain-orders-title">
+              الطلبات الخاصة بالكابتن
+            </h2>
             <Table
               pageName="singleCustomer"
               columns={tableInfo}
