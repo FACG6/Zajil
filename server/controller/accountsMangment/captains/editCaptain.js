@@ -14,7 +14,7 @@ const updateCaptain = (req, res) => {
     const { id } = req.params;
     const extName = path.extname(file.name).slice(1);
     const newName = `${new Date().getTime()}id_photo.${extName}`;
-    if (['png', 'jpg', 'jpeg'].some(ext => ext === extName)) {
+    if (['png', 'jpg', 'jpeg'].some(ext => ext === extName.toLowerCase())) {
       req.files.file.mv(path.join(__dirname, '..', '..', '..', 'upload', `${newName}`), (err) => {
         if (err) res.status(500).send({ error: 'Internal Server Error' });
         else {
