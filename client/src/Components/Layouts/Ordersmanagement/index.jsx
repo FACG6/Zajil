@@ -213,7 +213,7 @@ class OrdersManagement extends Component {
           x.address = address;
           x.phone = phone;
           x.items = itms;
-          x.b_status = 1;
+          x.b_status = 0;
           x.date = new Date(Date.now()).toLocaleString('br-BR').split(' ')[0];
           if (itms.length > 1) {
             x.price = itms.reduce((acc, nxt) => {

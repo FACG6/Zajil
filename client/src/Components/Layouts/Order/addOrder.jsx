@@ -263,7 +263,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
                   ]
                 })(<Input />)}
               </Form.Item>
-              <div style={{ display: "flex" }}>
+              <div className="phone-lable-and-input" >
                 <Form.Item label="الهاتف" layout="horizontal" className="phone">
                   {getFieldDecorator("phone2", {
                     rules: [
@@ -442,7 +442,7 @@ export default class CollectionsPage extends React.Component {
               const phone = `+${phone1}${phone2}`;
               const { id } = res.result;
               const itms = [];
-              items.forEach(itm => itms.push({name:itm[0], price:0}));
+              items.forEach(itm => itms.push({name:itm, price:0}));
               this.props.updateNewOrdersStateVariable(selectedPlaces, phone, address, itms, id, userName, this.state.selectedCaptainName);
             }
             this.handleVisible();
