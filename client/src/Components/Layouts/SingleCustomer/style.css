@@ -104,5 +104,9 @@
 }
 
 .profile__orders .view-captain-orders-title {
-    margin-right: 7rem;
+    /* margin-right: 7rem; */
+}
+
+.profile__orders .table-container {
+    width: 90%;
 }
