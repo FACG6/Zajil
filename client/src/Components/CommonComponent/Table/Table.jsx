@@ -272,6 +272,7 @@ class TableCmponent extends Component {
                     storeId={record.storeId}
                     stores={this.props.stores}
                     orderId={record.key}
+                    updateOrdersStateVariable={this.props.updateOrdersStateVariable}
                   />
                   <Divider type="vertical" />
                   <Icon
@@ -452,6 +453,7 @@ class TableCmponent extends Component {
                     storeId={record.storeId}
                     stores={this.props.stores}
                     orderId={record.key}
+                    updateOrdersStateVariable={this.props.updateOrdersStateVariable}
                   />
                   <Divider type="vertical" />
                   <Icon
