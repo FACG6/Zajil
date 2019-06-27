@@ -132,6 +132,31 @@ class Profile extends Component {
       };
     });
   };
+
+  updateOrdersStateVariable = (
+    storeId,
+    storeName,
+    phone,
+    address,
+    itms,
+    orderId
+  ) => {
+    this.setState(prev => {
+      const columns = prev.tableInfo.map(column => {
+        if (column.key === orderId) {
+          column.address = address;
+          column.items = itms.map(itm => {
+            return { f1: itm.itemid, f2: itm.name, f3: itm.price };
+          });
+          column.phone = phone;
+          column.place = storeName;
+          column.price = itms.reduce((acc, ele) => (acc += ele.price), 0);
+        }
+        return column;
+      });
+      return {tableInfo: columns}
+    });
+  };
   render() {
     const {
       personalInformation: { name, phone, status, email, address, avatar },
@@ -172,6 +197,7 @@ class Profile extends Component {
               viewValues={this.handleClick}
               EditPopup={EditOrder}
               stores={this.state.stores}
+              updateOrdersStateVariable={this.updateOrdersStateVariable}
             />
             <DeletePopup
               visible={this.state.singleCustomer.deleteVisibility}
