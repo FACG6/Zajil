@@ -3,7 +3,7 @@
     right: 0rem;
     min-height: 100vh;
     background: #2B2A37;
-    width: 225px;
+    width: 15.4vw;
     float: right;
     font-family: 'cairo';
     z-index: 3;
@@ -18,7 +18,7 @@
 }
 
 .sidebar {
-    width: 14.11rem;
+    width: 15vw;
     position: absolute;
     top: 0rem;
     right: 0rem;
@@ -27,8 +27,8 @@
     display: flex;
     background-color: #2B2A37;
     flex-direction: column;
-    justify-content: center;
-    font-size: 0.8rem;
+    font-size: 1vw;
+    height: 100vh;
 }
 
 .sidebar__header {
@@ -41,11 +41,13 @@
 }
 
 .sidebar__bar {
-    margin-top: 5rem;
+    margin-top: 6vw;
     margin-right: 2rem;
     text-align: right;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    line-height: 2vh;
 }
 
 .sidebar__links {

@@ -3,7 +3,8 @@
     justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 8rem;
-    width: 68rem;
+    width: 76vw;
+    margin-right: 181px;
 }
 
 .box__error {

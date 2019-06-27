@@ -42,7 +42,8 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
 
     loadCaptainsNames = () => {
       fetch("/api/v1/getCaptainsNames")
-        .then(res => res.json())
+        .then(res => {
+         return res.json()})
         .then(res => {
           const { error } = res;
           if (error) {

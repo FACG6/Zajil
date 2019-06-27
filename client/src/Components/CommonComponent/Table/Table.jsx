@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 import DropdownMenu from "./dropdownMenu";
 import "./style.css";
 
-// the passed input to this component has to be in the following form:
-// (pageName (orders or customers or captains or singleCaptain or singleCustomer) ,[{key: "id", customer:"", email:"", mobileNo:"", date:"", status:"", address:"", captain:"", price:""},{},{}], viewPopup, editPopup, deletePopup).
-
 class TableCmponent extends Component {
   state = {
     pageSize: "10"
@@ -22,9 +19,7 @@ class TableCmponent extends Component {
   }
   render() {
     const {
-      viewPopup,
       ViewPopup,
-      editPopup,
       columns,
       EditPopup,
       DeletePopup
@@ -86,10 +81,6 @@ class TableCmponent extends Component {
                    storeId={record.storeid}
                    stores={this.props.stores}
                    orderId={record.key}
-                   orderDate={record.date}
-                   orderStatus={record.b_status}
-                   orderPrice={record.price}
-                   captainName={record.captain}
                   />
                   <Divider type="vertical" />
                   <EditPopup
@@ -100,6 +91,8 @@ class TableCmponent extends Component {
                     storeId={record.storeid}
                     stores={this.props.stores}
                     orderId={record.key}
+                    updateItemsStateVariable={this.props.updateItemsStateVariable}
+                    updateOrdersStateVariable={this.props.updateOrdersStateVariable}
                   />
 
                   <Divider type="vertical" />

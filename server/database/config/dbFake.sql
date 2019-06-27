@@ -26,13 +26,13 @@ BEGIN;
         ('مكان 6');
 
     INSERT INTO orders
-        (fk_i_place_id, s_customer_address, s_customer_phone, i_status)
+        (fk_i_place_id, s_customer_address,customer_name, s_customer_phone, i_status)
     VALUES
-        (1, 'gaza', '+970599999999', 0),
-        (2, 'gaza', '+970599999999', 1),
-        (3, 'gaza', '+970599999999', 1),
-        (1, 'gaza', '+970599999999', 0),
-        (5, 'gaza', '+970599999999', 1);
+        (1, 'gaza','سمير', '+970599999999', 0),
+        (2, 'gaza','سمير', '+970599999999', 1),
+        (3, 'gaza','سمير', '+970599999999', 1),
+        (1, 'gaza','سمير', '+970599999999', 0),
+        (5, 'gaza','سمير', '+970599999999', 1);
 
     INSERT INTO items
         (s_name, fk_i_order_id, f_price)
