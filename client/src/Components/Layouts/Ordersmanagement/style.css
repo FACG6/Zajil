@@ -2,6 +2,7 @@
   font-family: Cairo;
   display: flex;
   flex-direction: row-reverse;
+  overflow-x: hidden;
 }
 .ordersManagement-main-container {
   display: flex;
@@ -124,7 +125,7 @@ textarea {
 }
 .ordersManagement_addOrder-button {
   width: 14vw;
-  height: 47px;
+  height: 34px;
   background: #28a745 !important;
   border-color: #fff;
   box-shadow: 0 0 0;
@@ -152,9 +153,6 @@ textarea {
   margin-top: 0px;
 }
 @media only screen and (max-width: 1000px) {
-  .ordersManagement_sub-container {
-    margin-right: 22vw;
-  }
   .ordersManagement_addOrder-button {
     font-size: 77%;
     left: 4vw;

@@ -17,11 +17,10 @@ class View extends Component {
   }
 
   render() {
-    const columns = [{ title: 'اسم الطلبية', dataIndex: 'f1' },
-    { title: 'السعر', dataIndex: 'f2' }]
+    const columns = [{ title: 'اسم الطلبية', dataIndex: 'f2' },
+    { title: 'السعر', dataIndex: 'f3' }]
     if (this.state.information) {
       const { information } = this.state;
-      console.log(information);
       return (
         <Modal
           title="عرض الطلب"

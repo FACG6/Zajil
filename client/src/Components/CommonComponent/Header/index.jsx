@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
-// to insert the Icon =>> <Icon type="carry-out" />
 
 const Header = ({ title, Icon }) => (
   <Fragment>

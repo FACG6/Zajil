@@ -10,7 +10,7 @@ const InProgress = () => {
     const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
     return (
       <section className="onProgress">
-        <div>
+        <div className="in-Progress">
           <Spin className="onProgressIcon" indicator={antIcon} />
           <span className="onProgressTitle">قيد الانشاء</span>
         </div>

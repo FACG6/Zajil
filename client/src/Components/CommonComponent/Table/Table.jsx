@@ -81,6 +81,9 @@ class TableCmponent extends Component {
                    storeId={record.storeid}
                    stores={this.props.stores}
                    orderId={record.key}
+                   orderPrice={record.price}
+                   captainName={record.captain}
+                   orderDate={record.date}
                   />
                   <Divider type="vertical" />
                   <EditPopup

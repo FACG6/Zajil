@@ -1,6 +1,9 @@
+.in-Progress {
+    position: absolute;
+}
 .onProgress {
     line-height: 5rem;
-    width: 67rem;
+    width: 30vw;
 }
 
 .onProgressIcon {
