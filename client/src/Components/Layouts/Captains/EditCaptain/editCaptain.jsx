@@ -30,6 +30,7 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           status,
           file: rows.s_attachment
         });
+        if (rows.s_attachment)
         fetch(`/api/v1/image/${rows.s_attachment}`)
           .then(res => res.arrayBuffer())
           .then(response => {
