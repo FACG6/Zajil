@@ -40,3 +40,16 @@
 .view-captain-orders .table-container {
   width: 90%;
 }
+
+.profile__value-attatchement{
+  cursor: pointer;
+  background: #80808036;
+  padding: 0.5rem;
+  border: 1px solid #ababb53b;
+  margin-top: -0.5rem;
+  border-radius: 7px;
+}
+.attatchment_image{
+  width: 100%;
+  height: 100%;
+}

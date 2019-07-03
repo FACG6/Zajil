@@ -28,9 +28,10 @@ const CollectionCreateForm = Form.create({ name: "form_in_modal" })(
           IDNumber: rows.s_id_number,
           licenceNumber: rows.s_driver_licence_number,
           status,
-          file: rows.s_image
+          file: rows.s_attachment
         });
-        fetch(`/api/v1/image/${rows.s_image}`)
+        if (rows.s_attachment)
+        fetch(`/api/v1/image/${rows.s_attachment}`)
           .then(res => res.arrayBuffer())
           .then(response => {
             let typeArray = new Uint8Array(response);
