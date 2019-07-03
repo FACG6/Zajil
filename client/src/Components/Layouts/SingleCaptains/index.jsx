@@ -9,7 +9,7 @@ import View from "./Popups/viewPopUp";
 import WrappedComponent from "../../HOC/WithNavSide";
 import EditOrder from "./Popups/EditOrder";
 
-import { notification, Icon } from "antd";
+import { notification, Icon, Modal } from "antd";
 
 class Viewcaptain extends Component {
   state = {
@@ -22,6 +22,7 @@ class Viewcaptain extends Component {
     address: "",
     licience_number: "",
     avatar: "",
+    attachment: null,
     visible: false,
     singleCaptain: {
       editVisibilty: false,
@@ -61,8 +62,10 @@ class Viewcaptain extends Component {
                 s_mobile_number,
                 status,
                 s_address,
-                s_driver_licence_number
+                s_driver_licence_number,
+                s_attachment
               } = rows;
+              console.log(rows);
               let typeArray = new Uint8Array(response);
               const stringChar = String.fromCharCode.apply(null, typeArray);
               this.setState({
@@ -73,7 +76,8 @@ class Viewcaptain extends Component {
                 status,
                 address: s_address,
                 licience_number: s_driver_licence_number,
-                avatar: stringChar
+                avatar: stringChar,
+                attachment: s_attachment
               });
             });
         } else {
@@ -165,8 +169,20 @@ class Viewcaptain extends Component {
         }
         return column;
       });
-      return {columns}
+      return { columns };
     });
+  };
+
+  handleAttatchment = e => {
+    fetch(`/api/v1/image/${this.state.attachment}`)
+      .then(res => res.arrayBuffer())
+      .then(response => {
+        let typeArray = new Uint8Array(response);
+        const stringChar = String.fromCharCode.apply(null, typeArray);
+        Modal.info({
+          title: <img src={stringChar} alt="ID" className="attatchment_image"/>
+        });
+      });
   };
 
   render() {
@@ -180,6 +196,7 @@ class Viewcaptain extends Component {
       licience_number,
       phone_number,
       status,
+      attachment,
       singleCaptain
     } = this.state;
     return (
@@ -217,6 +234,19 @@ class Viewcaptain extends Component {
               <div className="profile__box">
                 <p className="profile__box__title">رقم الهوية</p>
                 <p className="profile__value">{id_number}</p>
+              </div>
+              <div className="profile__box">
+                <p className="profile__box__title">صورة الهوية</p>
+                {attachment ? (
+                  <p
+                    className="profile__value-attatchement"
+                    onClick={this.handleAttatchment}
+                  >
+                    الصورة
+                  </p>
+                ) : (
+                  <p className="profile__value">لا يوجد صورة</p>
+                )}
               </div>
             </div>
           </div>
