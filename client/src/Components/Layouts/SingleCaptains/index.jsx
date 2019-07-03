@@ -65,7 +65,6 @@ class Viewcaptain extends Component {
                 s_driver_licence_number,
                 s_attachment
               } = rows;
-              console.log(rows);
               let typeArray = new Uint8Array(response);
               const stringChar = String.fromCharCode.apply(null, typeArray);
               this.setState({
